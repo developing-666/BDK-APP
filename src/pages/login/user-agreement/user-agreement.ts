@@ -2,26 +2,23 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SignInPage page.
+ * Generated class for the UserAgreementPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-sign-in',
-  templateUrl: 'sign-in.html',
+  selector: 'page-user-agreement',
+  templateUrl: 'user-agreement.html',
 })
-export class SignInPage {
+export class UserAgreementPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
-  }
-  login(){
-    
+    console.log('ionViewDidLoad UserAgreementPage');
   }
 
 }

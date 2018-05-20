@@ -14,9 +14,13 @@ export class LoginPage {
 		public navCtrl: NavController,
 		public navParams: NavParams
 	) { }
+	mushrooms: boolean = true;
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad LoginPage');
+	}
+	login(){
+	  
 	}
 
 }

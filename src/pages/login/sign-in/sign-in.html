@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>sign-in</ion-title>
+    <ion-title>注册</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+	<div class="main-form">
+		<form #loginForm="ngForm" novalidate (ngSubmit)="login()">
+			<ion-item>
+				<ion-label>
+					<i class="iconfont">&#xe65e;</i>
+				</ion-label>
+				<ion-input type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label>
+					<i class="iconfont">&#xe65c;</i>
+				</ion-label>
+				<ion-input type="password" placeholder="请输入您的密码"></ion-input>
+			</ion-item>
+			<button class="login submit" type="submit" [disabled]="loginForm.invalid" ion-button block round>注册</button>
+		</form>
+	</div>
 
 </ion-content>
