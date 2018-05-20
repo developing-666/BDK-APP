@@ -123,6 +123,26 @@ ion-buttons.buttons-group {
 .button{
 	&.large{max-width:calc(100% - (2 * #{rem(30)}));margin: rem(110) auto;}
 }
+.main-form{
+	.item.item-block{padding-left: 0;min-height: 4rem;
+		.item-inner{border-bottom: none;padding-right: rem(28);
+			.input{height: 100%;border-bottom:$border;display:flex;align-items: center;
+				input{margin:0;font-size:rem(30);background-color: color($colors,bg);
+					&:-webkit-autofill {
+						-webkit-box-shadow: 0 0 0px 1000px color($colors,bg) inset;
+  						-webkit-text-fill-color: color($colors,font);
+					}
+				}
+			}
+			.get-code{
+				@include flex-center;border-bottom: $border;padding:0;margin:0;height: 100%;
+			}
+		}
+	}
+	.label{margin:0;padding: 0 rem(20) 0 rem(30);
+		.iconfont{font-size: rem(60);}
+	}
+}
 
 .full-form{
 	.list{
