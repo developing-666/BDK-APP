@@ -14,7 +14,7 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<div class="remind-list-container">
+	<div class="remind-list-container no-result">
 		<div class="avtive-day-bar">
 			<div class="control">
 				<i class="iconfont">&#xe661;</i>
@@ -26,7 +26,7 @@
 				<i class="iconfont">&#xe613;</i>
 			</div>
 		</div>
-		<ion-list>
+		<ion-list hidden>
 			<ion-item-sliding>
 				<ion-item>
 					<em class="top-line"></em>
@@ -187,7 +187,7 @@
 			</ion-item-sliding>
 		</ion-list>
 	</div>
-	<div class="bottom-bar">
+	<div class="bottom-bar" hidden>
 		<div class="delete">
 			<i class="iconfont">&#xe66e;</i>
 			<span>删除</span>
@@ -197,4 +197,7 @@
 			<span>全选</span>
 		</div>
 	</div>
+	<button class="add-remind" ion-button icon-only>
+		<ion-icon name="add"></ion-icon>
+	</button>
 </ion-content>

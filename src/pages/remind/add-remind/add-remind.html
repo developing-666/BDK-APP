@@ -1,0 +1,51 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>新增客户提醒</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<form class="add-remind-form full-form" #addRemindForm="ngForm" novalidate (ngSubmit)="add()">
+		<ion-list>
+			<button ion-item>
+				<ion-label>选择客户</ion-label>
+				<ion-note item-end>选择客户</ion-note>
+			</button>
+			<ion-item>
+				<ion-label>提醒题目</ion-label>
+				<ion-input placeholder="请输入标题"></ion-input>
+			</ion-item>
+			<button ion-item>
+				<ion-label>选择客户</ion-label>
+				<ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
+			</button>
+		</ion-list>
+		<ion-item class="remark">
+			<ion-label>提醒备注</ion-label>
+			<ion-textarea placeholder="输入提醒文字备注或语音备注"></ion-textarea>
+		</ion-item>
+		<ion-item class="accessory">
+			<div class="accessory-list">
+				<div class="imgs-container">
+					<div class="img-item">
+						<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+						<i class="delete iconfont">&#xe681;</i>
+					</div>
+					<div class="img-item">
+						<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+					</div>
+					<div class="img-item">
+						<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+					</div>
+					<div class="img-item">
+						<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+					</div>
+				</div>
+				<span class="hint">上传成功</span>
+			</div>
+			<a class="upload iconfont">&#xe67d;</a>
+		</ion-item>
+		<dib class="btn-wrapper">
+			<button class="submit" ion-button block round>创建</button>
+		</dib>
+	</form>
+</ion-content>

@@ -31,9 +31,5 @@ page-login {
 		.label{margin:0;padding: 0 rem(20) 0 rem(30);
 			.iconfont{font-size: rem(60);}
 		}
-		.button{
-			max-width:calc(100% - (2 * #{rem(30)}));margin:0 auto;
-		}
-		.submit{margin-top: rem(100);}
 	}
 }

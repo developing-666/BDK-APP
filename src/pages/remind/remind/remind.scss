@@ -5,15 +5,15 @@ page-remind {
 	}
 	.hint{position: fixed;width: rem(200);height:rem(40);line-height:rem(40);display: flex;justify-content: center;align-items: center;top:30px;left:0;z-index: 999;background-color: #000;border-radius: rem(20);color:#fff;}
 
-	.remind-list-container{background-color: #fff;
-		.avtive-day-bar{margin-top: 1rem;
+	.remind-list-container{@include flex-center;
+		.avtive-day-bar{margin-top: 1rem;background-color: #fff;border-bottom:$border;width: 100%;
 			height: rem(80);display: flex;justify-content: space-between;align-items: center;padding:0 1rem;
 			.control{color:color($colors,light);display: flex;align-items: center;
 				.iconfont{font-size: 1.6rem;}
 			}
 			.avtive-day{font-size: 1.6rem;}
 		}
-		.list{
+		.list{margin-top:0;
 			.item{
 				padding-left: rem(60);padding-top: rem(20);
 				.item-inner{padding-right: 1rem;}
@@ -96,7 +96,13 @@ page-remind {
 				}
 			}
 		}
+		&.no-result{
+			&:before{
+				height: rem(278);width:rem(310);@include flex-center();padding-top: rem(200);background: url('../../../assets/imgs/no-remind.png') no-repeat center 3rem;background-size: rem(200); content: '暂无提醒任务';font-size: rem(30);margin-top: rem(200);position: absolute;
+			}
+		}
 	}
+	.add-remind{position: fixed;right: 1rem;bottom:6rem;border-radius:50%;width: rem(100);height:rem(100);@include flex-center;font-size:2.4rem;}
 	.bottom-bar{width: 100%;display: flex;height:rem(100);border-top:$border;justify-content:space-between;padding:rem(10) 0;
 		div{width: 50%;@include flex-center();  font-size: rem(36);
 			.iconfont{font-size:3rem;margin-right: 1rem;}

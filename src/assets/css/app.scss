@@ -119,3 +119,20 @@ ion-buttons.buttons-group {
 		.iconfont{font-size:30px;}
 	}
 }
+
+.button{
+	&.large{max-width:calc(100% - (2 * #{rem(30)}));margin: rem(110) auto;}
+}
+
+.full-form{
+	.list{
+		.item{border-bottom: $border;padding-left: 1rem;background-color: #fff;
+			.item-inner{
+				border-bottom: none;padding-right:22px;
+			}
+		}
+		button.item-ios:not([detail-none]) .item-inner{
+			background-position: right 10px center;
+		}
+	}
+}
