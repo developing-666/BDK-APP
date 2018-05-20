@@ -1,0 +1,121 @@
+.button.button-ios-fff,
+.button.button-md-fff {
+	color: color($colors, primary);
+	background-color: #fff;
+}
+ion-toast.success .toast-wrapper {
+	background-color: rgba(110, 217, 31, 0.8);
+}
+ion-toast.danger .toast-wrapper {
+	background-color: rgba(245, 61, 61, 0.8);
+}
+//full-button
+ion-buttons.buttons-group {
+	border-top: 1px solid color($colors, border);
+	margin: 0 0 1rem;
+}
+.button.full-button {
+	padding: 0 2.5rem;
+	margin: 0;
+	height: 4.5rem;
+	.button-inner {
+		justify-content: space-between;
+	}
+	.tag {
+		font-size: 1.6rem;
+		clear: both;
+		line-height: 30px;
+		font-weight: normal;
+		.iconfont {
+			font-size: 28px;
+			margin-right: 10px;
+		}
+	}
+	.icon {
+		color: color($colors, icon);
+		font-size: 2.8rem;
+	}
+	&.button-outline {
+		background-color: #fff;
+		color: color($colors, dark);
+		border: 0;
+		border-bottom: 1px solid color($colors, border);
+	}
+}
+.buttons-list.list {
+	margin-bottom: 1rem;
+	.item.item-block {
+		padding: 0 0 0 2.5rem;
+		.item-inner {
+			padding: 0 2.5rem 0 0;
+			margin: 0;
+			.icon[item-end] {
+				margin-right: 0;
+			}
+			.label,
+			.tag {
+				color: color($colors, dark);
+				font-size: 1.6rem;
+				clear: both;
+				line-height: 3rem;
+				font-weight: normal;
+				.icon,
+				.iconfont {
+					font-size: 2.8rem;
+					margin-right: 1rem;
+				}
+			}
+		}
+	}
+}
+.loading-mask {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #000;
+	opacity: 0.3;
+	z-index: 99;
+}
+.loading-container {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+	.loading-wrap {
+		width: 70%;
+		padding: 2rem;
+		background-color: #fff;
+		border-radius: 8px;
+		font-size: 1.6rem;
+		text-align: center;
+	}
+}
+.webview {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+.header{
+	.toolbar{overflow: visible;}
+	.bar-buttons{
+		.iconfont{font-size:30px;}
+	}
+}

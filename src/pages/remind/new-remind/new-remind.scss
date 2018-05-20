@@ -1,0 +1,18 @@
+page-new-remind {
+	.content{background-color: rgba(color($colors,bg),0.8);}
+	.new-remind-container{position: absolute;top:0;left:0;right:0;bottom: 0;@include flex-center();
+		flex-direction: column;
+		.title{font-size:1.6rem;line-height:3rem;margin-bottom: rem(104);}
+		.remind-type{text-align: center;
+			.iconfont{display: flex;width:rem(200);height: rem(200);border-radius: 50%;font-size:rem(200);line-height:1;}
+			p{line-height:rem(104);font-size: rem(36);font-weight: bold;}
+		}
+		.clientele-remind{margin-bottom: rem(142);
+			.iconfont{color:color($colors,primary);}
+		}
+		.other-remind{
+			.iconfont{color:color($colors,warning);}
+		}
+		.close{position: absolute;color:color($colors,icon);right:rem(40);top:rem(40);font-size: rem(60);}
+	}
+}

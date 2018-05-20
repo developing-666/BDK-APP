@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      注册
+    </ion-title>
+    <ion-buttons>
+      <button ion-button (click)="dismiss()">关闭</button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="(confirm())">
+    <ion-list>
+      <ion-item>
+        <ion-label>用户名</ion-label>
+        <ion-input type="text" formControlName="username"></ion-input>
+      </ion-item>
+      <div *ngIf="!registerForm.controls.username.valid && registerForm.controls.username.touched" class="validation-failed">
+        请输入正确的用户名
+      </div>
+      <ion-item>
+        <ion-label>手机号</ion-label>
+        <ion-input type="tel" formControlName="phone"></ion-input>
+      </ion-item>
+      <div *ngIf="!registerForm.controls.phone.valid && registerForm.controls.phone.touched" class="validation-failed">
+        请输入正确的电话号码
+      </div>
+      <ion-item>
+        <ion-label>验证码</ion-label>
+        <ion-input type="number" formControlName="verificationCode"></ion-input>
+      </ion-item>
+      <div *ngIf="!registerForm.controls.verificationCode.valid && registerForm.controls.verificationCode.touched" class="validation-failed">
+        请输入验证码
+      </div>
+      <ion-item>
+        <ion-label>密　码</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="!registerForm.controls.password.valid && registerForm.controls.password.touched" class="validation-failed">
+        请输入密码
+      </div>
+    </ion-list>
+    <div padding-horizontal>
+      <button ion-button block type="submit" [disabled]="!registerForm.valid">注 册</button>
+    </div>
+    <button class="verification" ion-button small color="secondary" *ngIf="registerForm.controls.phone.valid">获取验证码</button>
+  </form>
+</ion-content>

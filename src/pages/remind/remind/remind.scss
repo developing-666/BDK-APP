@@ -1,0 +1,117 @@
+page-remind {
+	.date-now{
+		display: flex;align-items: center;color: #fff;padding-left: 1rem;font-size: rem(36);
+		.iconfont{font-size:2.4rem;}
+	}
+	.hint{position: fixed;width: rem(200);height:rem(40);line-height:rem(40);display: flex;justify-content: center;align-items: center;top:30px;left:0;z-index: 999;background-color: #000;border-radius: rem(20);color:#fff;}
+
+	.remind-list-container{background-color: #fff;
+		.avtive-day-bar{margin-top: 1rem;
+			height: rem(80);display: flex;justify-content: space-between;align-items: center;padding:0 1rem;
+			.control{color:color($colors,light);display: flex;align-items: center;
+				.iconfont{font-size: 1.6rem;}
+			}
+			.avtive-day{font-size: 1.6rem;}
+		}
+		.list{
+			.item{
+				padding-left: rem(60);padding-top: rem(20);
+				.item-inner{padding-right: 1rem;}
+				.label{
+					margin:0;
+					.remind-content{
+						position: relative;padding-bottom: rem(16);padding-right: rem(60);
+						P{margin-bottom: 0;white-space:normal;word-break: break-all;}
+						.mark{display: flex;position: absolute;height:rem(44);width: rem(44);border-radius: 50%;border: 2px solid #bcbcbc;justify-content: center;align-items: center;top:rem(110);right:2px;font-size: 1.8rem;color:#fff;@extend .transition-02;
+
+						}
+					}
+					h3{
+						display: flex;height:rem(68);align-items: center;@extend .fn-text-overflow;margin-bottom: 0;
+						.time{
+							@include tag(color($colors,primary));
+						}
+						.title{font-size: rem(32); color:#000;font-weight: bold;margin-left: rem(20);}
+					}
+					.clientele-info{
+						padding-left: 0.6rem;
+						line-height: rem(52);max-height: rem(104);font-size:rem(28);@include text-overflow();
+						.name{margin-right: rem(30);}
+					}
+					.remark{
+						padding-left: 0.6rem;
+						line-height: rem(44);max-height: rem(88);@include text-overflow();color: color($colors,light);
+					}
+					.return-wrapper{
+						padding-left: 0.6rem;height:rem(76);
+						@include text-overflow();background-color: #f6f6f6;border-top: $border;
+					}
+					.return{
+						color:color($colors,primary);display: flex;height:rem(74);align-items: center;justify-content: flex-start;
+						.return-from{
+							@include tag(color($colors,primary),true);
+						}
+						.return-text{margin-left: rem(16);}
+					}
+				}
+				.top-line{
+					position: absolute;display:inline-block;height: 2.2rem;width: 1px;background-color: color($colors,border);left:1.5rem;top:0;
+				}
+				&:before{
+					position: absolute;display:inline-block;height: rem(20);width: rem(20);background-color: color($colors,primary);left:1rem;top:0.9rem;content: '';border-radius:50%;z-index:2;
+				}
+				&:after{
+					position: absolute;display:inline-block;height: 100%;width: 1px;background-color: color($colors,border);left:1.5rem;top:1.9rem;content: '';
+				}
+				&.disabled{
+					&:before{
+						background-color: color($colors,gray);
+					}
+					.label{
+						h3{
+							.time{
+								@include tag(color($colors,gray));
+							}
+						}
+					}
+				}
+				&.pitch-on{
+					.label{
+						.remind-content{
+							.mark{background-color: color($colors,warning);border-color:color($colors,warning); }
+						}
+					}
+				}
+			}
+			.item-options{
+				.button{
+					.button-inner{line-height:rem(36);font-size:1.6rem;}
+				}
+			}
+			.item-wrapper:first-child{
+				.item{padding-top: 0;
+					.top-line{
+						display:none;
+					}
+				}
+			}
+		}
+	}
+	.bottom-bar{width: 100%;display: flex;height:rem(100);border-top:$border;justify-content:space-between;padding:rem(10) 0;
+		div{width: 50%;@include flex-center();  font-size: rem(36);
+			.iconfont{font-size:3rem;margin-right: 1rem;}
+		}
+		.delete{color:color($colors,danger);border-right: $border;}
+		.check-all{
+			.iconfont{
+				width: rem(44);height: rem(44);border-radius: 50%;@include flex-center();
+				border: 2px solid color($colors,icon);font-size: 1.8rem;color:color($colors,icon);@extend .transition-02;
+			}
+			&.active{
+				.iconfont{
+					background-color: color($colors,warning);border-color:color($colors,warning);color:#fff;
+				}
+			}
+		}
+	}
+}

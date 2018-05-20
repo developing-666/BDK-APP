@@ -1,0 +1,298 @@
+@import "ionic.globals";
+
+html {
+  font-size: 10px !important;
+}
+
+$colors: (
+	primary: 	#3dcbbd,
+	secondary: 	#11a593,
+	warning: 	#ffaa33,
+	danger: 	#fe4739,
+	success: 	#6ed91f,
+	light: 		#999,
+	dark: 		#666,
+	link: 		#488aff,
+	gray: 		#c5c5c5,
+	icon: 		#828282,
+	font:		#333,
+	border:		#ddd,
+	bg: 		#fafafa
+);
+$border:		1px solid color($colors,border);
+
+$padding-horizontal:	rem(30);
+$designWidth : 750; //如设计图是750
+@function rem( $px ){
+	@return $px/20 + rem;
+}
+
+@mixin flex-center(){
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+@mixin text-overflow($size:2){
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $size;
+	-webkit-box-orient: vertical;
+}
+
+@mixin tag($color,$out-line:false){
+	display: inline-block;
+	text-align: center;
+	width: rem(90);
+	height: rem(32);
+	position:relative;
+	border-radius:rem(16);
+		em{
+			display:inline-block;
+			width:rem(15);
+			height: rem(15);
+			position:absolute;
+			left:0;
+			top:0;
+		}
+		i{
+			position: absolute;
+			width: 100%;
+			height:100%;
+			left:0;
+			top:0;
+			z-index:9;
+			font-size: $font-size-base;
+			line-height: rem(32);
+		}
+	@if($out-line){
+		color:$color;
+		border:1px solid $color;
+		em{
+			left:-1px;
+			top:-1px;
+			border-left:1px solid $color;
+			border-top:1px solid $color;
+			background-color: #f6f6f6;
+		}
+		i{line-height: rem(30);}
+	}
+	@else{
+		color:#fff;
+		background-color: $color;
+		em{
+			background-color: $color;
+		}
+	}
+}
+
+.transition-02 {transition: all 0.2s ease;
+}
+.transition-05 {
+	transition: all 0.5s ease;
+}
+.color-primary {
+	color: color($colors, primary);
+}
+.color-secondary {
+	color: color($colors,secondary);
+}
+.color-warning {
+	color: color($colors,warning);
+}
+.color-danger {
+	color: color($colors,danger);
+}
+.color-success {
+	color: color($colors,success);
+}
+/* 清理浮动 */
+
+.fn-clear:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: '';
+  clear: both;
+  height: 0;
+}
+
+.fn-clear {
+  zoom: 1;
+  /* for IE6 IE7 */
+}
+
+.fn-left {
+	float: left;
+}
+.fn-right {
+	float: right;
+}
+.fn-hide {
+	display: none !important;
+}
+.fn-text-overflow {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.icon-loading {
+	display: inline-block;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+	text-align: center;
+	z-index: 9;
+	transform-origin: 50% 50% 0;
+	animation: load 1.5s linear infinite;
+}
+
+
+
+
+/* 对齐是排版最重要的因素, 别让什么都居中 */
+
+caption,
+th {
+  text-align: left;
+}
+
+/* 来自yahoo, 让标题都自定义, 适应多个系统应用 */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: 500;
+}
+
+q:before,
+q:after {
+  content: '';
+}
+
+/* 统一上标和下标 */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* 正常链接 未访问 */
+
+a:link {
+  text-decoration: none;
+}
+
+/* 鼠标悬停 */
+
+a:hover {
+  text-decoration: none;
+}
+
+/* 默认不显示下划线，保持页面简洁 */
+
+ins,
+a {
+  text-decoration: none;
+}
+
+/* 代码字体 */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+
+
+
+/* 隐藏, 通常用来与 JS 配合 */
+
+/* a链接去掉点击时候的虚线*/
+
+a,
+button,
+input {
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*初始化系统默认样式*/
+
+i,
+em {
+  font-style: normal;
+}
+
+input,
+select,
+textarea {
+  vertical-align: middle;
+  -webkit-appearance: none;
+  border-radius: 0;
+  outline: none;
+  font-family: \5FAE\8F6F\96C5\9ED1, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
+  color: #333;
+}
+
+*,
+*:after,
+*::before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* 清除浏览器默认行为 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+}
+
+a,
+button {
+  -webkit-user-select: none;
+}
+
+input[type=tel],
+input[type=number],
+input[type=password],
+input[type=date] {
+  font-family: tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
+}
+
+
+/*input[type="date"]:before {
+    content: attr(placeholder);
+    color:#c7c7c7;width: 100%;
+    text-align: center;
+}*/
