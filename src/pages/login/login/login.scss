@@ -22,10 +22,6 @@ page-login {
 				.input{height: 100%;border-bottom:$border;display:flex;align-items: center;
 					input{margin:0;font-size:rem(30);}
 				}
-				.btn-wrapper{
-					border-bottom: $border;padding:0;margin: 0;height: 100%;@include flex-center();
-					.button{margin:0;max-width: 100%;}
-				}
 			}
 		}
 		.label{margin:0;padding: 0 rem(20) 0 rem(30);
