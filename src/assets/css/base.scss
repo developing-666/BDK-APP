@@ -1,112 +1,110 @@
 @import "ionic.globals";
 
-html {
-  font-size: 10px !important;
-}
 
 $colors: (
-	primary: 	#3dcbbd,
-	secondary: 	#11a593,
-	warning: 	#ffaa33,
-	danger: 	#fe4739,
-	success: 	#6ed91f,
-	light: 		#999,
-	dark: 		#666,
-	link: 		#488aff,
-	gray: 		#c5c5c5,
-	icon: 		#828282,
-	font:		#333,
-	border:		#ddd,
-	bg: 		#fafafa
+    primary:    #3dcbbd,
+    secondary:  #11a593,
+    warning:    #ffaa33,
+    danger:     #fe4739,
+    success:    #6ed91f,
+    light:      #999,
+    dark:       #666,
+    link:       #488aff,
+    gray:       #c5c5c5,
+    icon:       #828282,
+    font:       #333,
+    border:     #ddd,
+    bg:         #fafafa
 );
-$border:		1px solid color($colors,border);
+$border:        1px solid color($colors,border);
 
-$padding-horizontal:	rem(30);
+$padding-horizontal:    rem(30);
 $designWidth : 750; //如设计图是750
 @function rem( $px ){
-	@return $px/20 + rem;
+    @return $px/20 + rem;
 }
 
 @mixin flex-center(){
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 @mixin text-overflow($size:2){
-	overflow : hidden;
-	text-overflow: ellipsis;
-	display: -webkit-box;
-	-webkit-line-clamp: $size;
-	-webkit-box-orient: vertical;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $size;
+    -webkit-box-orient: vertical;
 }
 
 @mixin tag($color,$out-line:false){
-	display: inline-block;
-	text-align: center;
-	width: rem(90);
-	height: rem(32);
-	position:relative;
-	border-radius:rem(16);
-		em{
-			display:inline-block;
-			width:rem(15);
-			height: rem(15);
-			position:absolute;
-			left:0;
-			top:0;
-		}
-		i{
-			position: absolute;
-			width: 100%;
-			height:100%;
-			left:0;
-			top:0;
-			z-index:9;
-			font-size: $font-size-base;
-			line-height: rem(32);
-		}
-	@if($out-line){
-		color:$color;
-		border:1px solid $color;
-		em{
-			left:-1px;
-			top:-1px;
-			border-left:1px solid $color;
-			border-top:1px solid $color;
-			background-color: #f6f6f6;
-		}
-		i{line-height: rem(30);}
-	}
-	@else{
-		color:#fff;
-		background-color: $color;
-		em{
-			background-color: $color;
-		}
-	}
+    display: inline-block;
+    text-align: center;
+    width: rem(90);
+    height: rem(32);
+    position:relative;
+    border-radius:rem(16);
+        em{
+            display:inline-block;
+            width:rem(15);
+            height: rem(15);
+            position:absolute;
+            left:0;
+            top:0;
+        }
+        i{
+            position: absolute;
+            width: 100%;
+            height:100%;
+            left:0;
+            top:0;
+            z-index:9;
+            font-size: $font-size-base;
+            line-height: rem(32);
+        }
+    @if($out-line){
+        color:$color;
+        border:1px solid $color;
+        em{
+            left:-1px;
+            top:-1px;
+            border-left:1px solid $color;
+            border-top:1px solid $color;
+            background-color: #f6f6f6;
+        }
+        i{line-height: rem(30);}
+    }
+    @else{
+        color:#fff;
+        background-color: $color;
+        em{
+            background-color: $color;
+        }
+    }
 }
 
-.transition-02 {transition: all 0.2s ease;
-}
+.transition-02 {transition: all 0.2s ease;}
+.transition-35 {transition: all 0.35s ease;}
+
 .transition-05 {
-	transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 .color-primary {
-	color: color($colors, primary);
+    color: color($colors, primary);
 }
 .color-secondary {
-	color: color($colors,secondary);
+    color: color($colors,secondary);
 }
 .color-warning {
-	color: color($colors,warning);
+    color: color($colors,warning);
 }
 .color-danger {
-	color: color($colors,danger);
+    color: color($colors,danger);
 }
 .color-success {
-	color: color($colors,success);
+    color: color($colors,success);
 }
 /* 清理浮动 */
 
@@ -125,33 +123,33 @@ $designWidth : 750; //如设计图是750
 }
 
 .fn-left {
-	float: left;
+    float: left;
 }
 .fn-right {
-	float: right;
+    float: right;
 }
 .fn-hide {
-	display: none !important;
+    display: none !important;
 }
 .fn-text-overflow {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .icon-loading {
-	display: inline-block;
-	position: absolute;
-	width: 100px;
-	height: 100px;
-	line-height: 100px;
-	left: 50%;
-	top: 50%;
-	margin-top: -50px;
-	margin-left: -50px;
-	text-align: center;
-	z-index: 9;
-	transform-origin: 50% 50% 0;
-	animation: load 1.5s linear infinite;
+    display: inline-block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    text-align: center;
+    z-index: 9;
+    transform-origin: 50% 50% 0;
+    animation: load 1.5s linear infinite;
 }
 
 

@@ -1,0 +1,65 @@
+<ion-header>
+	<ion-navbar>
+		<span class="nav-title">客户</span>
+		<ion-buttons end>
+			<button ion-button icon-only>
+				<i class="iconfont">
+					&#xe673;
+				</i>
+			</button>
+			<button ion-button icon-only>
+				<i class="iconfont">
+					&#xe66c;
+				</i>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+	<div class="ion-filter">
+		<div class="filter-backdrop"></div>
+		<div class="filter-bar">
+			<div class="filter-item" [ngClass]="{'open':openSelect}" (click)="open()">
+				<span class="name">标签筛选</span>
+				<i class="iconfont">&#xe683;</i>
+			</div>
+			<div class="filter-item">
+				<span class="name">全部客户</span>
+				<i class="iconfont">&#xe683;</i>
+			</div>
+			<div class="filter-item">
+				<span class="name">排序</span>
+				<i class="iconfont">&#xe683;</i>
+			</div>
+		</div>
+		<div class="filter-panel" [ngClass]="{'show':openSelect}">
+			<div class="panel-item active">
+				<span class="name">全部客户</span>
+				<i class="iconfont">&#xe640;</i>
+			</div>
+			<div class="panel-item">
+				<span class="name">全部客户</span>
+				<i class="iconfont">&#xe640;</i>
+			</div>
+			<div class="panel-item">
+				<span class="name">全部客户</span>
+				<i class="iconfont">&#xe640;</i>
+			</div>
+			<div class="panel-item">
+				<span class="name">全部客户</span>
+				<i class="iconfont">&#xe640;</i>
+			</div>
+		</div>
+	</div>
+</ion-content>
+
+
+
+
+
+
+
+<!--<ion-select interface="popover" [(ngModel)]="value" placeholder="标签筛选" [selectOptions]="selectOptions">
+	<ion-option *ngFor="let opt of opts" [value]="opt.val">{{opt.name}}</ion-option>
+</ion-select>-->

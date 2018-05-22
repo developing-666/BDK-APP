@@ -14,6 +14,7 @@ import { AboutPage } from '../pages/mine/about/about';
 
 import { LoginModule } from '../pages/login/login.module';
 import { RemindModule } from '../pages/remind/remind.module';
+import { ClienteleModule } from '../pages/clientele/clientele.module';
 
 //Ionic原生相关
 import { StatusBar } from '@ionic-native/status-bar';
@@ -77,6 +78,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
 	imports: [
 		LoginModule,
 		RemindModule,
+		ClienteleModule,
 		BrowserModule,
 		HttpModule,
 		IonicModule.forRoot(MyApp, {

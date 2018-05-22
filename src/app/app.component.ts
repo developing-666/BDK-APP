@@ -22,6 +22,7 @@ import { NewRemindPage } from '../pages/remind/new-remind/new-remind';
 import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
 import { SignInPage } from '../pages/login/sign-in/sign-in';
 import { ForgetPasswordPage } from '../pages/login/forget-password/forget-password';
+import { ClientelePage } from '../pages/clientele/clientele/clientele';
 
 @Component({
   templateUrl: 'app.html'

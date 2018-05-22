@@ -1,0 +1,10 @@
+page-clientele {
+    .header{
+        .btns{
+            @include flex-center();
+            .iconfont{
+                @include flex-center();
+            }
+        }
+    }
+}
