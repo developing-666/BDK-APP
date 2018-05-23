@@ -4,6 +4,7 @@ import { RemindPage } from './remind/remind';
 import { NewRemindPage } from './new-remind/new-remind';
 import { AddRemindPage } from './add-remind/add-remind';
 
+import { ComponentsModule } from '../../components/components.module';
 @NgModule({
 	declarations: [
 		RemindPage,
@@ -16,7 +17,8 @@ import { AddRemindPage } from './add-remind/add-remind';
 		AddRemindPage
 	],
 	imports: [
-		IonicModule
+		IonicModule,
+		ComponentsModule
 	]
 })
 export class RemindModule {

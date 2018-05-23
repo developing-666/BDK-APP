@@ -85,6 +85,61 @@ $designWidth : 750; //如设计图是750
     }
 }
 
+@mixin tag-size($size){
+    @if $size == 'small'{
+        height: rem(32);
+        line-height: calc(#{rem(32)} - 2px);
+        padding:0 rem(20);
+        font-size:rem(24);
+        border-radius:rem(16);
+    }
+    @else if $size == 'large'{
+        height: rem(60);
+        line-height: calc(#{rem(60)} - 2px);
+        padding:0 rem(40);
+        font-size:rem(30);
+        border-radius:rem(30);
+    }
+    @else{
+        height: rem(50);
+        line-height: calc(#{rem(50)} - 2px);
+        padding:0 rem(32);
+        font-size:rem(30);
+        border-radius:rem(26);
+    }
+}
+
+
+@mixin round-tag($size:'default',$color:false,$out-line:true){
+    display: inline-block;
+    @include tag-size($size);
+    @if($out-line){
+        @if($color){
+            border:1px solid $color;
+            color: $color;
+        }
+        @else{
+            border:1px solid color($colors,border);
+            color: color($colors,dark);
+        }
+    }
+    @else{
+        border:1px solid transparent;
+        color: #fff;
+        @if($color){
+            background-color: $color;
+        }
+        @else{
+            background-color:color($colors,primary);
+        }
+    }
+    
+}
+
+
+
+
+
 .transition-02 {transition: all 0.2s ease;}
 .transition-35 {transition: all 0.35s ease;}
 

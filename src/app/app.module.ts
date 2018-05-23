@@ -16,6 +16,9 @@ import { LoginModule } from '../pages/login/login.module';
 import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
 
+
+import { AlphaScrollModule } from '../modules/alpha-scroll/index';
+
 //Ionic原生相关
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -81,6 +84,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
 		ClienteleModule,
 		BrowserModule,
 		HttpModule,
+		AlphaScrollModule.forRoot(),
 		IonicModule.forRoot(MyApp, {
 			mode: 'ios', // android是'md'
 			backButtonText: ''

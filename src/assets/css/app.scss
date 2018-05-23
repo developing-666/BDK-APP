@@ -246,15 +246,5 @@ ion-buttons.buttons-group {
 
 
 
-.voice-bar{
-    display: flex;align-items: center;
-    .voice-bar-item{padding: 0 1rem;position: relative;
-        height:2.2rem;border: $border;border-radius:1rem;display:inline-block;min-width: 10rem;
-        .iconfont{font-size: 1.2rem;color:color($colors,light);}
-        &:after{
-            content: '';position: absolute;width:0.5rem;height:0.5rem;border-radius: 50%;background-color: color($colors,danger);right:-1.5rem;top:0;
-        }
-    }
-    .seconds{font-size:1.2rem;align-self: flex-end;margin-left: 1rem;}
-}
+
 
