@@ -23,6 +23,7 @@ import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
 import { SignInPage } from '../pages/login/sign-in/sign-in';
 import { ForgetPasswordPage } from '../pages/login/forget-password/forget-password';
 import { ClientelePage } from '../pages/clientele/clientele/clientele';
+import { SearchClientelePage } from '../pages/clientele/search-clientele/search-clientele';
 
 @Component({
   templateUrl: 'app.html'
@@ -45,7 +46,7 @@ export class MyApp {
     platform.ready().then(() => {
       // this.nav.setRoot(TabsPage); // 设置首页
       // this.nav.setRoot(LoginPage); // 设置首页
-      this.nav.setRoot(ClientelePage); // 设置首页
+      this.nav.setRoot(SearchClientelePage); // 设置首页
       // this.nativeService.statusBarStyle(); // 设置状态栏颜色
       // this.assertNetwork(); // 检测网络
       // this.helper.funDebugInit(); // 初始化fundebug

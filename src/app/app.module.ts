@@ -86,7 +86,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
 		HttpModule,
 		AlphaScrollModule.forRoot(),
 		IonicModule.forRoot(MyApp, {
-			mode: 'ios', // android是'md'
+//			mode: 'ios', // android是'md'
 			backButtonText: ''
 		}),
 		IonicStorageModule.forRoot(),

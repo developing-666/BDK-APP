@@ -7,38 +7,46 @@ page-clientele {
             }
         }
     }
-    .clientele-list{
+    .no-result{background-color: #fff;
+        position: absolute;top:4.2rem;left:0;right: 0;bottom: 0;@include flex-center();
+        flex-wrap: wrap;
+        .no-result-tag{width: rem(350);@include flex-center();
+        flex-wrap: wrap;}
+        img{width:rem(310);}
+        p{line-height: rem(86);font-size: rem(30);color:color($colors,light);width: 100%;text-align: center;}
+        .add-clientele{margin-top: rem(82);}
+    }
+    .clientele-list{background-color: #fff;
         .item{
             padding-left:rem(142);
             .item-inner{
                 .progress{
-                    position: absolute;top:1rem;
+                    position: absolute;transform: translateX(-6rem);
                     width: rem(96);height: rem(96);
                     border-radius:50%;
-                    border:2px solid color($colors,border);
-                    .test{
-                        position: absolute;left:-2px;top:-2px;
-                        width: calc(100% + 4px);
-                        height: calc(100% + 4px);
-                        border: 2px solid #000;border-radius:50%;
+                    border:1px solid color($colors,border);
+                    @include flex-center();
+                    .state{
+                        font-size: rem(28);color:color($colors,dark);
                     }
                     div{
                         position: absolute;
-                        top:-2px;
-                        height: calc(100% + 4px);
+                        top:-1px;
+                        height: rem(96);
+                        width: rem(48);
                         overflow: hidden;
                     }
                     .line{
-                        width: calc(200% + 4px);
+                        top:0;
+                        width: rem(96);
                         border-radius: 50%;
-                        border-width: 2px;
+                        border-width: 1px;
                         border-style: solid;
                         border-color: transparent;
                         transform: rotate(-135deg);
                     }
                     .left-wrapper{
-                        left:-2px;
-                        width: calc(50% + 4px);
+                        left:-1px;
                         .line{
                             left:0;
                             border-left-color:color($colors,primary);
@@ -47,8 +55,7 @@ page-clientele {
                         }
                     }
                     .right-wrapper{
-                        right:-2px;
-                        width: 50%;
+                        right:-1px;
                         .line{
                             right:0;
                             border-right-color:color($colors,primary);
@@ -58,7 +65,7 @@ page-clientele {
                     }
                 }
                 .label{
-                    margin:0;
+                    margin:0;display: flex;align-items: center;
                     .name{
                         height:rem(66);display: flex;align-items: center;font-size:rem(30);margin-bottom: 0;
                         .main-tag{

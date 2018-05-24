@@ -41,10 +41,13 @@ $action-sheet-ios-button-min-height:auto;
 $list-border-color:color($colors, border);
 $tabs-ios-tab-icon-size:2.4rem;
 $label-md-text-color:color($colors, dark);
-
+$toolbar-ios-border-color:  transparent;
 $toolbar-ios-title-font-weight: 	normal;
 $datetime-ios-placeholder-color:		color($colors, gray);
 $datetime-md-placeholder-color:		$datetime-ios-placeholder-color;
 $text-input-placeholder-color:		color($colors, gray);
 
 $item-ios-body-text-font-size:		1.5rem;
+
+$searchbar-ios-background-color:            color($colors, primary);
+$searchbar-md-background-color:             $searchbar-ios-background-color;
