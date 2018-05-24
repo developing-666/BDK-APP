@@ -7,8 +7,11 @@
 	<form class="add-remind-form full-form" #addRemindForm="ngForm" novalidate (ngSubmit)="add()">
 		<ion-list>
 			<button ion-item>
+				<button clear ion-button icon-only item-start>
+					<i class="iconfont">&#xe66e;</i>
+				</button>
 				<ion-label>选择客户</ion-label>
-				<ion-note item-end>选择客户</ion-note>
+				<!-- <ion-note item-end>选择客户</ion-note> -->
 			</button>
 			<ion-item>
 				<ion-label>提醒题目</ion-label>
