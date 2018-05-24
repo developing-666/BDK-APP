@@ -16,6 +16,18 @@ page-add-remind {
 		&.item{
 			.item-inner{
 				border-bottom: none;
+				.label-ios{
+				    margin:0;
+				}
+				.remark-container{padding:1rem 0;
+				    p{
+				        line-height: 2.4rem;margin:0;white-space:normal;
+				    }
+				    .text-remark{
+				        @include text-overflow();max-height: 6rem;
+				    }
+				}
+				.hint{color:color($colors,gray);}
 			}
 		}
 	}
