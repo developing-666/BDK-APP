@@ -16,7 +16,7 @@ $colors: (
     border:     #ddd,
     bg:         #fafafa
 );
-$border:        1px solid color($colors,border);
+$border:        0.55px solid color($colors,border);
 
 $padding-horizontal:    rem(30);
 $designWidth : 750; //如设计图是750
@@ -133,7 +133,7 @@ $designWidth : 750; //如设计图是750
             background-color:color($colors,primary);
         }
     }
-    
+
 }
 
 

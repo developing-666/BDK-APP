@@ -1,10 +1,10 @@
 <ion-header>
-	<ion-searchbar 
+	<ion-searchbar
 		placeholder="请输入需要搜索的客户姓名"
 		[(ngModel)]="keywords"
-		[animated]="true" 
+		[animated]="true"
 		cancelButtonText="取消"
-		[showCancelButton]="true" 
+		[showCancelButton]="true"
 		(ionInput)="onInput($event)"
 		(ionCancel)="onCancel($event)">
 	</ion-searchbar>
