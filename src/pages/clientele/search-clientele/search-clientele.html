@@ -1,12 +1,5 @@
 <ion-header>
-	<ion-searchbar
-		placeholder="请输入需要搜索的客户姓名"
-		[(ngModel)]="keywords"
-		[animated]="true"
-		cancelButtonText="取消"
-		[showCancelButton]="true"
-		(ionInput)="onInput($event)"
-		(ionCancel)="onCancel($event)">
+	<ion-searchbar placeholder="请输入需要搜索的客户姓名" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
 	</ion-searchbar>
 </ion-header>
 
@@ -34,9 +27,11 @@
 	</div>
 	<div class="no-result">
 		<div class="no-result-tag">
-			<img src="../../../assets/imgs/no-clientele.png"/>
+			<img src="../../../assets/imgs/no-clientele.png" />
 			<p>没有搜索到客户</p>
-			<button class="add-clientele" ion-button block round>添加客户</button>
+			<button class="add-clientele" ion-button block round>
+				添加客户
+			</button>
 		</div>
 	</div>
 </ion-content>

@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>用户标签</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only clear>
+				<i class="iconfont">
+					&#xe66e;
+				</i>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="tag-wrapper">
+		<p class="hint">输入或选择客户标签，一次只能选一个</p>
+		<div class="tag-container">
+			<span class="tag-item active">重要客户</span>
+			<span class="tag-item del">老客户</span>
+			<span class="tag-item">一般客户</span>
+			<span class="tag-item">选号客户</span>
+			<span class="new-tag" (click) = "newTag()">
+				<i class="iconfont">&#xe66d;</i>
+			</span>
+		</div>
+		<button class="submit" ion-button block round>确定</button>
+		<button class="submit" ion-button block round>删除</button>
+	</div>
+</ion-content>
