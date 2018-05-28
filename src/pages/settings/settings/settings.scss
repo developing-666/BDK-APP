@@ -1,0 +1,48 @@
+page-settings {
+    .main-wrapper{
+        background-color: color($colors,bg);
+        .user-header{
+            width: 100%;
+            // height: rem(152);
+            display: flex;
+            .user-avatar{
+                margin: 0;
+                padding: 0;
+                width: rem(142);
+                height: rem(152);
+                @include flex-center;
+                img{
+                    width: rem(105);
+                    height: rem(105);
+                }
+            }
+            .input-wrapper {
+                .user-info {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    // background-color: red;
+                    p:nth-child(1){
+                        width: 100%;
+                    }
+                    p:nth-child(3){
+                        color: color($colors, primary);
+                    }
+                }
+
+            }
+            
+            &.item{
+                background-color: #fff;
+                // border-bottom: $border;
+                padding-left: 0;
+                .item-inner{
+                    border-bottom: none;padding-right: 0;
+                }
+            }
+        }
+
+        
+    }
+
+}

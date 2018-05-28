@@ -15,6 +15,7 @@ import { AboutPage } from '../pages/mine/about/about';
 import { LoginModule } from '../pages/login/login.module';
 import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
+import { SettingsPageModule } from './../pages/settings/settings.module';
 
 
 import { AlphaScrollModule } from '../modules/alpha-scroll/index';
@@ -90,7 +91,8 @@ export class FunDebugErrorHandler implements ErrorHandler {
 			backButtonText: ''
 		}),
 		IonicStorageModule.forRoot(),
-		CalendarModule
+		CalendarModule,
+		SettingsPageModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
