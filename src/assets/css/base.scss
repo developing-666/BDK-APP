@@ -16,7 +16,7 @@ $colors: (
     border:     #ddd,
     bg:         #fafafa
 );
-$border:        1px solid color($colors,border);
+$border:        0.55px solid color($colors,border);
 
 $padding-horizontal:    rem(30);
 $designWidth : 750; //如设计图是750
@@ -101,8 +101,8 @@ $designWidth : 750; //如设计图是750
         border-radius:rem(30);
     }
     @else{
-        height: rem(50);
-        line-height: calc(#{rem(50)} - 2px);
+        height: rem(52);
+        line-height: calc(#{rem(52)} - 2px);
         padding:0 rem(32);
         font-size:rem(30);
         border-radius:rem(26);
@@ -133,12 +133,89 @@ $designWidth : 750; //如设计图是750
             background-color:color($colors,primary);
         }
     }
-    
+
 }
 
+@mixin clientele-item(){
+	padding-left:rem(142);
+	.item-inner{
+		.progress{
+			position: absolute;transform: translateX(-6rem);
+			width: rem(96);height: rem(96);
+			border-radius:50%;
+			border:1px solid color($colors,border);
+			@include flex-center();
+			.state{
+				font-size: rem(28);color:color($colors,dark);
+			}
+			div{
+				position: absolute;
+				top:-1px;
+				height: rem(96);
+				width: rem(48);
+				overflow: hidden;
+			}
+			.line{
+				top:0;
+				width: rem(96);
+				border-radius: 50%;
+				border-width: 1px;
+				border-style: solid;
+				border-color: transparent;
+				transform: rotate(-135deg);
+			}
+			.left-wrapper{
+				left:-1px;
+				.line{
+					left:0;
+					border-left-color:color($colors,primary);
+					border-bottom-color:color($colors,primary);
+					transform: rotate(45deg);
+				}
+			}
+			.right-wrapper{
+				right:-1px;
+				.line{
+					right:0;
+					border-right-color:color($colors,primary);
+					border-top-color:color($colors,primary);
+					transform: rotate(45deg);
+				}
+			}
+		}
+		.label{
+			margin:0;display: flex;align-items: center;
+			.name{
+				height:rem(66);display: flex;align-items: center;font-size:rem(30);margin-bottom: 0;
+				.main-tag{
+					@include round-tag('small',color($colors,primary));margin-left: 1rem;
+				}
+			}
+			.company{height:rem(28);line-height: rem(28);color:color($colors,light);@extend .fn-text-overflow;margin-bottom: 0;
+				font-size:1.2rem;
+			}
+			.tag-container{
+				min-height: rem(66);display: flex;align-items: center;flex-wrap: wrap;max-height: rem(132);
+				.tag-item{
+					@include round-tag('small');
+					margin-right: 1rem;
+				}
+			}
+		}
+	}
+	.bar-buttons[item-end]{margin:0;
+		.button[icon-only]{
+			.iconfont{
+				font-size: 2.5rem;
+			}
+			&:last-child{
+				margin-left: 1rem;
+			}
+		}
+	}
+}
 
-
-
+.iconfont{color:color($colors,icon);}
 
 .transition-02 {transition: all 0.2s ease;}
 .transition-35 {transition: all 0.35s ease;}
@@ -289,7 +366,11 @@ samp {
 
 a,
 button,
-input {
+input{
+    &:focus{
+        text-decoration: none;
+        outline: none;
+    }
   text-decoration: none;
   outline: none;
 }

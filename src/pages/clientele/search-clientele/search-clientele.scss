@@ -1,0 +1,28 @@
+page-search-clientele {
+    .lately-words{background-color: #fff;
+        min-height: calc(100vh - 44px);
+        .title{line-height:rem(80);display: flex;align-items: center;justify-content: space-between;color: color($colors,light);padding:0 rem(30);
+            
+        }
+        .words-container{padding-left:rem(30);
+            .words-item{
+                margin:rem(18) rem(40) rem(18) 0;
+                @include round-tag();
+            } 
+        }
+    }
+    .result-container{background-color: #fff;
+        li{
+            height: rem(82);display: flex; align-items: center;border-bottom: $border;font-size: rem(30);padding:0 1rem;
+        }
+    }
+    .no-result{background-color: #fff;height: calc(100vh - 44px);
+        @include flex-center();
+        flex-wrap: wrap;
+        .no-result-tag{width: rem(350);@include flex-center();
+        flex-wrap: wrap;}
+        img{width:rem(310);}
+        p{line-height: rem(86);font-size: rem(30);color:color($colors,light);width: 100%;text-align: center;}
+        .add-clientele{margin-top: rem(82);}
+    }
+}

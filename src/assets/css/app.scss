@@ -3,6 +3,7 @@
     color: color($colors, primary);
     background-color: #fff;
 }
+.searchbar-ios-cancel.button-clear{color:#fff;font-size: 1.5rem;}
 ion-toast.success .toast-wrapper {
     background-color: rgba(110, 217, 31, 0.8);
 }
@@ -13,6 +14,11 @@ ion-toast.danger .toast-wrapper {
 ion-buttons.buttons-group {
     border-top: 1px solid color($colors, border);
     margin: 0 0 1rem;
+}
+
+
+.button-clear[icon-only]{
+	.iconfont{color: color($colors, primary);}
 }
 .button.full-button {
     padding: 0 2.5rem;
@@ -118,9 +124,9 @@ ion-buttons.buttons-group {
        .nav-title{color:#fff;font-size:rem(36);padding:0 rem(28);}
     }
     .bar-buttons{
-        .iconfont{font-size:30px;}
+        .iconfont{font-size:30px;color:#fff;}
     }
-    
+
 }
 
 .button{
@@ -149,20 +155,27 @@ ion-buttons.buttons-group {
 
 .full-form{
     .list{
-        .item{border-bottom: $border;padding-left: 1rem;background-color: #fff;
+        .item{border-bottom: $border;padding-left:1rem;background-color: #fff;
             .item-inner{
-                border-bottom: none;padding-right:22px;
+                border-bottom: none;padding-right:1rem;
+				input{
+					text-align: right;
+				}
             }
+			&:last-child{
+				border-bottom: none;
+			}
         }
         button.item-ios:not([detail-none]) .item-inner{
-            background-position: right 10px center;
+            background-position: right 10px center;padding-right:2.4rem;
         }
+		ion-item-group{margin-bottom: 1rem;}
     }
 }
 
 
-.ion-filter{height: rem(84);  
-         position: relative; 
+.ion-filter{height: rem(84);
+         position: relative;
     .filter-bar{background-color: color($colors,bg);height: rem(82);border-bottom: $border;
         display: flex;padding:1rem 0;position: relative;z-index: 10;
         .filter-item{
@@ -227,7 +240,7 @@ ion-buttons.buttons-group {
 //          .select-icon{
 //              &:before{
 //                  @extend .iconfont;content:'\e683';font-size:1.2rem;@include flex-center();height: 2.2rem;width: 4rem;transform-origin: center center;
-//                  
+//
 //              }
 //              .select-icon-inner{display: none;}
 //          }
@@ -242,9 +255,3 @@ ion-buttons.buttons-group {
 //      }
 //  }
 //}
-
-
-
-
-
-

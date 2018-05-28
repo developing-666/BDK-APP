@@ -28,62 +28,66 @@ import { SettingsPage } from '../pages/settings/settings/settings';
 
 
 
+import { SearchClientelePage } from '../pages/clientele/search-clientele/search-clientele';
+import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
+import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag';
+import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
 @Component({
 	templateUrl: 'app.html'
 })
 export class MyApp {
 	@ViewChild('myNav') nav: Nav;
 
-	constructor(private platform: Platform,
-		private keyboard: Keyboard,
-		private ionicApp: IonicApp,
-		private storage: Storage,
-		private globalData: GlobalData,
-		private helper: Helper,
-		private toastCtrl: ToastController,
-		private modalCtrl: ModalController,
-		private events: Events,
-		private commonService: CommonService,
-		private versionService: VersionService,
-		private nativeService: NativeService) {
-		platform.ready().then(() => {
-			// this.nav.setRoot(TabsPage); // 设置首页
-			// this.nav.setRoot(LoginPage); // 设置首页
-			this.nav.setRoot(SettingsPage); // 设置首页
-			// this.nativeService.statusBarStyle(); // 设置状态栏颜色
-			// this.assertNetwork(); // 检测网络
-			// this.helper.funDebugInit(); // 初始化fundebug
-			// this.helper.alloyLeverInit(); // 本地"开发者工具"
-			// this.helper.initJpush(); // 初始化极光推送
-			// this.jPushOpenNotification(); // 处理打开推送消息事件
-			// 订阅重新登录事件
-			// this.events.subscribe('user:reLogin', () => {
-			//   this.modalCtrl.create(LoginPage).present();
-			// });
-			// 从缓存中获取token
-			// this.storage.get('token').then(token => {
-			//   if (token) {
-			//     this.nav.setRoot(TabsPage); // 设置首页
-			//     this.globalData.token = token;
-			//     // 用旧token获取新token,旧token作为请求头
-			//     this.commonService.getNewToken().mergeMap(newToken => {
-			//       this.globalData.token = newToken;
-			//       this.storage.set('token', newToken);
-			//       return this.commonService.getUserInfo();
-			//     }).subscribe((userInfo: UserInfo) => {
-			//       this.helper.loginSuccessHandle(userInfo);
-			//     });
-			//   } else {
-			//     this.nav.setRoot(LoginPage); // 设置首页
-			//   }
-			//   this.nativeService.splashScreenHide(); // 隐藏启动页
-			// });
-			// this.registerBackButtonAction(); // 注册android返回按键事件
-			// this.versionService.checkVersion(); // 检查版本更新
-			// this.nativeService.sync(); // 启动app检查热更新
-			// Utils.sessionStorageClear(); // 清除数据缓存
-		});
-	}
+  constructor(private platform: Platform,
+    private keyboard: Keyboard,
+    private ionicApp: IonicApp,
+    private storage: Storage,
+    private globalData: GlobalData,
+    private helper: Helper,
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
+    private events: Events,
+    private commonService: CommonService,
+    private versionService: VersionService,
+    private nativeService: NativeService) {
+    platform.ready().then(() => {
+      // this.nav.setRoot(TabsPage); // 设置首页
+      // this.nav.setRoot(LoginPage); // 设置首页
+      this.nav.setRoot(SettingRecordPage); // 设置首页
+      // this.nativeService.statusBarStyle(); // 设置状态栏颜色
+      // this.assertNetwork(); // 检测网络
+      // this.helper.funDebugInit(); // 初始化fundebug
+      // this.helper.alloyLeverInit(); // 本地"开发者工具"
+      // this.helper.initJpush(); // 初始化极光推送
+      // this.jPushOpenNotification(); // 处理打开推送消息事件
+      // 订阅重新登录事件
+      // this.events.subscribe('user:reLogin', () => {
+      //   this.modalCtrl.create(LoginPage).present();
+      // });
+      // 从缓存中获取token
+      // this.storage.get('token').then(token => {
+      //   if (token) {
+      //     this.nav.setRoot(TabsPage); // 设置首页
+      //     this.globalData.token = token;
+      //     // 用旧token获取新token,旧token作为请求头
+      //     this.commonService.getNewToken().mergeMap(newToken => {
+      //       this.globalData.token = newToken;
+      //       this.storage.set('token', newToken);
+      //       return this.commonService.getUserInfo();
+      //     }).subscribe((userInfo: UserInfo) => {
+      //       this.helper.loginSuccessHandle(userInfo);
+      //     });
+      //   } else {
+      //     this.nav.setRoot(LoginPage); // 设置首页
+      //   }
+      //   this.nativeService.splashScreenHide(); // 隐藏启动页
+      // });
+      // this.registerBackButtonAction(); // 注册android返回按键事件
+      // this.versionService.checkVersion(); // 检查版本更新
+      // this.nativeService.sync(); // 启动app检查热更新
+      // Utils.sessionStorageClear(); // 清除数据缓存
+    });
+  }
 
 	// 检测网络
 	assertNetwork() {

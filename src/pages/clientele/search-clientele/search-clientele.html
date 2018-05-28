@@ -1,0 +1,37 @@
+<ion-header>
+	<ion-searchbar placeholder="请输入需要搜索的客户姓名" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消" [showCancelButton]="true" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+	</ion-searchbar>
+</ion-header>
+
+<ion-content>
+	<div class="lately-words" hidden>
+		<p class="title">
+			<span>最近搜索</span>
+			<i class="iconfont">&#xe66e;</i>
+		</p>
+		<div class="words-container">
+			<span class="words-item">某某</span>
+			<span class="words-item">某某</span>
+			<span class="words-item">某某</span>
+			<span class="words-item">某某</span>
+			<span class="words-item">某某</span>
+			<span class="words-item">某某</span>
+		</div>
+	</div>
+	<div class="result-container" hidden>
+		<ul>
+			<li>
+				王某
+			</li>
+		</ul>
+	</div>
+	<div class="no-result">
+		<div class="no-result-tag">
+			<img src="../../../assets/imgs/no-clientele.png" />
+			<p>没有搜索到客户</p>
+			<button class="add-clientele" ion-button block round>
+				添加客户
+			</button>
+		</div>
+	</div>
+</ion-content>
