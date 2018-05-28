@@ -157,17 +157,22 @@ ion-buttons.buttons-group {
     .list{
         .item{border-bottom: $border;padding-left:1rem;background-color: #fff;
             .item-inner{
-                border-bottom: none;padding-right:1rem;
-				input{
-					text-align: right;
-				}
+                border-bottom: none;
+                input{
+                    text-align: right;
+                }
+            }
+            &.item-ios{
+               .item-inner{
+                   padding-right:1rem;
+               } 
             }
 			&:last-child{
 				border-bottom: none;
 			}
         }
-        button.item-ios:not([detail-none]) .item-inner{
-            background-position: right 10px center;padding-right:2.4rem;
+        button.item:not([detail-none]) .item-inner{
+            background-position: right 1rem center;padding-right:2.4rem;
         }
 		ion-item-group{margin-bottom: 1rem;}
     }

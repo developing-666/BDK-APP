@@ -4,9 +4,57 @@
 	</ion-navbar>
 </ion-header>
 
-
 <ion-content>
+	<div class="clientele-info">
+		<button ion-item class="clientele-item">
+			<div class="progress">
+				<!--<div class="test"></div>-->
+				<div class="left-wrapper">
+					<div class="line"></div>
+				</div>
+				<div class="right-wrapper">
+					<div class="line"></div>
+				</div>
+				<span class="state">
+					跟进
+				</span>
+			</div>
+			<div class="clientele-detail">
+				<h3 class="name">
+					<span>孙甜</span>
+					<i class="main-tag">老客户</i>
+				</h3>
+				<p class="company">
+					<span class="post">李经理</span>
+					<span>大府信息技术科技有限公司</span>
+				</p>
+				<div class="tag-container">
+					<i class="tag-item">大户</i>
+				</div>
+			</div>
+			<ion-buttons item-end>
+				<button class="message" clear ion-button icon-only>
+					<i class="iconfont">
+						&#xe67e;
+					</i>
+				</button>
+		<button class="phone" clear ion-button icon-only>
+					<i class="iconfont">
+						&#xe67b;
+					</i>
+				</button>
+		</ion-buttons>
+		</button>
+	</div>
+	<div class="record-tab-container">
+		<ion-tabs tabsPlacement="top">
+			<ion-tab tabTitle="操作记录" [root]="tabPage"></ion-tab>
+			<ion-tab tabTitle="为根提醒" [root]="tabPage"></ion-tab>
+			<ion-tab tabTitle="跟进记录" [root]="tabPage"></ion-tab>
+			<ion-tab tabTitle="通话记录" [root]="tabPage"></ion-tab>
+		</ion-tabs>
+	</div>
 	<form class="setting-record-form full-form" novalidate (ngSubmit)="setting()">
-		
+
 	</form>
 </ion-content>

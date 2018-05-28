@@ -32,7 +32,7 @@ import { SearchClientelePage } from '../pages/clientele/search-clientele/search-
 import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
 import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag';
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
-@Component({
+@Component({   
 	templateUrl: 'app.html'
 })
 export class MyApp {

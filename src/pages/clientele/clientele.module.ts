@@ -7,6 +7,9 @@ import { ClienteleTagPage } from './clientele-tag/clientele-tag';
 import { CustomTagPage } from './custom-tag/custom-tag';
 import { SettingRecordPage } from './setting-record/setting-record';
 
+import { OperatingRecordPage } from './setting-record/tabs/operating-record/operating-record';
+
+
 @NgModule({
 	declarations: [
 		ClientelePage,
@@ -14,7 +17,8 @@ import { SettingRecordPage } from './setting-record/setting-record';
 		AddClientelePage,
 		ClienteleTagPage,
 		CustomTagPage,
-		SettingRecordPage
+		SettingRecordPage,
+		OperatingRecordPage
 	],
 	entryComponents: [
 		ClientelePage,
@@ -22,7 +26,8 @@ import { SettingRecordPage } from './setting-record/setting-record';
 		AddClientelePage,
 		ClienteleTagPage,
 		CustomTagPage,
-		SettingRecordPage
+		SettingRecordPage,
+		OperatingRecordPage
 	],
 	imports: [
 		IonicModule

@@ -46,6 +46,7 @@ $designWidth : 750; //如设计图是750
     height: rem(32);
     position:relative;
     border-radius:rem(16);
+    @include flex-center();
         em{
             display:inline-block;
             width:rem(15);
@@ -55,14 +56,8 @@ $designWidth : 750; //如设计图是750
             top:0;
         }
         i{
-            position: absolute;
-            width: 100%;
-            height:100%;
-            left:0;
-            top:0;
-            z-index:9;
             font-size: $font-size-base;
-            line-height: rem(32);
+            line-height: 1;
         }
     @if($out-line){
         color:$color;
@@ -74,7 +69,6 @@ $designWidth : 750; //如设计图是750
             border-top:1px solid $color;
             background-color: #f6f6f6;
         }
-        i{line-height: rem(30);}
     }
     @else{
         color:#fff;
@@ -214,6 +208,94 @@ $designWidth : 750; //如设计图是750
 		}
 	}
 }
+
+@mixin remind-item($hasHandle:false){
+    padding-left: rem(60);padding-top: rem(20);
+    .item-inner{padding-right: 1rem;}
+    .label{
+        margin:0;
+        .remind-content{
+            position: relative;padding-bottom: rem(16);
+            @if($hasHandle){
+                padding-right: rem(60);
+                .mark{display: flex;position: absolute;height:rem(44);width: rem(44);border-radius: 50%;border: 2px solid #bcbcbc;justify-content: center;align-items: center;top:rem(110);right:2px;font-size: 1.8rem;color:#fff;@extend .transition-02;
+                }
+            }
+        }
+        h3{
+            height:rem(68);display: flex;
+            justify-content: space-between;align-items: center;
+            @extend .fn-text-overflow;
+            margin-bottom: 0;
+            .start{
+                display: flex;align-items: center;height: 100%;
+            }
+            .time{
+                @include tag(color($colors,primary));
+            }
+            .title{font-size: rem(32); color:#000;font-weight: bold;margin-left: rem(20);line-height: 1;}
+            .date{
+                color:color($colors,light);align-items: flex-end;line-height: 1;
+            }
+        }
+        .clientele-info{
+            padding-left: 0.6rem;margin-bottom: 0;
+            line-height: rem(52);max-height: rem(104);font-size:rem(28);@include text-overflow();margin: 0;color:color($colors,dark);
+            .start{margin-right: 1rem;}
+        }
+        .remark{
+            padding-left: 0.6rem;
+            .remark-text{
+                line-height: rem(44);max-height: rem(88);@include text-overflow();color: color($colors,light);white-space:normal;word-break: break-all;
+            }
+            .remark-img-container{
+                display: flex;height:rem(72);align-items: center;
+                img{width:rem(56);height:rem(56);margin-right: 1rem;}
+            }
+            .remark-voice-container{margin-top:0.4rem;}
+        }
+        .return-wrapper{
+            padding-left: 0.6rem;background-color: #f6f6f6;border-top: $border;
+        }
+        .return{
+            min-height:rem(74);padding:rem(10) 0;
+            .return-from{
+                display: flex;
+                .name-wrapper{
+                    height: rem(56);@include flex-center();
+                }
+                .name{
+                    @include tag(color($colors,primary),true);
+                    margin-right: rem(16);
+                }
+                .return-text{width: calc(100% - 5.3rem);
+                    @include text-overflow();white-space:normal;word-break: break-all;line-height: rem(56);max-height: rem(112);font-size: 1.2rem;color:color($colors,primary);
+                }
+                .return-voice-container{
+                    width: calc(100% - 5.3rem);
+                    height: rem(56);
+                   display: flex;align-items: center;
+                }
+            }
+            .return-img-container{
+                height: rem(76);display: flex;align-items: center;
+                img{width:rem(56);height:rem(56);margin-right: 1rem;}
+            }
+        }
+    }
+    .top-line{
+        position: absolute;display:inline-block;height: 2.2rem;width: 1px;background-color: color($colors,border);left:1.5rem;top:0;
+    }
+    &:before{
+        position: absolute;display:inline-block;height: rem(20);width: rem(20);background-color: color($colors,primary);left:1rem;top:0.9rem;content: '';border-radius:50%;z-index:2;
+    }
+    &:after{
+        position: absolute;display:inline-block;height: 100%;width: 1px;background-color: color($colors,border);left:1.5rem;top:1.9rem;content: '';
+    }
+}
+
+
+
 
 .iconfont{color:color($colors,icon);}
 
