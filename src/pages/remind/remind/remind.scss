@@ -14,34 +14,7 @@ page-remind {
 			.avtive-day{font-size: 1.6rem;}
 		}
 		.list{margin-top:0;
-			.item{
-				@include remind-item(true);
-				&.disabled{
-					&:before{
-						background-color: color($colors,gray);
-					}
-					.label{
-						h3{
-							.time{
-								@include tag(color($colors,gray));
-							}
-						}
-					}
-				}
-				&.pitch-on{
-					.label{
-						.remind-content{
-							.mark{background-color: color($colors,warning);border-color:color($colors,warning); }
-						}
-					}
-				}
-			}
-			.item-options{
-				.button{
-					.button-inner{line-height:rem(36);font-size:1.6rem;}
-				}
-			}
-			.item-wrapper:first-child{
+			remind-item:first-child{
 				.item{padding-top: 0;
 					.top-line{
 						display:none;

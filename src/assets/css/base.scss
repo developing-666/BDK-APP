@@ -210,8 +210,9 @@ $designWidth : 750; //如设计图是750
 }
 
 @mixin remind-item($hasHandle:false){
-    padding-left: rem(60);padding-top: rem(20);
-    .item-inner{padding-right: 1rem;}
+    .item-block{padding-left: rem(60);padding-top: rem(20);position: relative;
+        .item-inner{padding-right: 1rem;border-bottom: none;}
+    }
     .label{
         margin:0;
         .remind-content{
@@ -255,7 +256,7 @@ $designWidth : 750; //如设计图是750
             .remark-voice-container{margin-top:0.4rem;}
         }
         .return-wrapper{
-            padding-left: 0.6rem;background-color: #f6f6f6;border-top: $border;
+            padding-left: 0.6rem;background-color: #f6f6f6;
         }
         .return{
             min-height:rem(74);padding:rem(10) 0;
@@ -286,17 +287,51 @@ $designWidth : 750; //如设计图是750
     .top-line{
         position: absolute;display:inline-block;height: 2.2rem;width: 1px;background-color: color($colors,border);left:1.5rem;top:0;
     }
-    &:before{
+    .item:before{
         position: absolute;display:inline-block;height: rem(20);width: rem(20);background-color: color($colors,primary);left:1rem;top:0.9rem;content: '';border-radius:50%;z-index:2;
     }
-    &:after{
+    .item:after{
         position: absolute;display:inline-block;height: 100%;width: 1px;background-color: color($colors,border);left:1.5rem;top:1.9rem;content: '';
+    }
+    &.disabled{
+        .item:before{
+            background-color: color($colors,gray);
+        }
+        .label{
+            h3{
+                .time{
+                    @include tag(color($colors,gray));
+                }
+            }
+        }
+    }
+    &.pitch-on{
+        .label{
+            .remind-content{
+                .mark{background-color: color($colors,warning);border-color:color($colors,warning); }
+            }
+        }
     }
 }
 
 
+@mixin set-state(){
+	background-color:#fff;padding:0 1rem 2.2rem 1rem;
+	.title{
+		height:rem(86);display:flex;align-items:center;font-size:rem(30);
+	}
+	.state-container{
+	    display: flex;justify-content: space-between;padding:0 0.5rem;
+	}
+	.state-item{
+	   @include round-tag('large');
+	   &.active{
+	       @include round-tag('large',color($colors,primary),true);
+	   }
+	}
+}
 
-
+.gray{background-color: color($colors,bg);}
 .iconfont{color:color($colors,icon);}
 
 .transition-02 {transition: all 0.2s ease;}

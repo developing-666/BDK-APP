@@ -1,0 +1,5 @@
+clientele-item {
+    .item{
+        @include clientele-item();
+    }
+}

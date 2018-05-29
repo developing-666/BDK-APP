@@ -1,0 +1,81 @@
+<ion-item-sliding>
+    <ion-item class="remind-item">
+        <em class="top-line"></em>
+        <div class="remind-content">
+            <h3>
+                <div class="start">
+                    <span class="time">
+                        <em></em>
+                        <i>11:20</i>
+                    </span>
+                    <span class="title">客户报价</span>
+                </div>
+                <span class="date">2018/05/10 周四</span>
+            </h3>
+            <p class="clientele-info">
+                <span class="start">李经理</span>
+                <span>大府信息技术科技有限公司</span>
+            </p>
+            <div class="remark">
+                <div class="remark-text">
+                    跟进一下选号是否选好了，如果选好了就需要报价了。
+                </div>
+                <div class="remark-img-container">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                </div>
+                <div class="remark-voice-container">
+                    <voice-bar></voice-bar>
+                </div>
+            </div>
+            <i class="iconfont mark">
+                &#xe640;
+            </i>
+        </div>
+        <div class="return-wrapper">
+            <div class="return">
+                <div class="return-from">
+                    <div class="name-wrapper">
+                        <span class="name">
+                            <em></em>
+                            <i>丁伟</i>
+                        </span>
+                    </div>
+                    <div class="return-voice-container">
+                        <voice-bar></voice-bar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="return-wrapper">
+            <div class="return">
+                <div class="return-from">
+                    <div class="name-wrapper">
+                        <span class="name">
+                            <em></em>
+                            <i>丁伟</i>
+                        </span>
+                    </div>
+                    <span class="return-text">具体预算多少钱呢？具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢</span>
+                </div>
+                <div class="return-img-container">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                </div>
+            </div>
+        </div>
+    </ion-item>
+    <ion-item-options side="right" class="item-options">
+        <button class="delay" ion-button (click)="delay(item)">
+            <span>延时</span>
+            <span>设置</span>
+        </button>
+        <button ion-button color="danger" (click)="delete(item)">
+            删除
+        </button>
+    </ion-item-options>
+</ion-item-sliding>

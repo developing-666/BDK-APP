@@ -1,0 +1,11 @@
+remind-item {
+    @include remind-item();
+    &.has-handle{
+        @include remind-item(true);
+    }
+    .item-options{
+        .button{
+            .button-inner{line-height:rem(36);font-size:1.6rem;}
+        }
+    }
+}

@@ -32,6 +32,7 @@ import { SearchClientelePage } from '../pages/clientele/search-clientele/search-
 import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
 import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag';
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
+import { ClienteleDetailPage } from '../pages/clientele/clientele-detail/clientele-detail';
 @Component({   
 	templateUrl: 'app.html'
 })
@@ -53,7 +54,7 @@ export class MyApp {
     platform.ready().then(() => {
       // this.nav.setRoot(TabsPage); // 设置首页
       // this.nav.setRoot(LoginPage); // 设置首页
-      this.nav.setRoot(SettingRecordPage); // 设置首页
+      this.nav.setRoot(RemindPage); // 设置首页
       // this.nativeService.statusBarStyle(); // 设置状态栏颜色
       // this.assertNetwork(); // 检测网络
       // this.helper.funDebugInit(); // 初始化fundebug
