@@ -2,7 +2,7 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { Config, IonicApp, IonicModule } from 'ionic-angular';
+import { Config, IonicApp, IonicModule,IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
 //业务相关组件、页面、模块
@@ -50,7 +50,7 @@ import { FileService } from '../providers/file-service';
 import { Helper } from '../providers/helper';
 import { Utils } from '../providers/utils';
 import { GlobalData } from '../providers/global-data';
-import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
+//import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
 import { Logger } from '../providers/logger';
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from './modal-transitions';
 import { CommonService } from '../service/common-service';
@@ -58,18 +58,18 @@ import { VersionService } from '../providers/version-service';
 import { JPush } from '../../typings/modules/jpush/index';
 import { Validators } from '../providers/validators';
 // 参考文档:https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
-import * as fundebug from 'fundebug-javascript';
+//import * as fundebug from 'fundebug-javascript';
 
-fundebug.apikey = FUNDEBUG_API_KEY;
-fundebug.releasestage = IS_DEBUG ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
-fundebug.silent = !IS_DEBUG; // 如果暂时不需要使用Fundebug，将silent属性设为true
+//fundebug.apikey = FUNDEBUG_API_KEY;
+//fundebug.releasestage = IS_DEBUG ? 'development' : 'production'; // 应用开发阶段，development:开发;production:生产
+//fundebug.silent = !IS_DEBUG; // 如果暂时不需要使用Fundebug，将silent属性设为true
 
-export class FunDebugErrorHandler implements ErrorHandler {
-	handleError(err: any): void {
-		fundebug.notifyError(err);
-		console.error(err);
-	}
-}
+//export class FunDebugErrorHandler implements ErrorHandler {
+//	handleError(err: any): void {
+//		fundebug.notifyError(err);
+//		console.error(err);
+//	}
+//}
 
 @NgModule({
 	declarations: [
@@ -121,7 +121,7 @@ export class FunDebugErrorHandler implements ErrorHandler {
 		CodePush,
 		CallNumber,
 		BarcodeScanner,
-		{ provide: ErrorHandler, useClass: FunDebugErrorHandler },
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		NativeService,
 		HttpService,
 		FileService,

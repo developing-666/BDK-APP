@@ -20,6 +20,7 @@ import { VersionService } from '../providers/version-service';
 import { RemindPage } from '../pages/remind/remind/remind';
 import { NewRemindPage } from '../pages/remind/new-remind/new-remind';
 import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
+import { AddClienteleRemindPage } from '../pages/remind/add-clientele-remind/add-clientele-remind';
 import { SignInPage } from '../pages/login/sign-in/sign-in';
 import { ForgetPasswordPage } from '../pages/login/forget-password/forget-password';
 import { ClientelePage } from '../pages/clientele/clientele/clientele';
@@ -33,6 +34,9 @@ import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele
 import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag';
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
 import { ClienteleDetailPage } from '../pages/clientele/clientele-detail/clientele-detail';
+
+
+
 @Component({   
 	templateUrl: 'app.html'
 })
@@ -54,7 +58,7 @@ export class MyApp {
     platform.ready().then(() => {
       // this.nav.setRoot(TabsPage); // 设置首页
       // this.nav.setRoot(LoginPage); // 设置首页
-      this.nav.setRoot(RemindPage); // 设置首页
+      this.nav.setRoot(ClientelePage); // 设置首页
       // this.nativeService.statusBarStyle(); // 设置状态栏颜色
       // this.assertNetwork(); // 检测网络
       // this.helper.funDebugInit(); // 初始化fundebug

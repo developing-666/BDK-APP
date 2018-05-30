@@ -17,41 +17,7 @@
 </ion-header>
 
 <ion-content>
-	<div class="ion-filter">
-		<!--<div class="filter-backdrop"></div>-->
-		<div class="filter-bar">
-			<div class="filter-item" [ngClass]="{'open':openSelect}" (click)="open()">
-				<span class="name">标签筛选</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item">
-				<span class="name">排序</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-		</div>
-		<div class="filter-panel" [ngClass]="{'show':openSelect}">
-			<div class="panel-item active">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-		</div>
-	</div>
+    <ion-filter></ion-filter>
 	<div class="no-result" hidden>
 		<div class="no-result-tag">
 			<img src="../../../assets/imgs/no-clientele.png"/>
@@ -61,6 +27,9 @@
 	</div>
 	<ion-list class="clientele-list">
 		<clientele-item></clientele-item>
+        <clientele-item></clientele-item>
+        <clientele-item></clientele-item>
+        <clientele-item></clientele-item>
 	</ion-list>
 </ion-content>
 

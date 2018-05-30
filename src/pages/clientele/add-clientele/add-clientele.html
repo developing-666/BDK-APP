@@ -5,15 +5,7 @@
 </ion-header>
 <ion-content>
 	<form class="add-clientele-form full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
-		<div class="state-wrapper">
-			<p class="title">提醒跟进状态</p>
-			<div class="state-container">
-				<span class="state-item">待跟</span>
-				<span class="state-item">跟进</span>
-				<span class="state-item">成交</span>
-				<span class="state-item">无效</span>
-			</div>
-		</div>
+		<set-state></set-state>
 		<div class="phone-wrapper">
 			<div class="phone-input-wrapper">
 				<div class="phone-input-container">

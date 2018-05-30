@@ -1,0 +1,18 @@
+page-add-clientele-remind {
+    .content{
+        background-color: #fff;
+    }
+    .clientele-item{background-color: #fff;
+        &.item{
+            .item-inner{border-bottom: none;}
+        }
+    }
+    .add-clientele-remind{
+        .list{
+            margin-top: 1rem;
+            .item{
+                border-top: none;
+            }
+        }
+    }
+}
