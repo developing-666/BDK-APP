@@ -21,9 +21,7 @@ import { SetStateComponent } from './set-state/set-state';
 		ClienteleItemComponent,
 		SetStateComponent
 	],
-	entryComponents: [
-		VoiceBarComponent
-	]
+	entryComponents: []
 })
 
 export class ComponentsModule {
