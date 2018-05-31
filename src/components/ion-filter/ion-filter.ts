@@ -15,12 +15,27 @@ export class IonFilterComponent implements OnInit {
     showBack: boolean = false;
     backIn: boolean = false;
     activeIndex: number = 0;
-
-    constructor() {
-        console.log(this.filterOpts);
-    }
+    value: any = [];
+    constructor() {}
     ngOnInit() {
         this.getOpts();
+        this.initValue();
+    }
+    initValue() {
+        for (let item of this.filterData) {
+            let obj = { name: item.name, key: item.key, values: [] };
+            for (let tag of item.options) {
+                if (tag.options && tag.options.length > 0) {
+                    obj.values.push({
+                        tag: tag.tag,
+                        key: tag.key,
+                        values: []
+                    });
+                }
+            }
+            this.value.push(obj);
+        }
+        console.log(this.value);
     }
     getOpts() {
         this.filterOpts = this.filterData[this.activeIndex];
@@ -38,13 +53,29 @@ export class IonFilterComponent implements OnInit {
         console.log(this.layout);
     }
     open(i) {
-        // this.activeIndex = i;
-        console.log(i);
-        this.showBack = true;
-        setTimeout(() => {
-            this.openPanel = true;
-            this.backIn = true;
-        }, 0);
+        if (this.activeIndex != i) {
+            this.activeIndex = i;
+            if (this.openPanel) {
+                this.toggle();
+            } else {
+                this.getOpts();
+                this.showBack = true;
+                setTimeout(() => {
+                    this.openPanel = true;
+                    this.backIn = true;
+                }, 0);
+            }
+        } else {
+            if (this.openPanel) {
+                this.close();
+            } else {
+                this.showBack = true;
+                setTimeout(() => {
+                    this.openPanel = true;
+                    this.backIn = true;
+                }, 0);
+            }
+        }
     }
     close() {
         this.openPanel = false;
@@ -53,5 +84,16 @@ export class IonFilterComponent implements OnInit {
             this.showBack = false;
         }, 200);
     }
-    toggle() {}
+    toggle() {
+        this.openPanel = false;
+        setTimeout(() => {
+            this.getOpts();
+            setTimeout(() => {
+                this.openPanel = true;
+            }, 50);
+        }, 350);
+        // this.getOpts();
+        
+    }
+    itemClick() {}
 }
