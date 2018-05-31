@@ -379,7 +379,15 @@ $designWidth : 750; //如设计图是750
             }
         }
         .filter-backdrop{
-            position:fixed;height: 100%;width: 100%;background-color: #000;opacity: 0.3;
+            position:fixed;
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+            opacity: 0;
+            @extend .transition-02;z-index: 9;
+            &.in{
+                opacity: 0.3;
+            }
         }
     }
 }
