@@ -17,41 +17,7 @@
 </ion-header>
 
 <ion-content>
-	<div class="ion-filter">
-		<!--<div class="filter-backdrop"></div>-->
-		<div class="filter-bar">
-			<div class="filter-item" [ngClass]="{'open':openSelect}" (click)="open()">
-				<span class="name">标签筛选</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item">
-				<span class="name">排序</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-		</div>
-		<div class="filter-panel" [ngClass]="{'show':openSelect}">
-			<div class="panel-item active">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-			<div class="panel-item">
-				<span class="name">全部客户</span>
-				<i class="iconfont">&#xe640;</i>
-			</div>
-		</div>
-	</div>
+    <ion-filter></ion-filter>
 	<div class="no-result" hidden>
 		<div class="no-result-tag">
 			<img src="../../../assets/imgs/no-clientele.png"/>
@@ -59,57 +25,11 @@
 			<button class="add-clientele" ion-button block round>添加客户</button>
 		</div>
 	</div>
-	<ion-list class="clientele-list" >
-		<ion-item-sliding>
-			<ion-item class="clientele-item">
-				<div class="progress">
-					<!--<div class="test"></div>-->
-					<div class="left-wrapper">
-						<div class="line"></div>
-					</div>
-					<div class="right-wrapper">
-						<div class="line"></div>
-					</div>
-					<span class="state">
-						跟进
-					</span>
-				</div>
-				<div class="clientele-detail">
-					<h3 class="name">
-						<span>孙甜</span>
-						<i class="main-tag">老客户</i>
-					</h3>
-					<p class="company">
-						<span class="post">李经理</span>
-						<span>大府信息技术科技有限公司</span>
-					</p>
-					<div class="tag-container">
-						<i class="tag-item">大户</i>
-					</div>
-				</div>
-				<ion-buttons item-end>
-					<button class="message" clear ion-button icon-only>
-						<i class="iconfont">
-							&#xe67e;
-						</i>
-					</button>
-					<button class="phone" clear ion-button icon-only>
-						<i class="iconfont">
-							&#xe67b;
-						</i>
-					</button>
-				</ion-buttons>
-			</ion-item>
-			<ion-item-options side="right" class="item-options">
-				<button class="remind" color="warning" ion-button (click)="remind(item)">
-		          <span>设置</span>
-				  <span>提醒</span>
-		        </button>
-				<button ion-button color="danger" (click)="delete(item)">
-		          	删除
-		        </button>
-			</ion-item-options>
-		</ion-item-sliding>
+	<ion-list class="clientele-list">
+		<clientele-item></clientele-item>
+        <clientele-item></clientele-item>
+        <clientele-item></clientele-item>
+        <clientele-item></clientele-item>
 	</ion-list>
 </ion-content>
 

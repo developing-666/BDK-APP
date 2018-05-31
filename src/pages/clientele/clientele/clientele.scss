@@ -17,14 +17,17 @@ page-clientele {
         .add-clientele{margin-top: rem(82);}
     }
     .clientele-list{background-color: #fff;
-        .clientele-item{
-            @include clientele-item();
-        }
         .item-options{
             .button{
                 .button-inner{line-height:rem(36);font-size:1.6rem;}
             }
         }
-
+        clientele-item:last-child{
+            .item{
+                .item-inner{
+                    border-bottom: none;
+                }
+            }
+        }
     }
 }

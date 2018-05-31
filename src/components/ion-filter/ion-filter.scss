@@ -1,0 +1,37 @@
+ion-filter {
+    @include ion-filter();
+    .line-wrapper{
+        padding: 0 1rem;
+        .panel-line{
+            display: flex;border-bottom: $border;justify-content: space-between;
+            .name {
+                color: color($colors,dark);height:rem(86);display: flex;align-items: center;width: rem(120);
+            }
+            .tag-container{align-content: flex-start;
+                width: calc(100% - 7rem);padding-top: rem(18);display: flex;flex-wrap:wrap;justify-content: space-around;
+                .tag{
+                    @include round-tag();font-size: 1.2rem;padding:0;width: 6rem;overflow: hidden;text-align: center;
+                    @extend .transition-02;margin-bottom:0.9rem;
+                    &.active{
+                        @include round-tag('', color($colors, primary), false);
+                        font-size: 1.2rem;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+    .btn-wrapper{
+        height: rem(80);padding:0.5rem 0;display: flex;
+        .btn{
+            display: flex;flex-basis: 50%;
+            justify-content: center;
+            align-items: center;
+            color: color($colors, light);font-size: 1.5rem;
+            &.on{
+                border-left: $border;
+                color: color($colors, primary);
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+<ion-item-sliding>
+    <ion-item class="clientele-item" detail-push>
+        <div class="progress">
+            <div class="left-wrapper">
+                <div class="line"></div>
+            </div>
+            <div class="right-wrapper">
+                <div class="line"></div>
+            </div>
+            <span class="state">
+                        跟进
+            </span>
+        </div>
+        <div class="clientele-detail">
+            <h3 class="name">
+                <span>孙甜</span>
+                <i class="main-tag">老客户</i>
+            </h3>
+            <p class="company">
+                <span class="post">李经理</span>
+                <span>大府信息技术科技有限公司</span>
+            </p>
+            <div class="tag-container">
+                <i class="tag-item">大户</i>
+            </div>
+        </div>
+        <ion-buttons item-end>
+            <button class="message" clear ion-button icon-only>
+                <i class="iconfont">
+                    &#xe67e;
+                </i>
+            </button>
+            <button class="phone" clear ion-button icon-only>
+                <i class="iconfont">
+                    &#xe67b;
+                </i>
+            </button>
+        </ion-buttons>
+    </ion-item>
+    <ion-item-options side="right" class="item-options">
+        <button class="remind" color="warning" ion-button (click)="remind(item)">
+          <span>设置</span>
+          <span>提醒</span>
+        </button>
+        <button ion-button color="danger" (click)="delete(item)">
+            删除
+        </button>
+    </ion-item-options>
+</ion-item-sliding>

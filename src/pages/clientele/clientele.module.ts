@@ -6,9 +6,11 @@ import { AddClientelePage } from './add-clientele/add-clientele';
 import { ClienteleTagPage } from './clientele-tag/clientele-tag';
 import { CustomTagPage } from './custom-tag/custom-tag';
 import { SettingRecordPage } from './setting-record/setting-record';
+import { ClienteleDetailPage } from './clientele-detail/clientele-detail';
 
-import { OperatingRecordPage } from './setting-record/tabs/operating-record/operating-record';
+import { OperatingRecordPage } from './clientele-detail/tabs/operating-record/operating-record';
 
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
 	declarations: [
@@ -17,6 +19,7 @@ import { OperatingRecordPage } from './setting-record/tabs/operating-record/oper
 		AddClientelePage,
 		ClienteleTagPage,
 		CustomTagPage,
+		ClienteleDetailPage,
 		SettingRecordPage,
 		OperatingRecordPage
 	],
@@ -26,11 +29,13 @@ import { OperatingRecordPage } from './setting-record/tabs/operating-record/oper
 		AddClientelePage,
 		ClienteleTagPage,
 		CustomTagPage,
+		ClienteleDetailPage,
 		SettingRecordPage,
 		OperatingRecordPage
 	],
 	imports: [
-		IonicModule
+		IonicModule,
+		ComponentsModule
 	]
 })
 export class ClienteleModule {

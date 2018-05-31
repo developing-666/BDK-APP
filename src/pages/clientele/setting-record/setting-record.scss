@@ -1,23 +1,29 @@
 page-setting-record {
-	.clientele-info{
-	    .clientele-item{background-color: #fff;
-	        @include clientele-item();
-	        &.item{
-	            .item-inner{border-bottom: none;
-	                background-position: right 10px center;
-	            }
-	        }
-	    }
-	}
-	.record-tab-container{
-	    position: relative;margin-top: 1rem;height:calc(100% - 9rem);
-	    .tabs{
-	        .tabbar{padding:0 0.4rem;}
-	        .tab-button{
-	            border-bottom:2px solid #fff;@extend .transition-02;
-	        }
-	        .tab-button[aria-selected=true]{border-bottom-color: color($colors,primary);}
-	    }
-	    
-	}
+    .content {
+        background-color: #fff;
+    }
+    .clientele-item {
+        background-color: #fff;
+        &.item {
+            .item-inner {
+                border-bottom: none;
+            }
+        }
+    }
+    .remind-item {
+        margin-top: 1rem;
+        background-color: #fff;
+        padding-bottom: 1.6rem;
+    }
+    .set-state {
+        margin-top: 1rem;
+        border-bottom: $border;
+    }
+    .btn-wrapper {
+        background-color: #fff;
+        padding: 2rem 0;
+        .button {
+            margin: 0 auto;
+        }
+    }
 }
