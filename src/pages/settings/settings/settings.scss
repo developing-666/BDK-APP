@@ -1,10 +1,19 @@
 page-settings {
     .main-wrapper{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
         background-color: color($colors,bg);
         .user-header{
             width: 100%;
-            // height: rem(152);
             display: flex;
+            &.item{
+                background-color: color($colors, primary);
+                padding-left: 0;
+                .item-inner{
+                    border-bottom: none;padding-right: 0;
+                }
+            }
             .user-avatar{
                 margin: 0;
                 padding: 0;
@@ -16,33 +25,45 @@ page-settings {
                     height: rem(105);
                 }
             }
+            &.item-ios .item-inner{
+                background-image: url("data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 20'><path d='M2,20l-2-2l8-8L0,2l2-2l10,10L2,20z' fill='#fff'/></svg>");
+            }
             .input-wrapper {
                 .user-info {
                     width: 100%;
                     display: flex;
                     flex-wrap: wrap;
-                    // background-color: red;
-                    p:nth-child(1){
-                        width: 100%;
-                    }
-                    p:nth-child(3){
-                        color: color($colors, primary);
+                    p {
+                        color: #fff;
+                        font-size: rem(28);
+                        &:first-child {
+                            font-size: rem(44);
+                            width: 100%;
+                        }
                     }
                 }
 
-            }
-            
-            &.item{
-                background-color: #fff;
-                // border-bottom: $border;
-                padding-left: 0;
-                .item-inner{
-                    border-bottom: none;padding-right: 0;
-                }
             }
         }
+        .user-list{
+            .list{
+                .item{
+                    border-bottom: $border;
+                    padding-left: 0;
+                    button[item-start]{
+                        margin: 0 1rem;
+                        .iconfont{font-size:2.4rem;color:color($colors,icon)}
+                    }
+                    .item-inner{
+                        border-bottom: none;padding-right: 0;
+                    }
+                    &:first-child{
+                        border-bottom: none;
+                    }
+                }
+            }
 
-        
+        }
     }
 
 }

@@ -197,7 +197,7 @@ $designWidth : 750; //如设计图是750
 			}
 		}
 	}
-	.bar-buttons[item-end]{margin:0;
+	.bar-buttons[item-end]{margin:0;z-index: 0;
 		.button[icon-only]{
 			.iconfont{
 				font-size: 2.5rem;
@@ -344,7 +344,7 @@ $designWidth : 750; //如设计图是750
                     @extend .transition-02;
                 }
                 .iconfont{font-size:1.2rem;margin-left:1rem;@include flex-center();height:100%;
-                    @extend .transition-05;
+                    @extend .transition-02;
                 }
                 &.open{
                     color:color($colors,primary);
@@ -379,7 +379,15 @@ $designWidth : 750; //如设计图是750
             }
         }
         .filter-backdrop{
-            position:fixed;height: 100%;width: 100%;background-color: #000;opacity: 0.3;
+            position:fixed;
+            height: 100%;
+            width: 100%;
+            background-color: #000;
+            opacity: 0;
+            @extend .transition-02;z-index: 9;
+            &.in{
+                opacity: 0.3;
+            }
         }
     }
 }

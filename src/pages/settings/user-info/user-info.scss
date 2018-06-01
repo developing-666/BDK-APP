@@ -1,0 +1,23 @@
+page-user-info {
+    .main-wrapper {
+        .header{
+            button {
+                height: rem(152);
+                &.item {
+                    padding-left: 1rem;
+                }
+                ion-avatar {
+                    margin: 0;
+                    padding: 0;
+                    width: rem(142);
+                    height: rem(152);
+                    @include flex-center;
+                    img{
+                        width: rem(105);
+                        height: rem(105);
+                    }
+                }
+            }
+        }
+    }
+}

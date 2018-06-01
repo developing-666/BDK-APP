@@ -1,32 +1,21 @@
 <div class="ion-filter">
-    <div class="filter-backdrop" *ngIf="showBack"></div>
+    <div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" #backdrop (tap)="close()"></div>
     <div class="filter-bar">
-        <div class="filter-item" *ngFor="let item of filterData" [ngClass]="{'open':openPanel}" (click)="open()">
+        <div class="filter-item" *ngFor="let item of filterData;let i = index" [ngClass]="{'open':activeIndex == i && openPanel}"
+            (tap)="open(i)">
             <span class="name">{{item.name}}</span>
             <i class="iconfont">&#xe683;</i>
         </div>
     </div>
-    <div class="filter-panel" [ngClass]="{'show':openPanel}" *ngIf="layout==1">
-        <div class="panel-item active">
-            <span class="name">全部客户</span>
-            <i class="iconfont">&#xe640;</i>
-        </div>
-        <div class="panel-item">
-            <span class="name">全部客户</span>
-            <i class="iconfont">&#xe640;</i>
-        </div>
-        <div class="panel-item">
-            <span class="name">全部客户</span>
-            <i class="iconfont">&#xe640;</i>
-        </div>
-        <div class="panel-item">
-            <span class="name">全部客户</span>
+    <div class="filter-panel" [ngClass]="{'show':openPanel}" [hidden]="layout==2">
+        <div class="panel-item" *ngFor="let tag of filterOpts.options">
+            <span class="name" [ngClass]="{'active':value[activeIndex].value == tag.value && openPanel}" (click)="itemClick(tag)">{{tag.label}}</span>
             <i class="iconfont">&#xe640;</i>
         </div>
     </div>
-    <div class="filter-panel" [ngClass]="{'show':openPanel}" *ngIf="layout==2">
+    <div class="filter-panel" [ngClass]="{'show':openPanel}" [hidden]="layout==1">
         <div class="line-wrapper">
-            <div class="panel-line" *ngFor="let item of filterOpts.options" >
+            <div class="panel-line" *ngFor="let item of filterOpts.options">
                 <span class="name">{{item.tag}}</span>
                 <div class="tag-container">
                     <span class="tag" *ngFor="let tag of item.options">

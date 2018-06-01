@@ -8,4 +8,5 @@ export class AppApi {
     login(opts?: any): any {
         return this._http.postFormData('UserLogin', opts);
     }
+    
 }
