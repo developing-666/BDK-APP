@@ -1,5 +1,5 @@
 <div class="ion-filter">
-    <div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" #backdrop (tap)="close()"></div>
+    <div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" (tap)="close()"></div>
     <div class="filter-bar">
         <div class="filter-item" *ngFor="let item of filterData;let i = index" [ngClass]="{'open':activeIndex == i && openPanel}"
             (tap)="open(i)">
@@ -7,30 +7,35 @@
             <i class="iconfont">&#xe683;</i>
         </div>
     </div>
-    <div class="filter-panel" [ngClass]="{'show':openPanel}" [hidden]="layout==2">
-        <div class="panel-item" *ngFor="let tag of filterOpts.options">
-            <span class="name" [ngClass]="{'active':value[activeIndex].value == tag.value && openPanel}" (click)="itemClick(tag)">{{tag.label}}</span>
-            <i class="iconfont">&#xe640;</i>
+    <div class="filter-panel" [ngClass]="{'show':openPanel}" #filterPanel>
+        <div class="filter-item-container" [hidden]="layout==2">
+            <div class="panel-item" *ngFor="let item of filterOpts.options;let  i = index" (tap)="itemTap(item)" [ngClass]="{'active':value[activeIndex].value == item.label}">
+                <span class="name">{{item.label}}</span>
+                <i class="iconfont">&#xe640;</i>
+            </div>
         </div>
-    </div>
-    <div class="filter-panel" [ngClass]="{'show':openPanel}" [hidden]="layout==1">
-        <div class="line-wrapper">
-            <div class="panel-line" *ngFor="let item of filterOpts.options">
-                <span class="name">{{item.tag}}</span>
-                <div class="tag-container">
-                    <span class="tag" *ngFor="let tag of item.options">
-                        {{tag.label}}
-                    </span>
+        <div class="filter-item-container" [hidden]="layout==1">
+            <div class="line-wrapper">
+                <div class="panel-line" *ngFor="let item of filterOpts.options;let  itemIndex = index">
+                    <span class="name">{{item.tag}}</span>
+                    <div class="tag-container">
+                        <span class="tag" *ngFor="let tag of item.options;let tagIndex = index" (tap)="tagTap(itemIndex,tag)" [ngClass]="{'active':value[activeIndex]?.value && value[activeIndex]?.value[itemIndex]?.value.indexOf(tag.label)>-1}">
+                            {{tag.label}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrapper">
+                <div class="btn" (tap)="tagReset()">
+                    重置
+                </div>
+                <div class="btn on" (tap)="tagFilter()">
+                    筛选
                 </div>
             </div>
         </div>
-        <div class="btn-wrapper">
-            <div class="btn">
-                重置
-            </div>
-            <div class="btn on">
-                筛选
-            </div>
-        </div>
     </div>
+    <!-- <div class="filter-panel" [ngClass]="{'show':openPanel}" [hidden]="layout==1">
+
+    </div> -->
 </div>

@@ -1,0 +1,93 @@
+info-input {
+    .info-input-warpper {
+        background-color: #fff;
+        padding: 0 1rem;
+        border-bottom: $border;
+    }
+    .remark-container {
+        padding: 1rem 0;
+        p {
+            line-height: 2.4rem;
+            margin: 0;
+            white-space: normal;
+        }
+        .text-remark {
+            @include text-overflow();
+            max-height: 6rem;
+        }
+        .remark-input {
+            line-height: 2.4rem;
+            border: none;
+            background-color: transparent;
+            font-size: 1.4rem;
+            width: 100%;
+            resize: none;
+            line-height: 2.4rem;
+            min-height: 2.4rem;
+            &::-webkit-input-placeholder {
+                color: color($colors, light);
+                opacity: 1;
+            }
+        }
+        .voice-bar-wrapper {
+            height: 2.4rem;
+        }
+        .hint {
+            color: color($colors, gray);
+        }
+    }
+    .accessory {
+        display: flex;justify-content: space-between;
+        .accessory-list {
+            margin-top: 1.2rem;
+            width: calc(100% - #{rem(84)});
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .imgs-container {
+                display: flex;
+                flex-wrap: wrap;
+                width: calc(100% - 5rem);
+            }
+            .img-item {
+                position: relative;
+                width: rem(114);
+                height: rem(114);
+                border: $border;
+                margin-bottom: rem(24);
+                margin-right: 1rem;
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+                &:nth-child(4n) {
+                    margin-right: 0;
+                }
+                .delete {
+                    @include flex-center();
+                    width: rem(28);
+                    height: rem(28);
+                    color: #fff;
+                    background-color: color($colors, danger);
+                    position: absolute;
+                    right: rem(-14);
+                    top: rem(-14);
+                    border-radius: 50%;
+                    font-size: 1rem;
+                }
+            }
+            .hint {
+                display: inline-block;
+            }
+        }
+        .upload {
+            align-self: flex-end;
+            @include flex-center();
+            justify-content: flex-end;
+            width: rem(84);
+            height: rem(84);
+            color: color($colors, primary);
+            font-size: 3rem;
+        }
+    }
+}

@@ -38,6 +38,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { HTTP } from '@ionic-native/http';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 //ionic第三方插件
@@ -72,77 +73,72 @@ import { Validators } from '../providers/validators';
 //}
 
 @NgModule({
-	declarations: [
-		MyApp,
-		AboutPage,
-		ContactPage,
-		HomePage,
-		TabsPage
-	],
-	imports: [
-		LoginModule,
-		RemindModule,
-		ClienteleModule,
-		BrowserModule,
-		HttpModule,
-		AlphaScrollModule.forRoot(),
-		IonicModule.forRoot(MyApp, {
-//			mode: 'ios', // android是'md'
-			backButtonText: ''
-		}),
-		IonicStorageModule.forRoot(),
-		CalendarModule,
-		SettingsPageModule
-	],
-	bootstrap: [IonicApp],
-	entryComponents: [
-		MyApp,
-		AboutPage,
-		ContactPage,
-		HomePage,
-		TabsPage
-	],
-	providers: [
-		StatusBar,
-		SplashScreen,
-		AppVersion,
-		Camera,
-		Toast,
-		File,
-		FileTransfer,
-		FileOpener,
-		InAppBrowser,
-		ImagePicker,
-		Network,
-		AppMinimize,
-		Diagnostic,
-		HTTP,
-		JPush,
-		CodePush,
-		CallNumber,
-		BarcodeScanner,
-		{ provide: ErrorHandler, useClass: IonicErrorHandler },
-		NativeService,
-		HttpService,
-		FileService,
-		Helper,
-		Utils,
-		GlobalData,
-		Logger,
-		CommonService,
-		VersionService,
-		Validators
-	]
+    declarations: [MyApp, AboutPage, ContactPage, HomePage, TabsPage],
+    imports: [
+        LoginModule,
+        RemindModule,
+        ClienteleModule,
+        BrowserModule,
+        HttpModule,
+        AlphaScrollModule.forRoot(),
+        IonicModule.forRoot(MyApp, {
+            //			mode: 'ios', // android是'md'
+            backButtonText: ''
+        }),
+        IonicStorageModule.forRoot(),
+        CalendarModule,
+        SettingsPageModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [MyApp, AboutPage, ContactPage, HomePage, TabsPage],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        AppVersion,
+        Camera,
+        Toast,
+        File,
+        FileTransfer,
+        FileOpener,
+        InAppBrowser,
+        ImagePicker,
+        Network,
+        AppMinimize,
+        Diagnostic,
+        HTTP,
+        JPush,
+        CodePush,
+        CallNumber,
+        BarcodeScanner,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        NativeService,
+        HttpService,
+        FileService,
+        Helper,
+        Utils,
+        GlobalData,
+        Logger,
+        CommonService,
+        VersionService,
+        Validators,
+        Keyboard
+    ]
 })
 export class AppModule {
-	constructor(public config: Config) {
-		this.setCustomTransitions();
-	}
+    constructor(public config: Config) {
+        this.setCustomTransitions();
+    }
 
-	private setCustomTransitions() {
-		this.config.setTransition('modal-from-right-enter', ModalFromRightEnter);
-		this.config.setTransition('modal-from-right-leave', ModalFromRightLeave);
-		this.config.setTransition('modal-scale-enter', ModalScaleEnter);
-		this.config.setTransition('modal-scale-leave', ModalScaleLeave);
-	}
+    private setCustomTransitions() {
+        this.config.setTransition(
+            'modal-from-right-enter',
+            ModalFromRightEnter
+        );
+        this.config.setTransition(
+            'modal-from-right-leave',
+            ModalFromRightLeave
+        );
+        this.config.setTransition('modal-scale-enter', ModalScaleEnter);
+        this.config.setTransition('modal-scale-leave', ModalScaleLeave);
+    }
 }

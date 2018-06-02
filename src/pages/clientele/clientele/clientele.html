@@ -17,7 +17,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-filter></ion-filter>
+<ion-filter (panelHidden)="filterHide($event)"></ion-filter>
 	<div class="no-result" hidden>
 		<div class="no-result-tag">
 			<img src="../../../assets/imgs/no-clientele.png"/>

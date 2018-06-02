@@ -24,12 +24,12 @@ const FilterData: any[] = [
                         value: 4
                     },
                     {
-                        label: '老客户',
-                        value: 3
+                        label: '新客户',
+                        value: 5
                     },
                     {
-                        label: '选号客户',
-                        value: 4
+                        label: '潜在客户',
+                        value: 6
                     }
                 ]
             },

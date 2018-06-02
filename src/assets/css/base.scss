@@ -371,11 +371,14 @@ $designWidth : 750; //如设计图是750
                 }
                 &.active{
                     color:color($colors,primary);
-                    .iconfont{display: block;}
+                    .iconfont {
+                        display: block;
+                        color: color($colors, primary);
+                    }
                 }
             }
             &.show{
-                box-shadow: 0 6px 5px rgba(0,0,0,0.1);transform: translateY(0);
+                box-shadow: 0 6px 5px rgba(0,0,0,0.05);transform: translateY(0);
             }
         }
         .filter-backdrop{
@@ -391,7 +394,6 @@ $designWidth : 750; //如设计图是750
         }
     }
 }
-
 
 .gray{background-color: color($colors,bg);}
 .iconfont{color:color($colors,icon);}

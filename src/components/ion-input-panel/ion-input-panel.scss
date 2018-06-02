@@ -1,0 +1,99 @@
+ion-input-panel {
+    .ion-input-panel{
+        transform: translateY(100%);
+        @extend .transition-02;
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        bottom: 0;
+        left:0;
+        border-top:$border;
+        .handle-bar{height: rem(80);display: flex;border-bottom:$border;padding:0.7rem 0;
+            .handle-item{
+                flex-basis: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                font-size: 1.5rem;
+                color: color($colors, light);
+                span{
+                    margin-left: 0.5rem;
+                }
+                &:last-child{
+                    border-left: $border;
+                }
+                &.active{
+                    color: color($colors, primary);
+                    .iconfont{
+                        color: color($colors, primary);
+                    }
+                }
+            }
+        }
+        .input-panel{
+            height: rem(566);width: 100%;position: relative;
+            .record-wrapper{
+                width: 100%;
+                height: 100%;
+                @include flex-center();
+                @extend .transition-02;
+                transform: translateX(0);
+                &.complete {
+                    transform: translateX(-100%);
+                }
+            }
+            .play-record-wrapper {
+                position: absolute;top:0;
+                width: 100%;
+                height: 100%;
+                @include flex-center();
+                @extend .transition-02;
+                transform: translateX(100%);
+                &.complete {
+                    transform: translateX(0);
+                }
+            }
+            .record{
+                display: inline-block;text-align: center;
+            }
+            .play-record {
+                position: relative;
+            }
+            .main-icon {
+                font-size: rem(180);
+                color: color($colors, primary);
+                position: relative;
+                &.ing{
+                    &:before,
+                    &:after {
+                        content: '';
+                        border-radius: 50%;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        left:0;
+                        top: 0;
+                        background-color: rgba(color($colors, primary),0.5);
+                        transform: scale(1);
+                        animation: ing 2s infinite;
+                    }
+                    &:after {
+                        animation-delay:0.5s;
+                    }
+                }
+            }
+            p{
+                line-height: rem(128);font-size:1.5rem;color: color($colors, light);
+            }
+            .delete{
+                font-size:3rem;
+                color: color($colors, danger);
+                position: absolute;top:50%;margin-top: -1.5rem;right:-5rem;
+            }
+        }
+        &.open {
+            transform: translateY(0);
+        }
+    }
+}

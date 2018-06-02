@@ -2,7 +2,7 @@ page-login {
 	.main-slogan{
 		padding-top: rem(166);display: flex;justify-content: center;flex-wrap: wrap;
 		.logo{width: rem(210);height: rem(210);border-radius:rem(30);background-color: color($colors, primary);color:#fff;display: flex;justify-content:center;align-items: center;
-			.iconfont{font-size:rem(180);}
+			.iconfont{font-size:rem(180);color:#fff;}
 		}
 		h1{width: 100%;display: flex;justify-content: center;align-items: center;height:rem(54);font-size:rem(36);font-weight: bold;margin-top: rem(40);}
 		h2{width: 100%;display: flex;justify-content: center;align-items: center;height:rem(46);font-size:rem(30);}

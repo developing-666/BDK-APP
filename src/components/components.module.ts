@@ -5,33 +5,36 @@ import { RemindItemComponent } from './remind-item/remind-item';
 import { ClienteleItemComponent } from './clientele-item/clientele-item';
 import { SetStateComponent } from './set-state/set-state';
 import { IonFilterComponent } from './ion-filter/ion-filter';
+import { IonInputPanelComponent } from './ion-input-panel/ion-input-panel';
+import { InfoInputComponent } from './info-input/info-input';
 
 @NgModule({
-	declarations: [
-		VoiceBarComponent,
-		RemindItemComponent,
-		ClienteleItemComponent,
-		SetStateComponent,
-		IonFilterComponent
-	],
-	imports: [
-		IonicModule
-	],
-	exports: [
-		VoiceBarComponent,
-		RemindItemComponent,
-		ClienteleItemComponent,
-		SetStateComponent,
-		IonFilterComponent
-	],
-	entryComponents: []
+    declarations: [
+        VoiceBarComponent,
+        RemindItemComponent,
+        ClienteleItemComponent,
+        SetStateComponent,
+        IonFilterComponent,
+        IonInputPanelComponent,
+        InfoInputComponent
+    ],
+    imports: [IonicModule],
+    exports: [
+        VoiceBarComponent,
+        RemindItemComponent,
+        ClienteleItemComponent,
+        SetStateComponent,
+        IonFilterComponent,
+        IonInputPanelComponent,
+        InfoInputComponent
+    ],
+    entryComponents: []
 })
-
 export class ComponentsModule {
-	public static forRoot(): ModuleWithProviders {
-		return {
-			ngModule: ComponentsModule,
-			providers: []
-		};
-	}
+    public static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: ComponentsModule,
+            providers: []
+        };
+    }
 }

@@ -17,6 +17,31 @@ ion-buttons.buttons-group {
 }
 
 
+@keyframes ing {
+    0% {
+        transform: scale(1);opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes voicePlay {
+    0% {
+        content: '\e689'
+    }
+    33.3% {
+        content: '\e687'
+    }
+    66.6% {
+        content: '\e688'
+    }
+    100% {
+        content: '\e689'
+    }
+}
+
 .button-clear[icon-only]{
 	.iconfont{color: color($colors, primary);}
 }

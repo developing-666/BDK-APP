@@ -1,9 +1,20 @@
 voice-bar {
     .voice-bar{
-        display: flex;align-items: center;
+        display: flex;
+        align-items: center;
+        min-height: 2.4rem;
         .voice-bar-item{padding: 0 1rem;position: relative;
-            height:2.2rem;border: $border;border-radius:1rem;display:inline-block;min-width: 10rem;
-            .iconfont{font-size: 1.2rem;color:color($colors,light);}
+            height:2.2rem;border: $border;border-radius:1.5rem;display:flex;min-width: 10rem; align-items: center;
+            .iconfont{font-size: 1.6rem;color:color($colors,light);
+                &:before{
+                    content: '\e688';
+                }
+                &.ing{
+                    &:before {
+                        animation: voicePlay 1.2s infinite;
+                    }
+                }
+            }
             &:after{
                 content: '';position: absolute;width:0.5rem;height:0.5rem;border-radius: 50%;background-color: color($colors,danger);right:-1.5rem;top:0;
             }
