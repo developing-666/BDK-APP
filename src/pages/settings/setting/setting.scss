@@ -1,0 +1,20 @@
+page-setting {
+    .full-form {
+        .list {
+            .item {
+                &:last-child {
+                    border-bottom: $border;
+                }
+            }
+        }
+    }
+    .submit {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .button {
+            width: calc(100% - #{rem(60)});
+        }
+    }
+
+}

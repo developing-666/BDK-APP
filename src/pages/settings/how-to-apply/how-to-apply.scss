@@ -1,0 +1,18 @@
+page-how-to-apply {
+    .main-wrapper {
+        width: 100%;
+        padding: 0 rem(30);
+        .title {
+            font-size: rem(36);
+            line-height: rem(86);
+            text-align: center;
+        }
+        .description {
+            font-size: rem(30);
+            line-height: rem(60);
+            color: color($colors,dark);
+            text-indent:2em;
+        }
+    }
+
+}
