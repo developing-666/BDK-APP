@@ -19,7 +19,7 @@
                 <ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
             </button>
         </ion-list>
-        <info-input #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"></info-input>
+        <info-input [(ngModel)]="formData.infoInput" #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="desc" (voiceBarClick)="voiceBarClick()"></info-input>
         <button class="large" ion-button block round (tap)="textInput()">创建</button>
     </form>
     <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()"></ion-input-panel>

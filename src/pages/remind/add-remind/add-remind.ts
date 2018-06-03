@@ -12,6 +12,9 @@ import { InfoInputComponent } from '../../../components/info-input/info-input';
 export class AddRemindPage {
     @ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
     @ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
+	formData:any = {
+		infoInput:{}
+	}
     constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
     ionViewDidLoad() {
@@ -23,6 +26,7 @@ export class AddRemindPage {
     }
     hideInputPanel() {
         this.inputPanel.panelOpen = false;
+		console.log(this.formData);
     }
 	textInput(){
 		this.infoInput.isRecord = false;
@@ -32,5 +36,9 @@ export class AddRemindPage {
 	}
 	recordInput(){
 		this.infoInput.isRecord = true;
+	}
+	voiceBarClick(){
+		this.infoInput.isRecord = true;
+		this.inputPanel.panelOpen = true;
 	}
 }

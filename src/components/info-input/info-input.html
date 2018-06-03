@@ -1,30 +1,20 @@
 <div class="info-input-warpper">
 	<div class="remark-container">
 		<!-- <p class="hint" (tap)="openInputPanel()">点击输入提醒文字备注或语音备注</p> -->
-		<textarea class="remark-input" (focus)="textareaFocus($event)" (blur)="textareaBlur($event)" type="text" [hidden]="isRecord" placeholder="点击输入提醒文字备注或语音备注." #remarkInput></textarea>
-		<div class="voice-bar-wrapper" [hidden]="!isRecord">
+		<textarea class="remark-input" (focus)="textareaFocus($event)" (blur)="textareaBlur($event)" type="text" [hidden]="isRecord" [(ngModel)]="inputValue" (input)="textareaInput()" [placeholder]="placeholder" #remarkInput [id]="id" [name]="name" [ngStyle]="textareaStyle"></textarea>
+		<div class="voice-bar-wrapper" (tap)="voiceBarTap($event)" [hidden]="!isRecord">
 			<voice-bar></voice-bar>
 		</div>
-		<p class="text-remark">文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注文字备注</p>
 	</div>
 	<div class="accessory">
 		<div class="accessory-list">
 			<div class="imgs-container">
-				<div class="img-item">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-					<i class="delete iconfont">&#xe681;</i>
-				</div>
-				<div class="img-item">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-				</div>
-				<div class="img-item">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-				</div>
-				<div class="img-item">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+				<div class="img-item" *ngFor="let item of innerValue.imgList;let i =index">
+					<img [src]="item">
+					<i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
 				</div>
 			</div>
-			<span class="hint">上传成功</span>
+			<!-- <span class="hint">上传成功</span> -->
 		</div>
 		<a class="upload iconfont" (tap)="chooseImage()">&#xe685;</a>
 	</div>
