@@ -68,6 +68,7 @@ export class MyApp {
     ) {
         platform.ready().then(() => {
             // var vConsole = new window.VConsole();
+            // var vConsole = new vconsole();
             if (this.nativeService.isMobile()) {
                 var vConsole = new vconsole();
             }

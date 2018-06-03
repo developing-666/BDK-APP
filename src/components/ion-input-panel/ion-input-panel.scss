@@ -95,5 +95,8 @@ ion-input-panel {
         &.open {
             transform: translateY(0);
         }
+		&.fixed{
+			transform: translateY(-281px);
+		}
     }
 }

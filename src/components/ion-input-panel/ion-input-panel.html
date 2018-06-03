@@ -1,26 +1,26 @@
-<div class="ion-input-panel" [ngClass]="{'open':panelOpen}">
-    <div class="handle-bar">
-        <div class="handle-item" (tap)="text($event)" [ngClass]="{'active':!isRecord}">
-            <i class="iconfont">&#xe635;</i>
-            <span>文字</span>
-        </div>
-        <div class="handle-item" (tap)="record($event)" [ngClass]="{'active':isRecord}">
-            <i class="iconfont">&#xe67f;</i>
-            <span>语音</span>
-        </div>
-    </div>
-    <div class="input-panel" [hidden]="!isRecord">
-<div class="record-wrapper" [ngClass]="{'complete':complete}">
-            <div class="record" >
-                <i class="iconfont main-icon" [ngClass]="{'ing':recording}" (press)="clockStart()" (touchend)="clockStop()">&#xe671;</i>
-                <p>按住录音</p>
-            </div>
-        </div>
-<div class="play-record-wrapper" [ngClass]="{'complete':complete}">
-            <div class="play-record">
-                <i class="iconfont main-icon" [ngClass]="{'ing':playing}" (tap)="play($event)">&#xe684;</i>
-                <i class="iconfont delete" (tap)="delete($event)">&#xe66e;</i>
-            </div>
-        </div>
-    </div>
+<div class="ion-input-panel" [ngClass]="{'open':panelOpen}" [ngStyle]="panelStyle">
+	<div class="handle-bar">
+		<div class="handle-item" (click)="text($event)" [ngClass]="{'active':!isRecord}">
+			<i class="iconfont">&#xe635;</i>
+			<span>文字</span>
+		</div>
+		<div class="handle-item" (click)="record($event)" [ngClass]="{'active':isRecord}">
+			<i class="iconfont">&#xe67f;</i>
+			<span>语音</span>
+		</div>
+	</div>
+	<div class="input-panel" [hidden]="!isRecord">
+		<div class="record-wrapper" [ngClass]="{'complete':complete}">
+			<div class="record">
+				<i class="iconfont main-icon" [ngClass]="{'ing':recording}" (press)="clockStart()" (touchend)="clockStop()">&#xe671;</i>
+				<p>按住录音</p>
+			</div>
+		</div>
+		<div class="play-record-wrapper" [ngClass]="{'complete':complete}">
+			<div class="play-record">
+				<i class="iconfont main-icon" [ngClass]="{'ing':playing}" (tap)="play($event)">&#xe684;</i>
+				<i class="iconfont delete" (tap)="delete($event)">&#xe66e;</i>
+			</div>
+		</div>
+	</div>
 </div>

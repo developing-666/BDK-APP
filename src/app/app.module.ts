@@ -30,7 +30,6 @@ import { File } from '@ionic-native/file';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { FileOpener } from '@ionic-native/file-opener';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { ImagePicker } from '@ionic-native/image-picker';
 import { Network } from '@ionic-native/network';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { CodePush } from '@ionic-native/code-push';
@@ -39,7 +38,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { HTTP } from '@ionic-native/http';
 import { Keyboard } from '@ionic-native/keyboard';
-
+import { ImagePicker } from '@ionic-native/image-picker';
 
 //ionic第三方插件
 import { CalendarModule } from 'ion2-calendar';
