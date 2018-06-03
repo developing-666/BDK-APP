@@ -1,0 +1,47 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>申请企业版</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+    <div class="main-wrapper">
+        <div class="title-wrapper">
+            <p>请认真填写以下信息，
+                <br> 提交后我们的工作人员会在24小时通知您审核结果.</p>
+        </div>
+        <form class="full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
+            <ion-list>
+                <ion-item-group>
+                    <ion-item>
+                        <ion-label>公司</ion-label>
+                        <ion-input type="text" placeholder="请输入公司名称"></ion-input>
+                    </ion-item>
+                    <button ion-item>
+                        <ion-label>行业</ion-label>
+                        <ion-note item-end>请选择行业</ion-note>
+                    </button>
+                    <button ion-item>
+                        <ion-label>城市</ion-label>
+                        <ion-note item-end>请选择城市</ion-note>
+                    </button>
+                </ion-item-group>
+                <ion-item-group>
+                    <button ion-item>
+                        <ion-label>申请人</ion-label>
+                        <ion-input type="text" placeholder="请输入你的姓名"></ion-input>
+                    </button>
+                    <button ion-item>
+                        <ion-label>手机号码</ion-label>
+                        <ion-input type="tel" placeholder="请输入手机号码"></ion-input>
+                    </button>
+                </ion-item-group>
+            </ion-list>
+        </form>
+        <div class="submit">
+            <button ion-button round block>提交申请</button>
+        </div>
+    </div>
+</ion-content>

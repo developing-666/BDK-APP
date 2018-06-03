@@ -1,0 +1,26 @@
+page-push-message {
+    .full-form {
+        .list ion-item-group {
+            margin-bottom: 0;
+
+            .item {
+			&:last-child{
+				border-bottom: $border;
+			}
+            }
+            .item-divider {
+                background-color: color($colors, bg);
+                height: rem(68);
+                .label {
+                    align-self: flex-end;
+                    font-size: rem(24);
+                    line-height: rem(56);
+                    color: color($colors, light);
+                    &.label-ios {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+page-apply-enterprise {
+    .main-wrapper {
+        .title-wrapper {
+            width: 100%;
+            height: rem(112);
+            border-bottom: $border;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            p {
+                padding: 0 rem(30);
+                font-size: rem(24);
+                line-height: rem(36);
+                text-align: center;
+                color: color($colors, light);
+            }
+        }
+        .full-form {
+            .list.list-ios {
+                margin-top: 0;
+            }
+        }
+        .submit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .button {
+                width: calc(100% - #{rem(60)});
+            }
+        }
+    }
+}

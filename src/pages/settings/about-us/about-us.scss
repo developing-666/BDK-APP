@@ -1,0 +1,34 @@
+page-about-us {
+    .main-wrapper {
+        width: 100%;
+        margin-top: rem(162);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .logo {
+            margin: rem(22);
+            width: rem(210);
+            height: rem(210);
+            border-radius: rem(30);
+            background-color: color($colors, primary);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .iconfont {
+                font-size: rem(180);
+            }
+        }
+        .version {
+            font-size: rem(36);
+            íline-height: rem(74);
+            color: color($colors, light);
+        }
+        .desciption {
+            font-size: rem(30);
+            line-height: rem(70);
+            color: color($colors, dark);
+        }
+    }
+}

@@ -49,6 +49,8 @@ $text-input-placeholder-color:			color($colors, gray);
 
 $item-ios-body-text-font-size:			1.5rem;
 $item-ios-note-color:					color($colors, light);
+$note-ios-color:                        color($colors, light);
+$note-md-color:                         $note-ios-color;
 
 $searchbar-ios-background-color:        color($colors, primary);
 $searchbar-md-background-color:         $searchbar-ios-background-color;

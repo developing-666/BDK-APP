@@ -1,0 +1,43 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>推送消息设置</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+        <form class="main-wrapper full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
+                <ion-list>
+                        <ion-item-group>
+                            <ion-item-divider >不丢客未打开时</ion-item-divider> 
+                            <ion-item>
+                                <ion-label>新推送消息通知</ion-label>
+                                <ion-toggle item-end checked="true"></ion-toggle>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>语音通话提醒</ion-label>
+                                <ion-toggle item-end checked="true"></ion-toggle>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>通知显示消息详情</ion-label>
+                                <ion-toggle item-end checked="false"></ion-toggle>
+                            </ion-item>
+                        </ion-item-group>
+                        <ion-item-group>
+                                <ion-item-divider light>不丢客打开时</ion-item-divider> 
+                            <ion-item>
+                                <ion-label>声音</ion-label>
+                                <ion-toggle item-end checked="true"></ion-toggle>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label>震动</ion-label>
+                                <ion-toggle item-end  checked="true"></ion-toggle>
+                            </ion-item>
+                        </ion-item-group>
+                </ion-list>
+            </form>
+
+</ion-content>
