@@ -4,9 +4,15 @@ import { AppModule } from './app.module';
 
 platformBrowserDynamic().bootstrapModule(AppModule);
 
-
-window.addEventListener('resize',function(){
-	if(window.screen.width<=580){
-		window.location.reload();
-	}
-},false);
+let windowWidth = window.innerWidth;
+window.addEventListener(
+    'resize',
+    function(e) {
+        console.log(e);
+        if (window.innerWidth < windowWidth && window.innerWidth <= 580) {
+            windowWidth = window.innerWidth;
+            window.location.reload();
+        }
+    },
+    false
+);
