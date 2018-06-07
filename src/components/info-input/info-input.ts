@@ -2,12 +2,16 @@ import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, ViewChild, E
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActionSheetController } from 'ionic-angular';
 
+
+
 import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Keyboard } from '@ionic-native/keyboard';
 
-
 import { Utils } from '../../providers/utils';
+
+
+
 @Component({
 	selector: 'info-input',
 	templateUrl: 'info-input.html',
@@ -95,6 +99,9 @@ export class InfoInputComponent implements ControlValueAccessor {
 		// this.keyboard.show();
 	}
 	pickerPhoto() {
+		if (this.value.desc == undefined) {
+			this.valueInit();
+		};
 		let count = 9 - this.innerValue.imgList.length;
 		if (count === 0 || count < 0) {
 			alert('最多添加9张图片');
@@ -107,9 +114,6 @@ export class InfoInputComponent implements ControlValueAccessor {
 			outputType: 1
 		};
 		this.imagePicker.getPictures(options).then((results) => {
-			if (this.value.desc == undefined) {
-				this.valueInit();
-			};
 			for (let item of results) {
 				if (this.value.imgList.indexOf('data:image/jpeg;base64,' + item) == -1) {
 					this.value.imgList.push('data:image/jpeg;base64,' + item);
@@ -120,6 +124,9 @@ export class InfoInputComponent implements ControlValueAccessor {
 		});
 	}
 	takePicture() {
+		if (this.value.desc == undefined) {
+			this.valueInit();
+		};
 		const imgOptions: CameraOptions = {
 			quality: 50,
 			destinationType: this.camera.DestinationType.DATA_URL,
@@ -129,14 +136,10 @@ export class InfoInputComponent implements ControlValueAccessor {
 		};
 		this.camera.getPicture(imgOptions).then((imageUrl) => {
 			// 获取成功
-			if (this.value.desc == undefined) {
-				this.valueInit();
-			};
 			let base64Image = 'data:image/jpeg;base64,' + imageUrl;
 			if (this.value.imgList.indexOf(base64Image) == -1) {
 				this.value.imgList.push(base64Image);
 			}
-			this.value.imgList.push(base64Image);
 		}, (err) => {
 			// alert('获取图片失败,请重试');
 		});

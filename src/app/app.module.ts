@@ -39,6 +39,8 @@ import { Diagnostic } from '@ionic-native/diagnostic';
 import { HTTP } from '@ionic-native/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { Media } from '@ionic-native/media';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 //ionic第三方插件
 import { CalendarModule } from 'ion2-calendar';
@@ -120,7 +122,9 @@ import { Validators } from '../providers/validators';
         CommonService,
         VersionService,
         Validators,
-        Keyboard
+        Keyboard,
+		Media,
+		NativeAudio
     ]
 })
 export class AppModule {

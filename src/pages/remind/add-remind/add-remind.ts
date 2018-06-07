@@ -26,7 +26,6 @@ export class AddRemindPage {
     }
     hideInputPanel() {
         this.inputPanel.panelOpen = false;
-		console.log(this.formData);
     }
 	textInput(){
 		this.infoInput.isRecord = false;
