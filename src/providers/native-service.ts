@@ -15,7 +15,6 @@ import { AlertController, Loading, LoadingController, Platform, ToastController 
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { CallNumber } from '@ionic-native/call-number';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { NativeAudio } from '@ionic-native/native-audio';
 
 import { Position } from '../model/type';
 import {
@@ -28,6 +27,8 @@ import { Observable } from 'rxjs/Rx';
 import { Logger } from './logger';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { CodePush } from '@ionic-native/code-push';
+
+import { Utils } from './utils';
 
 declare var LocationPlugin;
 declare var AMapNavigation;
@@ -55,8 +56,7 @@ export class NativeService {
 		private loadingCtrl: LoadingController,
 		public logger: Logger,
 		private diagnostic: Diagnostic,
-		private codePush: CodePush,
-		private nativeAudio: NativeAudio
+		private codePush: CodePush
 	) { }
 
 	/**
@@ -233,9 +233,22 @@ export class NativeService {
 		this.loading && this.loading.dismiss();
 		this.loading = null;
 	}
-	
 
 
+	preloadAudio(assetPath, audioId: string = Utils.uuid()): Observable<string> {
+		return Observable.create(observer => {
+			const Media = new Audio(assetPath);
+			// Media.preload = 'auto';
+		 	// Media.load();
+			observer.next(Media);
+			// this.nativeAudio.preloadComplex(audioId, assetPath, 1, 1, 0).then(() => {
+			// 	observer.next(audioId);
+			// }, (e) => {
+			// 	console.log(e);
+			// 	observer.error('音频加载错误');
+			// });
+		})
+	}
 	/**
 	 * 使用cordova-plugin-camera获取照片
 	 * @param options

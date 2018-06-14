@@ -12,13 +12,14 @@
 	<div class="input-panel" [hidden]="!isRecord">
 		<div class="record-wrapper" [ngClass]="{'complete':complete}">
 			<div class="record">
-				<i class="iconfont main-icon" [ngClass]="{'ing':recording}" (press)="clockStart()" (touchend)="clockStop()">&#xe671;</i>
+				<i class="iconfont main-icon" [ngClass]="{'recording':recording}" (touchstart)="clockStart()" (touchend)="clockStop()">&#xe671;</i>
 				<p>按住录音</p>
 			</div>
 		</div>
 		<div class="play-record-wrapper" [ngClass]="{'complete':complete}">
 			<div class="play-record">
-				<i class="iconfont main-icon" [ngClass]="{'ing':playing}" (tap)="play($event)">&#xe684;</i>
+				<i class="iconfont main-icon" *ngIf="!playing" (tap)="play($event)">&#xe684;</i>
+				<i class="iconfont main-icon playing" *ngIf="playing" (tap)="stop($event)">&#xe636;</i>
 				<i class="iconfont delete" (tap)="delete($event)">&#xe66e;</i>
 			</div>
 		</div>

@@ -39,12 +39,14 @@ import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
 import { ClienteleDetailPage } from '../pages/clientele/clientele-detail/clientele-detail';
 
+
+import * as VConsole from '../assets/lib/vconsole.min';
 function _window(): any {
     // return the global native browser window object
     return window;
 }
 
-let vconsole = _window().VConsole;
+// let vconsole = _window().VConsole;
 
 @Component({
     templateUrl: 'app.html'
@@ -67,10 +69,9 @@ export class MyApp {
         private nativeService: NativeService
     ) {
         platform.ready().then(() => {
-            // var vConsole = new window.VConsole();
-            // var vConsole = new vconsole();
+			console.log(VConsole);
             if (this.nativeService.isMobile()) {
-                var vConsole = new vconsole();
+                var vConsole = new VConsole();
             }
             // this.nav.setRoot(TabsPage); // 设置首页
             // this.nav.setRoot(LoginPage); // 设置首页

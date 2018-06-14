@@ -26,7 +26,6 @@ export class InfoInputComponent implements ControlValueAccessor {
 	@Output() voiceBarClick: EventEmitter<any> = new EventEmitter();
 	@Input() id: string;
 	@Input() name: string;
-	@Input() placeholder: string = '点击输入提醒文字备注或语音备注.';
 	changed: any = [];
 	touched: any = [];
 	disabled: boolean = false;
@@ -34,6 +33,7 @@ export class InfoInputComponent implements ControlValueAccessor {
 	inputValue: string = '';
 	innerValue: any = {};
 	textareaStyle: any = {};
+	audio:any = null;
 	get value(): any {
 		return this.innerValue;
 	}
