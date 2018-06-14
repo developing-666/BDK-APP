@@ -110,9 +110,9 @@
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
     <allow-navigation href="http://192.168.31.199:8102" />
     <plugin name="cordova-plugin-file" spec="^5.0.0" />
-    <engine name="android" spec="~7.1.0" />
-    <engine name="ios" spec="~4.5.4" />
     <plugin name="cordova-plugin-media" spec="^5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
+    <engine name="android" spec="7.1.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>

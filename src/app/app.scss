@@ -13,6 +13,8 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.vc-toolbar .vc-tool{line-height: 3rem;}
+
 /* 防止用户自定义背景颜色对网页的影响，添加让用户可以自定义字体 */
 
 html {

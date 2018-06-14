@@ -1,6 +1,6 @@
 ion-input-panel {
     .ion-input-panel{
-        transform: translateY(100%);
+        // transform: translate3d(0,100%,0);
         @extend .transition-02;
         position: fixed;
         width: 100%;
@@ -38,9 +38,9 @@ ion-input-panel {
                 height: 100%;
                 @include flex-center();
                 @extend .transition-02;
-                transform: translateX(0);
+                transform: translate3d(0,0,0);
                 &.complete {
-                    transform: translateX(-100%);
+                    transform: translate3d(-100%,0,0);
                 }
             }
             .play-record-wrapper {
@@ -49,9 +49,9 @@ ion-input-panel {
                 height: 100%;
                 @include flex-center();
                 @extend .transition-02;
-                transform: translateX(100%);
+                transform: translate3d(100%,0,0);
                 &.complete {
-                    transform: translateX(0);
+                    transform: translate3d(0,0,0);
                 }
             }
             .record{
@@ -111,10 +111,7 @@ ion-input-panel {
             }
         }
         &.open {
-            transform: translateY(0);
+            transform: translate3d(0,0,0);
         }
-		&.fixed{
-			transform: translateY(-281px);
-		}
     }
 }

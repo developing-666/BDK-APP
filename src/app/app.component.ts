@@ -69,7 +69,6 @@ export class MyApp {
         private nativeService: NativeService
     ) {
         platform.ready().then(() => {
-			console.log(VConsole);
             if (this.nativeService.isMobile()) {
                 var vConsole = new VConsole();
             }
