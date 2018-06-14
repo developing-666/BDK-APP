@@ -1,4 +1,8 @@
 page-add-remind {
+	.scroll-content{
+		overflow-y: hidden;
+		-webkit-overflow-scrolling:none;
+	}
 	.add-remind-form{
 		.list{margin-bottom: 1rem;
 			.item{

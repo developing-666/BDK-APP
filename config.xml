@@ -34,7 +34,7 @@
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
-    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -96,7 +96,7 @@
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
-    <plugin name="cordova-plugin-ionic-keyboard" spec="^2.1.2" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="此App需要您的同意才能读取媒体库" />
     </plugin>
@@ -106,11 +106,13 @@
     <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.1">
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="此App需要您的同意才能读取媒体库" />
     </plugin>
-    <plugin name="cordova-plugin-file" spec="^6.0.1" />
-    <plugin name="cordova-plugin-nativeaudio" spec="^3.0.9" />
-    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
+    <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
+    <allow-navigation href="http://192.168.31.199:8102" />
+    <plugin name="cordova-plugin-file" spec="^5.0.0" />
+    <engine name="android" spec="~7.1.0" />
+    <engine name="ios" spec="~4.5.4" />
     <plugin name="cordova-plugin-media" spec="^5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
-    <engine name="android" spec="7.0.0" />
 </widget>

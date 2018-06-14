@@ -22,5 +22,5 @@
         <info-input [(ngModel)]="formData.infoInput" #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="desc" (voiceBarClick)="voiceBarClick()"></info-input>
         <button class="large" ion-button block round (tap)="textInput()">创建</button>
     </form>
-    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()"></ion-input-panel>
+    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>
