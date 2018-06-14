@@ -1,20 +1,74 @@
 page-login {
-	.main-slogan{
-		padding-top: rem(166);display: flex;justify-content: center;flex-wrap: wrap;
-		.logo{width: rem(210);height: rem(210);border-radius:rem(30);background-color: color($colors, primary);color:#fff;display: flex;justify-content:center;align-items: center;
-			.iconfont{font-size:rem(180);color:#fff;}
-		}
-		h1{width: 100%;display: flex;justify-content: center;align-items: center;height:rem(54);font-size:rem(36);font-weight: bold;margin-top: rem(40);}
-		h2{width: 100%;display: flex;justify-content: center;align-items: center;height:rem(46);font-size:rem(30);}
-	}
-	.login-form{margin-top: rem(46);
-		.new-user{line-height: rem(88);font-size:rem(30);text-align: center;}
-		.forget-paw{position: fixed;bottom:0;height: rem(142);display: flex;justify-content: space-between;align-items: center;padding: 0 rem(30);width: 100%;font-size:rem(30);
-			.agreement{display: flex;justify-content: space-between;align-items: center;
-				.checkbox{margin-right: rem(10);}
-				.label{padding:0;font-size:rem(30);}
+	.main-slogan {
+		padding-top: rem(166);
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		.logo {
+			width: rem(210);
+			height: rem(210);
+			border-radius: rem(30);
+			background-color: color($colors, primary);
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.iconfont {
+				font-size: rem(180);
+				color: #fff;
 			}
 		}
-		.submit{margin-bottom: 0;}
+		h1 {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: rem(54);
+			font-size: rem(36);
+			font-weight: bold;
+			margin-top: rem(40);
+		}
+		h2 {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: rem(46);
+			font-size: rem(30);
+		}
+	}
+	.login-form {
+		margin-top: rem(46);
+		.new-user {
+			line-height: rem(88);
+			font-size: rem(30);
+			text-align: center;
+		}
+		.forget-paw {
+			position: fixed;
+			bottom: 0;
+			height: rem(142);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 rem(30);
+			width: 100%;
+			font-size: rem(30);
+			.agreement {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.checkbox {
+					margin-right: rem(10);
+				}
+				.label {
+					padding: 0;
+					font-size: rem(30);
+				}
+			}
+		}
+		.submit {
+			margin-bottom: 0;
+		}
 	}
 }
