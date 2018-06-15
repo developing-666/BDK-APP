@@ -35,27 +35,32 @@
     @extend .iconfont;
     font-size: inherit;
 }
-.ion-ios-icon-repayment-outline:before,
-.ion-md-icon-repayment-outline:before {
-    content: '\e61c';
+.ion-ios-icon-remind-outline:before,
+.ion-md-icon-remind-outline:before {
+    content: '\e667';
 }
-.ion-ios-icon-repayment:before,
-.ion-md-icon-repayment:before {
-    content: '\e635';
+.ion-ios-icon-remind:before,
+.ion-md-icon-remind:before {
+    content: '\e664';
 }
-.ion-ios-icon-payment-outline:before,
-.ion-md-icon-payment-outline:before {
-    content: '\e706';
+.ion-ios-icon-clientele-outline:before,
+.ion-md-icon-clientele-outline:before {
+    content: '\e666';
 }
-.ion-ios-icon-payment:before,
-.ion-md-icon-payment:before {
-    content: '\e7dc';
+.ion-ios-icon-clientele:before,
+.ion-md-icon-clientele:before {
+    content: '\e663';
 }
-.ion-ios-icon-share-outline:before,
-.ion-md-icon-share-outline:before {
-    content: '\e607';
+.ion-ios-icon-setting-outline:before,
+.ion-md-icon-setting-outline:before {
+    content: '\e678';
 }
-.ion-ios-icon-share:before,
-.ion-md-icon-share:before {
-    content: '\e62b';
+.ion-ios-icon-setting:before,
+.ion-md-icon-setting:before {
+    content: '\e67a';
+}
+.tabs .tab-button[aria-selected=true]{
+	.icon:before{
+		color: color($colors,primary);
+	}
 }

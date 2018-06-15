@@ -9,7 +9,7 @@ import {
     ToastController
 } from 'ionic-angular';
 
-import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login/login';
 // import { AboutPage } from '../pages/mine/about/about';
 
@@ -30,7 +30,6 @@ import { AddClienteleRemindPage } from '../pages/remind/add-clientele-remind/add
 import { SignInPage } from '../pages/login/sign-in/sign-in';
 import { ForgetPasswordPage } from '../pages/login/forget-password/forget-password';
 import { ClientelePage } from '../pages/clientele/clientele/clientele';
-import { HomePage } from './../pages/home/home';
 import { SettingsPage } from '../pages/settings/settings/settings';
 
 import { SearchClientelePage } from '../pages/clientele/search-clientele/search-clientele';
@@ -74,7 +73,7 @@ export class MyApp {
             }
             // this.nav.setRoot(TabsPage); // 设置首页
             // this.nav.setRoot(LoginPage); // 设置首页
-            this.nav.setRoot(AddRemindPage); // 设置首页
+            this.nav.setRoot(HomePage); // 设置首页
             // this.nativeService.statusBarStyle(); // 设置状态栏颜色
             // this.assertNetwork(); // 检测网络
             // this.helper.funDebugInit(); // 初始化fundebug
