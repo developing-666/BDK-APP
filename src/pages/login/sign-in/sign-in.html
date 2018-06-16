@@ -1,29 +1,33 @@
-
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>注册</ion-title>
-  </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>注册</ion-title>
+	</ion-navbar>
 </ion-header>
-
-
 <ion-content>
 	<div class="main-form">
-		<form #loginForm="ngForm" novalidate (ngSubmit)="login()">
+		<form #signInForm="ngForm" novalidate (ngSubmit)="signIn()">
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
-				<ion-input type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+				<ion-input name="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65c;</i>
 				</ion-label>
-				<ion-input type="tel" placeholder="请输入您的密码"></ion-input>
+				<ion-input name="password" [(ngModel)]="formData.password" type="password" placeholder="请输入您的密码"></ion-input>
 			</ion-item>
-			<button class="large" type="submit" [disabled]="loginForm.invalid" ion-button block round>注册</button>
+			<ion-item>
+				<ion-label>
+					<i class="iconfont">&#xe65d;</i>
+				</ion-label>
+				<ion-input name="validCode" [(ngModel)]="formData.validCode" type="number" placeholder="请输入验证码"></ion-input>
+				<div class="get-code" item-end>
+					<button ion-button round>获取验证码</button>
+				</div>
+			</ion-item>
+			<button class="large" type="submit" [disabled]="signInForm.invalid" ion-button block round>注册</button>
 		</form>
 	</div>
 </ion-content>

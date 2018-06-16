@@ -2,15 +2,12 @@
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { Config, IonicApp, IonicModule,IonicErrorHandler } from 'ionic-angular';
+import { Config, IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
 //业务相关组件、页面、模块
 import { MyApp } from './app.component';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
-import { AboutPage } from '../pages/mine/about/about';
 
 import { LoginModule } from '../pages/login/login.module';
 import { RemindModule } from '../pages/remind/remind.module';
@@ -24,6 +21,7 @@ import { AlphaScrollModule } from '../modules/alpha-scroll/index';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppVersion } from '@ionic-native/app-version';
+import { Device } from '@ionic-native/device';
 import { Camera } from '@ionic-native/camera';
 import { Toast } from '@ionic-native/toast';
 import { File } from '@ionic-native/file';
@@ -45,7 +43,10 @@ import { Media } from '@ionic-native/media';
 import { CalendarModule } from 'ion2-calendar';
 
 //自己封装的服务、模块、方法等
+
+import { AppApi } from '../providers/app-api';
 import { NativeService } from '../providers/native-service';
+import { HttpHeader } from '../providers/http-header';
 import { HttpService } from '../providers/http-service';
 import { FileService } from '../providers/file-service';
 import { Helper } from '../providers/helper';
@@ -73,73 +74,82 @@ import { Validators } from '../providers/validators';
 //}
 
 @NgModule({
-    declarations: [MyApp, AboutPage, ContactPage, HomePage, TabsPage],
-    imports: [
-        LoginModule,
-        RemindModule,
-        ClienteleModule,
-        BrowserModule,
-        HttpModule,
-        AlphaScrollModule.forRoot(),
-        IonicModule.forRoot(MyApp, {
-            //			mode: 'ios', // android是'md'
-            backButtonText: ''
-        }),
-        IonicStorageModule.forRoot(),
-        CalendarModule,
-        SettingsPageModule
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [MyApp, AboutPage, ContactPage, HomePage, TabsPage],
-    providers: [
-        StatusBar,
-        SplashScreen,
-        AppVersion,
-        Camera,
-        Toast,
-        File,
-        FileTransfer,
-        FileOpener,
-        InAppBrowser,
-        ImagePicker,
-        Network,
-        AppMinimize,
-        Diagnostic,
-        HTTP,
-        JPush,
-        CodePush,
-        CallNumber,
-        BarcodeScanner,
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
-        NativeService,
-        HttpService,
-        FileService,
-        Helper,
-        Utils,
-        GlobalData,
-        Logger,
-        CommonService,
-        VersionService,
-        Validators,
-        Keyboard,
-		Media
-    ]
+	declarations: [
+		MyApp,
+		HomePage
+	],
+	imports: [
+		LoginModule,
+		RemindModule,
+		ClienteleModule,
+		BrowserModule,
+		HttpModule,
+		AlphaScrollModule.forRoot(),
+		IonicModule.forRoot(MyApp, {
+			//			mode: 'ios', // android是'md'
+			backButtonText: ''
+		}),
+		IonicStorageModule.forRoot(),
+		CalendarModule,
+		SettingsPageModule
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		HomePage
+	],
+	providers: [
+		AppApi,
+		StatusBar,
+		SplashScreen,
+		AppVersion,
+		Camera,
+		Toast,
+		File,
+		FileTransfer,
+		FileOpener,
+		InAppBrowser,
+		ImagePicker,
+		Network,
+		AppMinimize,
+		Diagnostic,
+		HTTP,
+		JPush,
+		CodePush,
+		CallNumber,
+		BarcodeScanner,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		NativeService,
+		HttpHeader,
+		HttpService,
+		FileService,
+		Helper,
+		Utils,
+		GlobalData,
+		Logger,
+		CommonService,
+		VersionService,
+		Validators,
+		Keyboard,
+		Media,
+		Device
+	]
 })
 export class AppModule {
-    constructor(public config: Config) {
-        this.setCustomTransitions();
-    }
+	constructor(public config: Config) {
+		this.setCustomTransitions();
+	}
 
-    private setCustomTransitions() {
-        this.config.setTransition(
-            'modal-from-right-enter',
-            ModalFromRightEnter
-        );
-        this.config.setTransition(
-            'modal-from-right-leave',
-            ModalFromRightLeave
-        );
-        this.config.setTransition('modal-scale-enter', ModalScaleEnter);
-        this.config.setTransition('modal-scale-leave', ModalScaleLeave);
-    }
+	private setCustomTransitions() {
+		this.config.setTransition(
+			'modal-from-right-enter',
+			ModalFromRightEnter
+		);
+		this.config.setTransition(
+			'modal-from-right-leave',
+			ModalFromRightLeave
+		);
+		this.config.setTransition('modal-scale-enter', ModalScaleEnter);
+		this.config.setTransition('modal-scale-leave', ModalScaleLeave);
+	}
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Base64 } from 'js-base64';
 import md5 from 'blueimp-md5';
 
 /**
@@ -164,10 +164,11 @@ export class Utils {
      */
     static md5(str: string) {
         console.log(str);
-
         return md5(str);
     }
-
+	static base64(str: string){
+		return Base64.encode(str);
+	}
     /** 产生一个随机的32位长度字符串 */
     static uuid() {
         let text = '';
