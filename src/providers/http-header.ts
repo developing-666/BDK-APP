@@ -19,12 +19,12 @@ export class HttpHeader {
 		private device:Device
 	) {}
 	browserVersion(){
-		console.log(window.navigator.userAgent)
-		console.log(/Version\/(\d+\.\d+)/.test(window.navigator.userAgent))
 		if(/Android (\d+\.\d+)/.test(window.navigator.userAgent)){
-			return parseFloat(RegExp.$1);
+			return RegExp.$1;
 		}else if(/Version\/(\d+\.\d+)/.test(window.navigator.userAgent)){
-			console.log(parseFloat(RegExp.$1))
+			return RegExp.$1;
+		}else{
+			return '';
 		}
 	}
 	appInfo() {
@@ -63,8 +63,8 @@ export class HttpHeader {
 			let mockSign = `
 				${this.appInfo()}
 				${this.requestTime()}
-				${this.device.platform}
-				${Utils.md5(Utils.uuid()+this.device.version+this._appVersion)}
+				browser
+				${Utils.md5(Utils.uuid()+this.browserVersion()+this._appVersion)}
 			`;
 			return Utils.md5(mockSign);
 		}

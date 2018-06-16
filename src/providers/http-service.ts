@@ -79,7 +79,7 @@ export class HttpService {
 		options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO',this.httpHeader.appInfo());
 		options.headers.append('DAFU-REQUEST-TIME',this.httpHeader.requestTime());
-		options.headers.append('DAFU-APP-SIGN',this.httpHeader.appInfo());
+		options.headers.append('DAFU-APP-SIGN',this.httpHeader.appSign());
 
 		return Observable.create(observer => {
 			this.request(url, options).subscribe(res => {
