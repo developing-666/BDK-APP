@@ -19,6 +19,14 @@ export const REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
 
 export const FUNDEBUG_API_KEY = '663317d6edbdd20cd931b32793f16c26fcfe11c13e91eb0cfe6c0fc37d88da23'; // 去https:// fundebug.com/申请key
 
+export const HTTPSTATUS = {
+	400:'请求失败',
+	401:'密码已过期,请重新登录',
+	403:'密码已过期,请重新登录',
+	408:'请求超时',
+	500:'服务器内部错误'
+}
+
 // code push 部署key
 export const CODE_PUSH_DEPLOYMENT_KEY = {
   'android': {

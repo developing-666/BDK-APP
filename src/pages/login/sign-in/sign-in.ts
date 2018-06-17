@@ -31,13 +31,19 @@ export class SignInPage {
     /**
      * 创建表单
      */
-
     createForm() {
         this.ngForm = this.fb.group(
             {
                 phone: ['', [Validators.required, Validators.phone]],
                 password: ['', [Validators.required, Validators.minLength(6)]],
-                validCode: ['', [Validators.required, Validators.minLength(4),Validators.maxLength(4)]]
+                validCode: [
+                    '',
+                    [
+                        Validators.required,
+                        Validators.minLength(4),
+                        Validators.maxLength(4)
+                    ]
+                ]
             },
             { updateOn: 'blur' }
         );
@@ -51,10 +57,10 @@ export class SignInPage {
     get validCode() {
         return this.ngForm.get('validCode');
     }
-    change() {
-        console.log(this.ngForm);
-        console.log('this.password',this.password);
-        
+    getCode() {
+        this.appApi.getCode(this.formData.phone).subscribe(d => {
+            console.log(d);
+        });
     }
 
     signIn() {

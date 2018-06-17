@@ -12,13 +12,13 @@
 				<ion-label>
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
-				<ion-input type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+				<ion-input name="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
 			</ion-item>
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65c;</i>
 				</ion-label>
-				<ion-input type="password" placeholder="请输入您的手机/400号码"></ion-input>
+				<ion-input name="password" [(ngModel)]="formData.password" type="password" placeholder="请输入您的手机/400号码"></ion-input>
 			</ion-item>
 			<button class="login submit large" type="submit" [disabled]="loginForm.invalid" ion-button block round>登录</button>
 			<p class="new-user">新用户？<a>注册</a></p>

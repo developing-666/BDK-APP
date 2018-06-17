@@ -30,7 +30,7 @@
                 <ion-note class="tip" *ngIf="validCode.touched && validCode.errors?.required" item-end>请输入验证码！</ion-note>
                 <ion-note class="tip" *ngIf="validCode.touched && (validCode.errors?.minlength || validCode.errors?.maxlength)" item-end>请输4位验证码！</ion-note>
 				<div class="get-code" item-end>
-					<button ion-button round>获取验证码</button>
+					<button ion-button round (tap)="getCode()">获取验证码</button>
 				</div>
             </ion-item>
             <!-- <button ion-button full type="button" (tap)="change()">logForm</button> -->

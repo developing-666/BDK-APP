@@ -8,14 +8,13 @@ export class AppApi {
 		private _http: HttpService
 	) { }
 	login(opts?: any): any {
-		return this._http.post('UserLogin', opts);
+		return this._http.post('/login', opts);
 	}
 	getCode(phone?: any): any {
-		return this._http.get('/authenticationcode/sms/', {
-			phone
-		});
+		return this._http.get('/authenticationcode/sms/'+phone);
 	}
 	signIn(opts: any): any {
 		return this._http.post('/register', opts);
 	}
+
 }
