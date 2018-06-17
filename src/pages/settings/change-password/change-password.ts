@@ -34,16 +34,16 @@ export class ChangePasswordPage {
      * 创建表单 
      */    
     createForm() {
-    //     this.ngForm = this.fb.group({
-    //     old: ['',[Validators.required,Validators.minLength(6)]], 
-    //     new: ['',[Validators.required,Validators.minLength(6)]],
-    //     affirm: ['',[Validators.required,Validators.minLength(6)]], 
-    //   },{updateOn: 'blur'});
-    this.ngForm = new FormGroup({
-        old:new FormControl('',[Validators.required,Validators.minLength(6)]),
-        new:new FormControl('',[Validators.required,Validators.minLength(6)]),
-        affirm:new FormControl('',[Validators.required,Validators.minLength(6)]),
-    });
+        this.ngForm = this.fb.group({
+        old: ['',[Validators.required,Validators.minLength(6)]], 
+        new: ['',[Validators.required,Validators.minLength(6)]],
+        affirm: ['',[Validators.required,Validators.minLength(6)]], 
+      },{updateOn: 'blur'});
+    // this.ngForm = new FormGroup({
+    //     old:new FormControl('',[Validators.required,Validators.minLength(6)]),
+    //     new:new FormControl('',[Validators.required,Validators.minLength(6)]),
+    //     affirm:new FormControl('',[Validators.required,Validators.minLength(6)]),
+    // });
     }
     get old() { return this.ngForm.get('old'); }
     get new() { return this.ngForm.get('new'); }

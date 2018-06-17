@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { UserInfoPage } from './../user-info/user-info';
 
-/**
- * Generated class for the SettingsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @Component({
 	selector: 'page-settings',
@@ -14,11 +9,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SettingsPage {
 
-	constructor(public navCtrl: NavController, public navParams: NavParams) {
+	constructor(
+        public navCtrl: NavController, 
+        public navParams: NavParams,
+        private app:App
+    ) {
 	}
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad SettingsPage');
-	}
+    }
+    
+    /** 
+     * 跳转个人资料页面 
+     */    
+    toUserInfoPage() {
+        this.app.getRootNav().push(UserInfoPage);
+    }
 
 }
