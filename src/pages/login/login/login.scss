@@ -17,4 +17,24 @@ page-login {
 		}
 		.submit{margin-bottom: 0;}
 	}
+    .main-form {
+        .item.item-block {
+            .item-inner {
+                .input {
+                    &.invalid {
+                        border-bottom: 0.55px solid color($colors, danger);
+                    }
+                }
+                .tip {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 0.55px solid color($colors, danger);
+                    color: color($colors,danger);
+                }
+            }
+        }
+    }
 }

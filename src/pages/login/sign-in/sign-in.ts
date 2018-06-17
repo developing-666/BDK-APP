@@ -57,12 +57,18 @@ export class SignInPage {
     get validCode() {
         return this.ngForm.get('validCode');
     }
+
+    /** 
+     * 获取验证码 
+     */ 
     getCode() {
         this.appApi.getCode(this.formData.phone).subscribe(d => {
             console.log(d);
         });
     }
-
+    /** 
+     * 注册 
+     */    
     signIn() {
         console.log(this.formData);
         this.appApi.signIn(this.formData).subscribe(d => {
