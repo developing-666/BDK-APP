@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { NavController, NavParams } from 'ionic-angular';
 
+import { AppApi } from '../../../providers/app-api';
 
 @Component({
 	selector: 'page-login',
@@ -10,9 +11,11 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 	@ViewChild('loginForm') loginForm: NgForm;
+	formData:any= {};
 	constructor(
 		public navCtrl: NavController,
-		public navParams: NavParams
+		public navParams: NavParams,
+		private appApi: AppApi
 	) { }
 	mushrooms: boolean = true;
 
@@ -20,7 +23,9 @@ export class LoginPage {
 		console.log('ionViewDidLoad LoginPage');
 	}
 	login(){
-	  
+	  	this.appApi.login(this.formData).subscribe((d)=>{
+			console.log(d);
+		});
 	}
 
 }

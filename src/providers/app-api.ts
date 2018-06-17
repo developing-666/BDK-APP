@@ -8,7 +8,7 @@ export class AppApi {
 		private _http: HttpService
 	) { }
 	login(opts?: any): any {
-		return this._http.post('UserLogin', opts);
+		return this._http.post('/login', opts);
 	}
 	getCode(phone?: any): any {
 		return this._http.get('/authenticationcode/sms/'+phone);
@@ -16,4 +16,5 @@ export class AppApi {
 	signIn(opts: any): any {
 		return this._http.post('/register', opts);
 	}
+
 }
