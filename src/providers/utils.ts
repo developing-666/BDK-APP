@@ -163,11 +163,13 @@ export class Utils {
      * @returns {any}
      */
     static md5(str: string) {
-        console.log(str);
-        return md5(str);
+        return md5(str).toUpperCase();
     }
 	static base64(str: string){
 		return Base64.encode(str);
+	}
+	static base64Decode(str: string){
+		return Base64.decode(str);
 	}
     /** 产生一个随机的32位长度字符串 */
     static uuid() {

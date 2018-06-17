@@ -5,7 +5,12 @@ import { NativeService } from './native-service';
 import { Device } from '@ionic-native/device';
 @Injectable()
 export class HttpHeader {
-	private _appVersion:any = '';
+	private _appVersion:any = '1.0.0';
+	private _uuid:any = '';
+	private _browserVersion:any = '';
+	private _platform:any = '';
+	private _devName:any = '';
+	private _osVersion:any = '';
 	timestamp:string = '';
 	get appVersion(): string {
 		return this._appVersion;
@@ -23,50 +28,57 @@ export class HttpHeader {
 			return RegExp.$1;
 		}else if(/Version\/(\d+\.\d+)/.test(window.navigator.userAgent)){
 			return RegExp.$1;
+		}
+	}
+	uuid(){
+		if (this.nativeService.isMobile()) {
+			this._uuid = this.device.uuid;
 		}else{
-			return '';
+			this._uuid = Utils.uuid();
+		}
+	}
+	platform(){
+		if (this.nativeService.isMobile()) {
+			this._platform = this.device.platform;
+		}else{
+			this._platform = 'browser';
+		}
+	}
+	devName(){
+		if (this.nativeService.isMobile()) {
+			this._devName = this.device.manufacturer;
+		}else{
+			this._devName = 'dev-device';
+		}
+	}
+	osVersion(){
+		if (this.nativeService.isMobile()) {
+			this._osVersion = this.device.version;
+		}else{
+			this._osVersion = this.browserVersion();
 		}
 	}
 	appInfo() {
-		if (this.nativeService.isMobile()) {
-			const deviceInfo = `
-				devName=${this.device.manufacturer}
-				&osType=${this.device.platform}
-				&osVersion=${this.device.version}
-				&appVersion=${this._appVersion}
-				&browser=${window.navigator.userAgent}
-				&uuid=${this.device.uuid}
-			`;
-			console.log(deviceInfo);
-			return deviceInfo;
-		} else {
-			let mockInfo = `
-				devName=测试设备
-				&osType=浏览器
-				&osVersion=${this.browserVersion()}
-				&appVersion=1.0.0
-				&browser=${window.navigator.userAgent}
-				&uuid=${Utils.uuid()}
-			`;
-			console.log(this.browserVersion());
-			return Utils.base64(mockInfo);
-		}
+		this.devName();
+		this.platform();
+		this.osVersion();
+		this.uuid();
+		let deviceInfo = 'devName='+this._devName+'&osType='+this._platform+'&osVersion='+this._osVersion+'&appVersion='+this._appVersion+'&browser='+window.navigator.userAgent+'&uuid='+this._uuid;
+		console.log(deviceInfo);
+		return Utils.base64(deviceInfo);
 	}
 	requestTime(){
-		this.timestamp = String(new Date().getTime());
-		return this.timestamp;
+		// this.timestamp = String(new Date().getTime());
+		return String(new Date().getTime());
 	}
-	appSign(){
-		if (this.nativeService.isMobile()) {
-
-		}else{
-			let mockSign = `
-				${this.appInfo()}
-				${this.requestTime()}
-				browser
-				${Utils.md5(Utils.uuid()+this.browserVersion()+this._appVersion)}
-			`;
-			return Utils.md5(mockSign);
+	getHeader(){
+		const requestTime = this.requestTime();
+		const appInfo = this.appInfo();
+		const appSign = appInfo+requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
+		return{
+			appInfo,
+			requestTime,
+			appSign:Utils.md5(appSign)
 		}
 	}
 };
