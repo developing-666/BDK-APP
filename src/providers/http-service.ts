@@ -13,10 +13,10 @@ import { Observable, TimeoutError } from 'rxjs/Rx';
 import { Utils } from './utils';
 import { GlobalData } from './global-data';
 import { NativeService } from './native-service';
-import { APP_SERVE_URL, IS_DEBUG, REQUEST_TIMEOUT } from './constants';
+import { APP_SERVE_URL, IS_DEBUG, REQUEST_TIMEOUT, HTTPSTATUS } from './constants';
 import { Logger } from './logger';
 import { Events } from 'ionic-angular';
-import {HttpHeader} from './http-header';
+import { HttpHeader } from './http-header';
 
 @Injectable()
 export class HttpService {
@@ -27,7 +27,7 @@ export class HttpService {
 		public logger: Logger,
 		private events: Events,
 		public nativeService: NativeService,
-		private httpHeader:HttpHeader
+		private httpHeader: HttpHeader
 	) { }
 
 	public get(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
@@ -78,9 +78,9 @@ export class HttpService {
 		const header = this.httpHeader.getHeader();
 		options.headers = options.headers || new Headers();
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
-		options.headers.append('DAFU-APP-INFO',header.appInfo);
-		options.headers.append('DAFU-REQUEST-TIME',header.requestTime);
-		options.headers.append('DAFU-APP-SIGN',header.appSign);
+		options.headers.append('DAFU-APP-INFO', header.appInfo);
+		options.headers.append('DAFU-REQUEST-TIME', header.requestTime);
+		options.headers.append('DAFU-APP-SIGN', header.appSign);
 		return Observable.create(observer => {
 			this.request(url, options).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
@@ -91,8 +91,7 @@ export class HttpService {
 					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
 					observer.error(res.data);
 				}
-			},error=>{
-				console.log(error.status);
+			}, error => {
 				//  401,403 token无效或过期需要重新登录
 				if (error.status == 401 || error.status == 403) {
 					// this.nativeService.showToast('密码已过期,请重新登录');
@@ -136,15 +135,11 @@ export class HttpService {
 		} else {
 			const status = err.status;
 			let msg = '请求发生异常';
-			if (status === 0) {
-				msg = '请求失败，请求响应出错';
-			} else if (status === 401 || status === 403) {
-				msg = '密码已过期,请重新登录';
-			} else if (status === 404) {
-				msg = '请求失败，未找到请求地址';
-			} else if (status === 500) {
-				msg = '请求失败，服务器出错，请稍后再试';
-			}
+			for(let state in HTTPSTATUS){
+				if(parseInt(state)==status){
+					msg = HTTPSTATUS[state];
+				}
+			};
 			this.nativeService.alert(msg);
 			this.logger.httpLog(err, msg, {
 				url,
