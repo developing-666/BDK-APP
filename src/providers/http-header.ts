@@ -74,7 +74,7 @@ export class HttpHeader {
 	getHeader(){
 		const requestTime = this.requestTime();
 		const appInfo = this.appInfo();
-		const appSign = requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
+		const appSign = appInfo+requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
 		return{
 			appInfo,
 			requestTime,

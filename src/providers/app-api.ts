@@ -11,9 +11,7 @@ export class AppApi {
 		return this._http.post('UserLogin', opts);
 	}
 	getCode(phone?: any): any {
-		return this._http.get('/authenticationcode/sms/', {
-			phone
-		});
+		return this._http.get('/authenticationcode/sms/'+phone);
 	}
 	signIn(opts: any): any {
 		return this._http.post('/register', opts);

@@ -26,5 +26,10 @@ export class SignInPage {
 			console.log(d)
 		});
 	}
+	getCode(){
+		this.appApi.getCode(this.formData.phone).subscribe((d)=>{
+			console.log(d)
+		});
+	}
 
 }

@@ -24,7 +24,7 @@
 				</ion-label>
 				<ion-input name="validCode" [(ngModel)]="formData.validCode" type="number" placeholder="请输入验证码"></ion-input>
 				<div class="get-code" item-end>
-					<button ion-button round>获取验证码</button>
+					<button ion-button round (tap)="getCode()">获取验证码</button>
 				</div>
 			</ion-item>
 			<button class="large" type="submit" [disabled]="signInForm.invalid" ion-button block round>注册</button>
