@@ -80,7 +80,8 @@ export class HttpService {
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO', header.appInfo);
 		options.headers.append('DAFU-REQUEST-TIME', header.requestTime);
-		options.headers.append('DAFU-APP-SIGN', header.appSign);
+        options.headers.append('DAFU-APP-SIGN', header.appSign);
+        options.headers.append('DAFU-TOKEN', header.token);
 		return Observable.create(observer => {
 			this.request(url, options).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败

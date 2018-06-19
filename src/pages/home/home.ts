@@ -6,14 +6,12 @@ import { ClientelePage } from '../clientele/clientele/clientele';
 import { SettingsPage } from '../settings/settings/settings';
 
 @Component({
-	selector: 'page-home',
-	templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
-	tab1Root = RemindPage;
+    tab1Root = RemindPage;
     tab2Root = ClientelePage;
     tab3Root = SettingsPage;
-	constructor(
-		public navCtrl: NavController
-	) { }
+    constructor(public navCtrl: NavController) {}
 }

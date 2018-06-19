@@ -1,12 +1,16 @@
 import { ViewChild, Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 
-import { NavController, NavParams } from 'ionic-angular';
+import { App,NavController, NavParams } from 'ionic-angular';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
+
+
+import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
+import { HomePage } from '../../home/home';
+
 
 @Component({
     selector: 'page-login',
@@ -19,7 +23,8 @@ export class LoginPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         private appApi: AppApi,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private app:App
     ) {
         this.createForm();
     }
@@ -53,6 +58,8 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
+            // this.app.getRootNav().push(HomePage);
+            this.app.getRootNav().push(AddClientelePage);
         });
     }
     /** 

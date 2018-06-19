@@ -8,36 +8,39 @@ import { IonFilterComponent } from './ion-filter/ion-filter';
 import { IonInputPanelComponent } from './ion-input-panel/ion-input-panel';
 import { InfoInputComponent } from './info-input/info-input';
 import { IonAudioComponent } from './ion-audio/ion-audio';
+import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input';
 
 @NgModule({
-	declarations: [
-		VoiceBarComponent,
-		RemindItemComponent,
-		ClienteleItemComponent,
-		SetStateComponent,
-		IonFilterComponent,
-		IonInputPanelComponent,
-		InfoInputComponent,
-		IonAudioComponent
-	],
-	imports: [IonicModule],
-	exports: [
-		VoiceBarComponent,
-		RemindItemComponent,
-		ClienteleItemComponent,
-		SetStateComponent,
-		IonFilterComponent,
-		IonInputPanelComponent,
-		InfoInputComponent,
-		IonAudioComponent
-	],
-	entryComponents: []
+    declarations: [
+        VoiceBarComponent,
+        RemindItemComponent,
+        ClienteleItemComponent,
+        SetStateComponent,
+        IonFilterComponent,
+        IonInputPanelComponent,
+        InfoInputComponent,
+        IonAudioComponent,
+        PhoneNumberInputComponent
+    ],
+    imports: [IonicModule],
+    exports: [
+        VoiceBarComponent,
+        RemindItemComponent,
+        ClienteleItemComponent,
+        SetStateComponent,
+        IonFilterComponent,
+        IonInputPanelComponent,
+        InfoInputComponent,
+        IonAudioComponent,
+        PhoneNumberInputComponent
+    ],
+    entryComponents: []
 })
 export class ComponentsModule {
-	public static forRoot(): ModuleWithProviders {
-		return {
-			ngModule: ComponentsModule,
-			providers: []
-		};
-	}
+    public static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: ComponentsModule,
+            providers: []
+        };
+    }
 }
