@@ -18,8 +18,18 @@
                     <ion-input placeholder="请输入职务" [(ngModel)]="formData.post" name="post"></ion-input>
                 </ion-item>
                 <button ion-item>
+                    <ion-label>省份</ion-label>
+                    <ion-select [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份">
+                        <ion-option value="M">北京</ion-option>
+                        <ion-option value="F">上海</ion-option>
+                    </ion-select>
+                </button>
+                <button ion-item>
                     <ion-label>城市</ion-label>
-                    <ion-note item-end>选择所在城市</ion-note>
+                    <ion-select [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市">
+                        <ion-option value="M">男</ion-option>
+                        <ion-option value="F">女</ion-option>
+                    </ion-select>
                 </button>
             </ion-item-group>
             <ion-item-group>
