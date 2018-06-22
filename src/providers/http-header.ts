@@ -11,13 +11,19 @@ export class HttpHeader {
 	private _platform:any = '';
 	private _devName:any = '';
 	private _osVersion:any = '';
+	private _token:any = null;
 	timestamp:string = '';
 	get appVersion(): string {
 		return this._appVersion;
 	}
-
 	set appVersion(value: string) {
 		this._appVersion = value;
+	}
+	get token(): string {
+		return this._token;
+	}
+	set token(value: string) {
+		this._token = value;
 	}
 	constructor(
 		public nativeService: NativeService,
@@ -76,6 +82,7 @@ export class HttpHeader {
 		const appInfo = this.appInfo();
 		const appSign = appInfo+requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
 		return{
+			token:this._token,
 			appInfo,
 			requestTime,
 			appSign:Utils.md5(appSign)
