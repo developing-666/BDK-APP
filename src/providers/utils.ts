@@ -255,7 +255,7 @@ export class Utils {
 		}
 		return obj;
 	}
-	static extend() {
+	static extend(...args) {
 		let isObjFunc = (name) => {
 			var toString = Object.prototype.toString;
 			return (...args) => toString.call(args[0]) === '[object ' + name + ']';
@@ -263,7 +263,7 @@ export class Utils {
 		let isObject = isObjFunc('Object'),
 			isArray = isObjFunc('Array'),
 			isBoolean = isObjFunc('Boolean');
-		let extend = (...args)=>{
+		let extend = (args)=>{
 			let index = 0, isDeep = false, obj, copy, destination, source, i;
 			if (isBoolean(args[0])) {
 				index = 1;
