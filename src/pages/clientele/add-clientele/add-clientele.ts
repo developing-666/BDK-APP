@@ -1,52 +1,71 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { ClienteleTagPage } from '../clientele-tag/clientele-tag';
+import { CustomTagPage } from '../custom-tag/custom-tag';
 
+import { AppApi } from './../../../providers/app-api';
 import { GlobalData } from '../../../providers/global-data';
-
+import { INDUSTRY } from '../../../providers/constants';
 import { Utils } from '../../../providers/utils';
 @Component({
     selector: 'page-add-clientele',
     templateUrl: 'add-clientele.html'
 })
-export class AddClientelePage {
+export class AddClientelePage implements OnInit {
+    provinces: Array<any> = this.globalData.provinces;
+    city: Array<any> = [];
+    industry: Array<any> = INDUSTRY;
     formData: any = {
-        gender: 'M',
-		arr:['666','777']
+        gender: 'M'
     };
     constructor(
-		public navCtrl: NavController,
-		public navParams: NavParams,
-		public globalData: GlobalData
-	) {}
-
-    ionViewDidLoad() {
-        console.log('ionViewDidLoad AddClientelePage');
-		let obj1 = {
-			a:123,
-			b:this.formData
-		};
-		let obj2 = {
-			c:333
-		}
-		let obj = Utils.extend(true,{},obj1,obj2);
-		console.log(obj);
-		this.formData.arr[0] = '111';
-		console.log(obj);
-
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        public globalData: GlobalData,
+        private appApi: AppApi
+    ) {}
+    ngOnInit() {
+        this.queryProvinces();
     }
+    ionViewDidLoad() {}
     add() {
         console.log(this.formData);
     }
     addTag() {
-        console.log(12313);
+        let callback = (tag): any => {
+            console.log(tag);
+            this.formData.label = tag; 
+            return Promise.resolve();
+        };
+        this.navCtrl.push(ClienteleTagPage, { 
+            tag: this.formData.label,
+            callback
+        });
     }
     addCustomTag() {
-        console.log(222);
+        let callback = (tags): any => {
+            console.log(tags);
+            this.formData.labels = tags; 
+            return Promise.resolve();
+        };
+        this.navCtrl.push(CustomTagPage,{callback});
     }
-	queryProvinces(){
-		if(this.globalData.province.length){
-
-		}
-	}
+    queryProvinces() {
+        if (this.provinces.length == 0) {
+            this.appApi.queryProvinces().subscribe(d => {
+                console.log(d);
+                this.globalData.provinces = d;
+                this.provinces = d;
+            });
+        }
+    }
+    queryCitiesByProvinceId() {
+        this.appApi
+            .queryCitiesByProvinceId(this.formData.provinceId)
+            .subscribe(d => {
+                console.log(d);
+                this.city = d;
+            });
+    }
 }

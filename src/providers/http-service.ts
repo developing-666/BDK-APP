@@ -33,6 +33,9 @@ export class HttpService {
 	public get(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Get,
+            headers: new Headers({
+                'Content-Type': 'application/json; charset=UTF-8'
+            }),
 			search: HttpService.buildURLSearchParams(paramMap)
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);

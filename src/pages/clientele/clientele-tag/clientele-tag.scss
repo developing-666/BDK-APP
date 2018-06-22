@@ -12,7 +12,7 @@ page-clientele-tag {
 			.tag-item{
 				@include round-tag();margin-right: rem(40);margin-bottom: 1rem;background-color: #fff;position: relative;
 				&.active{
-					@include round-tag('default',color($colors,primary));
+					@include round-tag('default',color($colors,primary),false);
 				}
 				&:nth-child(3n){
 					margin-right:0;

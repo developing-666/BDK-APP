@@ -19,23 +19,21 @@
                 </ion-item>
                 <button ion-item>
                     <ion-label>省份</ion-label>
-                    <ion-select [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份">
-                        <ion-option value="M">北京</ion-option>
-                        <ion-option value="F">上海</ion-option>
+                    <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()">
+                        <ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
                     </ion-select>
                 </button>
                 <button ion-item>
                     <ion-label>城市</ion-label>
-                    <ion-select [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市">
-                        <ion-option value="M">男</ion-option>
-                        <ion-option value="F">女</ion-option>
+                    <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0">
+                        <ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
                     </ion-select>
                 </button>
             </ion-item-group>
             <ion-item-group>
                 <button ion-item>
                     <ion-label>性别</ion-label>
-                    <ion-select [(ngModel)]="formData.gender" name="gender">
+                    <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.gender" name="gender">
                         <ion-option value="M">男</ion-option>
                         <ion-option value="F">女</ion-option>
                     </ion-select>
@@ -53,9 +51,8 @@
                 </ion-item>
                 <button ion-item>
                     <ion-label>行业</ion-label>
-                    <ion-select placeholder="请选择行业" [(ngModel)]="formData.industry" name="industry">
-                        <ion-option value="M">男</ion-option>
-                        <ion-option value="F">女</ion-option>
+                    <ion-select cancelText="取消" okText="确认" placeholder="请选择行业" [(ngModel)]="formData.industry" name="industry">
+                        <ion-option [value]="item" *ngFor="let item of industry">{{item}}</ion-option>
                     </ion-select>
                 </button>
             </ion-item-group>

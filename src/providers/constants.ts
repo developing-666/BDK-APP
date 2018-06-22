@@ -18,7 +18,7 @@ export const QUALITY_SIZE = 94; // 图像压缩质量，范围为0 - 100
 export const REQUEST_TIMEOUT = 20000; // 请求超时时间,单位为毫秒
 
 export const FUNDEBUG_API_KEY = '663317d6edbdd20cd931b32793f16c26fcfe11c13e91eb0cfe6c0fc37d88da23'; // 去https:// fundebug.com/申请key
-
+//http常见错误状态
 export const HTTPSTATUS = {
 	400:'请求失败',
 	401:'密码已过期,请重新登录',
@@ -26,9 +26,14 @@ export const HTTPSTATUS = {
 	408:'请求超时',
 	500:'服务器内部错误'
 }
+//行业信息
+export const INDUSTRY:Array<any> = ['互联网','电信广播传输','金融','服务','餐饮','服装','批发零售','房地产','教育','娱乐文化']
 
+//客户标签信息
+export const TAGS: Array<any> = ['重要客户', '老客户', '一般客户', '选号客户'];
 
-export const FOLLOWSTATUS = [
+//客户状态信息
+export const FOLLOWSTATUS: Array<any> = [
     { 
         code: 'WAIT',
         label: '待跟'
