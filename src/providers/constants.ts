@@ -27,6 +27,25 @@ export const HTTPSTATUS = {
 	500:'服务器内部错误'
 }
 
+
+export const FOLLOWSTATUS = [
+    { 
+        code: 'WAIT',
+        label: '待跟'
+    },
+    { 
+        code: 'ALREADY',
+        label: '跟进'
+    },
+    { 
+        code: 'OVER',
+        label: '成交'
+    },
+    { 
+        code: 'INVALID',
+        label: '无效'
+    },
+];
 // code push 部署key
 export const CODE_PUSH_DEPLOYMENT_KEY = {
   'android': {

@@ -1,0 +1,66 @@
+phone-number-input {
+    .phone-wrapper {
+        background-color: #fff;
+        margin: 1rem 0;
+        .phone-input-wrapper {
+            padding: rem(16) 0;
+            height: rem(92);
+            border-bottom: $border;
+            display: flex;
+            align-items: center;
+            .button {
+                width: rem(100);
+                @include flex-center();
+                border-left: $border;
+                border-radius: 0;
+                height: 100%;
+            }
+            .phone-input-container {
+                width: calc(100% - #{rem(100)});
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1rem;
+                span {
+                    font-size: rem(30);
+                }
+                input {
+                    border: none;
+                    background-color: transparent;
+                    text-align: right;
+                    font-size: rem(30);
+                }
+            }
+        }
+        .phone-list {
+            .phone-item {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                height: rem(80);
+                border-bottom: $border;
+                padding: 0 1rem;
+                font-size: rem(30);
+                background-color: transparent;
+                .iconfont {
+                    color: color($colors, danger);
+                    font-size: 2.4rem;
+                    margin-right: 1rem;
+                }
+                &:last-child {
+                    border-bottom: none;
+                }
+                &.new {
+                    .iconfont {
+                        color: color($colors, primary);
+                    }
+                }
+            }
+        }
+        .ng-invalid.ng-touched,
+        .added.ng-invalid {
+            .phone-input-wrapper{
+                border-color: color($colors,danger);
+            }
+        }
+    }
+}

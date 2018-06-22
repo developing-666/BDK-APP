@@ -1,9 +1,6 @@
 <div class="set-state">
     <p class="title">提醒跟进状态</p>
     <div class="state-container">
-        <span class="state-item">待跟</span>
-        <span class="state-item active">跟进</span>
-        <span class="state-item">成交</span>
-        <span class="state-item">无效</span>
+        <span class="state-item" *ngFor="let item of followStatus" (tap)="statusTap(item.code)" [ngClass]="{'active': innerValue==item.code}">{{item.label}}</span>
     </div>
 </div>

@@ -7,70 +7,80 @@
 <ion-header>
 
 	<ion-navbar>
-		<ion-title>个人资料</ion-title>
+        <ion-title>个人资料</ion-title>
+		<ion-buttons end>
+				<button ion-button icon-only clear (tap)="clickEditButton()">{{canEdit?'保存':'编辑'}}
+				</button>
+		</ion-buttons>
+        
 	</ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-		<form class="main-wrapper full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
-		<ion-item-group class="header">
-			<button ion-item>
-				<ion-label>头像</ion-label>
-				<ion-avatar item-right>
-					<img src="../../../assets/imgs/avatar.png">
-				</ion-avatar>
-			</button>
-		</ion-item-group>
-
+		<form class="main-wrapper full-form "  [formGroup]="ngForm" novalidate>
 		<ion-list>
+            <ion-item-group class="header" >
+                <button type="button" ion-item (tap)="click()">
+                    <ion-label [ngClass]="{'disabled':!canEdit}">头像</ion-label>
+                    <ion-avatar item-right>
+                        <img src="../../../assets/imgs/avatar.png">
+                    </ion-avatar>
+                </button>
+            </ion-item-group>
+    
 			<ion-item-group>
-				<ion-item>
-					<ion-label>昵称</ion-label>
-					<ion-input type="text" placeholder="请输入昵称"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-label>手机</ion-label>
-					<ion-input type="tel" placeholder="请输入手机号" value="185****0000"></ion-input>
+				<ion-item [ngClass]="{'invalid':(ngForm.get('name').touched && ngForm.get('name').invalid)}">
+					<ion-label [ngClass]="{'disabled':!canEdit}">昵称</ion-label>
+					<!-- <ion-label *ngIf="(ngForm.get('name').touched && ngForm.get('name').invalid)" class="tip">请输入昵称！</ion-label> -->
+					<ion-input type="text" placeholder="请输入昵称" formControlName="name" value="123"></ion-input>
+                </ion-item>
+				<ion-item [ngClass]="{'invalid':(ngForm.get('phone').touched && ngForm.get('phone').invalid)}">
+					<ion-label [ngClass]="{'disabled':!canEdit}">手机</ion-label>
+					<ion-input type="tel" placeholder="请输入手机号" value="" formControlName="phone"></ion-input>
 				</ion-item>
 			</ion-item-group>
 			<ion-item-group>
-				<ion-item>
-					<ion-label>职务</ion-label>
-					<ion-input type="text" placeholder="请输入您的职务"></ion-input>
+				<ion-item [ngClass]="{'invalid':(ngForm.get('work').touched && ngForm.get('work').invalid)}">
+					<ion-label [ngClass]="{'disabled':!canEdit}">职务</ion-label>
+					<ion-input type="text" placeholder="请输入您的职务" formControlName="work"></ion-input>
 				</ion-item>
 				<button ion-item>
-					<ion-label>城市</ion-label>
-					<ion-note item-end>请选择城市</ion-note>
+					<ion-label [ngClass]="{'disabled':!canEdit}">城市</ion-label>
+					<ion-note item-end (tap)="click()">请选择城市</ion-note>
 				</button>
 			</ion-item-group>
 			<ion-item-group>
-				<button ion-item>
-					<ion-label>性别</ion-label>
+				<button ion-item [ngClass]="{'disabled':canEdit}">
+					<ion-label [ngClass]="{'disabled':!canEdit}">性别</ion-label>
 					<ion-note item-end>请选择性别</ion-note>
 				</button>
 				<button ion-item>
-					<ion-label>生日</ion-label>
+					<ion-label [ngClass]="{'disabled':!canEdit}">生日</ion-label>
 					<ion-note item-end>请选择生日</ion-note>
 				</button>
 			</ion-item-group>
 			<ion-item-group>
 				<ion-item>
-					<ion-label>公司</ion-label>
+					<ion-label [ngClass]="{'disabled':!canEdit}">公司</ion-label>
 					<ion-input type="text" placeholder="请输入公司名称"></ion-input>
 				</ion-item>
 				<button ion-item>
-					<ion-label>行业</ion-label>
+					<ion-label [ngClass]="{'disabled':!canEdit}">行业</ion-label>
 					<ion-note item-end>请选择行业</ion-note>
 				</button>
 			</ion-item-group>
 			<ion-item-group>
 				<button ion-item>
-					<ion-label>修改密码</ion-label>
+					<ion-label [ngClass]="{'disabled':!canEdit}">修改密码</ion-label>
 					<ion-note item-end></ion-note>
-				</button>
-			</ion-item-group>
-		</ion-list>
+                </button>
+                <p>ngForm.value:{{ngForm.value | json}}</p>
+                <p>ngForm.valid:{{ngForm.valid}}</p>
+                <p>name.touched:{{ngForm.get('name').touched}},name.valid:{{ngForm.get('name').valid}}</p>
+            </ion-item-group>
+        </ion-list>
+        <div class="shade" *ngIf="!canEdit"></div>
 </form>
 </ion-content>

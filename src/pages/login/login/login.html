@@ -7,25 +7,30 @@
 		<h2>帮你跟好客户，一个都不能丢。</h2>
 	</div>
 	<div class="main-form login-form">
-		<form #loginForm="ngForm" novalidate (ngSubmit)="login()">
+		<form [formGroup]="ngForm" novalidate (ngSubmit)="login()">
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
-				<ion-input name="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+				<ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
+                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
 			</ion-item>
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65c;</i>
 				</ion-label>
-				<ion-input name="password" [(ngModel)]="formData.password" type="password" placeholder="请输入您的手机/400号码"></ion-input>
-			</ion-item>
-			<button class="login submit large" type="submit" [disabled]="loginForm.invalid" ion-button block round>登录</button>
+				<ion-input [ngClass]="{'invalid':(password.touched && password.invalid)}" formControlName="password" [(ngModel)]="formData.password" type="password" placeholder="请输入您的密码"></ion-input>
+                <ion-note class="tip" *ngIf="password.touched && password.errors?.required" item-end>请输入密码！</ion-note>
+                <ion-note class="tip" *ngIf="password.touched && password.errors?.minlength" item-end>请输入至少6位密码！</ion-note>
+            </ion-item>
+            <!-- <button type="button" ion-button full (tap)="change()">测试</button> -->
+            <button class="login submit large" type="submit" [disabled]="(ngForm.invalid || !mushrooms)" ion-button block round>登录</button>
 			<p class="new-user">新用户？<a>注册</a></p>
 			<div class="forget-paw">
 				<div class="agreement">
 					<ion-item>
-						<ion-checkbox [(ngModel)]="mushrooms" name="agreement"></ion-checkbox>
+						<ion-checkbox [(ngModel)]="mushrooms" formControlName="agreement"></ion-checkbox>
 						<ion-label>用户协议</ion-label>
 					</ion-item>
 				</div>

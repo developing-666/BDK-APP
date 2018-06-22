@@ -11,19 +11,13 @@ export class HttpHeader {
 	private _platform:any = '';
 	private _devName:any = '';
 	private _osVersion:any = '';
-	private _token:any = null;
 	timestamp:string = '';
 	get appVersion(): string {
 		return this._appVersion;
 	}
+
 	set appVersion(value: string) {
 		this._appVersion = value;
-	}
-	get token(): string {
-		return this._token;
-	}
-	set token(value: string) {
-		this._token = value;
 	}
 	constructor(
 		public nativeService: NativeService,
@@ -82,7 +76,7 @@ export class HttpHeader {
 		const appInfo = this.appInfo();
 		const appSign = appInfo+requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
 		return{
-			token:this._token,
+            token:'DAFUeyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODUwMTY2NzY2MSIsInVzZXJzZXNzaW9uIjoie1wiaWRcIjo2MDc1MyxcImNvbXBhbnlJZFwiOjYwNzUzLFwidHlwZVwiOjEsXCJuYW1lXCI6bnVsbCxcInBob25lXCI6XCIxODUwMTY2NzY2MVwiLFwidXNlcm5hbWVcIjpcIjE4NTAxNjY3NjYxXCIsXCJhdXRob3JpdGllc1wiOm51bGwsXCJwYXNzd29yZE1vZGlmeVRpbWVcIjpudWxsfSIsImNyZWF0ZVRpbWUiOjE1Mjk0MTY5Nzc0MTcsImNyZWF0ZWQiOjE1Mjk0MTY5Nzc0MTQsImV4cCI6MTYxNTgxNjk3N30.RjJT47V3VqoItUc4zfrxKl1cqWp_p4N7OnfeIviWfkYpSwwLEMugSPh-0ssefN1k7NeVwX6EVGEqaMhmXNqLGQ',
 			appInfo,
 			requestTime,
 			appSign:Utils.md5(appSign)

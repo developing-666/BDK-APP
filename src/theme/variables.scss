@@ -46,6 +46,8 @@ $toolbar-ios-title-font-weight: 		normal;
 $datetime-ios-placeholder-color:		color($colors, gray);
 $datetime-md-placeholder-color:			$datetime-ios-placeholder-color;
 $text-input-placeholder-color:			color($colors, gray);
+$select-ios-placeholder-color:          $text-input-placeholder-color;
+$select-md-placeholder-color:           $text-input-placeholder-color;
 
 $item-ios-body-text-font-size:			1.5rem;
 $item-ios-note-color:					color($colors, light);

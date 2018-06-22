@@ -202,6 +202,11 @@ ion-buttons.buttons-group {
                 input{
                     text-align: right;
                 }
+                .select{
+                    .select-icon {
+                        display: none;
+                    }
+                }
             }
             &.item-ios{
                .item-inner{

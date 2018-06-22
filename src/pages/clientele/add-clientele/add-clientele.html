@@ -1,60 +1,79 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title>添加客户</ion-title>
-	</ion-navbar>
+    <ion-navbar>
+        <ion-title>添加客户</ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content>
-	<form class="add-clientele-form full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
-		<set-state></set-state>
-		<div class="phone-wrapper">
-			<div class="phone-input-wrapper">
-				<div class="phone-input-container">
-					<span>电话</span>
-					<input class="phone-input" type="tel" placeholder="请输入电话号码">
-				</div>
-				<button ion-button icon-only clear>
-					<i class="iconfont">
-						&#xe66f;
-					</i>
-				</button>
-			</div>
-			<div class="phone-list fn-clear">
-				<p class="phone-item new fn-left">
-					<i class="iconfont">&#xe679;</i>
-					<span>添加电话</span>
-				</p>
-				<p class="phone-item fn-left">
-					<i class="iconfont">&#xe66b;</i>
-					<span>18923567869</span>
-				</p>
-			</div>
-		</div>
-		<ion-list>
-			<ion-item-group>
-				<ion-item>
-					<ion-label>姓名</ion-label>
-					<ion-input placeholder="请输入姓名"></ion-input>
-				</ion-item>
-				<ion-item>
-					<ion-label>职务</ion-label>
-					<ion-input placeholder="请输入职务"></ion-input>
-				</ion-item>
-				<button ion-item>
-					<ion-label>城市</ion-label>
-					<ion-note item-end>选择所在城市</ion-note>
-				</button>
-			</ion-item-group>
-			<ion-item-group>
-				<button ion-item>
-					<ion-label>性别</ion-label>
-					<ion-note item-end>选择性别</ion-note>
-				</button>
-				<button ion-item>
-					<ion-label>生日</ion-label>
-					<ion-note item-end>选择生日</ion-note>
-				</button>
-			</ion-item-group>
-		</ion-list>
-		<button class="large" ion-button block round>添加</button>
-	</form>
+    <form class="add-clientele-form full-form" #addClienteleForm="ngForm" novalidate>
+        <set-state [(ngModel)]="formData.followStatus" name="followStatus"></set-state>
+        <phone-number-input [(ngModel)]="formData.phones" name="phones"></phone-number-input>
+        <ion-list>
+            <ion-item-group>
+                <ion-item>
+                    <ion-label>姓名</ion-label>
+                    <ion-input placeholder="请输入姓名" [(ngModel)]="formData.name " name="name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>职务</ion-label>
+                    <ion-input placeholder="请输入职务" [(ngModel)]="formData.post" name="post"></ion-input>
+                </ion-item>
+                <button ion-item>
+                    <ion-label>省份</ion-label>
+                    <ion-select [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份">
+                        <ion-option value="M">北京</ion-option>
+                        <ion-option value="F">上海</ion-option>
+                    </ion-select>
+                </button>
+                <button ion-item>
+                    <ion-label>城市</ion-label>
+                    <ion-select [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市">
+                        <ion-option value="M">男</ion-option>
+                        <ion-option value="F">女</ion-option>
+                    </ion-select>
+                </button>
+            </ion-item-group>
+            <ion-item-group>
+                <button ion-item>
+                    <ion-label>性别</ion-label>
+                    <ion-select [(ngModel)]="formData.gender" name="gender">
+                        <ion-option value="M">男</ion-option>
+                        <ion-option value="F">女</ion-option>
+                    </ion-select>
+                </button>
+                <button ion-item>
+                    <ion-label>生日</ion-label>
+                    <ion-datetime cancelText="取消" doneText="确认" placeholder="请选择生日" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="formData.birthday"
+                        name="birthday"></ion-datetime>
+                </button>
+            </ion-item-group>
+            <ion-item-group>
+                <ion-item>
+                    <ion-label>公司</ion-label>
+                    <ion-input placeholder="请输入公司" [(ngModel)]="formData.company " name="company"></ion-input>
+                </ion-item>
+                <button ion-item>
+                    <ion-label>行业</ion-label>
+                    <ion-select placeholder="请选择行业" [(ngModel)]="formData.industry" name="industry">
+                        <ion-option value="M">男</ion-option>
+                        <ion-option value="F">女</ion-option>
+                    </ion-select>
+                </button>
+            </ion-item-group>
+            <ion-item-group>
+                <button ion-item (tap)="addTag()">
+                    <ion-label>客户标签</ion-label>
+                    <ion-input [readonly]="true" placeholder="请选择客户标签" [(ngModel)]="formData.label" name="label"></ion-input>
+                </button>
+                <button ion-item (tap)="addCustomTag()">
+                    <ion-label>自定义标签</ion-label>
+                    <ion-input [readonly]="true" placeholder="请选择自定义标签" [(ngModel)]="formData.labels" name="labels"></ion-input>
+                </button>
+                <ion-item>
+                    <ion-label>备注</ion-label>
+                    <ion-textarea placeholder="输入客户备注" [(ngModel)]="formData.remark" name="remark"></ion-textarea>
+                </ion-item>
+            </ion-item-group>
+        </ion-list>
+        <button (tap)="add()" class="large" ion-button block round>添加</button>
+    </form>
 </ion-content>
