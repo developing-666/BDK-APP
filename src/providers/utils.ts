@@ -270,14 +270,14 @@ export class Utils {
 				isDeep = args[0];
 			};
 			for (i = args.length - 1; i > index; i--) {
-				destination = args[i - 1]
-				source = args[i]
+				destination = args[i - 1];
+				source = args[i];
 				if (isObject(source) || isArray(source)) {
-					console.log(source)
+					console.log(source);
 					for (var property in source) {
-						obj = source[property]
+						obj = source[property];
 						if (isDeep && (isObject(obj) || isArray(obj))) {
-							copy = isObject(obj) ? {} : []
+							copy = isObject(obj) ? {} : [];
 							let extended = extend(isDeep, copy, obj);
 							destination[property] = extended;
 						} else {
