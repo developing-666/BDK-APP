@@ -255,42 +255,38 @@ export class Utils {
 		}
 		return obj;
 	}
+	static isObjFunc(name){
+		let toString = Object.prototype.toString;
+		return (...args) => toString.call(args[0]) === '[object ' + name + ']';
+	}
 	static extend(...args) {
-		let isObjFunc = (name) => {
-			var toString = Object.prototype.toString;
-			return (...args) => toString.call(args[0]) === '[object ' + name + ']';
+		let isObject = this.isObjFunc('Object'),
+			isArray = this.isObjFunc('Array'),
+			isBoolean = this.isObjFunc('Boolean');
+		let index = 0, isDeep = false, obj, copy, destination, source, i;
+		if (isBoolean(args[0])) {
+			index = 1;
+			isDeep = args[0];
 		};
-		let isObject = isObjFunc('Object'),
-			isArray = isObjFunc('Array'),
-			isBoolean = isObjFunc('Boolean');
-		let extend = (args)=>{
-			let index = 0, isDeep = false, obj, copy, destination, source, i;
-			if (isBoolean(args[0])) {
-				index = 1;
-				isDeep = args[0];
-			};
-			for (i = args.length - 1; i > index; i--) {
-				destination = args[i - 1];
-				source = args[i];
-				if (isObject(source) || isArray(source)) {
-					console.log(source);
-					for (var property in source) {
-						obj = source[property];
-						if (isDeep && (isObject(obj) || isArray(obj))) {
-							copy = isObject(obj) ? {} : [];
-							let extended = extend(isDeep, copy, obj);
-							destination[property] = extended;
-						} else {
-							destination[property] = source[property];
-						}
+		for (i = args.length - 1; i > index; i--) {
+			destination = args[i - 1];
+			source = args[i];
+			if (isObject(source) || isArray(source)) {
+				for (var property in source) {
+					obj = source[property];
+					if (isDeep && (isObject(obj) || isArray(obj))) {
+						copy = isObject(obj) ? {} : [];
+						let extended = this.extend(isDeep, copy, obj);
+						destination[property] = extended;
+					} else {
+						destination[property] = source[property];
 					}
-				} else {
-					destination = source;
 				}
+			} else {
+				destination = source;
 			}
-			return destination;
 		}
-		return extend;
+		return destination;
 	}
 	static closest(el, selector) {
 		var matchesSelector = el.matches || el.webkitMatchesSelector || el.mozMatchesSelector || el.msMatchesSelector;
