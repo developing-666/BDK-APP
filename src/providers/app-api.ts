@@ -16,5 +16,7 @@ export class AppApi {
 	signIn(opts: any): any {
 		return this._http.post('/register', opts);
 	}
-
+	queryProvinces():any{
+		return this._http.get('/province/queryProvinces');
+	}
 }
