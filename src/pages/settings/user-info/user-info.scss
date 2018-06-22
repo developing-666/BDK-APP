@@ -45,4 +45,11 @@ page-user-info {
             }
         }
     }
+    .item.item-block.item-ios {
+        .item-inner {
+            background-position: right -14px center;
+            transition: background-position 0.5s;
+            transition-timing-function: ease-in;
+        }
+    }
 }

@@ -16,6 +16,8 @@ export class GlobalData {
 	// 是否启用文件缓存
 	private _enabledFileCache = true;
 
+	//省份数据
+	private _province = [];
 	get userId(): string {
 		return this._userId;
 	}
@@ -62,5 +64,11 @@ export class GlobalData {
 	set enabledFileCache(value: boolean) {
 		this._enabledFileCache = value;
 	}
+	get province(): any {
+		return this._province;
+	}
 
+	set province(value: any) {
+		this._province = value;
+	}
 }

@@ -32,4 +32,7 @@ export class AppApi {
 		return this._http.post('/register/valid', opts);
     }
 
+	queryProvinces():any{
+		return this._http.get('/province/queryProvinces');
+	}
 }

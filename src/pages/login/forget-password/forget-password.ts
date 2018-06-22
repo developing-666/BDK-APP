@@ -59,7 +59,6 @@ export class ForgetPasswordPage {
     /**
      * 重置密码
      */
-
     resetPassword() {}
 
     /** 
