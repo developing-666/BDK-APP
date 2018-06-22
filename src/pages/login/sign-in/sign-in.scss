@@ -2,19 +2,27 @@ page-sign-in {
     .main-form {
         .item.item-block {
             .item-inner {
+                position: relative;
                 .input {
                     &.invalid {
                         border-bottom: 0.55px solid color($colors, danger);
                     }
                 }
                 .tip {
+                    position: absolute;
+                    right: 0;
                     margin: 0;
                     padding: 0;
                     height: 100%;
                     display: flex;
                     align-items: center;
-                    border-bottom: 0.55px solid color($colors, danger);
-                    color: color($colors,danger);
+                    &.error {
+                        color: color($colors,danger);
+                    }
+                    &.success {
+                        color: color($colors,success);
+
+                    }
                 }
             }
         }

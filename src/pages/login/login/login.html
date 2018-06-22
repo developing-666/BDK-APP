@@ -13,8 +13,8 @@
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
 				<ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
-                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
-                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
 			</ion-item>
 			<ion-item>
 				<ion-label>
@@ -26,7 +26,7 @@
             </ion-item>
             <!-- <button type="button" ion-button full (tap)="change()">测试</button> -->
             <button class="login submit large" type="submit" [disabled]="(ngForm.invalid || !mushrooms)" ion-button block round>登录</button>
-			<p class="new-user">新用户？<a>注册</a></p>
+			<p class="new-user">新用户？<a (tap)="toSigninPage()">注册</a></p>
 			<div class="forget-paw">
 				<div class="agreement">
 					<ion-item>

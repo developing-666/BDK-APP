@@ -10,9 +10,10 @@
 				<ion-label>
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
-                <ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
-                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
-                <ion-note class="tip" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
+                <ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" (blur)="signInPhoneValid()" (input)="canRegister=false" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
+                <ion-note class="tip success" *ngIf="phone.valid && canRegister" item-end>手机号码可以注册！</ion-note>
 			</ion-item>
 			<ion-item>
 				<ion-label>
@@ -26,14 +27,18 @@
 				<ion-label>
 					<i class="iconfont">&#xe65d;</i>
 				</ion-label>
-				<ion-input [ngClass]="{'invalid':(validCode.touched && validCode.invalid)}"  formControlName="validCode" [(ngModel)]="formData.validCode" type="number" placeholder="请输入验证码"></ion-input>
+                <ion-input [ngClass]="{'invalid':(validCode.touched && validCode.invalid)}"  formControlName="validCode" [(ngModel)]="formData.validCode" type="number" placeholder="请输入验证码"></ion-input>
                 <ion-note class="tip" *ngIf="validCode.touched && validCode.errors?.required" item-end>请输入验证码！</ion-note>
                 <ion-note class="tip" *ngIf="validCode.touched && (validCode.errors?.minlength || validCode.errors?.maxlength)" item-end>请输4位验证码！</ion-note>
-				<div class="get-code" item-end>
-					<button ion-button round (tap)="getCode()">获取验证码</button>
+				<div class="get-code" item-end *ngIf="showVerificationCode" >
+					<button type="button" ion-button round (tap)="getCode()" [disabled]="phone.invalid">获取验证码</button>
+				</div>
+				<div class="get-code" item-end *ngIf="!showVerificationCode" >
+					<button type="button" ion-button round disabled="true">( {{time}} )</button>
 				</div>
             </ion-item>
-			<button class="large" type="submit" [disabled]="ngForm.invalid" ion-button block round>注册</button>
+			<button class="large" type="submit" [disabled]="ngForm.invalid || !canRegister || showVerificationCode" ion-button block round>注册</button>
+            <!-- <button type="button" ion-button full (tap)="signInPhoneValid()">测试</button> -->
 		</form>
 	</div>
 </ion-content>

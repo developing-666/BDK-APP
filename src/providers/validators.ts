@@ -13,7 +13,7 @@ export class Validators extends angularValidators {
 
 	/*手机号码*/
 	static phone = (control: AbstractControl) => {
-		return Validators.validatorsByPattern('phone', control, '1[3-9]{10,10}');
+		return Validators.validatorsByPattern('phone', control, '(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}');
 	}
 
 	/*中文*/
