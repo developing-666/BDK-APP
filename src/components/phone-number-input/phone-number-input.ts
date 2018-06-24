@@ -47,6 +47,13 @@ export class PhoneNumberInputComponent implements ControlValueAccessor {
             this.phoneForm.reset();
         }
     }
+    getPhone():any{
+        this.addEd = true;
+        if (this.phoneForm.valid) {
+            this.addEd = false;
+            return this.phone;
+        }
+    }
     delete(i){
         this.value.splice(i,1);
         this.onChange(this.value);

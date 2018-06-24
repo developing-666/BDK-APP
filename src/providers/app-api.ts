@@ -45,4 +45,18 @@ export class AppApi {
     queryCitiesByProvinceId(id: any): any {
         return this._http.get('/city/queryCitiesByProvinceId/' + id);
     }
+    /**
+     * 创建客户
+     * @param opts 
+     */
+    customerCreate(opts?: any): any {
+        return this._http.post('/customer/create', opts);
+    }
+    /**
+     * 查询客户列表
+     * @param opts 
+     */
+    customerQuery(opts){
+        return this._http.post('/customer/queryCustomerByPage', opts);
+    }
 }

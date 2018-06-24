@@ -6,12 +6,12 @@
 <ion-content>
     <form class="add-clientele-form full-form" #addClienteleForm="ngForm" novalidate>
         <set-state [(ngModel)]="formData.followStatus" name="followStatus"></set-state>
-        <phone-number-input [(ngModel)]="formData.phones" name="phones"></phone-number-input>
+        <phone-number-input [(ngModel)]="phones" name="phones" #phonePicker></phone-number-input>
         <ion-list>
             <ion-item-group>
                 <ion-item>
                     <ion-label>姓名</ion-label>
-                    <ion-input placeholder="请输入姓名" [(ngModel)]="formData.name " name="name"></ion-input>
+                    <ion-input placeholder="请输入姓名" required [(ngModel)]="formData.name" name="name"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label>职务</ion-label>
@@ -71,6 +71,6 @@
                 </ion-item>
             </ion-item-group>
         </ion-list>
-        <button (tap)="add()" class="large" ion-button block round>添加</button>
+        <button (tap)="add()" type="submit" class="large" ion-button block round>添加</button>
     </form>
 </ion-content>

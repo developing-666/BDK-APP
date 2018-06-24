@@ -9,7 +9,7 @@ import { CUSTOMTAGS } from '../../../providers/constants';
 })
 export class CustomTagPage {
     callback: any = this.navParams.get('callback');
-    tag: any = this.navParams.get('tag');
+    tag: any = this.navParams.get('tag') ? this.navParams.get('tag') : [];
     tags: Array<any> = CUSTOMTAGS;
     constructor(
         public navCtrl: NavController,
@@ -18,7 +18,7 @@ export class CustomTagPage {
     ) {}
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad ClienteleTagPage');
+        console.log(this.tag);
     }
     newTag() {
         let prompt = this.alertCtrl.create({
@@ -49,6 +49,11 @@ export class CustomTagPage {
         });
     }
     selectTag(tag) {
-        this.tag = tag;
+        let index = this.tag.indexOf(tag);
+        if (index>-1){
+            this.tag.splice(index,1);
+        }else{
+            this.tag.push(tag);
+        }
     }
 }
