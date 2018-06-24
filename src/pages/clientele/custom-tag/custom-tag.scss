@@ -3,16 +3,16 @@ page-custom-tag {
         background-color: #fff;
     }
 	.tag-wrapper{
-		padding: 0 rem(60);min-height: 100%;
+		min-height: 100%;padding:0 rem(30);
 		.hint{
 			line-height: rem(110);text-align: center;font-size: rem(30);color:color($colors,light);
 		}
 		.tag-container{
-			display: flex;flex-wrap: wrap;
+			display: flex;flex-wrap: wrap; justify-content: space-around;
 			.tag-item{
-				@include round-tag();margin-right: rem(40);margin-bottom: 1rem;background-color: #fff;position: relative;
+				@include round-tag();margin-bottom: 1rem;background-color: #fff;position: relative;
 				&.active{
-					@include round-tag('default',color($colors,primary));
+					@include round-tag('default',color($colors,primary),false);
 				}
 				&:nth-child(3n){
 					margin-right:0;

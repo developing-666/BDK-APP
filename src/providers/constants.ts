@@ -32,6 +32,8 @@ export const INDUSTRY:Array<any> = ['互联网','电信广播传输','金融','�
 //客户标签信息
 export const TAGS: Array<any> = ['重要客户', '老客户', '一般客户', '选号客户'];
 
+export const CUSTOMTAGS: Array<any> = ['大户', '拖机', '美女','吃货', '房产客户','大套客户'];
+
 //客户状态信息
 export const FOLLOWSTATUS: Array<any> = [
     { 
