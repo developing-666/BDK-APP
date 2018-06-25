@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -22,18 +22,30 @@ export class SignInPage {
     time: number = 60; //倒计时
     interval: any; //setInterval
     canRegister: boolean = false; //手机号可以注册
+    callback = this.navParams.get('callback');
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private appApi: AppApi,
         private fb: FormBuilder,
-        private globalData: GlobalData
+        private globalData: GlobalData,
+        public toastController: ToastController
     ) {
         this.createForm();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SignInPage');
+
+        let obj = {
+            a: 123,
+            b: 456
+        };
+        let obj1 = {
+            data: this.formData
+        };
+        let obj2 = Utils.extend(true, {}, obj, obj1);
+        console.log(obj2);
     }
 
     ionViewWillLeave() {
@@ -100,6 +112,7 @@ export class SignInPage {
         console.log(this.formData);
         this.appApi.signIn(this.formData).subscribe(d => {
             console.log('signIn', d);
+            this.registerSuccess();
         });
     }
     /**
@@ -118,6 +131,29 @@ export class SignInPage {
         }
     }
 
+    /** 
+     * 提示 
+     */    
+    async registerSuccess() {
+        const toast = await this.toastController.create({
+            message: '注册成功！',
+            showCloseButton: true,
+            position: 'top',
+            duration:1500,
+            cssClass:'success'
+        });
+        toast.present();
+        toast.onDidDismiss(()=>{
+            console.log('dissmiss后执行');
+            this.callback({
+                phone:this.formData.phone
+            }).then(()=>{
+                this.navCtrl.pop();
+            });
+            
+        });
+    }
+
     /**
      * 测试
      */
@@ -125,5 +161,6 @@ export class SignInPage {
     change() {
         console.log(this.ngForm);
         console.log('this.phone', this.phone);
+        this.registerSuccess();
     }
 }

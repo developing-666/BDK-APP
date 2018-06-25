@@ -31,18 +31,18 @@
             </ion-item-group>
     
 			<ion-item-group>
-				<ion-item [ngClass]="{'invalid':(ngForm.get('name').touched && ngForm.get('name').invalid)}">
+				<ion-item>
 					<ion-label [ngClass]="{'disabled':!canEdit}">昵称</ion-label>
 					<!-- <ion-label *ngIf="(ngForm.get('name').touched && ngForm.get('name').invalid)" class="tip">请输入昵称！</ion-label> -->
 					<ion-input type="text" placeholder="请输入昵称" formControlName="name" value="123"></ion-input>
                 </ion-item>
-				<ion-item [ngClass]="{'invalid':(ngForm.get('phone').touched && ngForm.get('phone').invalid)}">
+				<ion-item>
 					<ion-label [ngClass]="{'disabled':!canEdit}">手机</ion-label>
 					<ion-input type="tel" placeholder="请输入手机号" value="" formControlName="phone"></ion-input>
 				</ion-item>
 			</ion-item-group>
 			<ion-item-group>
-				<ion-item [ngClass]="{'invalid':(ngForm.get('work').touched && ngForm.get('work').invalid)}">
+				<ion-item [ngClass]="{'ng-invalid ng-touched':(ngForm.get('work').touched && ngForm.get('work').invalid)}">
 					<ion-label [ngClass]="{'disabled':!canEdit}">职务</ion-label>
 					<ion-input type="text" placeholder="请输入您的职务" formControlName="work"></ion-input>
 				</ion-item>

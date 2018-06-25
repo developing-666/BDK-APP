@@ -17,11 +17,6 @@ page-user-info {
                     color: color($colors,danger);
                 }
             }
-            .item {
-                &.invalid {
-                    border-bottom: 0.55px solid color($colors,danger);
-                }
-            }
             
         }
         .header {

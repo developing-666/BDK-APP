@@ -37,7 +37,8 @@ export class UserInfoPage {
         name:  ['', Validators.required], 
         phone: ['',[Validators.phone,Validators.required]],
         work: ['', Validators.required], 
-      });
+      },
+      { updateOn: 'blur' });
 
     }
 
