@@ -196,7 +196,8 @@ ion-buttons.buttons-group {
 
 .full-form{
     .list{
-        .item{border-bottom: $border;padding-left:1rem;background-color: #fff;
+        .item{
+            border-bottom: $border;padding-left:1rem;background-color: #fff;
             .item-inner{
                 border-bottom: none;
                 input{
@@ -216,7 +217,7 @@ ion-buttons.buttons-group {
 			&:last-child{
 				border-bottom: none;
 			}
-            &.invalid {
+            &.ng-invalid {
                 border-bottom: 0.55px solid color($colors,danger);
             }
         }
