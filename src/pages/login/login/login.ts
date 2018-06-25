@@ -10,8 +10,6 @@ import { Validators } from '../../../providers/validators';
 import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
 import { SignInPage } from '../sign-in/sign-in';
-import { PromiseObservable } from '_rxjs@5.5.10@rxjs/observable/PromiseObservable';
-import { isPromise } from '_@angular_core@5.2.10@@angular/core/src/util/lang';
 
 @Component({
     selector: 'page-login',

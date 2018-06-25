@@ -3,6 +3,9 @@ import { NgForm } from '@angular/forms';
 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+
+import { AppApi } from '../../providers/app-api';
+
 @Component({
     selector: 'phone-number-input',
     templateUrl: 'phone-number-input.html',
@@ -23,6 +26,7 @@ export class PhoneNumberInputComponent implements ControlValueAccessor {
     disabled: boolean = false;
     innerValue: Array<any> = [];
     phone: number = null;
+    valid:boolean = false;
     onChange = (_: any) => {};
     get value(): any {
         return this.innerValue;
@@ -33,9 +37,18 @@ export class PhoneNumberInputComponent implements ControlValueAccessor {
             this.changed.forEach(f => f(value));
         }
     }
-    constructor() {}
+    constructor(
+        private appApi: AppApi
+    ) {}
     change(val) {
         // this.onChange(val);
+    }
+    input(){
+        if (this.phoneForm.valid) {
+            this.appApi.customerValid(this.phone).subscribe(d => {
+                console.log(d);
+            });
+        }
     }
     add() {
         this.addEd = true;

@@ -17,6 +17,7 @@ import { Utils } from '../../../providers/utils';
 export class AddClientelePage implements OnInit {
     @ViewChild('addClienteleForm') addClienteleForm: NgForm;
     @ViewChild('phonePicker') phonePicker: PhoneNumberInputComponent;
+    callback: any = this.navParams.get('callback');
     provinces: Array<any> = this.globalData.provinces;
     city: Array<any> = [];
     industry: Array<any> = INDUSTRY;
@@ -24,6 +25,7 @@ export class AddClientelePage implements OnInit {
         gender: 'M'
     };
     phones: Array<any> = [];
+    valid:boolean = false;
     constructor(
         public toastCtrl: ToastController,
         public navCtrl: NavController,
@@ -37,16 +39,16 @@ export class AddClientelePage implements OnInit {
     ionViewDidLoad() {}
     add() {
         let phone = this.phonePicker.getPhone();
-        console.log(this.phones);
-        let valid = false;
+        console.log(this.addClienteleForm);
+        this.valid = false;
         if (this.phones.length == 0) {
             if (phone) {
                 this.formData.phone = phone;
-                valid = true;
+                this.valid = true;
             }
             this.formData.phones = null;
         } else {
-            valid = true;
+            this.valid = true;
             if (phone) {
                 this.formData.phone = phone;
                 this.formData.phones = this.phones.slice(0);
@@ -56,7 +58,7 @@ export class AddClientelePage implements OnInit {
             }
         }
         console.log(this.formData);
-        if (this.addClienteleForm.valid && valid) {
+        if (this.addClienteleForm.valid && this.valid) {
             this.customerCreate();
         }
     }
@@ -92,10 +94,12 @@ export class AddClientelePage implements OnInit {
         const toast = this.toastCtrl.create({
             message: '创建成功',
             position: 'middle',
-            duration: 2000
+            duration: 1500
         });
         toast.onDidDismiss(() => {
-            console.log(666);
+            this.callback(true).then(() => {
+                this.navCtrl.pop();
+            });
         });
         toast.present();
     }

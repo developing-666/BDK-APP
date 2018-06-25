@@ -3,7 +3,7 @@
         <div class="phone-input-wrapper">
             <div class="phone-input-container">
                 <span>电话</span>
-                <input class="phone-input" name="phone" type="tel" [(ngModel)]="phone" (input)="change(value)" required pattern="^1[3|4|5|7|8][0-9]{9}$"
+                <input class="phone-input" name="phone" type="tel" [(ngModel)]="phone" (input)="change(value)" required pattern="^1[3|4|5|7|8][0-9]{9}$" (input)="input()"
                     placeholder="请输入电话号码">
             </div>
             <button ion-button icon-only clear>

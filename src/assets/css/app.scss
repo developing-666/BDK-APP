@@ -217,7 +217,8 @@ ion-buttons.buttons-group {
 			&:last-child{
 				border-bottom: none;
 			}
-            &.ng-invalid.ng-touched {
+            &.ng-invalid.ng-touched,
+            &.invalid {
                 border-bottom: 0.55px solid color($colors,danger);
             }
         }

@@ -1,36 +1,33 @@
 <ion-header>
-	<ion-navbar>
-		<span class="nav-title">客户</span>
-		<ion-buttons end>
-			<button ion-button icon-only>
-				<i class="iconfont">
-					&#xe673;
-				</i>
-			</button>
-			<button ion-button icon-only>
-				<i class="iconfont">
-					&#xe66c;
-				</i>
-			</button>
-		</ion-buttons>
-	</ion-navbar>
+    <ion-navbar>
+        <span class="nav-title">客户</span>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <i class="iconfont">
+                    &#xe673;
+                </i>
+            </button>
+            <button ion-button icon-only (tap)="add()">
+                <i class="iconfont">
+                    &#xe66c;
+                </i>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-	<ion-filter (panelHidden)="filterHide($event)"></ion-filter>
-	<div class="no-result" hidden>
-		<div class="no-result-tag">
-			<img src="../../../assets/imgs/no-clientele.png"/>
-			<p>暂无重要客户</p>
-			<button class="add-cl˚ientele" ion-button block round>添加客户</button>
-		</div>
-	</div>
-	<ion-list class="clientele-list">
-		<clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)"></clientele-item>
-        <clientele-item></clientele-item>
-        <clientele-item></clientele-item>
-        <clientele-item></clientele-item>
-	</ion-list>
+    <ion-filter (panelHidden)="filterHide($event)"></ion-filter>
+    <div class="no-result" hidden>
+        <div class="no-result-tag">
+            <img src="../../../assets/imgs/no-clientele.png" />
+            <p>暂无重要客户</p>
+            <button class="add-cl˚ientele" ion-button block round>添加客户</button>
+        </div>
+    </div>
+    <ion-list class="clientele-list">
+        <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
+    </ion-list>
 </ion-content>
 
 <!--<ion-select interface="popover" [(ngModel)]="value" placeholder="标签筛选" [selectOptions]="selectOptions">

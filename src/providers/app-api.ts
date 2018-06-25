@@ -59,4 +59,14 @@ export class AppApi {
     customerQuery(opts){
         return this._http.post('/customer/queryCustomerByPage', opts);
     }
+    /**
+     * 验证新客户手机号
+     * @param phone 
+     */
+    customerValid(phone){
+        return this._http.post('/customer/valid', { phone });
+    }
+    customerDelete(id){
+        return this._http.delete('/customer/delete/' + id);
+    }
 }

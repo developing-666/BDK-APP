@@ -65,7 +65,10 @@ export class HttpService {
 
 	public delete(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
-			method: RequestMethod.Delete,
+            method: RequestMethod.Delete,
+            headers: new Headers({
+                'Content-Type': 'application/json; charset=UTF-8'
+            }),
 			search: HttpService.buildURLSearchParams(paramMap)
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);

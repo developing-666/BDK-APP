@@ -10,6 +10,8 @@ import { InfoInputComponent } from './info-input/info-input';
 import { IonAudioComponent } from './ion-audio/ion-audio';
 import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input';
 
+
+import { AppApi } from '../providers/app-api';
 @NgModule({
     declarations: [
         VoiceBarComponent,
@@ -34,7 +36,10 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
         IonAudioComponent,
         PhoneNumberInputComponent
     ],
-    entryComponents: []
+    entryComponents: [],
+    providers:[
+        AppApi
+    ]
 })
 export class ComponentsModule {
     public static forRoot(): ModuleWithProviders {

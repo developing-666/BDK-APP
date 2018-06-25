@@ -9,7 +9,7 @@
         <phone-number-input [(ngModel)]="phones" name="phones" #phonePicker></phone-number-input>
         <ion-list>
             <ion-item-group>
-                <ion-item>
+                <ion-item [ngClass]="{'invalid':(addClienteleForm.controls.name?.touched || addClienteleForm.submitted) && addClienteleForm.controls.name.invalid}">
                     <ion-label>姓名</ion-label>
                     <ion-input placeholder="请输入姓名" required [(ngModel)]="formData.name" name="name"></ion-input>
                 </ion-item>
@@ -71,6 +71,7 @@
                 </ion-item>
             </ion-item-group>
         </ion-list>
-        <button (tap)="add()" type="submit" class="large" ion-button block round>添加</button>
+        <button (tap)="add()" [disabled]="addClienteleForm.invalid" type="submit" class="large" ion-button block round>添加</button>
+        <!-- <button (tap)="add()" type="submit" class="large" ion-button block round>添加</button> -->
     </form>
 </ion-content>
