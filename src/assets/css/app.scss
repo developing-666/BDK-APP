@@ -216,6 +216,9 @@ ion-buttons.buttons-group {
 			&:last-child{
 				border-bottom: none;
 			}
+            &.invalid {
+                border-bottom: 0.55px solid color($colors,danger);
+            }
         }
         button.item:not([detail-none]) .item-inner{
             background-position: right 1rem center;padding-right:2.4rem;
