@@ -9,9 +9,11 @@ import { AppApi } from './../../../providers/app-api';
 })
 export class ClientelePage {
     queryParams: any = {
-        queryLabel: '',
+		params:{
+	        queryLabel: '',
+		},
         sort: '',
-        orderBy: '',
+        orderBy: 'DESC',
         currentPageIndex: 1
     };
     value: string = '';
@@ -38,4 +40,10 @@ export class ClientelePage {
             console.log(d);
         });
     }
+	itemDelete(i){
+		console.log(i)
+	}
+	itemRemind(i){
+		console.log(i)
+	}
 }

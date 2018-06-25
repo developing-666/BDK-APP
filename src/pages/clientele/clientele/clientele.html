@@ -17,16 +17,16 @@
 </ion-header>
 
 <ion-content>
-<ion-filter (panelHidden)="filterHide($event)"></ion-filter>
+	<ion-filter (panelHidden)="filterHide($event)"></ion-filter>
 	<div class="no-result" hidden>
 		<div class="no-result-tag">
 			<img src="../../../assets/imgs/no-clientele.png"/>
 			<p>暂无重要客户</p>
-			<button class="add-clientele" ion-button block round>添加客户</button>
+			<button class="add-cl˚ientele" ion-button block round>添加客户</button>
 		</div>
 	</div>
 	<ion-list class="clientele-list">
-		<clientele-item></clientele-item>
+		<clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)"></clientele-item>
         <clientele-item></clientele-item>
         <clientele-item></clientele-item>
         <clientele-item></clientele-item>
