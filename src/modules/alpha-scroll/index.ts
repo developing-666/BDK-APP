@@ -10,7 +10,7 @@ export * from '../../pipes/pipes.module';
 @NgModule({
 	imports: [
 		ScrollModule.forRoot(),
-		PipesModule.forRoot()
+		PipesModule
 	],
 	exports: [
     	ScrollModule,

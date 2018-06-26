@@ -8,7 +8,7 @@
                 <div class="line"></div>
             </div>
             <span class="state">
-                跟进
+                {{data.followStatus | followStatus}}
             </span>
         </div>
         <div class="clientele-detail">
@@ -21,7 +21,7 @@
                 <span>{{data.company}}</span>
             </p>
             <div class="tag-container">
-                <i class="tag-item">大户</i>
+                <i class="tag-item" *ngFor="let tag of labels">{{tag}}</i>
             </div>
         </div>
         <ion-buttons item-end>
@@ -38,11 +38,11 @@
         </ion-buttons>
     </ion-item>
     <ion-item-options side="right" class="item-options">
-<button class="remind" color="warning" ion-button (click)="itemRemind(data.id)">
+        <button class="remind" color="warning" ion-button (click)="itemRemind(data.id)">
             <span>设置</span>
             <span>提醒</span>
         </button>
-<button ion-button color="danger" (click)="itemDelete(data.id)">
+        <button ion-button color="danger" (click)="itemDelete(data.id)">
             删除
         </button>
     </ion-item-options>

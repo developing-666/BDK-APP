@@ -8,7 +8,10 @@ import { AlertController} from 'ionic-angular';
 export class ClienteleItemComponent {
     @Output() remind: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
-    @Input() data: any;
+    @Input() data: any = {};
+    get labels(){
+        return this.data.labels ? JSON.parse(this.data.labels) : [];
+    }
     constructor(private alertCtrl: AlertController) {}
     presentConfirm(i: any) {
         let alert = this.alertCtrl.create({

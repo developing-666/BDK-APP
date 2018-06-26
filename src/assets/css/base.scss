@@ -189,10 +189,10 @@ $designWidth : 750; //如设计图是750
 				font-size:1.2rem;
 			}
 			.tag-container{
-				min-height: rem(66);display: flex;align-items: center;flex-wrap: wrap;max-height: rem(132);
+				min-height: rem(66);display: flex;align-items: flex-start;flex-wrap: wrap;max-height: rem(140);padding-top:0.5rem;overflow: hidden;
 				.tag-item{
 					@include round-tag('small');
-					margin-right: 1rem;
+					margin-right: 1rem; margin-bottom: 0.5rem;
 				}
 			}
 		}

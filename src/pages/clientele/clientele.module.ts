@@ -12,31 +12,32 @@ import { OperatingRecordPage } from './clientele-detail/tabs/operating-record/op
 
 import { ComponentsModule } from '../../components/components.module';
 
+import { PipesModule} from '../../pipes/pipes.module';
 @NgModule({
-	declarations: [
-		ClientelePage,
-		SearchClientelePage,
-		AddClientelePage,
-		ClienteleTagPage,
-		CustomTagPage,
-		ClienteleDetailPage,
-		SettingRecordPage,
-		OperatingRecordPage
-	],
-	entryComponents: [
-		ClientelePage,
-		SearchClientelePage,
-		AddClientelePage,
-		ClienteleTagPage,
-		CustomTagPage,
-		ClienteleDetailPage,
-		SettingRecordPage,
-		OperatingRecordPage
-	],
-	imports: [
-		IonicModule,
-		ComponentsModule
-	]
+    declarations: [
+        ClientelePage,
+        SearchClientelePage,
+        AddClientelePage,
+        ClienteleTagPage,
+        CustomTagPage,
+        ClienteleDetailPage,
+        SettingRecordPage,
+        OperatingRecordPage
+    ],
+    entryComponents: [
+        ClientelePage,
+        SearchClientelePage,
+        AddClientelePage,
+        ClienteleTagPage,
+        CustomTagPage,
+        ClienteleDetailPage,
+        SettingRecordPage,
+        OperatingRecordPage
+    ],
+    imports: [
+        IonicModule,
+        ComponentsModule,
+        PipesModule
+    ]
 })
-export class ClienteleModule {
-}
+export class ClienteleModule {}

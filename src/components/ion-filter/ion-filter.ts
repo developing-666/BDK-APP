@@ -105,7 +105,6 @@ export class IonFilterComponent implements OnInit {
     }
     itemTap(item) {
         this.value[this.activeIndex].value = item.label;
-        console.log(this.value);
         this.itemClick.emit(this.value);
         this.close();
     }
@@ -118,7 +117,6 @@ export class IonFilterComponent implements OnInit {
             path.push(tag.label);
         }
         this.tapClick.emit(this.value);
-        console.log(this.value);
     }
     tagReset() {
         for (let item of this.value[this.activeIndex].value) {

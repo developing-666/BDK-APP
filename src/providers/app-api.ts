@@ -47,26 +47,33 @@ export class AppApi {
     }
     /**
      * 创建客户
-     * @param opts 
+     * @param opts
      */
     customerCreate(opts?: any): any {
         return this._http.post('/customer/create', opts);
     }
     /**
      * 查询客户列表
-     * @param opts 
+     * @param opts
      */
-    customerQuery(opts){
+    customerQuery(opts) {
         return this._http.post('/customer/queryCustomerByPage', opts);
     }
     /**
      * 验证新客户手机号
-     * @param phone 
+     * @param phone
      */
-    customerValid(phone){
+    customerValid(phone) {
         return this._http.post('/customer/valid', { phone });
     }
-    customerDelete(id){
+    /**
+     * 删除客户
+     * @param id
+     */
+    customerDelete(id) {
         return this._http.delete('/customer/delete/' + id);
+    }
+    customerSearch(opts) {
+        return this._http.delete('/customer/delete/', opts);
     }
 }

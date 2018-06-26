@@ -71,7 +71,7 @@
                 </ion-item>
             </ion-item-group>
         </ion-list>
-        <button (tap)="add()" [disabled]="addClienteleForm.invalid" type="submit" class="large" ion-button block round>添加</button>
+        <button (tap)="add()" [disabled]="addClienteleForm.invalid || submitIng" type="submit" class="large" ion-button block round>添加</button>
         <!-- <button (tap)="add()" type="submit" class="large" ion-button block round>添加</button> -->
     </form>
 </ion-content>

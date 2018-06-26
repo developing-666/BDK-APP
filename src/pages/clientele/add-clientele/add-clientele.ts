@@ -25,9 +25,10 @@ export class AddClientelePage implements OnInit {
         gender: 'M'
     };
     phones: Array<any> = [];
-    valid:boolean = false;
-	labels:Array<any> = [];
-	labelsString:string = '';
+    valid: boolean = false;
+    labels: Array<any> = [];
+    labelsString: string = '';
+    submitIng: boolean = false;
     constructor(
         public toastCtrl: ToastController,
         public navCtrl: NavController,
@@ -60,8 +61,8 @@ export class AddClientelePage implements OnInit {
             }
         }
         if (this.addClienteleForm.valid && this.valid) {
-			this.formData.labels = JSON.stringify(this.labels);
-	        console.log(this.formData);
+            this.formData.labels = JSON.stringify(this.labels);
+            console.log(this.formData);
             this.customerCreate();
         }
     }
@@ -80,7 +81,7 @@ export class AddClientelePage implements OnInit {
         let callback = (tags): any => {
             console.log(tags);
             this.labels = tags;
-			this.labelsString = tags.join(',');
+            this.labelsString = tags.join(',');
             return Promise.resolve();
         };
         this.navCtrl.push(CustomTagPage, {
@@ -89,10 +90,16 @@ export class AddClientelePage implements OnInit {
         });
     }
     customerCreate() {
-        this.appApi.customerCreate(this.formData).subscribe(d => {
-            console.log(d);
-            this.presentToast();
-        });
+        this.submitIng = true;
+        this.appApi.customerCreate(this.formData).subscribe(
+            d => {
+                console.log(d);
+                this.presentToast();
+            },
+            e => {
+                this.submitIng = false;
+            }
+        );
     }
     presentToast() {
         const toast = this.toastCtrl.create({

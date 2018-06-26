@@ -10,7 +10,7 @@ import { InfoInputComponent } from './info-input/info-input';
 import { IonAudioComponent } from './ion-audio/ion-audio';
 import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input';
 
-
+import { PipesModule } from '../pipes/pipes.module';
 import { AppApi } from '../providers/app-api';
 @NgModule({
     declarations: [
@@ -24,7 +24,10 @@ import { AppApi } from '../providers/app-api';
         IonAudioComponent,
         PhoneNumberInputComponent
     ],
-    imports: [IonicModule],
+    imports: [
+        IonicModule,
+        PipesModule
+    ],
     exports: [
         VoiceBarComponent,
         RemindItemComponent,
@@ -37,9 +40,7 @@ import { AppApi } from '../providers/app-api';
         PhoneNumberInputComponent
     ],
     entryComponents: [],
-    providers:[
-        AppApi
-    ]
+    providers: [AppApi]
 })
 export class ComponentsModule {
     public static forRoot(): ModuleWithProviders {

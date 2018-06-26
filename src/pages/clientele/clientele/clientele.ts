@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 
 import { AddClientelePage } from '../add-clientele/add-clientele';
+import { SearchClientelePage } from '../search-clientele/search-clientele';
 
 import { AppApi } from './../../../providers/app-api';
 
@@ -44,12 +45,15 @@ export class ClientelePage {
     add() {
         let callback = (refresh): any => {
             console.log(refresh);
-            if (refresh){
+            if (refresh) {
                 this.customerQuery(this.initQueryParams);
             }
             return Promise.resolve();
         };
         this.navCtrl.push(AddClientelePage, { callback });
+    }
+    search(){
+        this.navCtrl.push(SearchClientelePage);
     }
     open(): void {
         this.openSelect = !this.openSelect;
@@ -64,7 +68,7 @@ export class ClientelePage {
         });
     }
     itemDelete(i) {
-        this.appApi.customerDelete(i).subscribe((d)=>{
+        this.appApi.customerDelete(i).subscribe(d => {
             console.log(i);
             this.customerQuery(this.queryParams);
         });
