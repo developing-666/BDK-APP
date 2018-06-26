@@ -63,7 +63,7 @@
                 </button>
                 <button ion-item (tap)="addCustomTag()">
                     <ion-label>自定义标签</ion-label>
-                    <ion-input [readonly]="true" placeholder="请选择自定义标签" [(ngModel)]="formData.labels" name="labels"></ion-input>
+                    <ion-input [readonly]="true" placeholder="请选择自定义标签" [value]="labelsString" name="labels"></ion-input>
                 </button>
                 <ion-item>
                     <ion-label>备注</ion-label>

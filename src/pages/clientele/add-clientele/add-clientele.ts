@@ -26,6 +26,8 @@ export class AddClientelePage implements OnInit {
     };
     phones: Array<any> = [];
     valid:boolean = false;
+	labels:Array<any> = [];
+	labelsString:string = '';
     constructor(
         public toastCtrl: ToastController,
         public navCtrl: NavController,
@@ -57,8 +59,9 @@ export class AddClientelePage implements OnInit {
                 this.formData.phones = this.phones.slice(1);
             }
         }
-        console.log(this.formData);
         if (this.addClienteleForm.valid && this.valid) {
+			this.formData.labels = JSON.stringify(this.labels);
+	        console.log(this.formData);
             this.customerCreate();
         }
     }
@@ -76,11 +79,12 @@ export class AddClientelePage implements OnInit {
     addCustomTag() {
         let callback = (tags): any => {
             console.log(tags);
-            this.formData.labels = tags;
+            this.labels = tags;
+			this.labelsString = tags.join(',');
             return Promise.resolve();
         };
         this.navCtrl.push(CustomTagPage, {
-            tag: this.formData.labels,
+            tag: this.labels,
             callback
         });
     }
