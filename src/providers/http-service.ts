@@ -30,7 +30,7 @@ export class HttpService {
 		private httpHeader: HttpHeader
 	) { }
 
-	public get(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
+    public get(url: string, paramMap: any = null, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Get,
             headers: new Headers({
@@ -38,10 +38,10 @@ export class HttpService {
             }),
 			search: HttpService.buildURLSearchParams(paramMap)
 		});
-		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
+        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
 	}
 
-	public post(url: string, body: any = {}, useDefaultApi = true): Observable<any> {
+    public post(url: string, body: any = {}, noLoading: boolean = false,useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Post,
 			body,
@@ -49,7 +49,7 @@ export class HttpService {
 				'Content-Type': 'application/json; charset=UTF-8'
 			})
 		});
-		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
+        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
 	}
 
 	public postFormData(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
@@ -77,7 +77,7 @@ export class HttpService {
 	/**
 	 * 一个app可能有多个后台接口服务(api),针对主api添加业务处理,非主api请调用request方法
 	 */
-	public defaultRequest(url: string, options: RequestOptionsArgs): Observable<any> {
+	public defaultRequest(url: string, options: RequestOptionsArgs,noLoading:boolean = false): Observable<any> {
 		//  使用默认API:APP_SERVE_URL
 		url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url); // tslint:disable-line
 		//  添加请求头
@@ -89,7 +89,7 @@ export class HttpService {
         options.headers.append('DAFU-APP-SIGN', header.appSign);
         options.headers.append('DAFU-TOKEN', header.token);
 		return Observable.create(observer => {
-			this.request(url, options).subscribe(res => {
+            this.request(url, options, noLoading).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
 				if (res.status === 1) {
 					observer.next(res.data);
@@ -111,12 +111,12 @@ export class HttpService {
 		});
 	}
 
-	public request(url: string, options: RequestOptionsArgs): Observable<any> {
+    public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
 		IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
-		this.showLoading();
+        if (!noLoading) this.showLoading();
 		return Observable.create(observer => {
 			this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
-				this.hideLoading();
+                if (!noLoading) this.hideLoading();
 				try {
 					observer.next(res.json());
 				} catch (e) {
@@ -124,7 +124,7 @@ export class HttpService {
 				}
 				IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
-				this.hideLoading();
+                if (!noLoading) this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
 				IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
 			});

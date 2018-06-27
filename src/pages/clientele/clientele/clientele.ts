@@ -6,6 +6,8 @@ import { AddClientelePage } from '../add-clientele/add-clientele';
 import { SearchClientelePage } from '../search-clientele/search-clientele';
 
 import { AppApi } from './../../../providers/app-api';
+import { Utils } from '../../../providers/utils';
+
 
 @Component({
     selector: 'page-clientele',
@@ -14,7 +16,8 @@ import { AppApi } from './../../../providers/app-api';
 export class ClientelePage {
     initQueryParams: any = {
         params: {
-            queryLabel: ''
+            queryLabel: '',
+            queryKeyword: ''
         },
         sort: '',
         orderBy: 'DESC',
@@ -22,7 +25,8 @@ export class ClientelePage {
     };
     queryParams: any = {
         params: {
-            queryLabel: ''
+            queryLabel: '',
+            queryKeyword:''
         },
         sort: '',
         orderBy: 'DESC',
@@ -52,8 +56,17 @@ export class ClientelePage {
         };
         this.navCtrl.push(AddClientelePage, { callback });
     }
-    search(){
-        this.navCtrl.push(SearchClientelePage);
+    search() {
+        let callback = (keywords): any => {
+            console.log(keywords);
+            this.queryParams = Utils.extend(true, {}, this.initQueryParams);
+            this.queryParams.params.queryKeyword = keywords;
+            this.customerQuery(this.queryParams);
+            console.log(this.queryParams);
+            console.log(this.initQueryParams);
+            return Promise.resolve();
+        };
+        this.navCtrl.push(SearchClientelePage, { callback });
     }
     open(): void {
         this.openSelect = !this.openSelect;
@@ -70,6 +83,7 @@ export class ClientelePage {
     itemDelete(i) {
         this.appApi.customerDelete(i).subscribe(d => {
             console.log(i);
+            this.queryParams.params.queryKeyword = '';
             this.customerQuery(this.queryParams);
         });
     }

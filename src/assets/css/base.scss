@@ -179,6 +179,7 @@ $designWidth : 750; //如设计图是750
 		}
 		.label{
 			margin:0;display: flex;align-items: center;
+            .clientele-detail{width: 100%}
 			.name{
 				height:rem(66);display: flex;align-items: center;font-size:rem(30);margin-bottom: 0;
 				.main-tag{
@@ -187,6 +188,7 @@ $designWidth : 750; //如设计图是750
 			}
 			.company{height:rem(28);line-height: rem(28);color:color($colors,light);@extend .fn-text-overflow;margin-bottom: 0;
 				font-size:1.2rem;
+				width: 100%
 			}
 			.tag-container{
 				min-height: rem(66);display: flex;align-items: flex-start;flex-wrap: wrap;max-height: rem(140);padding-top:0.5rem;overflow: hidden;

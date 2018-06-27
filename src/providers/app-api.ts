@@ -73,7 +73,9 @@ export class AppApi {
     customerDelete(id) {
         return this._http.delete('/customer/delete/' + id);
     }
-    customerSearch(opts) {
-        return this._http.delete('/customer/delete/', opts);
+    customerSearch(keyword) {
+        return this._http.get('/customer/getCustomerKeyword/',{
+            keyword
+        },true);
     }
 }

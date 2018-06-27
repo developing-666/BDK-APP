@@ -7,6 +7,9 @@ page-clientele {
             }
         }
     }
+    .scroll-wrapper{
+        height:calc(100% - 4.2rem);
+    }
     .no-result{background-color: #fff;
         position: absolute;top:4.2rem;left:0;right: 0;bottom: 0;@include flex-center();
         flex-wrap: wrap;

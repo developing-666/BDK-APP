@@ -4,8 +4,9 @@ page-search-clientele {
     }
     .lately-words{background-color: #fff;
         min-height: calc(100vh - 44px);
-        .title{line-height:rem(80);display: flex;align-items: center;justify-content: space-between;color: color($colors,light);padding:0 rem(30);
-            
+        .title{
+            height:rem(80);
+            display: flex;align-items: center;justify-content: space-between;color: color($colors,light);padding:0 rem(30);
         }
         .words-container{padding-left:rem(30);
             .words-item{

@@ -25,9 +25,12 @@
             <button class="add-cl˚ientele" ion-button block round>添加客户</button>
         </div>
     </div>
-    <ion-list class="clientele-list">
-        <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
-    </ion-list>
+    <ion-scroll scrollY="true" class="scroll-wrapper">
+        <ion-list class="clientele-list">
+            <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
+        </ion-list>
+    </ion-scroll>
+
 </ion-content>
 
 <!--<ion-select interface="popover" [(ngModel)]="value" placeholder="标签筛选" [selectOptions]="selectOptions">
