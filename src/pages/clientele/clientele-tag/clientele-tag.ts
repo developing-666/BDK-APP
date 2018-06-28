@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, App } from 'ionic-angular';
 
 
 import { TAGS } from '../../../providers/constants';
+
+import { AppApi } from '../../../providers/app-api';
 @Component({
     selector: 'page-clientele-tag',
     templateUrl: 'clientele-tag.html'
@@ -10,15 +12,17 @@ import { TAGS } from '../../../providers/constants';
 export class ClienteleTagPage {
     callback: any = this.navParams.get('callback');
     tag: any = this.navParams.get('tag');
-    tags: Array<any> = TAGS;
+    tags: Array<any> = [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public appApi: AppApi
     ) {}
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ClienteleTagPage');
+        this.queryLabelByType();
     }
     newTag() {
         let prompt = this.alertCtrl.create({
@@ -36,7 +40,8 @@ export class ClienteleTagPage {
                 {
                     text: '确定',
                     handler: data => {
-                        console.log('Saved clicked');
+                        console.log(data);
+                        this.labelCreate(data.tag);
                     }
                 }
             ]
@@ -50,5 +55,24 @@ export class ClienteleTagPage {
     }
     selectTag(tag) {
         this.tag = tag;
+    }
+    queryLabelByType(){
+        this.appApi
+            .queryLabelByType('CUSTOMER_LABEL')
+            .subscribe(d => {
+                console.log(d);
+                this.tags = d;
+            });
+    }
+    labelCreate(t){
+        this.appApi.labelCreate({
+            label:t,
+            type: 'CUSTOMER_LABEL'
+        }).subscribe(d => {
+            console.log(d);
+        });
+    }
+    labelDelete(){
+
     }
 }

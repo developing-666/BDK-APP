@@ -19,6 +19,6 @@
                 <i class="iconfont">&#xe66d;</i>
             </span>
         </div>
-        <button class="submit" ion-button block round (tap)="done()">确定</button>
+        <button class="submit" ion-button block round (tap)="done()" [disabled]="!tag">确定</button>
     </div>
 </ion-content>

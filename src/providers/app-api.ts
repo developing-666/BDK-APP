@@ -73,9 +73,51 @@ export class AppApi {
     customerDelete(id) {
         return this._http.delete('/customer/delete/' + id);
     }
+    /**
+     * 搜索客户
+     * @param keyword
+     */
     customerSearch(keyword) {
-        return this._http.get('/customer/getCustomerKeyword/',{
-            keyword
-        },true);
+        return this._http.get(
+            '/customer/getCustomerKeyword/',
+            {
+                keyword
+            },
+            true
+        );
     }
+    /**
+     * 查询标签
+     * @param type
+     */
+    queryLabelByType(type) {
+        return this._http.post('/label/queryLabelByType', { type });
+    }
+    /**
+     * 新建标签
+     * @param opts
+     */
+    labelCreate(opts?: any) {
+        return this._http.post('/label/create', opts);
+    }
+    /**
+     * 删除标签
+     * @param id
+     */
+    labelDelete(id) {
+        return this._http.delete('/label/delete/' + id);
+    }
+    /**
+     * 查询搜索记录
+     */
+    searchhistory() {
+        return this._http.get('/searchhistory/queryHistory');
+    }
+    /**
+     * 删除所有搜索记录
+     */
+    searchHistoryDelete() {
+        return this._http.delete('/searchhistory/deleteAll');
+    }
+    
 }
