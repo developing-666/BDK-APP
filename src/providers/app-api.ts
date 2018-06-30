@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http-service';
 
-
 @Injectable()
 export class AppApi {
     constructor(private _http: HttpService) {}
@@ -91,7 +90,9 @@ export class AppApi {
      * @param type
      */
     queryLabelByType(type) {
-        return this._http.post('/label/queryLabelByType', { type });
+        return this._http.post('/label/queryLabelByType', {
+            type
+        });
     }
     /**
      * 新建标签
@@ -119,5 +120,4 @@ export class AppApi {
     searchHistoryDelete() {
         return this._http.delete('/searchhistory/deleteAll');
     }
-    
 }

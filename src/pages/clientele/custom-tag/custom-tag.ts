@@ -2,27 +2,37 @@ import { Component } from '@angular/core';
 import { NavController, NavParams,AlertController } from 'ionic-angular';
 
 
-import { CUSTOMTAGS } from '../../../providers/constants';
+import { GlobalData } from '../../../providers/global-data';
+import { AppApi } from '../../../providers/app-api';
 @Component({
     selector: 'page-custom-tag',
     templateUrl: 'custom-tag.html'
 })
 export class CustomTagPage {
     callback: any = this.navParams.get('callback');
-    tag: any = this.navParams.get('tag') ? this.navParams.get('tag') : [];
-    tags: Array<any> = CUSTOMTAGS;
+    tag: Array<any> = this.navParams.get('tag');
+    tags: Array<any> = [];
+    deleteIng: boolean = false;
+    deleteId: string = '';
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public appApi: AppApi,
+        public globalData: GlobalData
     ) {}
 
     ionViewDidLoad() {
-        console.log(this.tag);
+        console.log('ionViewDidLoad ClienteleTagPage');
+        if (this.globalData.CUSTOMER_LABELS.length > 0) {
+            this.tags = this.globalData.CUSTOMER_LABELS;
+        } else {
+            this.queryLabelByType();
+        }
     }
     newTag() {
         let prompt = this.alertCtrl.create({
-            title: '输入客户标签',
+            title: '输入自定义标签',
             inputs: [
                 {
                     name: 'tag',
@@ -36,7 +46,8 @@ export class CustomTagPage {
                 {
                     text: '确定',
                     handler: data => {
-                        console.log('Saved clicked');
+                        console.log(data);
+                        this.labelCreate(data.tag);
                     }
                 }
             ]
@@ -49,11 +60,60 @@ export class CustomTagPage {
         });
     }
     selectTag(tag) {
-        let index = this.tag.indexOf(tag);
-        if (index>-1){
-            this.tag.splice(index,1);
-        }else{
-            this.tag.push(tag);
+        if (this.deleteIng) {
+            this.deleteId = tag.id;
+        } else {
+            let index = this.tag.indexOf(tag.label);
+            if (index > -1) {
+                this.tag.splice(index, 1);
+            } else {
+                this.tag.push(tag.label);
+            }
         }
+    }
+    queryLabelByType() {
+        this.appApi.queryLabelByType('CUSTOMER_LABELS').subscribe(d => {
+            console.log(d);
+            this.tags = d;
+            this.globalData.CUSTOMER_LABELS = d;
+        });
+    }
+    labelCreate(t) {
+        this.appApi
+            .labelCreate({ label: t, type: 'CUSTOMER_LABELS' })
+            .subscribe(d => {
+                console.log(d);
+                this.queryLabelByType();
+            });
+    }
+    wantDelete() {
+        this.tag = [];
+        this.deleteId = '';
+        this.deleteIng = !this.deleteIng;
+        console.log(this.deleteIng);
+    }
+    confirm() {
+        let alert = this.alertCtrl.create({
+            title: '确认删除?',
+            buttons: [
+                {
+                    text: '取消',
+                    role: 'cancel'
+                },
+                {
+                    text: '确认',
+                    handler: () => {
+                        this.labelDelete();
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+    labelDelete() {
+        this.appApi.labelDelete(this.deleteId).subscribe(d => {
+            console.log(d);
+            this.queryLabelByType();
+        });
     }
 }

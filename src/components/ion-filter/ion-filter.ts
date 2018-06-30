@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 
-import FilterData from '../../providers/filter-bar-data';
+import { FILTERDATA } from '../../providers/constants';
 
 import { Utils } from '../../providers/utils';
+import { GlobalData } from '../../providers/global-data';
+import { AppApi } from '../../providers/app-api';
+import { Observable} from 'rxjs/Rx';
 @Component({
     selector: 'ion-filter',
     templateUrl: 'ion-filter.html'
@@ -14,7 +17,7 @@ export class IonFilterComponent implements OnInit {
     @Output() itemClick: EventEmitter<any> = new EventEmitter();
     @Output() tapClick: EventEmitter<any> = new EventEmitter();
     @Output() panelHidden: EventEmitter<any> = new EventEmitter();
-    filterData: any = FilterData;
+    filterData: any = FILTERDATA;
     filterOpts: any;
     layout: number = 1;
     openPanel: boolean = false;
@@ -22,33 +25,50 @@ export class IonFilterComponent implements OnInit {
     backIn: boolean = false;
     activeIndex: number = 0;
     value: any = [];
-    constructor() {}
+    constructor(public globalData: GlobalData, public appApi: AppApi) {}
     ngOnInit() {
-        this.getOpts();
-        this.initValue();
         this.panelHide();
+        this.queryLabelByType();
+        
+    }
+    queryLabelByType() {
+        const post1 = this.appApi.queryLabelByType('CUSTOMER_LABEL');
+        const post2 = this.appApi.queryLabelByType('CUSTOMER_LABELS');
+        const result = Observable.combineLatest(post1, post2);
+       
+        result.subscribe(d => {
+            this.globalData.CUSTOMER_LABEL = d[0];
+            this.globalData.CUSTOMER_LABELS = d[1];
+            this.filterData[0].options[0].options = d[0];
+            this.filterData[0].options[1].options = d[1];
+            this.getOpts();
+            this.initValue();
+            console.log(this.globalData);
+            }, e => {
+                console.log(e);
+            });
+        
     }
     initValue() {
         for (let item of this.filterData) {
             let obj = { name: item.name, key: item.key, value: [] };
-            for (let tag of item.options) {
+            item.options.forEach((tag, index) => {
                 if (tag.options && tag.options.length > 0) {
                     obj.value.push({
                         tag: tag.tag,
                         key: tag.key,
-                        value: []
+                        value: index == 0 ? '' : []
                     });
                 } else {
                     obj.value = undefined;
                 }
-            }
+            });
             this.value.push(obj);
         }
         console.log(this.value);
     }
     getOpts() {
         this.filterOpts = this.filterData[this.activeIndex];
-        console.log(this.filterOpts.options);
         this.getLayout();
     }
     getLayout() {
@@ -59,7 +79,6 @@ export class IonFilterComponent implements OnInit {
             }
         }
         this.layout = layout;
-        console.log(this.layout);
     }
     open(i) {
         if (this.activeIndex != i) {
@@ -104,24 +123,32 @@ export class IonFilterComponent implements OnInit {
         this.getOpts();
     }
     itemTap(item) {
-        this.value[this.activeIndex].value = item.label;
+        this.value[this.activeIndex].value = item.value;
         this.itemClick.emit(this.value);
         this.close();
     }
     tagTap(itemIndex, tag) {
         let path = this.value[this.activeIndex].value[itemIndex].value;
-        let index = path.indexOf(tag.label);
-        if (index > -1) {
-            path.splice(index, 1);
-        } else {
-            path.push(tag.label);
+        if (itemIndex==0){
+            if (path == tag.label) {
+            this.value[this.activeIndex].value[itemIndex].value = '';
+            } else {
+                this.value[this.activeIndex].value[itemIndex].value = tag.label;
+            }
+        }else{
+            let index = path.indexOf(tag.label);
+            if (index > -1) {
+                path.splice(index, 1);
+            } else {
+                path.push(tag.label);
+            }
         }
         this.tapClick.emit(this.value);
     }
     tagReset() {
-        for (let item of this.value[this.activeIndex].value) {
-            item.value = [];
-        }
+        this.value[this.activeIndex].value.forEach((item,index) => {
+            item.value = index==0?'':[];
+        });
         this.reset.emit(this.value);
     }
     tagFilter() {

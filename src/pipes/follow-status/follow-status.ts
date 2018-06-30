@@ -10,7 +10,7 @@ export class FollowStatusPipe implements PipeTransform {
     transform(value: string) {
         let result: string = '';
         for (let item of FOLLOWSTATUS){
-            if (value == item.code){
+            if (value == item.value){
                 result = item.label;
             }
         };

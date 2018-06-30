@@ -52,7 +52,7 @@ export class SetStateComponent implements ControlValueAccessor {
         if (val) {
             this.value = val;
         } else {
-            this.value = this.followStatus[0].code;
+            this.value = this.followStatus[0].value;
             this.change(this.value);
         }
     }

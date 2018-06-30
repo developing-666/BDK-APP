@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-searchbar debounce="500" placeholder="请输入需要搜索的客户姓名" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消" [showCancelButton]="true"
+    <ion-searchbar debounce="500" placeholder="请输入需要搜索的客户姓名" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消" [showCancelButton]="true" #searchbar
         (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
     </ion-searchbar>
 </ion-header>
@@ -7,15 +7,11 @@
     <div class="lately-words" *ngIf="results.length==0&&!loaded">
         <p class="title">
             <span>最近搜索</span>
-            <i class="iconfont">&#xe66e;</i>
+            <i class="iconfont" (tap)="confirm()">&#xe66e;</i>
         </p>
         <div class="words-container">
-            <span class="words-item">某某</span>
-            <span class="words-item">某某</span>
-            <span class="words-item">某某</span>
-            <span class="words-item">某某</span>
-            <span class="words-item">某某</span>
-            <span class="words-item">某某</span>
+            <span *ngIf="history.length==0">无</span>
+            <span class="words-item" *ngFor="let item of history" (tap)="itemTap(item)">{{item}}</span>
         </div>
     </div>
     <div class="result-container" *ngIf="results.length>0">

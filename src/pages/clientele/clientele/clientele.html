@@ -18,14 +18,14 @@
 
 <ion-content>
     <ion-filter (panelHidden)="filterHide($event)"></ion-filter>
-    <div class="no-result" hidden>
+    <div class="no-result" *ngIf="clienteles.length==0">
         <div class="no-result-tag">
             <img src="../../../assets/imgs/no-clientele.png" />
             <p>暂无重要客户</p>
             <button class="add-cl˚ientele" ion-button block round>添加客户</button>
         </div>
     </div>
-    <ion-scroll scrollY="true" class="scroll-wrapper">
+    <ion-scroll scrollY="true" class="scroll-wrapper" *ngIf="clienteles.length!=0">
         <ion-list class="clientele-list">
             <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
         </ion-list>

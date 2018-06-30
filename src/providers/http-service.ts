@@ -94,7 +94,7 @@ export class HttpService {
 				if (res.status === 1) {
 					observer.next(res.data);
 				} else {
-					IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
+					// IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
 					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
 					observer.error(res.data);
 				}
@@ -112,7 +112,7 @@ export class HttpService {
 	}
 
     public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
-		IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
+		// IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
         if (!noLoading) this.showLoading();
 		return Observable.create(observer => {
 			this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
@@ -122,11 +122,11 @@ export class HttpService {
 				} catch (e) {
 					observer.next(res);
 				}
-				IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+				// IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
                 if (!noLoading) this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
-				IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
+				// IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
 			});
 		});
 	}

@@ -37,21 +37,70 @@ export const CUSTOMTAGS: Array<any> = ['大户', '拖机', '美女','吃货', '�
 //客户状态信息
 export const FOLLOWSTATUS: Array<any> = [
     { 
-        code: 'WAIT',
+        value: 'WAIT',
         label: '待跟'
     },
     { 
-        code: 'ALREADY',
+        value: 'ALREADY',
         label: '跟进'
     },
     { 
-        code: 'OVER',
+        value: 'OVER',
         label: '成交'
     },
     { 
-        code: 'INVALID',
+        value: 'INVALID',
         label: '无效'
     },
+];
+
+
+export const FILTERDATA: any[] = [
+    {
+        name: '标签筛选',
+        key: 'tagFiltrate',
+        options: [
+            {
+                tag: '客户标签',
+                key: 'clienteleTag',
+                options: []
+            },
+            {
+                tag: '自定义标签',
+                key: 'customTag',
+                options: []
+            }
+        ]
+    },
+    {
+        name: '全部客户',
+        key: 'stateFiltrate',
+        options: [
+            {
+                value: undefined,
+                label: '全部'
+            },
+            ...FOLLOWSTATUS
+        ]
+    },
+    {
+        name: '排序',
+        key: 'sort',
+        options: [
+            {
+                label: '默认排序',
+                value: undefined
+            },
+            {
+                label: '创建时间',
+                value: 'CREATE_TIME'
+            },
+            {
+                label: '跟进时间顺序',
+                value: 'FOLLOW_TIME'
+            }
+        ]
+    }
 ];
 // code push 部署key
 export const CODE_PUSH_DEPLOYMENT_KEY = {
