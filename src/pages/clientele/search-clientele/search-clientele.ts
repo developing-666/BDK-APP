@@ -57,7 +57,7 @@ export class SearchClientelePage {
             this.history = d;
             setTimeout(() => {
                 this.searchbar.setFocus();
-            }, 300);
+            }, 500);
         });
     }
     clearHistory() {
