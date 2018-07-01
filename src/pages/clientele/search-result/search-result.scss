@@ -1,23 +1,8 @@
-page-clientele {
-    .header {
-        .btns {
-            @include flex-center();
-            .iconfont {
-                @include flex-center();
-            }
-        }
-        .toolbar {
-            position: relative;
-            z-index: 99;
-        }
+page-search-result {
+    .scroll-wrapper {
+        height: calc(100% - 4.2rem);
     }
-    .ion-filter {
-        position: relative;
-        width: 100%;
-    }
-    .has-refresher>.scroll-content {
-        border: none;
-    }
+
     .no-result {
         background-color: #fff;
         position: absolute;
@@ -46,9 +31,9 @@ page-clientele {
             margin-top: rem(82);
         }
     }
+
     .clientele-list {
         background-color: #fff;
-        border-top: $border;
         .item-options {
             .button {
                 .button-inner {

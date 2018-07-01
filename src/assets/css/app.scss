@@ -58,6 +58,8 @@ ion-buttons.buttons-group {
     }
 }
 
+
+.no-more{height: 4rem;display: flex;align-items: center;justify-content: center;width: 100%;}
 .button-clear[icon-only]{
 	.iconfont{color: color($colors, primary);}
 }

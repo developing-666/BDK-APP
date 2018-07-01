@@ -112,7 +112,7 @@ export class AppApi {
      * 查询搜索记录
      */
     searchhistory() {
-        return this._http.get('/searchhistory/queryHistory');
+        return this._http.get('/searchhistory/queryHistory',{},true);
     }
     /**
      * 删除所有搜索记录

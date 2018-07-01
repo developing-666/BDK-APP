@@ -1,6 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController,Searchbar } from 'ionic-angular';
 
+import { SearchResultPage}from '../search-result/search-result';
 
 import { AppApi } from './../../../providers/app-api';
 @Component({
@@ -9,7 +10,6 @@ import { AppApi } from './../../../providers/app-api';
 })
 export class SearchClientelePage {
     @ViewChild('searchbar') searchbar: Searchbar;
-    callback: any = this.navParams.get('callback');
     keywords: string = '';
     results: Array<any> = [];
     loaded: boolean = false;
@@ -21,13 +21,10 @@ export class SearchClientelePage {
         private alertCtrl: AlertController
     ) {}
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SearchClientelePage');
-        console.log(this.searchbar);
+        this.searchhistory();
     }
     ionViewDidEnter() {
-        this.searchhistory();
-        console.log(123123123);
-        
+        this.searchbar.setFocus();
     }
     onInput(e) {
         console.log(e);
@@ -47,17 +44,12 @@ export class SearchClientelePage {
             this.results = d;
         });
     }
-    itemTap(i) {
-        this.callback(i).then(() => {
-            this.navCtrl.pop();
-        });
+    itemTap(name) {
+        this.navCtrl.push(SearchResultPage, { name });
     }
     searchhistory() {
         this.appApi.searchhistory().subscribe(d => {
             this.history = d;
-            setTimeout(() => {
-                this.searchbar.setFocus();
-            }, 500);
         });
     }
     clearHistory() {

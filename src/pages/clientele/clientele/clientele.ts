@@ -34,7 +34,8 @@ export class ClientelePage {
         sort: '',
         orderBy: 'DESC'
     };
-    currentPage:number = 1;
+    currentPage: number = 1;
+    totalPages: number = 0;
     clienteles: Array<any> = [];
     value: string = '';
     openSelect: Boolean = false;
@@ -60,13 +61,7 @@ export class ClientelePage {
         this.navCtrl.push(AddClientelePage, { callback });
     }
     search() {
-        let callback = (keywords): any => {
-            this.queryParams = Utils.extend(true, {}, this.initQueryParams);
-            this.queryParams.params.queryKeyword = keywords;
-            this.customerQuery(this.queryParams);
-            return Promise.resolve();
-        };
-        this.navCtrl.push(SearchClientelePage, { callback });
+        this.navCtrl.push(SearchClientelePage);
     }
     open(): void {
         this.openSelect = !this.openSelect;
@@ -77,12 +72,14 @@ export class ClientelePage {
         tmpQueryParams.params.queryCustomLabel = v[0].value[1].value.join(',');
         tmpQueryParams.params.queryFollowStatus = v[1].value ? v[1].value : '';
         tmpQueryParams.sort = v[2].value ? v[2].value : '';
-        if (JSON.stringify(tmpQueryParams) != JSON.stringify(this.queryParams)){
+        if (
+            JSON.stringify(tmpQueryParams) != JSON.stringify(this.queryParams)
+        ) {
             this.queryParams = tmpQueryParams;
             this.customerQuery(this.queryParams);
         }
     }
-    customerQuery(queryParams) {
+    customerQuery(queryParams, e?: any) {
         this.appApi
             .customerQuery({
                 currentPageIndex: this.currentPage,
@@ -90,17 +87,28 @@ export class ClientelePage {
             })
             .subscribe(d => {
                 this.clienteles = d.items;
-                console.log(this.clienteles);
+                this.totalPages = d.totalPages;
+                this.currentPage++;
+                console.log(e);
+                e || e.complete();
             });
     }
     itemDelete(i) {
         this.appApi.customerDelete(i).subscribe(d => {
             console.log(i);
-            this.queryParams.params.queryKeyword = '';
-            this.customerQuery(this.queryParams);
+            this.currentPage = 1;
+            this.customerQuery(this.initQueryParams);
         });
     }
     itemRemind(i) {
         console.log(i);
+    }
+    loadMore(e) {
+        console.log(e);
+        this.customerQuery(this.queryParams, e);
+    }
+    doRefresh(e){
+        this.currentPage = 1;
+        this.customerQuery(this.initQueryParams, e);
     }
 }
