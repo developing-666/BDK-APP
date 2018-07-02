@@ -1,6 +1,6 @@
 <ion-item-sliding>
-    <ion-item class="clientele-item" detail-push>
-        <div class="progress">
+    <ion-item class="clientele-item" detail-push (tap)="itemClick(data.id)">
+        <div class="progress" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
             </div>
@@ -8,7 +8,7 @@
                 <div class="line"></div>
             </div>
             <span class="state">
-                {{data.followStatus | followStatus}}
+                {{data.followStatus | followStatus:'state'}}
             </span>
         </div>
         <div class="clientele-detail">
@@ -38,7 +38,7 @@
         </ion-buttons>
     </ion-item>
     <ion-item-options side="right" class="item-options">
-        <button class="remind" color="warning" ion-button (click)="itemRemind(data.id)">
+        <button class="remind" color="warning" ion-button (click)="itemRemind(data)">
             <span>设置</span>
             <span>提醒</span>
         </button>

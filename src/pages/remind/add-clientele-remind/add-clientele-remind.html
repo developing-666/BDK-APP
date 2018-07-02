@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
     <div class="main-container gray">
-        <clientele-item></clientele-item>
+        <clientele-item [data]="item"></clientele-item>
         <form class="add-clientele-remind full-form" novalidate (ngSubmit)="setting()">
             <ion-list>
                 <ion-item>
@@ -14,14 +14,11 @@
                 </ion-item>
                 <button ion-item>
                     <ion-label>提醒时间</ion-label>
-                    <ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
+                    <ion-datetime placeholder="请选择提醒时间" displayFormat="YYYY-MM-DD HH:mm"></ion-datetime>
                 </button>
-                <button ion-item>
-                    <ion-label>跟进时间</ion-label>
-                    <ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
-                </button>
+
             </ion-list>
-        </form >
+        </form>
     </div>
     <button class="large" ion-button block round>创建</button>
 </ion-content>

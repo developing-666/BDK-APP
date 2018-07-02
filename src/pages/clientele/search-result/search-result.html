@@ -8,16 +8,18 @@
 
 
 <ion-content>
-    <div class="no-result" *ngIf="clienteles.length==0">
+    <div class="no-result" *ngIf="clienteles.length==0&&currentPage!=1">
         <div class="no-result-tag">
             <img src="../../../assets/imgs/no-clientele.png" />
-            <p>暂无重要客户</p>
-            <button class="add-cl˚ientele" ion-button block round>添加客户</button>
+            <p>为找到相关客户</p>
         </div>
     </div>
-    <ion-scroll scrollY="true" class="scroll-wrapper" *ngIf="clienteles.length!=0">
-        <ion-list class="clientele-list">
-            <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
-        </ion-list>
-    </ion-scroll>
+    <ion-list class="clientele-list" *ngIf="clienteles.length!=0&&currentPage!=1">
+        <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
+            [data]="item" [index]="i"></clientele-item>
+    </ion-list>
+    <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

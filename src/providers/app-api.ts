@@ -59,6 +59,13 @@ export class AppApi {
         return this._http.post('/customer/queryCustomerByPage', opts);
     }
     /**
+     * 查询客户详情
+     * @param opts
+     */
+    customerDetails(id) {
+        return this._http.get('/customer/queryCustomerById/' + id);
+    }
+    /**
      * 验证新客户手机号
      * @param phone
      */
@@ -112,7 +119,7 @@ export class AppApi {
      * 查询搜索记录
      */
     searchhistory() {
-        return this._http.get('/searchhistory/queryHistory',{},true);
+        return this._http.get('/searchhistory/queryHistory', {}, true);
     }
     /**
      * 删除所有搜索记录

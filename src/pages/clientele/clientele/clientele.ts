@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, App, ViewController, List   } from 'ionic-angular';
 
 import { AddClientelePage } from '../add-clientele/add-clientele';
 import { SearchClientelePage } from '../search-clientele/search-clientele';
+import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
+import { AddClienteleRemindPage } from '../../remind/add-clientele-remind/add-clientele-remind';
 
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
-
 
 @Component({
     selector: 'page-clientele',
     templateUrl: 'clientele.html'
 })
 export class ClientelePage {
+    @ViewChild(List) list: List;
     initQueryParams: any = {
         params: {
             queryLabel: '',
@@ -45,16 +46,24 @@ export class ClientelePage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private appApi: AppApi
+        private appApi: AppApi,
+        public app: App,
+        public viewCtrl: ViewController
     ) {}
     ionViewDidLoad() {
         this.customerQuery(this.initQueryParams);
+    }
+    ionViewWillEnter() {
+        console.log(this.list);
+        if (this.list) {
+            this.list.closeSlidingItems();
+        }
     }
     add() {
         let callback = (refresh): any => {
             console.log(refresh);
             if (refresh) {
-				this.currentPage = 1;
+                this.currentPage = 1;
                 this.customerQuery(this.initQueryParams);
             }
             return Promise.resolve();
@@ -77,7 +86,7 @@ export class ClientelePage {
             JSON.stringify(tmpQueryParams) != JSON.stringify(this.queryParams)
         ) {
             this.queryParams = tmpQueryParams;
-			this.currentPage = 1;
+            this.currentPage = 1;
             this.customerQuery(this.queryParams);
         }
     }
@@ -88,34 +97,42 @@ export class ClientelePage {
                 ...queryParams
             })
             .subscribe(d => {
-				if(this.currentPage==1){
-	                this.clienteles = d.items;
-				}else{
-					this.clienteles = this.clienteles.concat(d.items);
-				}
+                if (this.currentPage == 1) {
+                    this.clienteles = d.items;
+                } else {
+                    this.clienteles = this.clienteles.concat(d.items);
+                }
                 this.totalPages = d.totalPages;
                 this.currentPage++;
-				if(e){
-					setTimeout(()=>{
-						e.complete();
-					},200);
-				}
+                if (e) {
+                    setTimeout(() => {
+                        e.complete();
+                    }, 200);
+                }
             });
     }
     itemDelete(item) {
         this.appApi.customerDelete(item.id).subscribe(d => {
             // this.currentPage = 1;
-			this.clienteles.splice(item.index,1);
+            this.clienteles.splice(item.index, 1);
         });
     }
-    itemRemind(i) {
-        console.log(i);
+    itemRemind(item) {
+        this.app.getRootNav().push(AddClienteleRemindPage, { item });
+    }
+    itemDetails(id) {
+        // this.app.getRootNav().push(ClienteleDetailPage,{
+        //     id
+        // });
+        this.navCtrl.push(ClienteleDetailPage, {
+            id
+        });
     }
     loadMore(e) {
         console.log(e);
         this.customerQuery(this.queryParams, e);
     }
-    doRefresh(e){
+    doRefresh(e) {
         this.currentPage = 1;
         this.customerQuery(this.initQueryParams, e);
     }

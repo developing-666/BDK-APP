@@ -7,13 +7,15 @@ import { FOLLOWSTATUS } from '../../providers/constants';
     name: 'followStatus'
 })
 export class FollowStatusPipe implements PipeTransform {
-    transform(value: string) {
-        let result: string = '';
+    transform(value: string,need:string) {
+        let result: any = {
+            class: value?value.toLowerCase():''
+        };
         for (let item of FOLLOWSTATUS){
             if (value == item.value){
-                result = item.label;
+                result.state = item.label;
             }
         };
-        return result;
+        return result[need];
     }
 }
