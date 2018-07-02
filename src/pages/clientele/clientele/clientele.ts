@@ -54,6 +54,7 @@ export class ClientelePage {
         let callback = (refresh): any => {
             console.log(refresh);
             if (refresh) {
+				this.currentPage = 1;
                 this.customerQuery(this.initQueryParams);
             }
             return Promise.resolve();
@@ -76,6 +77,7 @@ export class ClientelePage {
             JSON.stringify(tmpQueryParams) != JSON.stringify(this.queryParams)
         ) {
             this.queryParams = tmpQueryParams;
+			this.currentPage = 1;
             this.customerQuery(this.queryParams);
         }
     }
@@ -86,18 +88,24 @@ export class ClientelePage {
                 ...queryParams
             })
             .subscribe(d => {
-                this.clienteles = d.items;
+				if(this.currentPage==1){
+	                this.clienteles = d.items;
+				}else{
+					this.clienteles = this.clienteles.concat(d.items);
+				}
                 this.totalPages = d.totalPages;
                 this.currentPage++;
-                console.log(e);
-                e || e.complete();
+				if(e){
+					setTimeout(()=>{
+						e.complete();
+					},200);
+				}
             });
     }
-    itemDelete(i) {
-        this.appApi.customerDelete(i).subscribe(d => {
-            console.log(i);
-            this.currentPage = 1;
-            this.customerQuery(this.initQueryParams);
+    itemDelete(item) {
+        this.appApi.customerDelete(item.id).subscribe(d => {
+            // this.currentPage = 1;
+			this.clienteles.splice(item.index,1);
         });
     }
     itemRemind(i) {

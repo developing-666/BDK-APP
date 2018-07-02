@@ -9,6 +9,7 @@ export class ClienteleItemComponent {
     @Output() remind: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Input() data: any = {};
+    @Input() index: number = undefined;
     get labels(){
         return this.data.labels ? JSON.parse(this.data.labels) : [];
     }
@@ -28,7 +29,10 @@ export class ClienteleItemComponent {
                     text: '确认',
                     handler: () => {
                         console.log('Buy clicked');
-                        this.delete.emit(i);
+                        this.delete.emit({
+							id:i,
+							index:this.index
+						});
                     }
                 }
             ]
