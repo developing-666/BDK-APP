@@ -1,48 +1,55 @@
 <ion-header>
-	<ion-navbar>
-		<div class="date-now">
-			<span>2018年5月</span>
-			<i class="iconfont">&#xe675;</i>
-		</div>
-		<!-- <div class="hint"> 点击返回今天 </div> -->
-		<ion-buttons end>
-			<button ion-button="ion-button" icon-only="icon-only">
-				<i class="iconfont">&#xe66e;</i>
-			</button>
-			<!-- <i class="iconfont">&#xe66e;</i> -->
-		</ion-buttons>
-	</ion-navbar>
+    <ion-navbar>
+        <div class="date-now">
+            <span>2018年5月</span>
+            <i class="iconfont">&#xe675;</i>
+        </div>
+        <!-- <div class="hint"> 点击返回今天 </div> -->
+        <ion-buttons end>
+            <button ion-button="ion-button" icon-only="icon-only" (tap)="delete()">
+                <span *ngIf="hideTabs">完成</span>
+                <i *ngIf="!hideTabs" class="iconfont">&#xe66e;</i>
+            </button>
+            <!-- <i class="iconfont">&#xe66e;</i> -->
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
-<ion-content>
-	<div class="remind-list-container">
-		<div class="avtive-day-bar">
-			<div class="control">
-				<i class="iconfont">&#xe661;</i>
-				<span>上一天</span>
-			</div>
-			<span class="avtive-day">5月8日</span>
-			<div class="control">
-				<span>下一天</span>
-				<i class="iconfont">&#xe613;</i>
-			</div>
-		</div>
-		<ion-list>
-			<remind-item class="has-handle"></remind-item>
-            <remind-item class="has-handle disabled"></remind-item>
-            <remind-item class="has-handle pitch-on"></remind-item>
-		</ion-list>
-	</div>
-	<div class="bottom-bar" hidden>
-		<div class="delete">
-			<i class="iconfont">&#xe66e;</i>
-			<span>删除</span>
-		</div>
-		<div class="check-all active">
-			<i class="iconfont">&#xe640;</i>
-			<span>全选</span>
-		</div>
-	</div>
-	<button class="add-remind" ion-button icon-only>
-		<ion-icon name="add"></ion-icon>
-	</button>
+<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs}">
+    <div class="avtive-day-bar">
+        <div class="control">
+            <i class="iconfont">&#xe661;</i>
+            <span>上一天</span>
+        </div>
+        <span class="avtive-day">5月8日</span>
+        <div class="control">
+            <span>下一天</span>
+            <i class="iconfont">&#xe613;</i>
+        </div>
+    </div>
+    <ion-content class="scroll-container">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+        </ion-refresher>
+        <ion-list>
+            <remind-item class="" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+            <remind-item class="has-handle disabled" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+            <remind-item class="has-handle pitch-on" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+            <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="bottom-bar" *ngIf="hideTabs">
+        <div class="delete">
+            <i class="iconfont">&#xe66e;</i>
+            <span>删除</span>
+        </div>
+        <div class="check-all">
+            <i class="iconfont">&#xe640;</i>
+            <span>全选</span>
+        </div>
+    </div>
+    <button class="add-remind" ion-button icon-only>
+        <ion-icon name="add"></ion-icon>
+    </button>
 </ion-content>
