@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input,ElementRef } from '@angular/core';
 
 import { AlertController } from 'ionic-angular';
 @Component({
@@ -14,7 +14,10 @@ export class ClienteleItemComponent {
     get labels() {
         return this.data.labels ? JSON.parse(this.data.labels) : [];
     }
-    constructor(private alertCtrl: AlertController) {}
+    constructor(
+		private alertCtrl: AlertController,
+		private $el:ElementRef
+	) {}
     presentConfirm(i: any) {
         let alert = this.alertCtrl.create({
             title: '确认删除？',
@@ -55,4 +58,7 @@ export class ClienteleItemComponent {
     phone(p) {
         console.log(p);
     }
+	getHeight(){
+		return this.$el.nativeElement.querySelector('.item-wrapper').offsetHeight
+	}
 }

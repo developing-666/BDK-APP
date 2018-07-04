@@ -5,13 +5,13 @@
 </ion-header>
 
 <ion-content>
-    <clientele-item [data]="clienteleDetail"></clientele-item>
-    <!-- <div class="record-tab-container">
+    <clientele-item [data]="clienteleDetail" #clienteleItem></clientele-item>
+    <div class="record-tab-container" *ngIf="tabStyle" [ngStyle]="tabStyle">
         <ion-tabs tabsPlacement="top">
             <ion-tab tabTitle="操作记录" [root]="tabPage"></ion-tab>
             <ion-tab tabTitle="未跟提醒" [root]="tabPage"></ion-tab>
             <ion-tab tabTitle="跟进记录" [root]="tabPage"></ion-tab>
             <ion-tab tabTitle="通话记录" [root]="tabPage"></ion-tab>
         </ion-tabs>
-    </div> -->
+    </div>
 </ion-content>
