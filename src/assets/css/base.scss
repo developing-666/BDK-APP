@@ -257,7 +257,6 @@ $designWidth: 750; //如设计图是750
         position: relative;
         .item-inner {
             padding-right: 1rem;
-            border-bottom: none;
         }
     }
     .label {
@@ -265,6 +264,9 @@ $designWidth: 750; //如设计图是750
         .remind-content {
             position: relative;
             padding-bottom: rem(16);
+            .mark {
+                display: none;
+            }
             @if($hasHandle) {
                 padding-right: rem(60);
                 .mark {
