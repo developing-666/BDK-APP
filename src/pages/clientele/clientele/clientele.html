@@ -28,7 +28,7 @@
             <button class="add-cl˚ientele" ion-button block round>添加客户</button>
         </div>
     </div>
-    <ion-list class="clientele-list" *ngIf="clienteles.length!=0&&currentPage!=1">
+    <ion-list class="clientele-list" *ngIf="clienteles.length!=0">
         <clientele-item (details)="itemDetails($event)" (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
             [data]="item" [index]="i"></clientele-item>
     </ion-list>
