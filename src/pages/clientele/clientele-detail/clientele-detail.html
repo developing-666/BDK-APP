@@ -3,11 +3,10 @@
         <ion-title>客户详情</ion-title>
     </ion-navbar>
 </ion-header>
-
 <ion-content>
-    <clientele-item [data]="clienteleDetail" #clienteleItem></clientele-item>
+    <clientele-item [hidden]="hideItem" [data]="clienteleDetail" #clienteleItem></clientele-item>
     <div class="record-tab-container" *ngIf="tabStyle" [ngStyle]="tabStyle">
-        <ion-tabs tabsPlacement="top">
+        <ion-tabs tabsPlacement="top" class="record-tab-container">
             <ion-tab tabTitle="操作记录" [root]="tabPage"></ion-tab>
             <ion-tab tabTitle="未跟提醒" [root]="tabPage"></ion-tab>
             <ion-tab tabTitle="跟进记录" [root]="tabPage"></ion-tab>

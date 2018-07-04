@@ -1,6 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, App, ViewController, List   } from 'ionic-angular';
-
+import {
+    NavController,
+    NavParams,
+    App,
+    ViewController,
+    List,
+    Platform,
+    Content
+} from 'ionic-angular';
 import { AddClientelePage } from '../add-clientele/add-clientele';
 import { SearchClientelePage } from '../search-clientele/search-clientele';
 import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
@@ -14,6 +21,7 @@ import { Utils } from '../../../providers/utils';
     templateUrl: 'clientele.html'
 })
 export class ClientelePage {
+    @ViewChild('content') content: Content;
     @ViewChild(List) list: List;
     initQueryParams: any = {
         params: {
@@ -48,16 +56,11 @@ export class ClientelePage {
         public navParams: NavParams,
         private appApi: AppApi,
         public app: App,
-        public viewCtrl: ViewController
+        public viewCtrl: ViewController,
+        public plt: Platform
     ) {}
     ionViewDidLoad() {
         this.customerQuery(this.initQueryParams);
-    }
-    ionViewWillEnter() {
-        console.log(this.list);
-        if (this.list) {
-            this.list.closeSlidingItems();
-        }
     }
     add() {
         let callback = (refresh): any => {
@@ -68,10 +71,10 @@ export class ClientelePage {
             }
             return Promise.resolve();
         };
-        this.navCtrl.push(AddClientelePage, { callback });
+        this.app.getRootNav().push(AddClientelePage, { callback });
     }
     search() {
-        this.navCtrl.push(SearchClientelePage);
+        this.app.getRootNav().push(SearchClientelePage);
     }
     open(): void {
         this.openSelect = !this.openSelect;
@@ -118,15 +121,25 @@ export class ClientelePage {
         });
     }
     itemRemind(item) {
-        this.app.getRootNav().push(AddClienteleRemindPage, { item });
+        let callback = (): any => {
+            this.list.closeSlidingItems();
+            return Promise.resolve();
+        };
+        this.app.getRootNav().push(AddClienteleRemindPage, {
+            item,
+            callback
+        });
     }
     itemDetails(id) {
-        // this.app.getRootNav().push(ClienteleDetailPage,{
-        //     id
-        // });
-        this.navCtrl.push(ClienteleDetailPage, {
-            id
-        });
+        this.app.getRootNav().push(
+            ClienteleDetailPage,
+            {
+                id
+            },
+            {
+                animation: 'md-transition'
+            }
+        );
     }
     loadMore(e) {
         console.log(e);

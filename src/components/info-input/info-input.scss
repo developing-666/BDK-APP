@@ -4,6 +4,11 @@ info-input {
         padding: 0 1rem;
         border-bottom: $border;
     }
+    &.invalid{
+        .info-input-warpper {
+            border-color:color($colors,danger);
+        }
+    }
     .remark-container {
         padding: 1rem 0;
         p {

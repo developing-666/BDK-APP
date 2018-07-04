@@ -5,6 +5,8 @@ import { RemindPage } from '../remind/remind/remind';
 import { ClientelePage } from '../clientele/clientele/clientele';
 import { SettingsPage } from '../settings/settings/settings';
 
+
+import { SearchResultPage } from '../clientele/search-result/search-result';
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html'

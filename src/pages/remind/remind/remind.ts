@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events } from 'ionic-angular';
+import { NavController, NavParams, Events,App } from 'ionic-angular';
 
+import { AddRemindPage}from '../add-remind/add-remind';
 
-
+import { SearchResultPage } from '../../clientele/search-result/search-result';
 @Component({
     selector: 'page-remind',
     templateUrl: 'remind.html'
@@ -14,7 +15,8 @@ export class RemindPage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private event: Events
+        private event: Events,
+        public app: App
     ) {}
 
     ionViewDidLoad() {
@@ -33,5 +35,8 @@ export class RemindPage {
     }
     loadMore(e) {
         console.log(e);
+    }
+    add(){
+        this.app.getRootNav().push(SearchResultPage);
     }
 }

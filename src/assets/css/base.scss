@@ -475,14 +475,16 @@ $designWidth: 750; //如设计图是750
     }
 }
 
-@mixin ion-filter() {
+@mixin ion-filter($platform) {
     .ion-filter {
         height: rem(84);
         position: relative;
         .filter-bar {
             background-color: color($colors, bg);
             height: rem(82);
-            border-bottom: $border;
+            @if $platform=='ios' {
+                border-bottom: $border;
+            }
             display: flex;
             padding: 1rem 0;
             position: relative;

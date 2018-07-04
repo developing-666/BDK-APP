@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 
+
 import { FILTERDATA } from '../../providers/constants';
 
 import { Utils } from '../../providers/utils';

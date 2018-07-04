@@ -1,22 +1,24 @@
 <div class="info-input-warpper">
-	<div class="remark-container">
-		<!-- <p class="hint" (tap)="openInputPanel()">点击输入提醒文字备注或语音备注</p> -->
-		<textarea class="remark-input" (focus)="textareaFocus($event)" (blur)="textareaBlur($event)" type="text" [hidden]="isRecord" [(ngModel)]="inputValue" (input)="textareaInput()" placeholder="点击输入提醒文字备注或语音备注." #remarkInput [id]="id" [name]="name" [ngStyle]="textareaStyle"></textarea>
-		<div class="voice-bar-wrapper" (tap)="voiceBarTap($event)" [hidden]="!isRecord">
-			<voice-bar *ngIf="audio"></voice-bar>
-			<p class="placeholder" *ngIf="!audio">点击输入提醒文字备注或语音备注</p>
-		</div>
-	</div>
-	<div class="accessory">
-		<div class="accessory-list">
-			<div class="imgs-container">
-				<div class="img-item" *ngFor="let item of innerValue.imgList;let i =index">
-					<img [src]="item">
-					<i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
-				</div>
-			</div>
-			<!-- <span class="hint">上传成功</span> -->
-		</div>
-		<a class="upload iconfont" (tap)="chooseImage()">&#xe685;</a>
-	</div>
+    <div class="remark-container">
+        <!-- <p class="hint" (tap)="openInputPanel()">点击输入提醒文字备注或语音备注</p> -->
+        <textarea class="remark-input" (focus)="textareaFocus($event)" (blur)="textareaBlur($event)" type="text" [hidden]="isRecord"
+            [(ngModel)]="inputValue" (ngModelChange)="textareaInput()" placeholder="点击输入提醒文字备注或语音备注." #remarkInput [id]="id"
+            [name]="name" [ngStyle]="textareaStyle"></textarea>
+        <div class="voice-bar-wrapper" (tap)="voiceBarTap($event)" [hidden]="!isRecord">
+            <voice-bar *ngIf="audio"></voice-bar>
+            <p class="placeholder" *ngIf="!audio">点击输入提醒文字备注或语音备注</p>
+        </div>
+    </div>
+    <div class="accessory">
+        <div class="accessory-list">
+            <div class="imgs-container">
+                <div class="img-item" *ngFor="let item of innerValue?.imgList;let i =index">
+                    <img [src]="item">
+                    <i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
+                </div>
+            </div>
+            <!-- <span class="hint">上传成功</span> -->
+        </div>
+        <a class="upload iconfont" (tap)="chooseImage()">&#xe685;</a>
+    </div>
 </div>

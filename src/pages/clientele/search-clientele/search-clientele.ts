@@ -29,16 +29,17 @@ export class SearchClientelePage {
     onInput(e) {
         console.log(e);
         if (e.data) {
-            console.log(this.keywords);
-            this.search();
+            let keywords = this.keywords.replace(/(^\s*)|(\s*$)/g, '');
+            console.log(keywords);
+            this.search(keywords);
         }
     }
     onCancel(e) {
         console.log(e);
         this.navCtrl.pop();
     }
-    search() {
-        this.appApi.customerSearch(this.keywords).subscribe(d => {
+    search(keywords) {
+        this.appApi.customerSearch(keywords).subscribe(d => {
             console.log(d);
             this.loaded = true;
             this.results = d;
