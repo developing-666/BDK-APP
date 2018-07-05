@@ -1,7 +1,7 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NavController, NavParams, Navbar } from 'ionic-angular';
-
+import moment  from 'moment';
 
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
@@ -26,6 +26,7 @@ export class AddClienteleRemindPage {
         title: undefined,
         planRemindTime: undefined
     };
+	planRemindTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
     item: any = this.navParams.get('item');
     constructor(
         public navCtrl: NavController,
@@ -35,6 +36,7 @@ export class AddClienteleRemindPage {
     ) {}
 
     ionViewDidLoad() {
+		console.log(moment().utc())
         console.log(this.item);
         this.navBar.backButtonClick = (e: UIEvent) => {
             // todo something
@@ -46,14 +48,7 @@ export class AddClienteleRemindPage {
     done() {
         if (this.addRemindForm.valid) {
             this.formData = Utils.extend(true, this.formData, this.content);
-            this.formData.planRemindTime = this.formData.planRemindTime.replace(
-                'Z',
-                ''
-            );
-            this.formData.planRemindTime = this.formData.planRemindTime.replace(
-                'T',
-                ' '
-            );
+			this.formData.planRemindTime = moment(this.planRemindTime).utc().format()
             console.log(this.formData);
             this.taskCreate();
         }
