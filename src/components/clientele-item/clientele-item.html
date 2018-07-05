@@ -1,5 +1,5 @@
-<ion-item-sliding>
-    <ion-item class="clientele-item" detail-push (tap)="itemClick(data.id)">
+<ion-item-sliding [ngClass]="{'no-push':noPush}">
+    <ion-item class="clientele-item" detail-push (tap)="itemClick(data)">
         <div class="progress" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
@@ -42,7 +42,7 @@
             <span>设置</span>
             <span>提醒</span>
         </button>
-        <button ion-button color="danger" (click)="itemDelete(data.id)">
+        <button ion-button color="danger" (click)="itemDelete(data)">
             删除
         </button>
     </ion-item-options>

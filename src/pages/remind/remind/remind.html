@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header [ngClass]="{'blur':blur}">
     <ion-navbar>
         <div class="date-now">
             <span>2018年5月</span>
@@ -14,7 +14,7 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs}">
+<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs,'blur':blur}">
     <div class="avtive-day-bar">
         <div class="control">
             <i class="iconfont">&#xe661;</i>

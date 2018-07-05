@@ -18,6 +18,7 @@ export class AddClientelePage implements OnInit {
     @ViewChild('addClienteleForm') addClienteleForm: NgForm;
     @ViewChild('phonePicker') phonePicker: PhoneNumberInputComponent;
     callback: any = this.navParams.get('callback');
+    type: string = this.navParams.get('type');
     provinces: Array<any> = this.globalData.provinces;
     city: Array<any> = [];
     industry: Array<any> = INDUSTRY;

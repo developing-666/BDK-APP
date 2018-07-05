@@ -67,10 +67,10 @@ export class InfoInputComponent implements ControlValueAccessor {
         public actionSheetCtrl: ActionSheetController
     ) {}
     ngOnInit() {
-        //document.addEventListener('touchstart', this.blankClick, false);
+        // document.addEventListener('touchstart', this.blankClick, false);
     }
     ngOnDestroy() {
-        //document.removeEventListener('touchstart', this.blankClick, false);
+        // document.removeEventListener('touchstart', this.blankClick, false);
     }
     valueInit() {
         this.innerValue = {

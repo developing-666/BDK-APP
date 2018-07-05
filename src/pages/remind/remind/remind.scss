@@ -1,12 +1,23 @@
 page-remind {
-
+    .header {
+        @extend .transition-02;
+        &.blur{
+            filter: blur(5px);
+        }
+    }
 	.date-now{
 		display: flex;align-items: center;color: #fff;padding-left: 1rem;font-size: rem(36);
 		.iconfont{font-size:2.4rem;color:#fff;}
 	}
 	.hint{position: fixed;width: rem(200);height:rem(40);line-height:rem(40);display: flex;justify-content: center;align-items: center;top:30px;left:0;z-index: 999;background-color: #000;border-radius: rem(20);color:#fff;}
     
-	.remind-list-container{@include flex-center();flex-wrap: wrap;
+	.remind-list-container {
+	    @include flex-center();
+	    flex-wrap: wrap;
+	    @extend .transition-02;
+        &.blur {
+            filter: blur(5px);
+        }
         &>.scroll-content{overflow: hidden;}
         .scroll-container {
             height: calc(100% - 5rem);

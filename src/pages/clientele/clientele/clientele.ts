@@ -11,7 +11,6 @@ import {
 import { AddClientelePage } from '../add-clientele/add-clientele';
 import { SearchClientelePage } from '../search-clientele/search-clientele';
 import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
-import { AddClienteleRemindPage } from '../../remind/add-clientele-remind/add-clientele-remind';
 
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
@@ -48,6 +47,7 @@ export class ClientelePage {
     clienteles: Array<any> = [];
     value: string = '';
     openSelect: Boolean = false;
+    detail: boolean = false;
     selectOptions: any = {
         cssClass: 'full-selector'
     };
@@ -63,15 +63,18 @@ export class ClientelePage {
         this.customerQuery(this.initQueryParams);
     }
     add() {
-        let callback = (refresh): any => {
-            console.log(refresh);
-            if (refresh) {
+        let callback = (done): any => {
+            console.log(done);
+            if (done) {
                 this.currentPage = 1;
                 this.customerQuery(this.initQueryParams);
             }
             return Promise.resolve();
         };
-        this.app.getRootNav().push(AddClientelePage, { callback });
+        this.app.getRootNav().push(AddClientelePage, { 
+            callback,
+            type:'add'
+        });
     }
     search() {
         this.app.getRootNav().push(SearchClientelePage);
@@ -115,26 +118,16 @@ export class ClientelePage {
             });
     }
     itemDelete(item) {
-        this.appApi.customerDelete(item.id).subscribe(d => {
-            // this.currentPage = 1;
-            this.clienteles.splice(item.index, 1);
-        });
+        this.clienteles.splice(item.index, 1);
     }
-    itemRemind(item) {
-        let callback = (): any => {
-            this.list.closeSlidingItems();
-            return Promise.resolve();
-        };
-        this.app.getRootNav().push(AddClienteleRemindPage, {
-            item,
-            callback
-        });
+    itemRemind() {
+        this.list.closeSlidingItems();
     }
-    itemDetails(id) {
+    itemDetails(item) {
         this.app.getRootNav().push(
             ClienteleDetailPage,
             {
-                id
+                id: item.id
             },
             {
                 animation: 'md-transition'

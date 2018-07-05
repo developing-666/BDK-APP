@@ -24,7 +24,9 @@ export class SearchClientelePage {
         this.searchhistory();
     }
     ionViewDidEnter() {
-        this.searchbar.setFocus();
+        setTimeout(() => {
+            this.searchbar.setFocus();
+        }, 200);
     }
     onInput(e) {
         console.log(e);
@@ -46,7 +48,10 @@ export class SearchClientelePage {
         });
     }
     itemTap(name) {
-        this.navCtrl.push(SearchResultPage, { name });
+        this.navCtrl.push(SearchResultPage, { 
+            name,
+            type:'search'
+        });
     }
     searchhistory() {
         this.appApi.searchhistory().subscribe(d => {

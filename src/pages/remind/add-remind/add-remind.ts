@@ -1,6 +1,6 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, Navbar } from 'ionic-angular';
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
 import { InfoInputComponent } from '../../../components/info-input/info-input';
@@ -15,9 +15,13 @@ import { Utils } from '../../../providers/utils';
     templateUrl: 'add-remind.html'
 })
 export class AddRemindPage {
+    @ViewChild(Navbar) navBar: Navbar;
     @ViewChild('addRemindForm') addRemindForm: NgForm;
     @ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
     @ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
+    type: any = this.navParams.get('type');
+    title: string = this.navParams.get('type') =='clientele'?'新增客户提醒':'其它提醒';
+    clientele:any = undefined;
     content: any;
     formData: any = {
         customerId: undefined,
@@ -32,10 +36,16 @@ export class AddRemindPage {
         public modalCtrl: ModalController
     ) {}
 
-    ionViewDidLoad() {}
-    ionViewWillLeave(){
+    ionViewDidLoad() {
+        // this.navBar.backButtonClick = (e: UIEvent) => {
+        //     // todo something
+        //     this.callback().then(() => {
+        //         this.navCtrl.pop();
+        //     });
+        // };
+    }
+    ionViewWillLeave() {
         console.log(123123123);
-        
     }
     done() {
         if (this.addRemindForm.valid) {
@@ -88,8 +98,16 @@ export class AddRemindPage {
             return Promise.resolve();
         };
         let profileModal = this.modalCtrl.create(SearchResultPage, {
-            callback
+            item:this.clientele
         });
+        profileModal.onDidDismiss(data => {
+            this.inputPanel.scrollDisable();
+            if(data){
+                this.clientele = data;
+            }
+            console.log(data);
+        });
+        this.inputPanel.scrollEnable();
         profileModal.present();
     }
 }

@@ -80,10 +80,17 @@ export class IonInputPanelComponent implements OnInit {
         }
     }
     ngOnDestroy() {
+        iNoBounce.disable();
         if (this.platform.is('ios')) {
             this.keyboardShow.unsubscribe();
             this.keyboardHide.unsubscribe();
         }
+    }
+    scrollDisable() {
+        iNoBounce.enable();
+    }
+    scrollEnable() {
+        iNoBounce.disable();
     }
     open() {
         this.panelOpen = !this.panelOpen;

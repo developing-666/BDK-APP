@@ -1,5 +1,19 @@
 @import "ionic.globals";
-$colors: ( primary : #3dcbbd, secondary : #11a593, warning : #ffaa33, danger : #fe4739, success : #6ed91f, light : #999, dark : #666, link : #488aff, gray : #c5c5c5, icon : #828282, font : #333, border : #ddd, bg : #fafafa);
+$colors: ( 
+    primary : #3dcbbd, 
+    secondary : #11a593, 
+    warning : #ffaa33, 
+    danger : #fe4739, 
+    success : #6ed91f, 
+    light : #999, 
+    dark : #666, 
+    link : #488aff, 
+    gray : #c5c5c5, 
+    icon : #828282, 
+    font : #333, 
+    border : #ddd, 
+    bg : #fafafa
+);
 $border : 0.55px solid color($colors, border);
 $padding-horizontal : rem(30);
 $designWidth: 750; //如设计图是750

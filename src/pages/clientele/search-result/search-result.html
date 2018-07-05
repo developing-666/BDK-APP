@@ -1,7 +1,12 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-title>搜索结果</ion-title>
+        <ion-buttons start *ngIf="type!='search'">
+            <button ion-button icon-only (tap)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -14,7 +19,7 @@
     </div>
     <ion-list class="clientele-list" *ngIf="clienteles.length!=0">
         <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
-            [data]="item" [index]="i"></clientele-item>
+ [data]="item" [index]="i" [detail]="detail" [noPush]="noPush" (details)="itemDetails($event)" [ngClass]="{'active':activeId==item.id}"></clientele-item>
     </ion-list>
     <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">

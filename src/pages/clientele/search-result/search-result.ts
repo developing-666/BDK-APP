@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, ViewController, List } from 'ionic-angular';
 
-import { AddClientelePage } from '../add-clientele/add-clientele';
+import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
 
 import { AppApi } from './../../../providers/app-api';
 @Component({
@@ -9,6 +9,7 @@ import { AppApi } from './../../../providers/app-api';
     templateUrl: 'search-result.html'
 })
 export class SearchResultPage {
+    @ViewChild(List) list: List;
     queryParams: any = {
         params: {
             queryLabel: '',
@@ -22,13 +23,22 @@ export class SearchResultPage {
     currentPage: number = 1;
     totalPages: number = 0;
     clienteles: Array<any> = [];
+    item: any = this.navParams.get('item');
+    activeId: string = this.navParams.get('item') ? this.navParams.get('item').id:'';
+    type: string = this.navParams.get('type');
+    detail: boolean = false;
+    noPush: boolean = this.navParams.get('type') == 'search' ? false : true;
+    title: string =
+        this.navParams.get('type') == 'search' ? '搜索结果' : '选择客户';
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private appApi: AppApi
+        private appApi: AppApi,
+        public viewCtrl: ViewController
     ) {}
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SearchResultPage');
+        console.log('noPush' + this.noPush);
+        console.log('detail' + this.detail);
         this.customerQuery(this.queryParams);
     }
     customerQuery(queryParams, e?: any) {
@@ -53,16 +63,32 @@ export class SearchResultPage {
             });
     }
     itemDelete(item) {
-        this.appApi.customerDelete(item.id).subscribe(d => {
-            // this.currentPage = 1;
-            this.clienteles.splice(item.index, 1);
-        });
+        this.clienteles.splice(item.index, 1);
     }
-    itemRemind(i) {
-        console.log(i);
+    itemRemind() {
+        this.list.closeSlidingItems();
+    }
+    itemDetails(item) {
+        if (this.type == 'search') {
+            this.navCtrl.push(
+                ClienteleDetailPage,
+                {
+                    id: item.id
+                },
+                {
+                    animation: 'md-transition'
+                }
+            );
+        } else {
+            this.activeId = item.id;
+            this.viewCtrl.dismiss(item);
+        }
     }
     loadMore(e) {
         console.log(e);
         this.customerQuery(this.queryParams, e);
+    }
+    dismiss() {
+        this.viewCtrl.dismiss();
     }
 }
