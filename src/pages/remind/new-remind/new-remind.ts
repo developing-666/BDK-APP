@@ -10,6 +10,7 @@ import { AddRemindPage } from '../add-remind/add-remind';
 })
 export class NewRemindPage {
     callback: any = this.navParams.get('callback');
+    refresh: any = this.navParams.get('refresh');
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -27,6 +28,7 @@ export class NewRemindPage {
     }
     new(type) {
         this.app.getActiveNav().push(AddRemindPage, {
+            refresh: this.refresh,
             type
         });
         this.close();

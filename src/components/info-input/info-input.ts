@@ -89,7 +89,6 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.inputBlur.emit(e);
     }
     textareaInput() {
-        console.log(this.inputValue);
         if (!this.innerValue) {
             this.valueInit();
         }

@@ -5,6 +5,25 @@ page-remind {
             filter: blur(5px);
         }
     }
+    ion-calendar{
+        padding:0;
+        .week-toolbar{
+            font-size: 1.4rem;
+            border-top: $border;
+            border-bottom: $border;
+            .week-title{
+                li {
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
+    .fold-bar{background-color: #fff;
+        height: rem(40);@include flex-center();
+        .iconfont {
+            font-size: 1.4rem;
+        }
+    }
 	.date-now{
 		display: flex;align-items: center;color: #fff;padding-left: 1rem;font-size: rem(36);
 		.iconfont{font-size:2.4rem;color:#fff;}

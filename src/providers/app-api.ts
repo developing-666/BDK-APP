@@ -149,4 +149,5 @@ export class AppApi {
     taskCreate(opts) {
         return this._http.post('/task/create', opts);
     }
+    
 }

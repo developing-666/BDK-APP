@@ -15,6 +15,13 @@
     </ion-navbar>
 </ion-header>
 <ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs,'blur':blur}">
+    <ion-calendar [ngClass]="{'fold':fold}" [(ngModel)]="activeDay" (onChange)="dayChange($event)" (monthChange)="monthChange($event)"
+        [format]="'YYYY-MM-DD'" [options]="calendarOpt">
+    </ion-calendar>
+    <p class="fold-bar" (tap)="foldCalendar($event)">
+        <i class="iconfont" *ngIf="!fold">&#xe67c;</i>
+        <i class="iconfont" *ngIf="fold">&#xe674;</i>
+    </p>
     <div class="avtive-day-bar">
         <div class="control">
             <i class="iconfont">&#xe661;</i>
@@ -31,9 +38,9 @@
             <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
         </ion-refresher>
         <ion-list>
-            <remind-item class="" [ngClass]="{'has-handle':hideTabs}"></remind-item>
-            <remind-item class="has-handle disabled" [ngClass]="{'has-handle':hideTabs}"></remind-item>
-            <remind-item class="has-handle pitch-on" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+            <remind-item *ngFor="let item of reminds" class="" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+            <!-- <remind-item class="has-handle disabled" [ngClass]="{'has-handle':hideTabs}"></remind-item>
+            <remind-item class="has-handle pitch-on" [ngClass]="{'has-handle':hideTabs}"></remind-item> -->
         </ion-list>
         <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
             <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>

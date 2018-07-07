@@ -6,7 +6,7 @@
 <ion-content>
     <form #addRemindForm="ngForm" class="add-clientele-remind full-form" novalidat>
         <ion-list>
-            <button ion-item (tap)="choose()" *ngIf="type=='clientele'">
+            <button ion-item (tap)="choose()" *ngIf="type=='clientele'" [ngClass]="{'invalid':addRemindForm.submitted && clientele==undefined}">
                 <ion-label>选择客户</ion-label>
                 <ion-note [ngClass]="{'active':clientele}" item-end>{{clientele?clientele.name:'选择客户'}}</ion-note>
             </button>
@@ -16,14 +16,14 @@
             </ion-item>
             <button ion-item [ngClass]="{'invalid':(addRemindForm.controls.time?.touched || addRemindForm.submitted) && addRemindForm.controls.time.invalid}">
                 <ion-label>提醒时间</ion-label>
-                <ion-datetime name="time" [(ngModel)]="formData.planRemindTime" required placeholder="请选择提醒时间" pickerFormat="YYYY-MM-DD HH:mm"
-                    cancelText="取消" doneText="确定"></ion-datetime>
+                <ion-datetime name="time" [(ngModel)]="planRemindTime" required placeholder="请选择提醒时间" pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消"
+                    doneText="确定"></ion-datetime>
             </button>
             <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
                 [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="content"
                 (voiceBarClick)="voiceBarClick()"></info-input>
         </ion-list>
-        <button class="large" ion-button block round (tap)="textInput()">创建</button>
+        <button class="large" ion-button block round (tap)="done()" [disabled]="addRemindForm.invalid||(!clientele&&type==='clientele')">创建</button>
     </form>
     <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

@@ -6,6 +6,8 @@ import { AddRemindPage } from './add-remind/add-remind';
 import { AddClienteleRemindPage } from './add-clientele-remind/add-clientele-remind';
 
 import { ComponentsModule } from '../../components/components.module';
+
+import { CalendarModule } from 'ion2-calendar';
 @NgModule({
 	declarations: [
 		RemindPage,
@@ -21,7 +23,8 @@ import { ComponentsModule } from '../../components/components.module';
 	],
 	imports: [
 		IonicModule,
-		ComponentsModule
+        ComponentsModule,
+		CalendarModule,
 	]
 })
 export class RemindModule {

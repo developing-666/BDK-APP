@@ -40,7 +40,6 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Media } from '@ionic-native/media';
 
 //ionic第三方插件
-import { CalendarModule } from 'ion2-calendar';
 
 //自己封装的服务、模块、方法等
 
@@ -90,7 +89,6 @@ import { Validators } from '../providers/validators';
 			backButtonText: ''
 		}),
 		IonicStorageModule.forRoot(),
-		CalendarModule,
 		SettingsPageModule
 	],
 	bootstrap: [IonicApp],
