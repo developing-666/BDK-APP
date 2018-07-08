@@ -70,11 +70,11 @@
         </div>
     </ion-item>
     <ion-item-options side="right" class="item-options">
-        <button class="delay" ion-button (click)="delay(item)">
+        <button class="delay" ion-button (tap)="itemDelay(data)">
             <span>延时</span>
             <span>设置</span>
         </button>
-        <button ion-button color="danger" (click)="delete(item)">
+        <button ion-button color="danger" (tap)="presentConfirm(data)">
             删除
         </button>
     </ion-item-options>

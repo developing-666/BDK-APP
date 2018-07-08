@@ -319,7 +319,7 @@ export class NativeService {
 	getMultiplePicture(options = {}): Observable<any> {
 		const that = this;
 		const ops = {
-			maximumImagesCount: 6,
+			maximumImagesCount: 9,
 			width: IMAGE_SIZE, // 缩放图像的宽度（像素）
 			height: IMAGE_SIZE, // 缩放图像的高度（像素）
 			quality: QUALITY_SIZE, ...options

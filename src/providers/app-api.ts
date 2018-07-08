@@ -144,10 +144,32 @@ export class AppApi {
     }
     /**
      * 创建提醒
-     * @param opts 
+     * @param opts
      */
     taskCreate(opts) {
         return this._http.post('/task/create', opts);
     }
-    
+    /**
+     * 删除提醒
+     * @param id
+     */
+    taskDelete(id) {
+        return this._http.delete('/task/delete/' + id);
+    }
+    /**
+     * 批量删除提醒
+     * @param ids
+     */
+    taskDeleteBatch(ids) {
+        return this._http.delete('/task/deleteBatch/', {
+            ids
+        });
+    }
+    /**
+     * 延时提醒
+     * @param opts 
+     */
+    taskLazy(opts) {
+        return this._http.post('/task/lazy', opts);
+    }
 }

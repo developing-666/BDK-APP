@@ -28,6 +28,7 @@ export class InfoInputComponent implements ControlValueAccessor {
     @Output() inputFoucs: EventEmitter<any> = new EventEmitter();
     @Output() inputBlur: EventEmitter<any> = new EventEmitter();
     @Output() voiceBarClick: EventEmitter<any> = new EventEmitter();
+    @Input() placeholder: string = '点击输入提醒文字备注或语音备注.';
     @Input() id: string;
     @Input() name: string;
     change: any;
@@ -200,6 +201,8 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.disabled = isDisabled;
     }
     writeValue(obj: string): void {
+        console.log(obj);
         this.innerValue = obj;
+        this.inputValue = obj;
     }
 }

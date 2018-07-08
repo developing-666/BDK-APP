@@ -6,13 +6,13 @@
 <ion-content>
     <form #addRemindForm="ngForm" class="add-clientele-remind full-form" novalidat>
         <ion-list>
-            <button ion-item (tap)="choose()" *ngIf="type=='clientele'" [ngClass]="{'invalid':addRemindForm.submitted && clientele==undefined}">
+            <button [disabled]="mode=='delay'" ion-item (tap)="choose()" *ngIf="type=='clientele'" [ngClass]="{'invalid':addRemindForm.submitted && clientele==undefined}">
                 <ion-label>选择客户</ion-label>
                 <ion-note [ngClass]="{'active':clientele}" item-end>{{clientele?clientele.name:'选择客户'}}</ion-note>
             </button>
             <ion-item [ngClass]="{'invalid':(addRemindForm.controls.title?.touched || addRemindForm.submitted) && addRemindForm.controls.title.invalid}">
                 <ion-label>提醒题目</ion-label>
-                <ion-input name="title" [(ngModel)]="formData.title" required placeholder="请输入标题"></ion-input>
+                <ion-input name="title" [disabled]="mode=='delay'" [(ngModel)]="formData.title" required placeholder="请输入标题"></ion-input>
             </ion-item>
             <button ion-item [ngClass]="{'invalid':(addRemindForm.controls.time?.touched || addRemindForm.submitted) && addRemindForm.controls.time.invalid}">
                 <ion-label>提醒时间</ion-label>
@@ -20,10 +20,12 @@
                     doneText="确定"></ion-datetime>
             </button>
             <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
-                [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="content"
-                (voiceBarClick)="voiceBarClick()"></info-input>
+                [disabled]="mode=='delay'" [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
+                name="content" (voiceBarClick)="voiceBarClick()"></info-input>
         </ion-list>
-        <button class="large" ion-button block round (tap)="done()" [disabled]="addRemindForm.invalid||(!clientele&&type==='clientele')">创建</button>
+        <button class="large" *ngIf="mode!='delay'" ion-button block round (tap)="done()" [disabled]="addRemindForm.invalid||(!clientele&&type==='clientele')">创建</button>
+        <button class="large" *ngIf="mode=='delay'" ion-button block round (tap)="delay()">确认</button>
+
     </form>
     <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

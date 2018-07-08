@@ -9,7 +9,6 @@ import { AddRemindPage } from '../add-remind/add-remind';
     templateUrl: 'new-remind.html'
 })
 export class NewRemindPage {
-    callback: any = this.navParams.get('callback');
     refresh: any = this.navParams.get('refresh');
     constructor(
         public navCtrl: NavController,
@@ -17,13 +16,8 @@ export class NewRemindPage {
         public viewCtrl: ViewController,
         public app: App
     ) {}
-
     ionViewDidLoad() {}
-    ionViewWillEnter() {
-        this.callback(true);
-    }
     close() {
-        this.callback(false);
         this.viewCtrl.dismiss();
     }
     new(type) {

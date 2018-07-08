@@ -19,10 +19,17 @@ export class AddRemindPage {
     @ViewChild('addRemindForm') addRemindForm: NgForm;
     @ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
     @ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
+    callback: any = this.navParams.get('callback');
+    item: any = this.navParams.get('item');
     refresh: any = this.navParams.get('refresh');
     type: any = this.navParams.get('type');
+    mode: string = this.navParams.get('mode');
+    modeText: string = this.mode == 'delay' ? '延迟' : '新增';
     title: string =
-        this.navParams.get('type') == 'clientele' ? '新增客户提醒' : '其它提醒';
+        this.navParams.get('type') == 'clientele'
+            ? `${this.modeText}客户提醒`
+            : `${this.modeText}其它提醒`;
+
     clientele: any = undefined;
     content: any;
     formData: any = {
@@ -37,8 +44,20 @@ export class AddRemindPage {
         private appApi: AppApi,
         public modalCtrl: ModalController,
         public toastCtrl: ToastController
-    ) {}
-
+    ) {
+        if (this.item) {
+            console.log(this.item);
+            this.formData = {
+                title:this.item.title
+            };
+            this.content = this.item.content;
+            console.log(this.content);
+            
+            this.planRemindTime = moment(this.item.planRemindTime).format(
+                'YYYY-MM-DDTHH:mm:ssZ'
+            );
+        }
+    }
     ionViewDidLoad() {
         // this.navBar.backButtonClick = (e: UIEvent) => {
         //     // todo something
@@ -50,6 +69,25 @@ export class AddRemindPage {
     ionViewWillLeave() {
         console.log(123123123);
     }
+    delay() {
+        this.appApi.taskLazy({
+            lazyId:this.item.id,
+            planRemindTime:this.planRemindTime
+        }).subscribe(d=>{
+            console.log(d);
+            const toast = this.toastCtrl.create({
+                message: '延迟成功',
+                position: 'middle',
+                duration: 1500
+            });
+            toast.onDidDismiss(() => {
+                this.callback().then(() => {
+                    this.navCtrl.pop();
+                });
+            });
+            toast.present();
+        })
+    }
     done() {
         if (this.addRemindForm.valid) {
             if (this.addRemindForm.valid) {
@@ -57,12 +95,15 @@ export class AddRemindPage {
                     this.formData.customerId = this.clientele.id;
                 }
                 this.formData = Utils.extend(true, this.formData, this.content);
-                this.formData.planRemindTime = moment(this.planRemindTime).utc().format();
+                this.formData.planRemindTime = moment(this.planRemindTime)
+                    .utc()
+                    .format();
                 console.log(this.formData);
                 this.taskCreate();
             }
         }
     }
+
     taskCreate() {
         this.appApi.taskCreate(this.formData).subscribe(d => {
             console.log(d);
@@ -109,7 +150,6 @@ export class AddRemindPage {
     choose() {
         let callback = (d): any => {
             console.log(d);
-
             return Promise.resolve();
         };
         let profileModal = this.modalCtrl.create(SearchResultPage, {

@@ -38,15 +38,11 @@ export class ClienteleItemComponent {
             buttons: [
                 {
                     text: '取消',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
+                    role: 'cancel'
                 },
                 {
                     text: '确认',
                     handler: () => {
-                        console.log('Buy clicked');
                         this.appApi.customerDelete(item.id).subscribe(d => {
                             this.delete.emit({
                                 ...item,
