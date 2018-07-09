@@ -127,6 +127,15 @@ export class AppApi {
     searchHistoryDelete() {
         return this._http.delete('/searchhistory/deleteAll');
     }
+	/**
+	 * 获取用户操作记录
+	 */
+	queryCustomerOperateLogByPage(opts){
+		return this._http.post(
+            'customeroperatelog/queryCustomerOperateLogByPage',
+            opts
+        );
+	}
     /**
      * 跟进记录
      */
@@ -137,7 +146,7 @@ export class AppApi {
         );
     }
     /**
-     * 未跟提醒
+     * 获取提醒
      */
     queryTaskDetailByPage(opts) {
         return this._http.post('/task/queryTaskDetailByPage', opts);
@@ -161,13 +170,13 @@ export class AppApi {
      * @param ids
      */
     taskDeleteBatch(ids) {
-        return this._http.delete('/task/deleteBatch/', {
+        return this._http.delete('/task/deleteBatch', {
             ids
         });
     }
     /**
      * 延时提醒
-     * @param opts 
+     * @param opts
      */
     taskLazy(opts) {
         return this._http.post('/task/lazy', opts);

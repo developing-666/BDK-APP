@@ -71,7 +71,7 @@ export class ClienteleItemComponent {
     itemClick(item) {
         let callback = (done): any => {
             console.log(done);
-            
+
             return Promise.resolve();
         };
         if (this.detail) {

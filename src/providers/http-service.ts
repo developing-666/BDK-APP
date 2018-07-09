@@ -63,13 +63,13 @@ export class HttpService {
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
 
-	public delete(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
+	public delete(url: string, body: any = {}, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
             method: RequestMethod.Delete,
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8'
             }),
-			search: HttpService.buildURLSearchParams(paramMap)
+			body
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
@@ -88,6 +88,7 @@ export class HttpService {
 		options.headers.append('DAFU-REQUEST-TIME', header.requestTime);
         options.headers.append('DAFU-APP-SIGN', header.appSign);
         options.headers.append('DAFU-TOKEN', header.token);
+		console.log(header);
 		return Observable.create(observer => {
             this.request(url, options, noLoading).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败

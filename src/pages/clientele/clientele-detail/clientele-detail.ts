@@ -12,6 +12,9 @@ import { AppApi } from './../../../providers/app-api';
 export class ClienteleDetailPage {
     @ViewChild(Navbar) navBar: Navbar;
     @ViewChild(ClienteleItemComponent) clienteleItem: ClienteleItemComponent;
+	tabParams:any = {
+		id:this.navParams.get('id')
+	};
     tabPage = OperatingRecordPage;
     id: string = this.navParams.get('id');
     clienteleDetail: any = {};

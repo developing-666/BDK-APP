@@ -80,6 +80,7 @@ export class RemindPage {
             .queryTaskDetailByPage({
                 currentPageIndex: this.currentPage,
                 params: {
+					queryFetchCustomer:true,
                     queryPlanRemindTimeStart: this.activeDay.value,
                     queryPlanRemindTimeEnd: this.activeDay.value
                 }
@@ -99,7 +100,14 @@ export class RemindPage {
                     }, 200);
                 }
                 console.log(this.reminds);
-            });
+            },err=>{
+				console.log(err);
+				if (e) {
+                    setTimeout(() => {
+                        e.complete();
+                    }, 200);
+                }
+			});
     }
     wantDelete() {
         if (this.hideTabs) {
@@ -231,7 +239,10 @@ export class RemindPage {
                         this.appApi
                             .taskDeleteBatch(this.deleteIds)
                             .subscribe(d => {
+								this.change();
                                 this.deleteSuccess();
+								this.hideTabs = false;
+								this.deleteIds = [];
                             });
                     }
                 }

@@ -6,6 +6,7 @@ import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
+import { HttpHeader } from '../../../providers/http-header';
 
 import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
@@ -26,7 +27,8 @@ export class LoginPage {
         public navParams: NavParams,
         private appApi: AppApi,
         private fb: FormBuilder,
-        private app: App
+        private app: App,
+		private httpHeader:HttpHeader
     ) {
         this.createForm();
     }
@@ -64,8 +66,9 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
-            // this.app.getRootNav().push(HomePage);
-            this.app.getRootNav().push(AddClientelePage);
+			this.httpHeader.token = d;
+            this.app.getRootNav().push(HomePage);
+            // this.app.getRootNav().push(AddClientelePage);
         });
     }
     /**
@@ -78,15 +81,15 @@ export class LoginPage {
 
                 resolve(()=>{
                     console.log('resolve');
-                    
+
                 });
                 // reject(()=>{
                 //     console.log('reject');
-                    
+
                 // });
                 if (params) {
                     console.log('拿到参数',params);
-                    
+
                 }
             });
         }

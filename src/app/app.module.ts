@@ -1,5 +1,8 @@
 //Angular以及ionic框架相关
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule,LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeZh from '@angular/common/locales/zh';
+import localeZhExtra from '@angular/common/locales/extra/zh';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { Config, IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -72,6 +75,8 @@ import { Validators } from '../providers/validators';
 //	}
 //}
 
+
+registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
 	declarations: [
 		MyApp,
@@ -97,6 +102,7 @@ import { Validators } from '../providers/validators';
 		HomePage
 	],
 	providers: [
+		{ provide: LOCALE_ID, useValue: 'zh' },
 		AppApi,
 		StatusBar,
 		SplashScreen,

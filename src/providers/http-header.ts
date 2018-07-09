@@ -11,14 +11,22 @@ export class HttpHeader {
 	private _platform:any = '';
 	private _devName:any = '';
 	private _osVersion:any = '';
+	private _token:string = '';
 	timestamp:string = '';
 	get appVersion(): string {
 		return this._appVersion;
 	}
-
 	set appVersion(value: string) {
 		this._appVersion = value;
 	}
+
+	get token(): string {
+		return this._token;
+	}
+	set token(value: string) {
+		this._token = value;
+	}
+
 	constructor(
 		public nativeService: NativeService,
 		private device:Device
@@ -63,7 +71,8 @@ export class HttpHeader {
 		this.platform();
 		this.osVersion();
 		this.uuid();
-		let deviceInfo = 'devName='+this._devName+'&osType='+this._platform+'&osVersion='+this._osVersion+'&appVersion='+this._appVersion+'&browser='+window.navigator.userAgent+'&uuid='+this._uuid;
+		let deviceInfo = 'devName='+this._devName+'&osType='+this._platform+'&osVersion='+this._osVersion+'&appVersion='+this._appVersion+'&browser='+window.navigator.userAgent+'&uuid=3654D6D2-456B-4F95-AD8D-0BCECE19EAD1';
+		console.log(deviceInfo);
 		return Utils.base64(deviceInfo);
 	}
 	requestTime(){
@@ -74,8 +83,9 @@ export class HttpHeader {
 		const requestTime = this.requestTime();
 		const appInfo = this.appInfo();
 		const appSign = appInfo+requestTime+this._platform+Utils.md5(this._uuid+this._osVersion+this._appVersion);
-		return { 
-            token: 'DAFUeyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODUwMTY2NzY2MSIsInVzZXJzZXNzaW9uIjoie1wiaWRcIjo2MDc1MyxcImNvbXBhbnlJZFwiOjYwNzUzLFwidHlwZVwiOjIsXCJuYW1lXCI6bnVsbCxcInBob25lXCI6XCIxODUwMTY2NzY2MVwiLFwidXNlcm5hbWVcIjpcIjE4NTAxNjY3NjYxXCIsXCJhdXRob3JpdGllc1wiOm51bGwsXCJwYXNzd29yZE1vZGlmeVRpbWVcIjpudWxsfSIsImNyZWF0ZVRpbWUiOjE1MzAzMzA4ODk0ODIsImNyZWF0ZWQiOjE1MzAzMzA4ODk0NzksImV4cCI6MTYxNjczMDg4OX0.2bxlxiaNHCktSb3G0oM0xWMooCtMIt-HihxVKWWZSN2ub4rDizpyp9VrqmCMNbbECOVbmtkrbkpZmb0izDLcoA',
+		console.log(this.token)
+		return {
+            token:this.token?this.token: 'DAFUeyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODUwMTY2NzY2MSIsInVzZXJzZXNzaW9uIjoie1wiaWRcIjo2MDc1MyxcImNvbXBhbnlJZFwiOjYwNzUzLFwidHlwZVwiOjIsXCJuYW1lXCI6bnVsbCxcInBob25lXCI6XCIxODUwMTY2NzY2MVwiLFwidXNlcm5hbWVcIjpcIjE4NTAxNjY3NjYxXCIsXCJhdXRob3JpdGllc1wiOm51bGwsXCJwYXNzd29yZE1vZGlmeVRpbWVcIjpudWxsfSIsImNyZWF0ZVRpbWUiOjE1MzAzMzA4ODk0ODIsImNyZWF0ZWQiOjE1MzAzMzA4ODk0NzksImV4cCI6MTYxNjczMDg4OX0.2bxlxiaNHCktSb3G0oM0xWMooCtMIt-HihxVKWWZSN2ub4rDizpyp9VrqmCMNbbECOVbmtkrbkpZmb0izDLcoA',
             appInfo,
             requestTime,
             appSign: Utils.md5(appSign)

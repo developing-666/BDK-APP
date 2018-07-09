@@ -14,7 +14,7 @@ export class RemindItemComponent {
     @Output() delay: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Output() detail: EventEmitter<any> = new EventEmitter();
-    @Input() data: any = {};
+    @Input() remind: any = {};
     @Input() index: number = undefined;
 
     constructor(
@@ -22,9 +22,11 @@ export class RemindItemComponent {
         private alertCtrl: AlertController,
         public app: App
     ) {
-        console.log('Hello RemindItemComponent Component');
+        console.log(this.remind);
     }
-    presentConfirm(item: any) {
+    presentConfirm(e) {
+		e.stopPropagation();
+		e.preventDefault();
         let alert = this.alertCtrl.create({
             title: '确认删除？',
             buttons: [
@@ -35,9 +37,9 @@ export class RemindItemComponent {
                 {
                     text: '确认',
                     handler: () => {
-                        this.appApi.taskDelete(item.id).subscribe(d => {
+                        this.appApi.taskDelete(this.remind.id).subscribe(d => {
                             this.delete.emit({
-                                ...item,
+                                ...this.remind,
                                 index: this.index
                             });
                         });
@@ -47,17 +49,19 @@ export class RemindItemComponent {
         });
         alert.present();
     }
-    itemDelay(item) {
+    itemDelay(e) {
+		e.stopPropagation();
+		e.preventDefault();
         let callback = (): any => {
-            this.delay.emit(item);
+            this.delay.emit(this.remind);
             return Promise.resolve();
         };
-        this.goDelay.emit(item);
+        this.goDelay.emit(this.remind);
         this.app.getRootNav().push(AddRemindPage, {
-            item,
+            item:this.remind,
             callback,
             mode: 'delay',
-            type: item.customerId ? 'clientele' : 'other'
+            type: this.remind.customerId ? 'clientele' : 'other'
         });
     }
 }
