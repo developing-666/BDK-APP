@@ -10,6 +10,9 @@ import { ClienteleDetailPage } from './clientele-detail/clientele-detail';
 import { SearchResultPage } from './search-result/search-result';
 
 import { OperatingRecordPage } from './clientele-detail/tabs/operating-record/operating-record';
+import { CallRecordPage } from './clientele-detail/tabs/call-record/call-record';
+import { FollowRecordPage } from './clientele-detail/tabs/follow-record/follow-record';
+import { NotFollowPage } from './clientele-detail/tabs/not-follow/not-follow';
 
 import { ComponentsModule } from '../../components/components.module';
 
@@ -24,7 +27,10 @@ import { PipesModule } from '../../pipes/pipes.module';
         ClienteleDetailPage,
         SettingRecordPage,
         OperatingRecordPage,
-        SearchResultPage
+        SearchResultPage,
+        CallRecordPage,
+        FollowRecordPage,
+        NotFollowPage
     ],
     entryComponents: [
         ClientelePage,
@@ -35,7 +41,10 @@ import { PipesModule } from '../../pipes/pipes.module';
         ClienteleDetailPage,
         SettingRecordPage,
         OperatingRecordPage,
-        SearchResultPage
+        SearchResultPage,
+        CallRecordPage,
+        FollowRecordPage,
+        NotFollowPage
     ],
     imports: [IonicModule, ComponentsModule, PipesModule]
 })

@@ -52,7 +52,7 @@ export class AddRemindPage {
             };
             this.content = this.item.content;
             console.log(this.content);
-            
+            this.clientele = this.item.customer;
             this.planRemindTime = moment(this.item.planRemindTime).format(
                 'YYYY-MM-DDTHH:mm:ssZ'
             );
@@ -124,23 +124,27 @@ export class AddRemindPage {
         toast.present();
     }
     openInputPanel() {
+        if (this.mode == 'delay') return;
         this.inputPanel.inputFoucs();
     }
     hideInputPanel() {
-        console.log('close');
+        if (this.mode == 'delay') return;
         this.inputPanel.panelOpen = false;
         this.applicationRef.tick();
     }
     textInput() {
+        if (this.mode == 'delay') return;
         this.infoInput.isRecord = false;
         setTimeout(() => {
             this.infoInput.setFocus();
         }, 200);
     }
     recordInput() {
+        if (this.mode == 'delay') return;
         this.infoInput.isRecord = true;
     }
     voiceBarClick() {
+        if (this.mode == 'delay') return;
         this.infoInput.isRecord = true;
         this.inputPanel.panelOpen = true;
     }

@@ -20,7 +20,7 @@ export class IonFilterComponent implements OnInit {
     @Output() panelHidden: EventEmitter<any> = new EventEmitter();
     filterData: any = FILTERDATA;
     filterOpts: any;
-    layout: number = 1;
+    layout: number = 2;
     openPanel: boolean = false;
     showBack: boolean = false;
     backIn: boolean = false;
@@ -44,7 +44,6 @@ export class IonFilterComponent implements OnInit {
             this.filterData[0].options[1].options = d[1];
             this.getOpts();
             this.initValue();
-            console.log(this.globalData);
             }, e => {
                 console.log(e);
             });
@@ -54,14 +53,14 @@ export class IonFilterComponent implements OnInit {
         for (let item of this.filterData) {
             let obj = { name: item.name, key: item.key, value: [] };
             item.options.forEach((tag, index) => {
-                if (tag.options && tag.options.length > 0) {
+                if (tag.options===undefined) {
+                    obj.value = undefined;
+                } else {
                     obj.value.push({
                         tag: tag.tag,
                         key: tag.key,
                         value: index == 0 ? '' : []
                     });
-                } else {
-                    obj.value = undefined;
                 }
             });
             this.value.push(obj);
@@ -73,10 +72,10 @@ export class IonFilterComponent implements OnInit {
         this.getLayout();
     }
     getLayout() {
-        let layout = 1;
+        let layout = 2;
         for (let item of this.filterOpts.options) {
-            if (item.options && item.options.length > 0) {
-                layout = 2;
+            if (item.options===undefined) {
+                layout = 1;
             }
         }
         this.layout = layout;

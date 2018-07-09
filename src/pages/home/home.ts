@@ -13,8 +13,11 @@ import { SearchResultPage } from '../clientele/search-result/search-result';
 })
 export class HomePage {
     @ViewChild(Tabs) tabRef: Tabs;
-    tab1Root = RemindPage;
-    tab2Root = ClientelePage;
+    // tab1Root = RemindPage;
+    // tab2Root = ClientelePage;
+    // tab3Root = SettingsPage;
+    tab1Root = ClientelePage;
+    tab2Root = RemindPage;
     tab3Root = SettingsPage;
     mb: any;
     constructor(

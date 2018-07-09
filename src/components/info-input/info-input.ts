@@ -159,6 +159,7 @@ export class InfoInputComponent implements ControlValueAccessor {
         );
     }
     chooseImage() {
+        if(this.disabled) return;
         let actionSheet = this.actionSheetCtrl.create({
             buttons: [
                 {

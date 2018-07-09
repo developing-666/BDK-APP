@@ -267,7 +267,6 @@ $designWidth: 750; //如设计图是750
 @mixin remind-item($hasHandle:false) {
     .item-block {
         padding-left: rem(60);
-        padding-top: rem(20);
         position: relative;
         .item-inner {
             padding-right: 1rem;

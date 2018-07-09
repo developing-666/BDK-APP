@@ -1,6 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
 
-import { App, NavController, NavParams } from 'ionic-angular';
+import { App, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -25,6 +25,7 @@ export class LoginPage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
+        public viewCtrl: ViewController,
         private appApi: AppApi,
         private fb: FormBuilder,
         private app: App,
@@ -67,7 +68,11 @@ export class LoginPage {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
 			this.httpHeader.token = d;
-            this.app.getRootNav().push(HomePage);
+            if (this.viewCtrl.isOverlay) {
+                this.viewCtrl.dismiss();
+            } else {
+                this.navCtrl.setRoot(HomePage); // 重新设置首页
+            }
             // this.app.getRootNav().push(AddClientelePage);
         });
     }

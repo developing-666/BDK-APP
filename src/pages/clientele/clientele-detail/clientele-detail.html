@@ -6,11 +6,11 @@
 <ion-content>
     <clientele-item [hidden]="hideItem" [data]="clienteleDetail" #clienteleItem></clientele-item>
     <div class="record-tab-container" *ngIf="tabStyle" [ngStyle]="tabStyle">
-        <ion-tabs tabsPlacement="top" class="record-tab-container">
-            <ion-tab tabTitle="操作记录" [root]="tabPage" [rootParams]="tabParams"></ion-tab>
-            <ion-tab tabTitle="未跟提醒" [root]="tabPage" [rootParams]="tabParams"></ion-tab>
-            <ion-tab tabTitle="跟进记录" [root]="tabPage" [rootParams]="tabParams"></ion-tab>
-            <ion-tab tabTitle="通话记录" [root]="tabPage" [rootParams]="tabParams"></ion-tab>
+        <ion-tabs tabsPlacement="top">
+            <ion-tab tabTitle="操作记录" [root]="tabPage1" [rootParams]="tabParams"></ion-tab>
+            <ion-tab tabTitle="未跟提醒" [root]="tabPage2" [rootParams]="tabParams"></ion-tab>
+            <ion-tab tabTitle="跟进记录" [root]="tabPage3" [rootParams]="tabParams"></ion-tab>
+            <ion-tab tabTitle="通话记录" [root]="tabPage4" [rootParams]="tabParams"></ion-tab>
         </ion-tabs>
     </div>
 </ion-content>

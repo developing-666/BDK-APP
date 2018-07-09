@@ -3,6 +3,7 @@ import {
     Output,
     EventEmitter,
     OnInit,
+    Input,
     ApplicationRef
 } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
@@ -33,6 +34,7 @@ export class IonInputPanelComponent implements OnInit {
     @Output() deleteClick: EventEmitter<any> = new EventEmitter();
     @Output() playClick: EventEmitter<any> = new EventEmitter();
     @Output() recordEnd: EventEmitter<any> = new EventEmitter();
+    @Input() disabled: boolean = false;
     isRecord: boolean = false;
     panelOpen: boolean = false;
     complete: boolean = false;
@@ -96,14 +98,17 @@ export class IonInputPanelComponent implements OnInit {
         this.panelOpen = !this.panelOpen;
     }
     text(e) {
+        if (this.disabled) return;
         this.isRecord = false;
         this.textInput.emit(e);
     }
     inputFoucs() {
+        if (this.disabled) return;
         this.isRecord = false;
         this.panelOpen = true;
     }
     record(e) {
+        if (this.disabled) return;
         this.isRecord = true;
         this.panelOpen = true;
         this.recordInput.emit(e);

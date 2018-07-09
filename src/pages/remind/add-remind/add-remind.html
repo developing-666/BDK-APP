@@ -27,5 +27,5 @@
         <button class="large" *ngIf="mode=='delay'" ion-button block round (tap)="delay()">确认</button>
 
     </form>
-    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
+    <ion-input-panel [disabled]="mode=='delay'" #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

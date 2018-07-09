@@ -21,9 +21,7 @@ export class ClienteleItemComponent {
     @Input() detail: boolean = true;
     @Input() data: any = {};
     @Input() index: number = undefined;
-    get labels() {
-        return this.data.labels ? JSON.parse(this.data.labels) : [];
-    }
+    labels: Array<any> = this.data.labels ? this.data.labels : [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,

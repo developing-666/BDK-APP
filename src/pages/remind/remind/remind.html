@@ -39,7 +39,7 @@
         </ion-refresher>
         <ion-list>
             <remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'has-handle':hideTabs,'disabled':item.isExpired,'pitch-on':deleteIds.indexOf(item.id)>-1}"
-                [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (tap)="itemClick(item)"></remind-item>
+                [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (click)="itemClick($event,item)"></remind-item>
             <!-- <remind-item class="has-handle disabled" [ngClass]="{'has-handle':hideTabs}"></remind-item>
             <remind-item class="has-handle pitch-on" [ngClass]="{'has-handle':hideTabs}"></remind-item> -->
         </ion-list>

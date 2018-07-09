@@ -1,3 +1,29 @@
 <ion-content>
-	test
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
+<p class="no-result" *ngIf="record.length==0&&currentPage!=1">暂无重要客户</p>
+    <ion-list>
+        <ion-item class="record-item" *ngFor="let item of record">
+            <em class="top-line"></em>
+            <div class="record-content">
+                <h3>
+                    <div class="start">
+                        <span class="time">
+                            <em></em>
+                            <i>{{item?.operateTime | date:'HH:mm'}}</i>
+                        </span>
+                    </div>
+                    <span class="date">{{item?.operateTime | date:'yyyy/MM/dd E'}}</span>
+                </h3>
+                <div class="record-info">
+                    <p class="operater">{{item?.operater?.name}}</p>
+                    <p class="operat-content">{{item?.content}}</p>
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

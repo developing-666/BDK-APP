@@ -8,13 +8,13 @@
         </div>
     </div>
     <div class="filter-panel" [ngClass]="{'show':openPanel}" #filterPanel>
-        <div class="filter-item-container" [hidden]="layout==2">
+        <div class="filter-item-container" *ngIf="layout==1">
             <div class="panel-item" *ngFor="let item of filterOpts?.options;let  i = index" (tap)="itemTap(item)" [ngClass]="{'active':value[activeIndex].value == item.value}">
                 <span class="name">{{item.label}}</span>
                 <i class="iconfont">&#xe640;</i>
             </div>
         </div>
-        <div class="filter-item-container" [hidden]="layout==1">
+        <div class="filter-item-container" *ngIf="layout==2">
             <div class="line-wrapper">
                 <div class="panel-line" *ngFor="let item of filterOpts?.options;let  itemIndex = index">
                     <span class="name">{{item.tag}}</span>

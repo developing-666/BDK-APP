@@ -197,7 +197,9 @@ export class RemindPage {
     delay(item) {
         this.change();
     }
-    itemClick(item) {
+    itemClick(e,item) {
+        e.stopPropagation();
+        e.preventDefault();
         if (this.hideTabs) {
             let index = this.deleteIds.indexOf(item.id);
             if (index > -1) {

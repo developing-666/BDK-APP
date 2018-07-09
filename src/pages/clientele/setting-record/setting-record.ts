@@ -1,4 +1,4 @@
-import { Component, ViewChild, ApplicationRef } from "@angular/core";
+import { Component, ViewChild, ApplicationRef,Input } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 
 
@@ -11,6 +11,7 @@ import { InfoInputComponent } from '../../../components/info-input/info-input';
 export class SettingRecordPage {
     @ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
     @ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
+    remind: any = this.navParams.get('remind')?this.navParams.get('remind'):{};
     placeholder: string = '点击输入跟进情况文字备注或语音备注';
     content: any;
     constructor(

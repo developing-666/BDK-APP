@@ -78,9 +78,8 @@ export class MyApp {
 			if (this.nativeService.isMobile()) {
 				var vConsole = new VConsole();
 			}
-			// this.nav.setRoot(TabsPage); // 设置首页
 			// this.nav.setRoot(LoginPage); // 设置首页
-            this.nav.setRoot(LoginPage); // 设置首页
+            this.nav.setRoot(HomePage); // 设置首页
 			// this.nativeService.statusBarStyle(); // 设置状态栏颜色
 			// this.assertNetwork(); // 检测网络
 			// this.helper.funDebugInit(); // 初始化fundebug
@@ -88,9 +87,9 @@ export class MyApp {
 			// this.helper.initJpush(); // 初始化极光推送
 			// this.jPushOpenNotification(); // 处理打开推送消息事件
 			// 订阅重新登录事件
-			// this.events.subscribe('user:reLogin', () => {
-			//   this.modalCtrl.create(LoginPage).present();
-			// });
+			this.events.subscribe('user:reLogin', () => {
+			  this.modalCtrl.create(LoginPage).present();
+			});
 			// 从缓存中获取token
 			// this.storage.get('token').then(token => {
 			//   if (token) {

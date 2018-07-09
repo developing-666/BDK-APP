@@ -17,13 +17,25 @@ import { Utils } from '../../../providers/utils';
 export class AddClientelePage implements OnInit {
     @ViewChild('addClienteleForm') addClienteleForm: NgForm;
     @ViewChild('phonePicker') phonePicker: PhoneNumberInputComponent;
+    item: any = this.navParams.get('item');
     callback: any = this.navParams.get('callback');
     type: string = this.navParams.get('type');
     provinces: Array<any> = this.globalData.provinces;
     city: Array<any> = [];
     industry: Array<any> = INDUSTRY;
     formData: any = {
-        gender: 'M'
+        followStatus: undefined,
+        name: undefined,
+        post: undefined,
+        provinceId: undefined,
+        cityId: undefined,
+        gender: 'M',
+        birthday: undefined,
+        company: undefined,
+        industry:undefined,
+        label: undefined,
+        labels: undefined,
+        remark: undefined,
     };
     phones: Array<any> = [];
     valid: boolean = false;
@@ -36,11 +48,23 @@ export class AddClientelePage implements OnInit {
         public navParams: NavParams,
         public globalData: GlobalData,
         private appApi: AppApi
-    ) {}
+    ) {
+        if (this.type === 'edit') {
+            for (let name in this.formData){
+                console.log(name);
+                this.formData[name] = this.item[name];
+            }
+            console.log(this.formData);
+        }
+    }
     ngOnInit() {
         this.queryProvinces();
     }
-    ionViewDidLoad() {}
+    ionViewDidLoad() {
+        if (this.type === 'edit' && this.item.provinceId) {
+            this.queryCitiesByProvinceId();
+        }
+    }
     add() {
         let phone = this.phonePicker.getPhone();
         console.log(this.addClienteleForm);
@@ -62,7 +86,7 @@ export class AddClientelePage implements OnInit {
             }
         }
         if (this.addClienteleForm.valid && this.valid) {
-            this.formData.labels = JSON.stringify(this.labels);
+            this.formData.labels = this.labels;
             console.log(this.formData);
             this.customerCreate();
         }

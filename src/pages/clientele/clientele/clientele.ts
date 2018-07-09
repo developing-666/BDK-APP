@@ -71,9 +71,9 @@ export class ClientelePage {
             }
             return Promise.resolve();
         };
-        this.app.getRootNav().push(AddClientelePage, { 
+        this.app.getRootNav().push(AddClientelePage, {
             callback,
-            type:'add'
+            type: 'add'
         });
     }
     search() {
@@ -102,20 +102,30 @@ export class ClientelePage {
                 currentPageIndex: this.currentPage,
                 ...queryParams
             })
-            .subscribe(d => {
-                if (this.currentPage == 1) {
-                    this.clienteles = d.items;
-                } else {
-                    this.clienteles = this.clienteles.concat(d.items);
+            .subscribe(
+                d => {
+                    if (this.currentPage == 1) {
+                        this.clienteles = d.items;
+                    } else {
+                        this.clienteles = this.clienteles.concat(d.items);
+                    }
+                    this.totalPages = d.totalPages;
+                    this.currentPage++;
+                    if (e) {
+                        setTimeout(() => {
+                            e.complete();
+                        }, 200);
+                    }
+                },
+                err => {
+                    console.log(err);
+                    if (e) {
+                        setTimeout(() => {
+                            e.complete();
+                        }, 200);
+                    }
                 }
-                this.totalPages = d.totalPages;
-                this.currentPage++;
-                if (e) {
-                    setTimeout(() => {
-                        e.complete();
-                    }, 200);
-                }
-            });
+            );
     }
     itemDelete(item) {
         this.clienteles.splice(item.index, 1);
