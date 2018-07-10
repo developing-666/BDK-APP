@@ -1,6 +1,6 @@
 /*----------------------------------------后台Api地址----------------------------------------*/
 
-export const APP_SERVE_URL = 'http://58.247.96.174:7101/budiuke/'; // 测试
+export const APP_SERVE_URL = 'http://58.247.96.174:7070/budiuke/'; // 测试
 
 /*----------------------------------------文件服务器地址----------------------------------------*/
 export const FILE_SERVE_URL = 'http://172.16.19.136:9000/kit_file_server/'; // 文件服务:测试环境
@@ -36,19 +36,19 @@ export const CUSTOMTAGS: Array<any> = ['大户', '拖机', '美女','吃货', '�
 
 //客户状态信息
 export const FOLLOWSTATUS: Array<any> = [
-    { 
+    {
         value: 'WAIT',
         label: '待跟'
     },
-    { 
+    {
         value: 'ALREADY',
         label: '跟进'
     },
-    { 
+    {
         value: 'OVER',
         label: '成交'
     },
-    { 
+    {
         value: 'INVALID',
         label: '无效'
     },

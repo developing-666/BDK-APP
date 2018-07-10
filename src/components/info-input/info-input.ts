@@ -10,6 +10,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { Utils } from '../../providers/utils';
 
+import { AppApi } from '../../providers/app-api';
 
 
 @Component({
@@ -31,15 +32,17 @@ export class InfoInputComponent implements ControlValueAccessor {
     @Input() placeholder: string = '点击输入提醒文字备注或语音备注.';
     @Input() id: string;
     @Input() name: string;
+	@Input() type: string = 'task';
     change: any;
     changed: any = [];
     touched: any = [];
     disabled: boolean = false;
     isRecord: boolean = false;
     inputValue: string = undefined;
-    innerValue: any = {};
+    innerValue: any = null;
     textareaStyle: any = {};
     audio: any = null;
+	pics:Array<string> = [];
     get value(): any {
         if (this.innerValue.content || this.innerValue.audio) {
             return this.innerValue;
@@ -65,7 +68,8 @@ export class InfoInputComponent implements ControlValueAccessor {
         private camera: Camera,
         private imagePicker: ImagePicker,
         private keyboard: Keyboard,
-        public actionSheetCtrl: ActionSheetController
+        public actionSheetCtrl: ActionSheetController,
+        private appApi: AppApi,
     ) {}
     ngOnInit() {
         // document.addEventListener('touchstart', this.blankClick, false);
@@ -107,7 +111,10 @@ export class InfoInputComponent implements ControlValueAccessor {
         // this.keyboard.show();
     }
     pickerPhoto() {
-        let count = 9 - this.innerValue.pics.length;
+		if (!this.innerValue) {
+            this.valueInit();
+        }
+        let count = 9 - this.pics.length;
         if (count === 0 || count < 0) {
             alert('最多添加9张图片');
             return false;
@@ -120,15 +127,17 @@ export class InfoInputComponent implements ControlValueAccessor {
         };
         this.imagePicker.getPictures(options).then(
             results => {
+				console.log(results);
                 for (let item of results) {
                     if (
-                        this.innerValue.pics.indexOf(
-                            'data:image/jpeg;base64,' + item
+                        this.pics.indexOf(
+                            'data:image/jpg;base64,' + item
                         ) == -1
                     ) {
-                        this.innerValue.pics.push(
-                            'data:image/jpeg;base64,' + item
+                        this.pics.push(
+                            'data:image/jpg;base64,' + item
                         );
+						this.upoadImage('data:image/jpg;base64,' + item);
                     }
                 }
             },
@@ -138,6 +147,9 @@ export class InfoInputComponent implements ControlValueAccessor {
         );
     }
     takePicture() {
+		if (!this.innerValue) {
+            this.valueInit();
+        }
         const imgOptions: CameraOptions = {
             quality: 50,
             destinationType: this.camera.DestinationType.DATA_URL,
@@ -148,9 +160,10 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.camera.getPicture(imgOptions).then(
             imageUrl => {
                 // 获取成功
-                let base64Image = 'data:image/jpeg;base64,' + imageUrl;
-                if (this.innerValue.pics.indexOf(base64Image) == -1) {
-                    this.innerValue.pics.push(base64Image);
+                let base64Image = 'data:image/jpg;base64,' + imageUrl;
+                if (this.pics.indexOf(base64Image) == -1) {
+                    this.pics.push(base64Image);
+					this.upoadImage(base64Image);
                 }
             },
             err => {
@@ -183,12 +196,22 @@ export class InfoInputComponent implements ControlValueAccessor {
         actionSheet.present();
     }
     deleteImg(i) {
-        this.innerValue.pics.splice(i, 1);
+        this.pics.splice(i, 1);
     }
     voiceBarTap(e) {
         console.log(e);
         this.voiceBarClick.emit(e);
     }
+	upoadImage(data){
+		this.appApi.upoadImage({
+			data,
+			type:this.type.toUpperCase()
+		}).subscribe(d=>{
+			console.log(d);
+		})
+	}
+
+
 
     // custom-form-item
     registerOnChange(fn: any): void {
@@ -206,4 +229,5 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.innerValue = obj;
         this.inputValue = obj;
     }
+
 }

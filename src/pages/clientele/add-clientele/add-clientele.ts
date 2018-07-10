@@ -39,7 +39,6 @@ export class AddClientelePage implements OnInit {
     };
     phones: Array<any> = [];
     valid: boolean = false;
-    labels: Array<any> = [];
     labelsString: string = '';
     submitIng: boolean = false;
     constructor(
@@ -50,11 +49,10 @@ export class AddClientelePage implements OnInit {
         private appApi: AppApi
     ) {
         if (this.type === 'edit') {
+			this.labelsString = this.item.labels?this.item.labels.join(','):'';
             for (let name in this.formData){
-                console.log(name);
                 this.formData[name] = this.item[name];
             }
-            console.log(this.formData);
         }
     }
     ngOnInit() {
@@ -86,7 +84,6 @@ export class AddClientelePage implements OnInit {
             }
         }
         if (this.addClienteleForm.valid && this.valid) {
-            this.formData.labels = this.labels;
             console.log(this.formData);
             this.customerCreate();
         }
@@ -104,13 +101,12 @@ export class AddClientelePage implements OnInit {
     }
     addCustomTag() {
         let callback = (tags): any => {
-            console.log(tags);
-            this.labels = tags;
+            this.formData.labels = tags;
             this.labelsString = tags.join(',');
             return Promise.resolve();
         };
         this.navCtrl.push(CustomTagPage, {
-            tag: this.labels,
+            tag: this.formData.labels,
             callback
         });
     }

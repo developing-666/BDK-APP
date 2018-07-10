@@ -112,7 +112,7 @@ export class HttpService {
 	}
 
     public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
-		// IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
+		//IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
         if (!noLoading) this.showLoading();
 		return Observable.create(observer => {
 			this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
@@ -124,6 +124,7 @@ export class HttpService {
 				}
 				// IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
+				console.log(err);
                 if (!noLoading) this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
 				// IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);

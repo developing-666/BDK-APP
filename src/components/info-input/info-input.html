@@ -12,7 +12,7 @@
     <div class="accessory">
         <div class="accessory-list">
             <div class="imgs-container">
-                <div class="img-item" *ngFor="let item of innerValue?.imgList;let i =index">
+                <div class="img-item" *ngFor="let item of pics;let i =index">
                     <img [src]="item">
                     <i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
                 </div>

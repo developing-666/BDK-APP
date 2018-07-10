@@ -1,4 +1,4 @@
-import { Component, Output, Input, EventEmitter } from '@angular/core';
+import { Component, Output, Input, EventEmitter,AfterContentInit } from '@angular/core';
 
 import { AlertController, NavController, NavParams, App } from 'ionic-angular';
 
@@ -9,21 +9,24 @@ import { AppApi } from '../../providers/app-api';
     selector: 'remind-item',
     templateUrl: 'remind-item.html'
 })
-export class RemindItemComponent {
+export class RemindItemComponent implements AfterContentInit {
     @Output() goDelay: EventEmitter<any> = new EventEmitter();
     @Output() delay: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Output() detail: EventEmitter<any> = new EventEmitter();
     @Input() remind: any = {};
     @Input() index: number = undefined;
-
+	planRemindTime:string = '';
     constructor(
         private appApi: AppApi,
         private alertCtrl: AlertController,
         public app: App
     ) {
-        console.log(this.remind);
     }
+	ngAfterContentInit() {
+        console.log('RemindItem'+this.remind);
+
+	}
     presentConfirm(e) {
 		e.stopPropagation();
 		e.preventDefault();
@@ -64,4 +67,7 @@ export class RemindItemComponent {
             type: this.remind.customerId ? 'clientele' : 'other'
         });
     }
+	itemClick(){
+		this.detail.emit(this.remind);
+	}
 }

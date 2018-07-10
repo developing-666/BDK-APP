@@ -106,7 +106,7 @@ export class NativeService {
 		if (this.isMobile()) {
 			this.statusBar.overlaysWebView(false);
 			this.statusBar.styleLightContent();
-			this.statusBar.backgroundColorByHexString('#488aff'); // 3261b3
+			this.statusBar.backgroundColorByHexString('#3dcbbd'); // 3261b3
 		}
 	}
 

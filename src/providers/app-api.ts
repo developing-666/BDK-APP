@@ -181,4 +181,10 @@ export class AppApi {
     taskLazy(opts) {
         return this._http.post('/task/lazy', opts);
     }
+	/**
+	 * 图片上传
+	 */
+	upoadImage(opts){
+		return this._http.post('/upoad/image', opts);
+	}
 }

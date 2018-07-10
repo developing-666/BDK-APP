@@ -21,7 +21,6 @@ export class SettingRecordPage {
     ) {}
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SettingRecordPage');
         this.inputPanel.scrollEnable();
     }
     openInputPanel() {

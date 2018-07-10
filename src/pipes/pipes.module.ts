@@ -3,6 +3,7 @@ import { MapToIterable } from './map-to-iterable';
 import { OrderBy } from './order-by';
 import { TrustResourceUrl } from './bypass-trust-res-url';
 import { FollowStatusPipe } from './follow-status/follow-status';
+import { MomentPipe } from './moment/moment';
 
 export { MapToIterable } from './map-to-iterable';
 export { OrderBy } from './order-by';
@@ -13,13 +14,15 @@ export { TrustResourceUrl } from './bypass-trust-res-url';
 		MapToIterable,
 		OrderBy,
 		TrustResourceUrl,
-        FollowStatusPipe
+		FollowStatusPipe,
+		MomentPipe
 	],
 	declarations: [
 		MapToIterable,
 		OrderBy,
 		TrustResourceUrl,
-        FollowStatusPipe
+		FollowStatusPipe,
+		MomentPipe
 	]
 })
-export class PipesModule {}
+export class PipesModule { }

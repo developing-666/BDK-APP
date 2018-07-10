@@ -197,9 +197,7 @@ export class RemindPage {
     delay(item) {
         this.change();
     }
-    itemClick(e,item) {
-        e.stopPropagation();
-        e.preventDefault();
+    itemClick(item) {
         if (this.hideTabs) {
             let index = this.deleteIds.indexOf(item.id);
             if (index > -1) {
@@ -208,8 +206,7 @@ export class RemindPage {
                 this.deleteIds.push(item.id);
             }
         } else {
-            this.app
-                .getRootNav()
+            this.app.getRootNav()
                 .push(SettingRecordPage, {
                     remind: item
                 });

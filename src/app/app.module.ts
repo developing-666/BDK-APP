@@ -41,6 +41,7 @@ import { HTTP } from '@ionic-native/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Media } from '@ionic-native/media';
+import { Base64 } from '@ionic-native/base64';
 
 //ionic第三方插件
 
@@ -136,7 +137,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		Validators,
 		Keyboard,
 		Media,
-		Device
+		Device,
+		Base64
 	]
 })
 export class AppModule {
