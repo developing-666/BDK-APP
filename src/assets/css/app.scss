@@ -26,6 +26,9 @@ ion-buttons.buttons-group {
     }
 }
 
+.simple-no-result{
+	line-height: 4rem;text-align: center;font-size: 2rem;
+}
 @keyframes playing {
     0% {
         transform: scale(1);

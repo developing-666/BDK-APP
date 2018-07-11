@@ -17,9 +17,6 @@ import { AppApi } from './../../../providers/app-api';
 export class ClienteleDetailPage {
     @ViewChild(Navbar) navBar: Navbar;
     @ViewChild(ClienteleItemComponent) clienteleItem: ClienteleItemComponent;
-    tabParams: any = {
-        id: this.navParams.get('id')
-    };
     tabPage1 = OperatingRecordPage;
     tabPage2 = NotFollowPage;
     tabPage3 = FollowRecordPage;
@@ -28,6 +25,9 @@ export class ClienteleDetailPage {
     clienteleDetail: any = {};
     tabStyle: any = undefined;
     hideItem: boolean = false;
+	tabParams: any = {
+        id: this.navParams.get('id')
+    };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -47,6 +47,7 @@ export class ClienteleDetailPage {
         this.appApi.customerDetails(this.id).subscribe(d => {
             console.log(d);
             this.clienteleDetail = d;
+			this.tabParams.item = d;
             setTimeout(() => {
                 this.tabStyle = {
                     height: `calc(100% - ${this.clienteleItem.getHeight() /

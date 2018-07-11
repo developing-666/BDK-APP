@@ -24,7 +24,7 @@ export class RemindItemComponent implements AfterContentInit {
     ) {
     }
 	ngAfterContentInit() {
-        console.log('RemindItem'+this.remind);
+        console.log(this.remind);
 
 	}
     presentConfirm(e) {

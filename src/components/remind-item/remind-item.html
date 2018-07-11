@@ -20,14 +20,11 @@
                 <div class="remark-text">
                     {{remind?.content}}
                 </div>
-                <div class="remark-img-container">
-                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-                </div>
                 <div class="remark-voice-container">
                     <voice-bar></voice-bar>
+                </div>
+                <div class="remark-img-container" *ngIf="remind?.pics.length>0">
+                    <img *ngFor="let item of remind.pics" [src]="item.url">
                 </div>
             </div>
             <i class="iconfont mark">
@@ -49,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="return-wrapper">
+        <div class="return-wrapper" hidden>
             <div class="return">
                 <div class="return-from">
                     <div class="name-wrapper">

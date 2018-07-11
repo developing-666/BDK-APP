@@ -11,6 +11,9 @@ import { SearchResultPage}from'../../clientele/search-result/search-result';
 
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
+import { NativeService } from '../../../providers/native-service';
+
+import { Observable} from 'rxjs/Rx';
 @Component({
     selector: 'page-add-remind',
     templateUrl: 'add-remind.html'
@@ -31,27 +34,31 @@ export class AddRemindPage {
             : `${this.modeText}其它提醒`;
 
     clientele: any = undefined;
-    content: any;
+    infoContent: any = {};
     formData: any = {
         title: undefined,
         planRemindTime: undefined
     };
     planRemindTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+	paths:Array<any> = [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private applicationRef: ApplicationRef,
         private appApi: AppApi,
         public modalCtrl: ModalController,
-        public toastCtrl: ToastController
+        public toastCtrl: ToastController,
+		public nativeService: NativeService,
     ) {
         if (this.item) {
             console.log(this.item);
             this.formData = {
                 title:this.item.title
             };
-            this.content = this.item.content;
-            console.log(this.content);
+            this.infoContent.content = this.item.content;
+			this.infoContent.pics = this.item.pics;
+			this.infoContent.audio = this.item.audio;
+            console.log(this.infoContent);
             this.clientele = this.item.customer;
             this.planRemindTime = moment(this.item.planRemindTime).format(
                 'YYYY-MM-DDTHH:mm:ssZ'
@@ -65,9 +72,6 @@ export class AddRemindPage {
         //         this.navCtrl.pop();
         //     });
         // };
-    }
-    ionViewWillLeave() {
-        console.log(123123123);
     }
     delay() {
         this.appApi.taskLazy({
@@ -90,20 +94,52 @@ export class AddRemindPage {
     }
     done() {
         if (this.addRemindForm.valid) {
-            if (this.addRemindForm.valid) {
-                if (this.type == 'clientele') {
-                    this.formData.customerId = this.clientele.id;
-                }
-                this.formData = Utils.extend(true, this.formData, this.content);
-                this.formData.planRemindTime = moment(this.planRemindTime)
-                    .utc()
-                    .format();
-                console.log(this.formData);
-                this.taskCreate();
-            }
+			 this.upoadImage().subscribe(d=>{
+				 if(d){
+					 if (this.type == 'clientele') {
+		                 this.formData.customerId = this.clientele.id;
+		             };
+					 this.formData.content = this.infoContent.content;
+					 this.formData.audio = this.infoContent.audio;
+					 this.formData.pics = this.paths;
+					 this.formData.planRemindTime = moment(this.planRemindTime).utc().format();
+					 console.log(this.formData);
+		             this.taskCreate();
+				 }
+			 });
         }
     }
-
+	upoadImage() : Observable<any>{
+		return Observable.create(observer => {
+			this.paths = [];
+			if(this.infoContent.pics.length==0){
+				observer.next(true);
+			}else{
+				const imgHttp:Array<Observable<any>> = [];
+				for (let data of this.infoContent.pics) {
+					imgHttp.push(
+						this.appApi.upoadImage({
+							data,
+							type:'TASK'
+						})
+					);
+				};
+				const result = Observable.combineLatest(...imgHttp);
+				result.subscribe(d => {
+					console.log(d);
+					if(d.length==this.infoContent.pics.length){
+						for (let item of d) {
+						    this.paths.push(item.path);
+						};
+						observer.next(true);
+					}
+				},e=>{
+					console.log(e);
+					this.nativeService.alert('图片上传失败,请重试');
+				})
+			}
+		});
+	}
     taskCreate() {
         this.appApi.taskCreate(this.formData).subscribe(d => {
             console.log(d);

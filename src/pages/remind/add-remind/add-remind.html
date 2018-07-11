@@ -20,12 +20,12 @@
                     doneText="确定"></ion-datetime>
             </button>
             <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
-                [disabled]="mode=='delay'" [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
+                [disabled]="mode=='delay'" [(ngModel)]="infoContent" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
                 name="content" (voiceBarClick)="voiceBarClick()"></info-input>
         </ion-list>
         <button class="large" *ngIf="mode!='delay'" ion-button block round (tap)="done()" [disabled]="addRemindForm.invalid||(!clientele&&type==='clientele')">创建</button>
         <button class="large" *ngIf="mode=='delay'" ion-button block round (tap)="delay()">确认</button>
 
     </form>
-    <ion-input-panel [disabled]="mode=='delay'" #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
+    <ion-input-panel [hidden]="mode=='delay'" [disabled]="mode=='delay'" #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

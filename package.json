@@ -79,7 +79,6 @@
     "js-base64": "^2.4.5",
     "moment": "^2.22.2",
     "mx.ferreyra.callnumber": "~0.0.2",
-    "phonegap-plugin-barcodescanner": "^8.0.0",
     "rxjs": "5.5.10",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
@@ -115,17 +114,14 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-appminimize": {},
       "mx.ferreyra.callnumber": {},
-      "phonegap-plugin-barcodescanner": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      },
       "com-badrit-base64": {},
       "cordova-plugin-telerik-imagepicker": {
         "PHOTO_LIBRARY_USAGE_DESCRIPTION": "your usage message"
       }
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

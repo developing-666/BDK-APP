@@ -1,6 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, List } from 'ionic-angular';
+import { NavController, NavParams, List,App } from 'ionic-angular';
 
+
+
+import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
 
 import { AppApi } from '../../../../../providers/app-api';
 @Component({
@@ -12,15 +15,18 @@ export class NotFollowPage {
     currentPage: number = 1;
     totalPages: number = 1;
     id: string = this.navParams.get('id');
+	item:any = this.navParams.get('item');
     reminds: Array<any> = [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public appApi: AppApi
+        public appApi: AppApi,
+		public app:App
     ) {}
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad NotFollowPage');
+        console.log(this.item);
+        console.log(this.id);
         this.queryTaskDetailByPage();
     }
     queryTaskDetailByPage(e?: any) {
@@ -78,6 +84,19 @@ export class NotFollowPage {
     itemClick(e, item){
         e.stopPropagation();
         e.preventDefault();
-        
     }
+	add(){
+		let callback = (done): any => {
+            console.log(done);
+            // if (done) {
+			// 	this.currentPage = 1;
+		    //     this.queryTaskDetailByPage();
+            // }
+            return Promise.resolve();
+        };
+        this.app.getRootNav().push(AddClienteleRemindPage, {
+			item:this.item,
+            callback
+        });
+	}
 }

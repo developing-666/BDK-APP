@@ -12,13 +12,13 @@
     <div class="accessory">
         <div class="accessory-list">
             <div class="imgs-container">
-                <div class="img-item" *ngFor="let item of pics;let i =index">
+                <div class="img-item" [ngClass]="{'disabled':disabled}" *ngFor="let item of innerValue?.pics;let i =index">
                     <img [src]="item">
                     <i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
                 </div>
             </div>
             <!-- <span class="hint">上传成功</span> -->
         </div>
-        <a class="upload iconfont" (tap)="chooseImage()">&#xe685;</a>
+        <a class="upload iconfont" (tap)="chooseImage()" [hidden]="disabled">&#xe685;</a>
     </div>
 </div>

@@ -7,8 +7,6 @@ moment.locale('zh-cn');
 })
 export class MomentPipe implements PipeTransform {
 	transform(value: string, ...args) {
-		console.log(value);
-		console.log(args);
 		if (value) {
 			return moment(value).format(args[0]);
 		} else {

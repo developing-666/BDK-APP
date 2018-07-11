@@ -33,6 +33,9 @@ info-input {
                 color: color($colors, light);
                 opacity: 1;
             }
+			&[disabled]{
+				opacity: .4;
+			}
         }
         .voice-bar-wrapper {
             height: 2.4rem;
@@ -80,6 +83,11 @@ info-input {
                     border-radius: 50%;
                     font-size: 1rem;
                 }
+				&.disabled{
+					.delete {
+						display: none;
+					}
+				}
             }
             .hint {
                 display: inline-block;
