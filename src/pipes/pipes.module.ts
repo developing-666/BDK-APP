@@ -4,6 +4,7 @@ import { OrderBy } from './order-by';
 import { TrustResourceUrl } from './bypass-trust-res-url';
 import { FollowStatusPipe } from './follow-status/follow-status';
 import { MomentPipe } from './moment/moment';
+import { GetImgPipe } from './get-img/get-img';
 
 export { MapToIterable } from './map-to-iterable';
 export { OrderBy } from './order-by';
@@ -15,14 +16,16 @@ export { TrustResourceUrl } from './bypass-trust-res-url';
 		OrderBy,
 		TrustResourceUrl,
 		FollowStatusPipe,
-		MomentPipe
+		MomentPipe,
+		GetImgPipe
 	],
 	declarations: [
 		MapToIterable,
 		OrderBy,
 		TrustResourceUrl,
 		FollowStatusPipe,
-		MomentPipe
+		MomentPipe,
+		GetImgPipe
 	]
 })
 export class PipesModule { }

@@ -180,7 +180,7 @@ export class IonInputPanelComponent implements OnInit {
                 }
             });
         } else {
-            this.nativeService.alert('Not cordova!');
+            this.nativeService.alert('请在APP中使用!');
             return;
         }
     }
@@ -263,9 +263,8 @@ export class IonInputPanelComponent implements OnInit {
                 console.log('播放完成');
             });
             this.recordEnd.emit({
-                assetPath: this.file.cacheDirectory.replace(/^file:\/\//, ''),
-                fileName: this.fileName,
-                fileId: this.fileId,
+                file: this.file.cacheDirectory.replace(/^file:\/\//, '') + this.fileName,
+                // file:'../../../assets/audio/audio.m4a',
                 duration: this.seconds
             });
         });

@@ -97,6 +97,7 @@ export class InfoInputComponent implements ControlValueAccessor {
             this.valueInit();
         }
         this.innerValue.content = this.inputValue;
+
         this.change(this.innerValue);
         this.textareaStyle = {
             height: `${this.remarkInput.nativeElement.scrollHeight}px`

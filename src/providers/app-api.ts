@@ -187,4 +187,10 @@ export class AppApi {
 	upoadImage(opts){
 		return this._http.post('/upoad/image', opts);
 	}
+	/**
+	 * 语音上传
+	 */
+	upoadAudio(opts){
+		return this._http.postFormData('/upoad/audio', opts);
+	}
 }
