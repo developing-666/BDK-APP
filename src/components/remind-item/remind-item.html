@@ -24,7 +24,7 @@
                     <voice-bar></voice-bar>
                 </div>
                 <div class="remark-img-container" *ngIf="remind?.pics.length>0">
-                    <img *ngFor="let item of remind.pics" [src]="item.url | getImg:'x200'">
+                    <img *ngFor="let item of remind.pics" [src]="item | getImg:'x200'">
                 </div>
             </div>
             <i class="iconfont mark">
