@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActionSheetController } from 'ionic-angular';
 
@@ -55,14 +55,6 @@ export class InfoInputComponent implements ControlValueAccessor {
             this.changed.forEach(f => f(value));
         }
     }
-    blankClick: any = e => {
-        let parent =
-            Utils.closest(e.target, '.remark-container') ||
-            Utils.closest(e.target, '.ion-input-panel');
-        if (!parent) {
-            this.inputBlur.emit(e);
-        }
-    };
     constructor(
         private camera: Camera,
         private imagePicker: ImagePicker,
@@ -70,12 +62,6 @@ export class InfoInputComponent implements ControlValueAccessor {
         public actionSheetCtrl: ActionSheetController,
         private appApi: AppApi,
     ) {}
-    ngOnInit() {
-        // document.addEventListener('touchstart', this.blankClick, false);
-    }
-    ngOnDestroy() {
-        // document.removeEventListener('touchstart', this.blankClick, false);
-    }
     valueInit() {
         this.innerValue = {
             content: this.inputValue,

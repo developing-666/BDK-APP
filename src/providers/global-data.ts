@@ -18,6 +18,8 @@ export class GlobalData {
 
     //省份数据
     private _provinces: Array<any> = [];
+
+	private _header:any = {};
     get userId(): string {
         return this._userId;
     }
@@ -82,5 +84,11 @@ export class GlobalData {
     }
     set CUSTOMER_LABELS(value: any) {
         this._CUSTOMER_LABELS = value;
+    }
+	get header() {
+        return this._header;
+    }
+    set header(value: any) {
+        this._header = value;
     }
 }

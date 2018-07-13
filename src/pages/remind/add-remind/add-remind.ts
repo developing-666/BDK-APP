@@ -15,7 +15,8 @@ import {
 	FileTransferObject,
 	FileUploadResult
 } from '@ionic-native/file-transfer';
-import { APP_SERVE_URL} from '../../../providers/constants';
+import { APP_SERVE_URL } from '../../../providers/constants';
+import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
 import { NativeService } from '../../../providers/native-service';
@@ -52,6 +53,14 @@ export class AddRemindPage {
 		// duration: 10,
 		type: 'TASK'
 	};
+    blankClick: any = e => {
+        let parent =
+            Utils.closest(e.target, '.remark-container') ||
+            Utils.closest(e.target, '.ion-input-panel');
+        if (!parent) {
+            this.hideInputPanel();
+        }
+    };
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -61,6 +70,7 @@ export class AddRemindPage {
 		public toastCtrl: ToastController,
 		public nativeService: NativeService,
 		public ft: FileTransfer,
+		private globalData: GlobalData
 	) {
 		if (this.item) {
 			console.log(this.item);
@@ -68,9 +78,9 @@ export class AddRemindPage {
 				title: this.item.title
 			};
 			this.infoContent = {};
-			this.infoContent.content = this.item.content?this.item.content:undefined;
-			this.infoContent.pics = this.item.pics?this.item.pics:undefined;
-			this.infoContent.audio = this.item.audioPath?this.item.audioPath:undefined;
+			this.infoContent.content = this.item.content ? this.item.content : undefined;
+			this.infoContent.pics = this.item.pics ? this.item.pics : undefined;
+			this.infoContent.audio = this.item.audioPath ? this.item.audioPath : undefined;
 			console.log(this.infoContent);
 			this.clientele = this.item.customer;
 			this.planRemindTime = moment(this.item.planRemindTime).format(
@@ -109,19 +119,25 @@ export class AddRemindPage {
 	done() {
 		// this.uploadAudio();
 		if (this.addRemindForm.valid) {
-			 this.upoadImage().subscribe(d=>{
-				 if(d){
-					 if (this.type == 'clientele') {
-		                 this.formData.customerId = this.clientele.id;
-		             };
-					 this.formData.content = this.infoContent.content;
-					 this.formData.audio = this.infoContent.audio;
-					 this.formData.pics = this.paths;
-					 this.formData.planRemindTime = moment(this.planRemindTime).utc().format();
-					 console.log(this.formData);
-		             this.taskCreate();
-				 }
-			 });
+			const imgUpload = this.upoadImage();
+			const audioUpload = this.uploadAudio();
+			const result = Observable.combineLatest(imgUpload, audioUpload);
+			result.subscribe(d => {
+				console.log(d);
+				if(d[0]&&d[1]){
+					if (this.type == 'clientele') {
+						this.formData.customerId = this.clientele.id;
+					};
+					this.formData.content = this.infoContent.content;
+					this.formData.audio = {};
+					this.formData.audio.path = d[1].path;
+					this.formData.audio.duration = this.audio.duration;
+					this.formData.pics = this.paths;
+					this.formData.planRemindTime = moment(this.planRemindTime).utc().format();
+					console.log(this.formData);
+					this.taskCreate();
+				}
+			});
 		}
 	}
 	upoadImage(): Observable<any> {
@@ -141,7 +157,6 @@ export class AddRemindPage {
 				};
 				const result = Observable.combineLatest(...imgHttp);
 				result.subscribe(d => {
-					console.log(d);
 					if (d.length == this.infoContent.pics.length) {
 						for (let item of d) {
 							this.paths.push(item.path);
@@ -155,22 +170,37 @@ export class AddRemindPage {
 			}
 		});
 	}
-	uploadAudio() {
-		let options: FileUploadOptions = {
-			params:{
-				type:'TASK'
-			},
-			mimeType: 'audio/ma4'
-		};
-		const ftObj: FileTransferObject = this.ft.create();
-		ftObj.upload(this.audio.file,
-			encodeURI(APP_SERVE_URL+'/upoad/audio'), options).then(
-				(d) => {
-					console.log(d)
-				},
-				(e) => {
-					console.log(e)
-				});
+	uploadAudio(): Observable<any> {
+		return Observable.create(observer => {
+			if (!this.audio.audioUrl) {
+				observer.next(true);
+			} else {
+				const header = this.globalData.header;
+				let options: FileUploadOptions = {
+					headers: {
+						// 'Content-Type':'application/json; charset=UTF-8',
+						'DAFU-APP-INFO': header.appInfo,
+						'DAFU-REQUEST-TIME': header.requestTime,
+						'DAFU-APP-SIGN': header.appSign,
+						'DAFU-TOKEN': header.token
+					},
+					params: {
+						type: 'TASK'
+					},
+					fileName: this.audio.fileName,
+					mimeType: 'audio/x-m4a'
+				};
+				const ftObj: FileTransferObject = this.ft.create();
+				ftObj.upload(this.audio.audioUrl,
+					encodeURI(APP_SERVE_URL + '/upoad/audio'), options).then(
+						(d) => {
+							observer.next(true);
+						},
+						(e) => {
+							this.nativeService.alert('语音上传失败,请重试');
+						});
+			}
+		});
 	}
 	taskCreate() {
 		this.appApi.taskCreate(this.formData).subscribe(d => {
@@ -199,6 +229,7 @@ export class AddRemindPage {
 		if (this.mode == 'delay') return;
 		this.inputPanel.panelOpen = false;
 		this.applicationRef.tick();
+        document.removeEventListener('touchstart', this.blankClick, false);
 	}
 	textInput() {
 		if (this.mode == 'delay') return;
@@ -210,6 +241,7 @@ export class AddRemindPage {
 	recordInput() {
 		if (this.mode == 'delay') return;
 		this.infoInput.isRecord = true;
+		document.addEventListener('touchstart', this.blankClick, false);
 		this.infoInput.setBlur();
 	}
 	voiceBarClick() {
@@ -218,12 +250,11 @@ export class AddRemindPage {
 		this.inputPanel.panelOpen = true;
 	}
 	recordEnd(e) {
-		console.log(e);
 		this.audio = {
 			...this.audio,
 			...e
 		};
-		this.uploadAudio();
+		console.log(this.audio);
 	}
 	choose() {
 		let callback = (d): any => {

@@ -82,6 +82,7 @@ export class HttpService {
 		url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url); // tslint:disable-line
 		//  添加请求头
 		const header = this.httpHeader.getHeader();
+		this.globalData.header = header;
 		options.headers = options.headers || new Headers();
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO', header.appInfo);
