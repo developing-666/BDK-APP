@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { HowToApplyPage } from '../how-to-apply/how-to-apply';
+
 /**
  * Generated class for the HelpPage page.
  *
@@ -20,5 +22,12 @@ export class HelpPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad HelpPage');
   }
+
+    /** 
+     * 跳转如何申请页面 
+     */    
+    toHowToApplyPage() {
+        this.navCtrl.push(HowToApplyPage);
+    }
 
 }

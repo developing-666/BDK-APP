@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 
+import { PushMessagePage } from '../push-message/push-message';
+import { ChangePasswordPage } from '../change-password/change-password';
+
 /**
  * Generated class for the SettingPage page.
  *
@@ -22,6 +25,21 @@ export class SettingPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingPage');
     }
+
+
+    /** 
+     * 跳转修改密码页面 
+     */    
+    toChangePasswordPage() {
+        this.navCtrl.push(ChangePasswordPage);
+    }
+    /** 
+     * 跳转推送消息设置页面 
+     */    
+    toPushMessagePage() {
+        this.navCtrl.push(PushMessagePage);
+    }
+
 
     /**
      * 注销账号

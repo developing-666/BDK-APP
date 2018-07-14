@@ -9,6 +9,7 @@ import { AboutUsPage } from './about-us/about-us';
 import { SettingPage } from './setting/setting';
 import { ChangePasswordPage } from './change-password/change-password';
 import { PushMessagePage } from './push-message/push-message';
+import { PipesModule } from '../../pipes/pipes.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,7 @@ import { PushMessagePage } from './push-message/push-message';
         AboutUsPage,
         SettingPage,
         ChangePasswordPage,
-        PushMessagePage,
+        PushMessagePage
     ],
     entryComponents: [
         SettingsPage,
@@ -31,8 +32,8 @@ import { PushMessagePage } from './push-message/push-message';
         AboutUsPage,
         SettingPage,
         ChangePasswordPage,
-        PushMessagePage,
+        PushMessagePage
     ],
-    imports: [IonicPageModule.forChild(SettingsPage)]
+    imports: [IonicPageModule.forChild(SettingsPage),PipesModule]
 })
 export class SettingsPageModule {}

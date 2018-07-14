@@ -17,10 +17,10 @@
 	<div class="main-wrapper">
 		<button ion-item class="user-header" (tap)="toUserInfoPage()">
 			<ion-avatar class="user-avatar" item-left >
-				<img src="../../../assets/imgs/avatar.png">
+				<img [src]="avatar">
 			</ion-avatar>
 			<div class="user-info">
-				<p>185****0000</p>
+				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
 				<p>个人用户版</p>
 				<p>【免费】</p>
 			</div>
@@ -29,27 +29,29 @@
 		<div class="user-list full-form">
 			<ion-list>
 				<ion-item-group>
-				<button ion-item>
+				<button ion-item (tap)="toApplyEnterprisePage()">
 					<button clear ion-button icon-only item-start>
 						<i class="iconfont">&#xe677;</i>
 					</button>
 					<ion-label>申请企业版</ion-label>
-					<ion-note item-end>审核中</ion-note>
+					<ion-note item-end class="P-WAIT_CHECK" *ngIf="isWaitCheck">审核中</ion-note>
+					<ion-note item-end class="P-CHECK_SUCCESS" *ngIf="isCheckSuccess">申请已通过</ion-note>
+					<ion-note item-end class="P-CHECK_FAIL" *ngIf="isCheckFail">申请失败</ion-note>
 				</button>
 				</ion-item-group>
-				<button ion-item>
+				<button ion-item (tap)="toAboutUsPage()">
 					<button clear ion-button icon-only item-start>
 						<i class="iconfont">&#xe670;</i>
 					</button>
 					<ion-label>关于我们</ion-label>
 				</button>
-				<button ion-item>
+				<button ion-item (tap)="toHelpPage()">
 					<button clear ion-button icon-only item-start>
 						<i class="iconfont">&#xe676;</i>
 					</button>
 					<ion-label>使用帮助</ion-label>
 				</button>
-				<button ion-item>
+				<button ion-item (tap)="toSettingPage()">
 					<button clear ion-button icon-only item-start>
 						<i class="iconfont">&#xe678;</i>
 					</button>
@@ -59,7 +61,7 @@
 	
         </div>
         
-        <div class="submit">
+        <div class="submit" (tap)="test()">
                 <button ion-button round block>切换为企业版</button>
             </div>
 

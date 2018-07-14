@@ -73,6 +73,16 @@ export class HttpService {
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
+    public put(url: string, body: any = {}, noLoading: boolean = false,useDefaultApi = true): Observable<any> {
+		const options = new RequestOptions({
+			method: RequestMethod.Put,
+			body,
+			headers: new Headers({
+				'Content-Type': 'application/json; charset=UTF-8'
+			})
+		});
+        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
+	}
 
 	/**
 	 * 一个app可能有多个后台接口服务(api),针对主api添加业务处理,非主api请调用request方法

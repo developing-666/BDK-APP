@@ -9,39 +9,57 @@
 <ion-content>
     <div class="main-wrapper">
         <div class="title-wrapper">
-            <p>请认真填写以下信息，
-                <br> 提交后我们的工作人员会在24小时通知您审核结果.</p>
+            <p class="P-UNCHECK" *ngIf="isUncheck">请认真填写以下信息,</p>
+            <p class="P-UNCHECK" *ngIf="isUncheck">提交后我们的工作人员会在24小时通知您审核结果.</p>
+            <p class="P-WAIT_CHECK-1" *ngIf="isWaitCheck">申请审核中</p>
+            <p class="P-WAIT_CHECK-2" *ngIf="isWaitCheck">工作人员正在审核中，请耐心等待.</p>
+            <p class="P-CHECK_SUCCESS" *ngIf="isCheckSuccess">申请已通过</p>
+            <p class="P-WAIT_CHECK-2" *ngIf="isCheckSuccess">您现在可以使用企业版了</p>
+            <p class="P-CHECK_FAIL" *ngIf="isCheckFail">申请失败</p>
+            <p class="P-WAIT_CHECK-2" *ngIf="isCheckFail">{{applyCompanyInfo.checkResult}}</p>
+
         </div>
-        <form class="full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
+        <form class="full-form"  [formGroup]="ngForm" novalidate>
             <ion-list>
                 <ion-item-group>
-                    <ion-item>
+                    <ion-item [ngClass]="{'invalid':(company.touched && company.invalid),'disabled':!canEdit}">
                         <ion-label>公司</ion-label>
-                        <ion-input type="text" placeholder="请输入公司名称"></ion-input>
+                        <ion-input type="text" placeholder="请输入公司名称" [(ngModel)]="formData.company" formControlName="company" :disabled="isWaitCheck"></ion-input>
                     </ion-item>
-                    <button ion-item>
+                    <button ion-item  [ngClass]="{'invalid':(industry.touched && industry.invalid),'disabled':!canEdit}">
                         <ion-label>行业</ion-label>
-                        <ion-note item-end>请选择行业</ion-note>
+                        <ion-select cancelText="取消" okText="确认" placeholder="请选择行业" [(ngModel)]="formData.industry" formControlName="industry">
+                            <ion-option [value]="item" *ngFor="let item of industrys">{{item}}</ion-option>
+                        </ion-select>
                     </button>
-                    <button ion-item>
+                    <button ion-item  [ngClass]="{'invalid':(provinceId.touched && provinceId.invalid),'disabled':!canEdit}">
+                        <ion-label>省份</ion-label>
+                        <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()"  formControlName="provinceId">
+                            <ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
+                        </ion-select>
+                    </button>
+                    <button ion-item [ngClass]="{'invalid':(cityId.touched && cityId.invalid),'disabled':!canEdit}">
                         <ion-label>城市</ion-label>
-                        <ion-note item-end>请选择城市</ion-note>
+                        <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" placeholder="请选择城市" [disabled]="city.length==0" formControlName="cityId">
+                            <ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
+                        </ion-select>
                     </button>
                 </ion-item-group>
                 <ion-item-group>
-                    <button ion-item>
+                    <ion-item [ngClass]="{'invalid':(applyPeople.touched && applyPeople.invalid),'disabled':!canEdit}">
                         <ion-label>申请人</ion-label>
-                        <ion-input type="text" placeholder="请输入你的姓名"></ion-input>
-                    </button>
-                    <button ion-item>
+                        <ion-input type="text" placeholder="请输入你的姓名" [(ngModel)]="formData.applyPeople" formControlName="applyPeople" ></ion-input>
+                    </ion-item>
+                    <ion-item [ngClass]="{'invalid':(phone.touched && phone.invalid),'disabled':!canEdit}">
                         <ion-label>手机号码</ion-label>
-                        <ion-input type="tel" placeholder="请输入手机号码"></ion-input>
-                    </button>
+                        <ion-input type="tel" placeholder="请输入手机号码" [(ngModel)]="formData.phone" formControlName="phone"></ion-input>
+                    </ion-item>
                 </ion-item-group>
             </ion-list>
         </form>
-        <div class="submit">
-            <button ion-button round block>提交申请</button>
+        <div class="submit" *ngIf="canEdit">
+            <button type="submit" ion-button round block (tap)="submitApply()" >提交申请</button>
         </div>
+        <div class="shade" *ngIf="!canEdit"></div>
     </div>
 </ion-content>

@@ -7,15 +7,15 @@
 	<form class="main-wrapper full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
 		<ion-list>
 			<ion-item-group>
-				<button ion-item>
-					<ion-label>如何申请企业版</ion-label>
+				<button ion-item (tap)="toChangePasswordPage()">
+					<ion-label>修改密码</ion-label>
 					<ion-note item-end>修改</ion-note>
 				</button>
 				<button ion-item (tap)="cancellationAccount()">
 					<ion-label>注销账号</ion-label>
 					<ion-note item-end>注销账号</ion-note>
 				</button>
-				<button ion-item>
+				<button ion-item (tap)="toPushMessagePage()">
 					<ion-label>推送消息设置</ion-label>
 				</button>
 				<ion-item (tap)="clearCache()">
