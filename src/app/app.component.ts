@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild,NgZone } from '@angular/core';
 import {
 	Events,
 	IonicApp,
@@ -22,6 +22,9 @@ import { Utils } from '../providers/utils';
 import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
 import { HttpHeader } from '../providers/http-header';
+import { CodePush } from '@ionic-native/code-push';
+import { CODE_PUSH_DEPLOYMENT_KEY,IS_DEBUG } from '../providers/constants';
+
 
 import { RemindPage } from '../pages/remind/remind/remind';
 import { NewRemindPage } from '../pages/remind/new-remind/new-remind';
@@ -52,7 +55,7 @@ function _window(): any {
 })
 export class MyApp {
 	@ViewChild('myNav') nav: Nav;
-
+	current:any;
 	constructor(
 		private platform: Platform,
 		private keyboard: Keyboard,
@@ -67,19 +70,21 @@ export class MyApp {
 		private versionService: VersionService,
 		private nativeService: NativeService,
 		private device: Device,
-		private httpHeader:HttpHeader
+		private httpHeader: HttpHeader,
+		private codePush: CodePush,
+		private zone:NgZone,
 	) {
 		platform.ready().then(() => {
 			this.nativeService.getVersionNumber().subscribe((v) => {
 				this.httpHeader.appVersion = v;
-			},()=>{
+			}, () => {
 				console.log('获取appVersion失败');
 			});
 			if (this.nativeService.isMobile()) {
 				var vConsole = new VConsole();
 			}
 			// this.nav.setRoot(LoginPage); // 设置首页
-            this.nav.setRoot(HomePage); // 设置首页
+			this.nav.setRoot(HomePage); // 设置首页
 			this.nativeService.statusBarStyle(); // 设置状态栏颜色
 			this.assertNetwork(); // 检测网络
 			// this.helper.funDebugInit(); // 初始化fundebug
@@ -88,7 +93,7 @@ export class MyApp {
 			// this.jPushOpenNotification(); // 处理打开推送消息事件
 			// 订阅重新登录事件
 			this.events.subscribe('user:reLogin', () => {
-			  this.modalCtrl.create(LoginPage).present();
+				this.modalCtrl.create(LoginPage).present();
 			});
 			// 从缓存中获取token
 			// this.storage.get('token').then(token => {
@@ -108,13 +113,51 @@ export class MyApp {
 			//   }
 			//   this.nativeService.splashScreenHide(); // 隐藏启动页
 			// });
-			// this.registerBackButtonAction(); // 注册android返回按键事件
+			this.registerBackButtonAction(); // 注册android返回按键事件
 			// this.versionService.checkVersion(); // 检查版本更新
-			// this.nativeService.sync(); // 启动app检查热更新
+			this.assetsSync(); // 启动app检查热更新
 			// Utils.sessionStorageClear(); // 清除数据缓存
 		});
 	}
-
+	assetsSync() {
+		const downloadProgress = (progress) => {
+			this.zone.run(()=>{
+				this.current = Math.floor((progress.receivedBytes/progress.totalBytes)*100);
+			});
+		}
+		if (this.nativeService.isMobile()) {
+			let deploymentKey = '';
+			if (this.nativeService.isAndroid() && IS_DEBUG) {
+				deploymentKey = CODE_PUSH_DEPLOYMENT_KEY.android.Staging;
+			}
+			if (this.nativeService.isAndroid() && !IS_DEBUG) {
+				deploymentKey = CODE_PUSH_DEPLOYMENT_KEY.android.Production;
+			}
+			if (this.nativeService.isIos() && IS_DEBUG) {
+				deploymentKey = CODE_PUSH_DEPLOYMENT_KEY.ios.Staging;
+			}
+			if (this.nativeService.isIos() && !IS_DEBUG) {
+				deploymentKey = CODE_PUSH_DEPLOYMENT_KEY.ios.Production;
+			}
+			this.codePush.sync({
+				deploymentKey
+			},downloadProgress).subscribe(syncStatus => {
+				if (syncStatus == 0) {
+					console.log('[CodePush]:app已经是最新版本;syncStatus:' + syncStatus);
+				} else if (syncStatus == 3) {
+					console.log('[CodePush]:更新出错;syncStatus:' + syncStatus);
+				} else if (syncStatus == 5) {
+					console.log('[CodePush]:检查是否有更新;syncStatus:' + syncStatus);
+				} else if (syncStatus == 7) {
+					console.log('[CodePush]:准备下载安装包;syncStatus:' + syncStatus);
+				} else if (syncStatus == 8) {
+					console.log('[CodePush]:下载完成准备安装;syncStatus:' + syncStatus);
+				} else {
+					console.log('[CodePush]:syncStatus:' + syncStatus);
+				}
+			});
+		}
+	}
 	// 检测网络
 	assertNetwork() {
 		if (!this.nativeService.isConnecting()) {

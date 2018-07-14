@@ -105,11 +105,11 @@ export const FILTERDATA: any[] = [
 // code push 部署key
 export const CODE_PUSH_DEPLOYMENT_KEY = {
   'android': {
-    'Production': 'i0LgJRugiIfjVYTgmXs9go45Xc7g26690215-d954-4697-a879-90e0c4612b59',
-    'Staging': 'WY29_Zyq_hg0eB3TSTGaKRSKPE6k26690215-d954-4697-a879-90e0c4612b59'
+    'Production': '7-EYzJUWF6G4NkSbTgbbNpaya8lL65d837ac-83a7-46ac-b3f7-d9f5df69ca82',
+    'Staging': 'Xp74u9fR1Q3L33gd3uOaA2wv_jsd65d837ac-83a7-46ac-b3f7-d9f5df69ca82'
   },
   'ios': {
-    'Production': 'kn3VJ28z0hB_zQYnW-KnblldnBzN26690215-d954-4697-a879-90e0c4612b59',
-    'Staging': 'SRoxClVMoed8SgwIRxeVCPWx26Fk26690215-d954-4697-a879-90e0c4612b59'
+    'Production': 'b0FAimOPJgPqr8kNZKld1GQWOpa_65d837ac-83a7-46ac-b3f7-d9f5df69ca82',
+    'Staging': 'IxCaGymFmvrMxbgW5wqY7EZgj8QX65d837ac-83a7-46ac-b3f7-d9f5df69ca82'
   }
 };

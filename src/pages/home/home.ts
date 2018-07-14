@@ -16,8 +16,8 @@ export class HomePage {
     // tab1Root = RemindPage;
     // tab2Root = ClientelePage;
     // tab3Root = SettingsPage;
-    tab1Root = ClientelePage;
-    tab2Root = RemindPage;
+    tab1Root = RemindPage;
+    tab2Root = ClientelePage;
     tab3Root = SettingsPage;
     mb: any;
     constructor(
