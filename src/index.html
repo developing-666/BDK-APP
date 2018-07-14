@@ -13,14 +13,15 @@
                 var screen_w = parseInt(window.screen.width);
                 var scale = screen_w / 375;
                 if (/Android (\d+\.\d+)/.test(userAgent)) {
-                    var version = parseFloat(RegExp.$1);
-                    if (userAgent.indexOf("MX") > -1 && version >= 5) {
-                        //alert(userAgent)
-                        document.write('<meta name="viewport" content="width=375,minimum-scale = ' + scale +
-                            ', maximum-scale = ' + scale + ', target-densitydpi=device-dpi">');
-                    } else {
-                        document.write('<meta name="viewport" content="width=device-width, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=' + scale + ', user-scalable=no">');
-                    };
+					document.write('<meta name="viewport" content="width=device-width, initial-scale=' + scale + ', minimum-scale=' + scale + ', maximum-scale=' + scale + ', user-scalable=no">');
+                    // var version = parseFloat(RegExp.$1);
+                    // if (userAgent.indexOf("MX") > -1 && version >= 5) {
+                    //     //alert(userAgent)
+                    //     document.write('<meta name="viewport" content="width=375,minimum-scale = ' + scale +
+                    //         ', maximum-scale = ' + scale + ', target-densitydpi=device-dpi">');
+                    // } else {
+					//
+                    // };
                 } else {
                     document.write(
                         '<meta name="viewport" content="width=375, user-scalable=no, target-densitydpi=device-dpi, viewport-fit=cover">'

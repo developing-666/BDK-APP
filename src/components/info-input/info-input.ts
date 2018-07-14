@@ -41,7 +41,6 @@ export class InfoInputComponent implements ControlValueAccessor {
     inputValue: string = undefined;
     innerValue: any = null;
     textareaStyle: any = {};
-    audio: any = undefined;
     get value(): any {
         if (this.innerValue.content || this.innerValue.audio) {
             return this.innerValue;
@@ -79,7 +78,7 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.inputBlur.emit(e);
     }
     textareaInput() {
-        if (!this.innerValue) {
+        if (!this.innerValue.content) {
             this.valueInit();
         }
         this.innerValue.content = this.inputValue;
@@ -97,7 +96,7 @@ export class InfoInputComponent implements ControlValueAccessor {
         // this.keyboard.show();
     }
     pickerPhoto() {
-		if (!this.innerValue) {
+		if (!this.innerValue.content) {
             this.valueInit();
         }
         let count = 9 - this.innerValue.pics.length;
@@ -132,7 +131,7 @@ export class InfoInputComponent implements ControlValueAccessor {
         );
     }
     takePicture() {
-		if (!this.innerValue) {
+		if (!this.innerValue.content) {
             this.valueInit();
         }
         const imgOptions: CameraOptions = {

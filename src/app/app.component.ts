@@ -89,7 +89,7 @@ export class MyApp {
 			this.assertNetwork(); // 检测网络
 			// this.helper.funDebugInit(); // 初始化fundebug
 			// this.helper.alloyLeverInit(); // 本地"开发者工具"
-			// this.helper.initJpush(); // 初始化极光推送
+			this.helper.initJpush(); // 初始化极光推送
 			// this.jPushOpenNotification(); // 处理打开推送消息事件
 			// 订阅重新登录事件
 			this.events.subscribe('user:reLogin', () => {
@@ -115,7 +115,7 @@ export class MyApp {
 			// });
 			this.registerBackButtonAction(); // 注册android返回按键事件
 			// this.versionService.checkVersion(); // 检查版本更新
-			this.assetsSync(); // 启动app检查热更新
+			// this.assetsSync(); // 启动app检查热更新
 			// Utils.sessionStorageClear(); // 清除数据缓存
 		});
 	}
@@ -221,7 +221,7 @@ export class MyApp {
 				const activeNav = activeVC.getNav();
 				activeNav.popToRoot({}).then(() => {
 					// 导航跳到最顶层
-					childNav.select(3); // 选中第四个tab
+					childNav.select(1); // 选中第四个tab
 					const t = childNav.getSelected(); // 获取选中的tab
 					const v = t.getActive(); // 通过当前选中的tab获取ViewController
 					const n = v.getNav(); // 通过当前视图的ViewController获取的NavController

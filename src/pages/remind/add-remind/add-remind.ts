@@ -42,7 +42,12 @@ export class AddRemindPage {
 			: `${this.modeText}其它提醒`;
 
 	clientele: any = undefined;
-	infoContent: any;
+	infoContent: any = {
+		audio: {
+			audioUrl: 'http://58.247.96.174:7070/audios/task/2018/20180715/b2488a9896d3491eaaf49e3ced4236f7.m4a',
+			duration: 5
+		}
+	};
 	formData: any = {
 		title: undefined,
 		planRemindTime: undefined
@@ -53,14 +58,14 @@ export class AddRemindPage {
 		// duration: 10,
 		type: 'TASK'
 	};
-    blankClick: any = e => {
-        let parent =
-            Utils.closest(e.target, '.remark-container') ||
-            Utils.closest(e.target, '.ion-input-panel');
-        if (!parent) {
-            this.hideInputPanel();
-        }
-    };
+	blankClick: any = e => {
+		let parent =
+			Utils.closest(e.target, '.remark-container') ||
+			Utils.closest(e.target, '.ion-input-panel');
+		if (!parent) {
+			this.hideInputPanel();
+		}
+	};
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -123,17 +128,21 @@ export class AddRemindPage {
 			const audioUpload = this.uploadAudio();
 			const result = Observable.combineLatest(imgUpload, audioUpload);
 			result.subscribe(d => {
-				console.log(d);
-				if(d[0]&&d[1]){
+				if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
+					const audio = d[1] === true ? undefined : JSON.parse(d[1].response).data;
+					console.log(audio);
 					if (this.type == 'clientele') {
 						this.formData.customerId = this.clientele.id;
 					};
 					this.formData.content = this.infoContent.content;
-					this.formData.audio = {};
-					this.formData.audio.path = d[1].path;
-					this.formData.audio.duration = this.audio.duration;
+					if(audio){
+						this.formData.audio = {}
+						this.formData.audio.path = audio ? audio.path : undefined;
+						this.formData.audio.duration = this.audio.duration;
+					}
 					this.formData.pics = this.paths;
 					this.formData.planRemindTime = moment(this.planRemindTime).utc().format();
+					console.log('formData======================');
 					console.log(this.formData);
 					this.taskCreate();
 				}
@@ -172,6 +181,7 @@ export class AddRemindPage {
 	}
 	uploadAudio(): Observable<any> {
 		return Observable.create(observer => {
+			console.log(this.audio.audioUrl);
 			if (!this.audio.audioUrl) {
 				observer.next(true);
 			} else {
@@ -194,7 +204,7 @@ export class AddRemindPage {
 				ftObj.upload(this.audio.audioUrl,
 					encodeURI(APP_SERVE_URL + '/upoad/audio'), options).then(
 						(d) => {
-							observer.next(true);
+							observer.next(d);
 						},
 						(e) => {
 							this.nativeService.alert('语音上传失败,请重试');
@@ -229,7 +239,7 @@ export class AddRemindPage {
 		if (this.mode == 'delay') return;
 		this.inputPanel.panelOpen = false;
 		this.applicationRef.tick();
-        document.removeEventListener('touchstart', this.blankClick, false);
+		document.removeEventListener('touchstart', this.blankClick, false);
 	}
 	textInput() {
 		if (this.mode == 'delay') return;
@@ -254,7 +264,11 @@ export class AddRemindPage {
 			...this.audio,
 			...e
 		};
-		console.log(this.audio);
+		if (!this.infoContent) {
+			this.infoContent = {}
+		}
+		this.infoContent.audio = this.audio;
+		console.log(this.infoContent);
 	}
 	choose() {
 		let callback = (d): any => {

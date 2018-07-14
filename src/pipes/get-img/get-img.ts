@@ -13,7 +13,6 @@ export class GetImgPipe implements PipeTransform {
 			const len = value.length;
 			const path = value.substring(0, index);
 			const suffix = value.substring(index, len);
-			console.log(`${path}_-${size}${suffix}`);
 			return `${path}_-${size}${suffix}`;
 		}
 	}

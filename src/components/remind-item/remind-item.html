@@ -20,8 +20,8 @@
                 <div class="remark-text">
                     {{remind?.content}}
                 </div>
-                <div class="remark-voice-container">
-                    <voice-bar></voice-bar>
+                <div class="remark-voice-container" *ngIf="remind?.audio">
+                    <voice-bar [data]="remind?.audio"></voice-bar>
                 </div>
                 <div class="remark-img-container" *ngIf="remind?.pics.length>0">
                     <img *ngFor="let item of remind.pics" [src]="item | getImg:'x200'">

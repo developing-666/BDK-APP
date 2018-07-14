@@ -1,8 +1,8 @@
-<div class="voice-bar">
-	<div class="voice-bar-item">
-		<i class="iconfont ing"></i>
+<div class="voice-bar" (click)="barClick($event)">
+	<div class="voice-bar-item" [ngStyle]="{'width':barWidth()}" [ngClass]="{'played':played}">
+		<i class="iconfont" [ngClass]="{'ing':playing}"></i>
 	</div>
-	<span class="seconds">
-		30″
+	<span class="seconds" *ngIf="data?.duration">
+		{{data?.duration}}″
 	</span>
 </div>
