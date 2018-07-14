@@ -127,6 +127,39 @@ export class AppApi {
     searchHistoryDelete() {
         return this._http.delete('/searchhistory/deleteAll');
     }
+    /** 
+     * 申请企业版 
+     */    
+    applyCompanyCreate(opts?:any):any {
+        return this._http.post('/apply_company/create',opts);
+    }
+    /** 
+     * 获取申请企业版信息
+     */    
+    applyCompanyQueryInfo():any {
+        return this._http.get('/apply_company/queryInfo');
+    }
+    /** 
+     * 获取用户信息
+     */    
+    queryUserInfo():any {
+        return this._http.get('/user/queryUserInfo');
+    }
+    /** 
+     * 更新用户信息
+     */    
+    updateUserInfo(opts?:any):any {
+        return this._http.put('/user/update',opts);
+    }
+
+    /** 
+     * 修改密码 
+     */    
+    resetPassword(opts?:any):any {
+        return this._http.post('/resetPassword',opts);
+    }
+    
+    
 	/**
 	 * 获取用户操作记录
 	 */

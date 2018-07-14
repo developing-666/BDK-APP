@@ -3,6 +3,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
+import { AppApi } from './../../../providers/app-api';
+import { ForgetPasswordPage } from '../../login/forget-password/forget-password';
 
 /**
  * Generated class for the ChangePasswordPage page.
@@ -17,11 +19,15 @@ import { Validators } from '../../../providers/validators';
 })
 export class ChangePasswordPage {
     ngForm: FormGroup;
-
+    formData:any = {
+        oldPassword:'',
+        newPassword:''
+    };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private appApi: AppApi,
     ) {
         this.createForm();
     }
@@ -39,19 +45,24 @@ export class ChangePasswordPage {
         new: ['',[Validators.required,Validators.minLength(6)]],
         affirm: ['',[Validators.required,Validators.minLength(6)]], 
       },{updateOn: 'blur'});
-    // this.ngForm = new FormGroup({
-    //     old:new FormControl('',[Validators.required,Validators.minLength(6)]),
-    //     new:new FormControl('',[Validators.required,Validators.minLength(6)]),
-    //     affirm:new FormControl('',[Validators.required,Validators.minLength(6)]),
-    // });
     }
     get old() { return this.ngForm.get('old'); }
     get new() { return this.ngForm.get('new'); }
     get affirm() { return this.ngForm.get('affirm'); }
 
-    change() {
-        console.log(this.ngForm);
-        console.log('this.old',this.old);
-        
+    /** 
+     * 提交 
+     */    
+    submit() {
+        console.log(this.formData);
+        this.appApi.resetPassword(this.formData).subscribe(d=>{
+            console.log(d);
+            
+        });
     }
+
+    toForgetPasswordPage() {
+        this.navCtrl.push(ForgetPasswordPage);
+    }
+
 }

@@ -232,6 +232,9 @@ ion-buttons.buttons-group {
             &.invalid {
                 border-bottom: 0.55px solid color($colors,danger);
             }
+            &.disabled {
+                opacity: 0.4;
+            }
         }
         button.item:not([detail-none]) .item-inner{
             background-position: right 1rem center;padding-right:2.4rem;

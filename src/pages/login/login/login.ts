@@ -38,6 +38,7 @@ export class LoginPage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
     }
+
     /**
      * 创建表单
      */
@@ -60,10 +61,10 @@ export class LoginPage {
     get agreement() {
         return this.ngForm.get('agreement');
     }
+
     /**
      * 登录
      */
-
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
@@ -76,36 +77,27 @@ export class LoginPage {
             // this.app.getRootNav().push(AddClientelePage);
         });
     }
+
     /**
      * 注册
      */
-
     toSigninPage() {
-        let callback = (params)=>{
-            return new Promise((resolve,reject)=>{
-
-                resolve(()=>{
-                    console.log('resolve');
-
-                });
-                // reject(()=>{
-                //     console.log('reject');
-
-                // });
+        let callback = params => {
+            return new Promise((resolve, reject) => {
                 if (params) {
-                    console.log('拿到参数',params);
-
+                    this.formData.phone = params.phone;
+                    resolve();
                 }
             });
-        }
-        this.navCtrl.push(SignInPage,{
-            callback:callback
+        };
+        this.navCtrl.push(SignInPage, {
+            callback: callback
         });
     }
+
     /**
      * 测试
      */
-
     change() {
         console.log(this.ngForm);
         console.log('this.agreement', this.phone);

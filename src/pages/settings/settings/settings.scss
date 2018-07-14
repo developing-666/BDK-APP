@@ -74,5 +74,14 @@ page-settings {
         }
     }
     }
+    .P-WAIT_CHECK {
+        color: color($colors, warning);
+    }
+    .P-CHECK_SUCCESS {
+        color: color($colors, primary);
+    }
+    .P-CHECK_FAIL {
+        color: color($colors, danger);
+    }
 
 }

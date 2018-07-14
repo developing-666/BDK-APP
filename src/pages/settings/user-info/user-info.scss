@@ -9,15 +9,17 @@ page-user-info {
             top: 0;
         }
         .list {
-            .label.label-ios {
-                &.disabled {
-                    color: color($colors, gray);
+            .item {
+                .item-inner {
+                    transition: background-position 0.5s;
+                    transition-timing-function: ease-in;
                 }
-                &.tip {
-                    color: color($colors,danger);
+                &.unactive {
+                    .item-inner {
+                        background-position: right -14px center;
+                    }
                 }
             }
-            
         }
         .header {
             button {
@@ -38,13 +40,6 @@ page-user-info {
                     }
                 }
             }
-        }
-    }
-    .item.item-block.item-ios {
-        .item-inner {
-            background-position: right -14px center;
-            transition: background-position 0.5s;
-            transition-timing-function: ease-in;
         }
     }
 }

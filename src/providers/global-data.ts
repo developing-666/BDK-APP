@@ -19,6 +19,16 @@ export class GlobalData {
     //省份数据
     private _provinces: Array<any> = [];
 
+    //申请企业版信息
+    private _applyCompanyInfo: any = {};
+
+    //申请状态
+    checkStatus:any = {
+        WAIT_CHECK:'WAIT_CHECK',
+        CHECK_SUCCESS:'CHECK_SUCCESS',
+        CHECK_FAIL:'CHECK_FAIL'
+    };
+    
 	private _header:any = {};
     get userId(): string {
         return this._userId;
@@ -72,6 +82,12 @@ export class GlobalData {
 
     set provinces(value: any) {
         this._provinces = value;
+    }
+    public get applyCompanyInfo(): any {
+        return this._applyCompanyInfo;
+    }
+    public set applyCompanyInfo(value: any) {
+        this._applyCompanyInfo = value;
     }
     get CUSTOMER_LABEL() {
         return this._CUSTOMER_LABEL;

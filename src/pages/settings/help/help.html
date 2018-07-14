@@ -18,7 +18,7 @@
     <form class="main-wrapper full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
         <ion-list>
             <ion-item-group>
-                <button ion-item>
+                <button ion-item (tap)="toHowToApplyPage()">
                     <ion-label>如何申请企业版</ion-label>
                 </button>
                 <button ion-item>
