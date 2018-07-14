@@ -4,24 +4,26 @@
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <div class="main-container gray">
-        <clientele-item></clientele-item>
-        <form class="add-clientele-remind full-form" novalidate (ngSubmit)="setting()">
+    <form #addRemindForm="ngForm" class="add-clientele-remind full-form" novalidat>
+        <div class="main-container gray">
+            <clientele-item [data]="item"></clientele-item>
             <ion-list>
-                <ion-item>
+                <ion-item [ngClass]="{'invalid':(addRemindForm.controls.title?.touched || addRemindForm.submitted) && addRemindForm.controls.title.invalid}">
                     <ion-label>提醒题目</ion-label>
-                    <ion-input placeholder="请输入标题"></ion-input>
+                    <ion-input name="title" [(ngModel)]="formData.title" required placeholder="请输入标题"></ion-input>
                 </ion-item>
-                <button ion-item>
+                <button ion-item [ngClass]="{'invalid':(addRemindForm.controls.time?.touched || addRemindForm.submitted) && addRemindForm.controls.time.invalid}">
                     <ion-label>提醒时间</ion-label>
-                    <ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
+                    <ion-datetime name="time" [(ngModel)]="planRemindTime" required placeholder="请选择提醒时间" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm"
+                        cancelText="取消" doneText="确定"></ion-datetime>
                 </button>
-                <button ion-item>
-                    <ion-label>跟进时间</ion-label>
-                    <ion-datetime placeholder="请选择提醒日期" displayFormat="MMMM YYYY" min="2016" max="2020-10-31"></ion-datetime>
-                </button>
+                <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
+                    [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
+                    name="content" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-list>
-        </form >
-    </div>
-    <button class="large" ion-button block round>创建</button>
+        </div>
+        <button type="submit" class="large" ion-button block round (tap)="done()">创建</button>
+		<!-- <button type="submit" class="large" ion-button block round (tap)="done()" [disabled]="addRemindForm.invalid">创建</button> -->
+    </form>
+    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

@@ -2,8 +2,7 @@ page-search-clientele {
     .content{
         background-color: #fff;
     }
-    .lately-words{background-color: #fff;
-        min-height: calc(100vh - 44px);
+    .lately-words{
         .title{
             height:rem(80);
             display: flex;align-items: center;justify-content: space-between;color: color($colors,light);padding:0 rem(30);

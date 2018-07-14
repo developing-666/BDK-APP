@@ -1,0 +1,13 @@
+<ion-content [ngClass]="{'no-result':reminds.length===0}">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+        <remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'disabled':item.isExpired}"
+            [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (click)="itemClick($event,item)"></remind-item>
+    </ion-list>
+	<button class="large" ion-button block round (tap)="add()">创建提醒</button>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

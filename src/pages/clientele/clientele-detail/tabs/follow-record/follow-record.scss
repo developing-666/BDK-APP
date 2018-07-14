@@ -1,0 +1,24 @@
+page-follow-record {
+    .content {
+        &.no-result {
+            &:before {
+                height: rem(278);
+                width: rem(310);
+                @include flex-center();
+                padding-top: rem(200);
+                background: url('../../../assets/imgs/no-remind.png') no-repeat center 3rem;
+                background-size: rem(200);
+                content: '暂无跟进记录';
+                font-size: rem(30);
+                margin-top: rem(200);
+                position: absolute;
+                z-index: 2;
+                left: 50%;
+                margin-left: rem(-310/2);
+            }
+			.button.large{
+				margin-top:30rem;
+			}
+        }
+    }
+}

@@ -1,5 +1,7 @@
 page-new-remind {
-	.content{background-color: rgba(color($colors,bg),0.8);}
+	.content {
+	    background-color: rgba(color($colors, bg), 0.9);
+	}
 	.new-remind-container{position: absolute;top:0;left:0;right:0;bottom: 0;@include flex-center();
 		flex-direction: column;
 		.title{font-size:1.6rem;line-height:3rem;margin-bottom: rem(104);}

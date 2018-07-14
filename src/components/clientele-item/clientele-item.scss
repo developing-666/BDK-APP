@@ -2,4 +2,14 @@ clientele-item {
     .item{
         @include clientele-item();
     }
+    .no-push {
+        .item .item-inner {
+            background-image: none;
+        }
+    }
+    &.active {
+        .item{
+            background-color: #f3ffff;
+        }
+    }
 }

@@ -1,11 +1,12 @@
 import { ViewChild, Component } from '@angular/core';
 
-import { App, NavController, NavParams } from 'ionic-angular';
+import { App, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
+import { HttpHeader } from '../../../providers/http-header';
 
 import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
@@ -24,9 +25,11 @@ export class LoginPage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
+        public viewCtrl: ViewController,
         private appApi: AppApi,
         private fb: FormBuilder,
-        private app: App
+        private app: App,
+		private httpHeader:HttpHeader
     ) {
         this.createForm();
     }
@@ -65,7 +68,12 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
-            // this.app.getRootNav().push(HomePage);
+			this.httpHeader.token = d;
+            if (this.viewCtrl.isOverlay) {
+                this.viewCtrl.dismiss();
+            } else {
+                this.navCtrl.setRoot(HomePage); // 重新设置首页
+            }
             // this.app.getRootNav().push(AddClientelePage);
         });
     }

@@ -3,6 +3,7 @@ import {
     Output,
     EventEmitter,
     OnInit,
+    Input,
     ApplicationRef
 } from '@angular/core';
 import { Platform, AlertController } from 'ionic-angular';
@@ -33,6 +34,7 @@ export class IonInputPanelComponent implements OnInit {
     @Output() deleteClick: EventEmitter<any> = new EventEmitter();
     @Output() playClick: EventEmitter<any> = new EventEmitter();
     @Output() recordEnd: EventEmitter<any> = new EventEmitter();
+    @Input() disabled: boolean = false;
     isRecord: boolean = false;
     panelOpen: boolean = false;
     complete: boolean = false;
@@ -69,7 +71,7 @@ export class IonInputPanelComponent implements OnInit {
             this.keyboardShow = this.keyboard.onKeyboardShow().subscribe(e => {
                 this.keyboardHeight = e.keyboardHeight;
                 this.panelStyle = {
-                    transform: `translateY(-${e.keyboardHeight}px)`
+                    transform: `translateY(-${e.keyboardHeight*(375/window.screen.width)}px)`
                 };
                 this.applicationRef.tick();
             });
@@ -80,23 +82,33 @@ export class IonInputPanelComponent implements OnInit {
         }
     }
     ngOnDestroy() {
+        iNoBounce.disable();
         if (this.platform.is('ios')) {
             this.keyboardShow.unsubscribe();
             this.keyboardHide.unsubscribe();
         }
     }
+    scrollDisable() {
+        iNoBounce.enable();
+    }
+    scrollEnable() {
+        iNoBounce.disable();
+    }
     open() {
         this.panelOpen = !this.panelOpen;
     }
     text(e) {
+        if (this.disabled) return;
         this.isRecord = false;
         this.textInput.emit(e);
     }
     inputFoucs() {
+        if (this.disabled) return;
         this.isRecord = false;
         this.panelOpen = true;
     }
     record(e) {
+        if (this.disabled) return;
         this.isRecord = true;
         this.panelOpen = true;
         this.recordInput.emit(e);
@@ -168,7 +180,7 @@ export class IonInputPanelComponent implements OnInit {
                 }
             });
         } else {
-            this.nativeService.alert('Not cordova!');
+            this.nativeService.alert('请在APP中使用!');
             return;
         }
     }
@@ -251,9 +263,9 @@ export class IonInputPanelComponent implements OnInit {
                 console.log('播放完成');
             });
             this.recordEnd.emit({
-                assetPath: this.file.cacheDirectory.replace(/^file:\/\//, ''),
-                fileName: this.fileName,
-                fileId: this.fileId,
+                audioUrl: this.file.cacheDirectory.replace(/^file:\/\//, '') + this.fileName,
+                fileId:this.fileId,
+                fileName:this.fileName,
                 duration: this.seconds
             });
         });

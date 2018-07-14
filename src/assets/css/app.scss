@@ -20,6 +20,15 @@ ion-buttons.buttons-group {
 	font-size: 2.8rem;margin-bottom: 4px;margin-top: 0;
 }
 
+.note-ios{
+    &.active{
+        color: color($colors,font);
+    }
+}
+
+.simple-no-result{
+	line-height: 4rem;text-align: center;font-size: 2rem;
+}
 @keyframes playing {
     0% {
         transform: scale(1);
@@ -58,6 +67,8 @@ ion-buttons.buttons-group {
     }
 }
 
+
+.no-more{height: 4rem;display: flex;align-items: center;justify-content: center;width: 100%;}
 .button-clear[icon-only]{
 	.iconfont{color: color($colors, primary);}
 }

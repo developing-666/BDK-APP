@@ -7,12 +7,16 @@ import { ClienteleTagPage } from './clientele-tag/clientele-tag';
 import { CustomTagPage } from './custom-tag/custom-tag';
 import { SettingRecordPage } from './setting-record/setting-record';
 import { ClienteleDetailPage } from './clientele-detail/clientele-detail';
+import { SearchResultPage } from './search-result/search-result';
 
 import { OperatingRecordPage } from './clientele-detail/tabs/operating-record/operating-record';
+import { CallRecordPage } from './clientele-detail/tabs/call-record/call-record';
+import { FollowRecordPage } from './clientele-detail/tabs/follow-record/follow-record';
+import { NotFollowPage } from './clientele-detail/tabs/not-follow/not-follow';
 
 import { ComponentsModule } from '../../components/components.module';
 
-import { PipesModule} from '../../pipes/pipes.module';
+import { PipesModule } from '../../pipes/pipes.module';
 @NgModule({
     declarations: [
         ClientelePage,
@@ -22,7 +26,11 @@ import { PipesModule} from '../../pipes/pipes.module';
         CustomTagPage,
         ClienteleDetailPage,
         SettingRecordPage,
-        OperatingRecordPage
+        OperatingRecordPage,
+        SearchResultPage,
+        CallRecordPage,
+        FollowRecordPage,
+        NotFollowPage
     ],
     entryComponents: [
         ClientelePage,
@@ -32,12 +40,12 @@ import { PipesModule} from '../../pipes/pipes.module';
         CustomTagPage,
         ClienteleDetailPage,
         SettingRecordPage,
-        OperatingRecordPage
+        OperatingRecordPage,
+        SearchResultPage,
+        CallRecordPage,
+        FollowRecordPage,
+        NotFollowPage
     ],
-    imports: [
-        IonicModule,
-        ComponentsModule,
-        PipesModule
-    ]
+    imports: [IonicModule, ComponentsModule, PipesModule]
 })
 export class ClienteleModule {}

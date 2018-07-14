@@ -9,7 +9,7 @@
 			<span>语音</span>
 		</div>
 	</div>
-	<div class="input-panel" [hidden]="!isRecord">
+	<div class="input-panel" [hidden]="!isRecord || !panelOpen">
 		<div class="record-wrapper" [ngClass]="{'complete':complete}">
 			<div class="record">
 				<i class="iconfont main-icon" [ngClass]="{'recording':recording}" (touchstart)="clockStart()" (touchend)="clockStop()">&#xe671;</i>

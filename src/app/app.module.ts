@@ -1,5 +1,8 @@
 //Angular以及ionic框架相关
-import { ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule,LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeZh from '@angular/common/locales/zh';
+import localeZhExtra from '@angular/common/locales/extra/zh';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { Config, IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -38,9 +41,9 @@ import { HTTP } from '@ionic-native/http';
 import { Keyboard } from '@ionic-native/keyboard';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Media } from '@ionic-native/media';
+import { Base64 } from '@ionic-native/base64';
 
 //ionic第三方插件
-import { CalendarModule } from 'ion2-calendar';
 
 //自己封装的服务、模块、方法等
 
@@ -73,6 +76,8 @@ import { Validators } from '../providers/validators';
 //	}
 //}
 
+
+registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
 	declarations: [
 		MyApp,
@@ -90,7 +95,6 @@ import { Validators } from '../providers/validators';
 			backButtonText: ''
 		}),
 		IonicStorageModule.forRoot(),
-		CalendarModule,
 		SettingsPageModule
 	],
 	bootstrap: [IonicApp],
@@ -99,6 +103,7 @@ import { Validators } from '../providers/validators';
 		HomePage
 	],
 	providers: [
+		{ provide: LOCALE_ID, useValue: 'zh' },
 		AppApi,
 		StatusBar,
 		SplashScreen,
@@ -132,7 +137,8 @@ import { Validators } from '../providers/validators';
 		Validators,
 		Keyboard,
 		Media,
-		Device
+		Device,
+		Base64
 	]
 })
 export class AppModule {

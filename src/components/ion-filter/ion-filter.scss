@@ -1,5 +1,10 @@
 ion-filter {
-    @include ion-filter();
+    &.ion-filter-ios{
+        @include ion-filter('ios');
+    }
+    &.ion-filter-md{
+        @include ion-filter('md');
+    }
     .line-wrapper{
         padding: 0 1rem;
         .panel-line{

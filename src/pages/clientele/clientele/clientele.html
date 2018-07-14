@@ -14,23 +14,28 @@
             </button>
         </ion-buttons>
     </ion-navbar>
+    <ion-filter [ngClass]="{'ion-filter-ios':plt.is('ios'),'ion-filter-md':plt.is('android')}" (panelHidden)="filterHide($event)">
+    </ion-filter>
 </ion-header>
-
-<ion-content>
-    <ion-filter (panelHidden)="filterHide($event)"></ion-filter>
-    <div class="no-result" hidden>
+<ion-content #content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
+    <div class="no-result" *ngIf="clienteles.length==0&&currentPage!=1">
         <div class="no-result-tag">
             <img src="../../../assets/imgs/no-clientele.png" />
             <p>暂无重要客户</p>
             <button class="add-cl˚ientele" ion-button block round>添加客户</button>
         </div>
     </div>
-    <ion-scroll scrollY="true" class="scroll-wrapper">
-        <ion-list class="clientele-list">
-            <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles" [data]="item"></clientele-item>
-        </ion-list>
-    </ion-scroll>
-
+    <ion-list class="clientele-list">
+        <clientele-item (details)="itemDetails($event)" (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
+            [data]="item" [index]="i" [detail]="detail"></clientele-item>
+    </ion-list>
+    <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 <!--<ion-select interface="popover" [(ngModel)]="value" placeholder="标签筛选" [selectOptions]="selectOptions">

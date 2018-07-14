@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams, AlertController,Searchbar } from 'ionic-angular';
 
+import { SearchResultPage}from '../search-result/search-result';
 
 import { AppApi } from './../../../providers/app-api';
 @Component({
@@ -8,39 +9,78 @@ import { AppApi } from './../../../providers/app-api';
     templateUrl: 'search-clientele.html'
 })
 export class SearchClientelePage {
-    callback: any = this.navParams.get('callback');
+    @ViewChild('searchbar') searchbar: Searchbar;
     keywords: string = '';
     results: Array<any> = [];
     loaded: boolean = false;
+    history: Array<any> = [];
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private appApi: AppApi
+        private appApi: AppApi,
+        private alertCtrl: AlertController
     ) {}
     ionViewDidLoad() {
-        console.log('ionViewDidLoad SearchClientelePage');
+        this.searchhistory();
+    }
+    ionViewDidEnter() {
+        setTimeout(() => {
+            this.searchbar.setFocus();
+        }, 200);
     }
     onInput(e) {
         console.log(e);
         if (e.data) {
-            console.log(this.keywords);
-            this.search();
+            let keywords = this.keywords.replace(/(^\s*)|(\s*$)/g, '');
+            console.log(keywords);
+            this.search(keywords);
         }
     }
     onCancel(e) {
         console.log(e);
         this.navCtrl.pop();
     }
-    search() {
-        this.appApi.customerSearch(this.keywords).subscribe(d => {
+    search(keywords) {
+        this.appApi.customerSearch(keywords).subscribe(d => {
             console.log(d);
             this.loaded = true;
             this.results = d;
         });
     }
-    itemTap(i) {
-        this.callback(i).then(() => {
-            this.navCtrl.pop();
+    itemTap(name) {
+        this.navCtrl.push(SearchResultPage, { 
+            name,
+            type:'search'
         });
+    }
+    searchhistory() {
+        this.appApi.searchhistory().subscribe(d => {
+            this.history = d;
+        });
+    }
+    clearHistory() {
+        this.appApi.searchHistoryDelete().subscribe(d => {
+            console.log(d);
+            this.searchhistory();
+        });
+    }
+    confirm() {
+        let alert = this.alertCtrl.create({
+            title: '确认清空搜索历史?',
+            buttons: [
+                {
+                    text: '取消',
+                    role: 'cancel'
+                },
+                {
+                    text: '确认',
+                    handler: () => {
+                        console.log('Buy clicked');
+                        this.clearHistory;
+                    }
+                }
+            ]
+        });
+        alert.present();
     }
 }

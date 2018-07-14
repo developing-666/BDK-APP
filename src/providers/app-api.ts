@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http-service';
 
-
 @Injectable()
 export class AppApi {
     constructor(private _http: HttpService) {}
@@ -60,6 +59,13 @@ export class AppApi {
         return this._http.post('/customer/queryCustomerByPage', opts);
     }
     /**
+     * 查询客户详情
+     * @param opts
+     */
+    customerDetails(id) {
+        return this._http.get('/customer/queryCustomerById/' + id);
+    }
+    /**
      * 验证新客户手机号
      * @param phone
      */
@@ -91,7 +97,9 @@ export class AppApi {
      * @param type
      */
     queryLabelByType(type) {
-        return this._http.post('/label/queryLabelByType', { type });
+        return this._http.post('/label/queryLabelByType', {
+            type
+        });
     }
     /**
      * 新建标签
@@ -111,7 +119,7 @@ export class AppApi {
      * 查询搜索记录
      */
     searchhistory() {
-        return this._http.get('/searchhistory/queryHistory');
+        return this._http.get('/searchhistory/queryHistory', {}, true);
     }
     /**
      * 删除所有搜索记录
@@ -152,4 +160,70 @@ export class AppApi {
     }
     
     
+	/**
+	 * 获取用户操作记录
+	 */
+	queryCustomerOperateLogByPage(opts){
+		return this._http.post(
+            'customeroperatelog/queryCustomerOperateLogByPage',
+            opts
+        );
+	}
+    /**
+     * 跟进记录
+     */
+    queryCustomerFollowDetailByPage(opts) {
+        return this._http.post(
+            '/customerfollow/queryCustomerFollowDetailByPage',
+            opts
+        );
+    }
+    /**
+     * 获取提醒
+     */
+    queryTaskDetailByPage(opts) {
+        return this._http.post('/task/queryTaskDetailByPage', opts);
+    }
+    /**
+     * 创建提醒
+     * @param opts
+     */
+    taskCreate(opts) {
+        return this._http.post('/task/create', opts);
+    }
+    /**
+     * 删除提醒
+     * @param id
+     */
+    taskDelete(id) {
+        return this._http.delete('/task/delete/' + id);
+    }
+    /**
+     * 批量删除提醒
+     * @param ids
+     */
+    taskDeleteBatch(ids) {
+        return this._http.delete('/task/deleteBatch', {
+            ids
+        });
+    }
+    /**
+     * 延时提醒
+     * @param opts
+     */
+    taskLazy(opts) {
+        return this._http.post('/task/lazy', opts);
+    }
+	/**
+	 * 图片上传
+	 */
+	upoadImage(opts){
+		return this._http.post('/upoad/image', opts);
+	}
+	/**
+	 * 语音上传
+	 */
+	upoadAudio(opts){
+		return this._http.postFormData('/upoad/audio', opts);
+	}
 }

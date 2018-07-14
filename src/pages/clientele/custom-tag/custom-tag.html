@@ -2,8 +2,9 @@
     <ion-navbar>
         <ion-title>自定义标签</ion-title>
         <ion-buttons end>
-            <button ion-button icon-only clear>
-                <i class="iconfont">
+            <button ion-button icon-only clear (tap)="wantDelete()">
+                <span *ngIf="deleteIng">完成</span>
+                <i *ngIf="!deleteIng" class="iconfont">
                     &#xe66e;
                 </i>
             </button>
@@ -16,12 +17,12 @@
     <div class="tag-wrapper">
         <p class="hint">输入或选择自定义标签，可以多选个</p>
         <div class="tag-container">
-            <span class="tag-item" *ngFor="let item of tags" (tap)="selectTag(item)" [ngClass]="{'active':tag.indexOf(item)>-1}">{{item}}</span>
+            <span class="tag-item" *ngFor="let item of tags" (tap)="selectTag(item)" [ngClass]="{'active':tag.indexOf(item.label)>-1,'del':deleteId==item.id}">{{item.label}}</span>
             <span class="new-tag" (tap)="newTag()">
                 <i class="iconfont">&#xe66d;</i>
             </span>
         </div>
-        <button class="submit" ion-button block round (tap)="done()">确定</button>
-        <button class="submit" ion-button block round hidden>删除</button>
+        <button class="submit" *ngIf="!deleteIng" ion-button block round (tap)="done()" [disabled]="tag.length==0">确定</button>
+        <button class="submit" *ngIf="deleteIng" ion-button block round (tap)="confirm()" [disabled]="!deleteId">删除</button>
     </div>
 </ion-content>

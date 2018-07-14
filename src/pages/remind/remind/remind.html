@@ -1,48 +1,61 @@
 <ion-header>
-	<ion-navbar>
-		<div class="date-now">
-			<span>2018年5月</span>
-			<i class="iconfont">&#xe675;</i>
-		</div>
-		<!-- <div class="hint"> 点击返回今天 </div> -->
-		<ion-buttons end>
-			<button ion-button="ion-button" icon-only="icon-only">
-				<i class="iconfont">&#xe66e;</i>
-			</button>
-			<!-- <i class="iconfont">&#xe66e;</i> -->
-		</ion-buttons>
-	</ion-navbar>
+    <ion-navbar>
+        <div class="date-now" (tap)="goToady()">
+            <span>{{today | date:'yyyy-MM-dd'}}</span>
+            <i class="iconfont">&#xe675;</i>
+        </div>
+        <!-- <div class="hint"> 点击返回今天 </div> -->
+        <ion-buttons end>
+            <button ion-button="ion-button" icon-only="icon-only" (tap)="wantDelete()">
+                <span *ngIf="hideTabs">完成</span>
+                <i *ngIf="!hideTabs" class="iconfont">&#xe66e;</i>
+            </button>
+            <!-- <i class="iconfont">&#xe66e;</i> -->
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
-<ion-content>
-	<div class="remind-list-container">
-		<div class="avtive-day-bar">
-			<div class="control">
-				<i class="iconfont">&#xe661;</i>
-				<span>上一天</span>
-			</div>
-			<span class="avtive-day">5月8日</span>
-			<div class="control">
-				<span>下一天</span>
-				<i class="iconfont">&#xe613;</i>
-			</div>
-		</div>
-		<ion-list>
-			<remind-item class="has-handle"></remind-item>
-            <remind-item class="has-handle disabled"></remind-item>
-            <remind-item class="has-handle pitch-on"></remind-item>
-		</ion-list>
-	</div>
-	<div class="bottom-bar" hidden>
-		<div class="delete">
-			<i class="iconfont">&#xe66e;</i>
-			<span>删除</span>
-		</div>
-		<div class="check-all active">
-			<i class="iconfont">&#xe640;</i>
-			<span>全选</span>
-		</div>
-	</div>
-	<button class="add-remind" ion-button icon-only>
-		<ion-icon name="add"></ion-icon>
-	</button>
+<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs,'fold':fold}">
+    <ion-calendar [ngClass]="{'fold':fold}" [(ngModel)]="activeDay.value" (onChange)="dayChange($event)" (monthChange)="monthChange($event)"
+        [format]="'YYYY-MM-DD'" [options]="calendarOpt">
+    </ion-calendar>
+    <p class="fold-bar" (click)="foldCalendar($event)">
+        <i class="iconfont" *ngIf="!fold">&#xe67c;</i>
+        <i class="iconfont" *ngIf="fold">&#xe674;</i>
+    </p>
+    <div class="avtive-day-bar">
+        <div class="control" (tap)="prevDay()" [ngClass]="{'disabled':prevDayDisabled}">
+            <i class="iconfont">&#xe661;</i>
+            <span>上一天</span>
+        </div>
+        <span class="avtive-day">{{activeDay.display}}</span>
+        <div class="control" (tap)="nextDay()">
+            <span>下一天</span>
+            <i class="iconfont">&#xe613;</i>
+        </div>
+    </div>
+    <ion-content class="scroll-container" [ngClass]="{'no-result':reminds.length===0}">
+        <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+        </ion-refresher>
+        <ion-list>
+            <remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'has-handle':hideTabs,'disabled':item.isExpired,'pitch-on':deleteIds.indexOf(item.id)>-1}"
+                [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (detail)="itemClick($event)"></remind-item>
+        </ion-list>
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+            <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </ion-content>
+    <div class="bottom-bar" *ngIf="hideTabs">
+        <div class="delete" (tap)="deleteBatch()">
+            <i class="iconfont">&#xe66e;</i>
+            <span>删除</span>
+        </div>
+        <div class="check-all" [ngClass]="{'active':deleteIds.length === reminds.length}" (tap)="selectAll()">
+            <i class="iconfont">&#xe640;</i>
+            <span>全选</span>
+        </div>
+    </div>
+    <button class="add-remind" ion-button icon-only (tap)="add()">
+        <ion-icon name="add"></ion-icon>
+    </button>
 </ion-content>

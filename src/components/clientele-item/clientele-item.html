@@ -1,6 +1,6 @@
-<ion-item-sliding>
-    <ion-item class="clientele-item" detail-push>
-        <div class="progress">
+<ion-item-sliding [ngClass]="{'no-push':noPush}">
+    <ion-item class="clientele-item" detail-push (tap)="itemClick(data)">
+        <div class="progress" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
             </div>
@@ -8,7 +8,7 @@
                 <div class="line"></div>
             </div>
             <span class="state">
-                {{data.followStatus | followStatus}}
+                {{data.followStatus | followStatus:'state'}}
             </span>
         </div>
         <div class="clientele-detail">
@@ -20,8 +20,8 @@
                 <span class="post">{{data.post}}</span>
                 <span>{{data.company}}</span>
             </p>
-            <div class="tag-container">
-                <i class="tag-item" *ngFor="let tag of labels">{{tag}}</i>
+			<div class="tag-container">
+                <i class="tag-item" *ngFor="let tag of data.labels">{{tag}}</i>
             </div>
         </div>
         <ion-buttons item-end>
@@ -38,11 +38,11 @@
         </ion-buttons>
     </ion-item>
     <ion-item-options side="right" class="item-options">
-        <button class="remind" color="warning" ion-button (click)="itemRemind(data.id)">
+        <button class="remind" color="warning" ion-button (click)="itemRemind(data)">
             <span>设置</span>
             <span>提醒</span>
         </button>
-        <button ion-button color="danger" (click)="itemDelete(data.id)">
+        <button ion-button color="danger" (click)="itemDelete(data)">
             删除
         </button>
     </ion-item-options>

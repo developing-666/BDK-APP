@@ -63,13 +63,13 @@ export class HttpService {
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
 
-	public delete(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
+	public delete(url: string, body: any = {}, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
             method: RequestMethod.Delete,
             headers: new Headers({
                 'Content-Type': 'application/json; charset=UTF-8'
             }),
-			search: HttpService.buildURLSearchParams(paramMap)
+			body
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
@@ -92,6 +92,7 @@ export class HttpService {
 		url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url); // tslint:disable-line
 		//  添加请求头
 		const header = this.httpHeader.getHeader();
+		this.globalData.header = header;
 		options.headers = options.headers || new Headers();
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO', header.appInfo);
@@ -104,7 +105,7 @@ export class HttpService {
 				if (res.status === 1) {
 					observer.next(res.data);
 				} else {
-					IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
+					// IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
 					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
 					observer.error(res.data);
 				}
@@ -122,7 +123,7 @@ export class HttpService {
 	}
 
     public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
-		IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
+		//IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
         if (!noLoading) this.showLoading();
 		return Observable.create(observer => {
 			this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
@@ -132,11 +133,12 @@ export class HttpService {
 				} catch (e) {
 					observer.next(res);
 				}
-				IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
+				// IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
+				console.log(err);
                 if (!noLoading) this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
-				IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
+				// IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
 			});
 		});
 	}

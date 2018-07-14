@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalData {
+    private _CUSTOMER_LABEL: Array<any>;
+    private _CUSTOMER_LABELS: Array<any>;
     private _userId: string; // 用户id
     private _username: string; // 用户名
     private _user; // 用户详细信息
@@ -27,6 +29,7 @@ export class GlobalData {
         CHECK_FAIL:'CHECK_FAIL'
     };
     
+	private _header:any = {};
     get userId(): string {
         return this._userId;
     }
@@ -85,5 +88,23 @@ export class GlobalData {
     }
     public set applyCompanyInfo(value: any) {
         this._applyCompanyInfo = value;
+    }
+    get CUSTOMER_LABEL() {
+        return this._CUSTOMER_LABEL;
+    }
+    set CUSTOMER_LABEL(value: any) {
+        this._CUSTOMER_LABEL = value;
+    }
+    get CUSTOMER_LABELS() {
+        return this._CUSTOMER_LABELS;
+    }
+    set CUSTOMER_LABELS(value: any) {
+        this._CUSTOMER_LABELS = value;
+    }
+	get header() {
+        return this._header;
+    }
+    set header(value: any) {
+        this._header = value;
     }
 }

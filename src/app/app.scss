@@ -204,3 +204,17 @@ body {
 .app-root .ion-page.show-page~.nav-decor {
     background-color: color($colors, bg);
 }
+
+
+.download-progress-container{
+    width: 100%;
+    margin: 10px 0;
+    text-align: center;
+    background-color: color($colors, gray);
+}
+.download-progress{
+	height: 2px;
+    border-radius: 1;
+    background-color: color($colors, primary);
+	box-shadow: 0 2px 5px rgba(color($colors, primary),0.6);
+}

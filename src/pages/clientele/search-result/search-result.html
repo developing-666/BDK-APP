@@ -1,0 +1,28 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons start *ngIf="type!='search'">
+            <button ion-button icon-only (tap)="dismiss()">
+                <ion-icon name="close"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+<ion-content>
+    <div class="no-result" *ngIf="clienteles.length==0&&currentPage!=1">
+        <div class="no-result-tag">
+            <img src="../../../assets/imgs/no-clientele.png" />
+            <p>为找到相关客户</p>
+        </div>
+    </div>
+    <ion-list class="clientele-list" *ngIf="clienteles.length!=0">
+        <clientele-item (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
+ [data]="item" [index]="i" [detail]="detail" [noPush]="noPush" (details)="itemDetails($event)" [ngClass]="{'active':activeId==item.id}"></clientele-item>
+    </ion-list>
+    <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

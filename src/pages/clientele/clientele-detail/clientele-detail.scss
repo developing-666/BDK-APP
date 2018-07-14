@@ -1,4 +1,5 @@
 page-clientele-detail {
+	&>.content>.scroll-content{overflow: hidden;}
 	.clientele-item{background-color: #fff;
 	   &.item{
             .item-inner{border-bottom: none;}
@@ -13,6 +14,6 @@ page-clientele-detail {
 	        }
 	        .tab-button[aria-selected=true]{border-bottom-color: color($colors,primary);}
 	    }
-	    
+
 	}
 }

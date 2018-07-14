@@ -1,16 +1,19 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title>写入跟进记录</ion-title>
-	</ion-navbar>
+    <ion-navbar>
+        <ion-title>写入跟进记录</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-	<form class="setting-record-form full-form gray" novalidate (ngSubmit)="setting()">
-		<clientele-item></clientele-item>
-		<remind-item></remind-item>
-		<set-state></set-state>
-		<div class="btn-wrapper">
-			<button class="large" ion-button block round>提交</button>
-		</div>
-	</form>
+    <form class="setting-record-form full-form gray" novalidate>
+        <clientele-item *ngIf="remind.customer" [data]="remind.customer"></clientele-item>
+        <remind-item [remind]="remind"></remind-item>
+        <info-input [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="content"
+            [placeholder]="placeholder" (voiceBarClick)="voiceBarClick()"></info-input>
+        <set-state></set-state>
+        <div class="btn-wrapper">
+            <button class="large" type="submit" ion-button block round (tap)="setting()">提交</button>
+        </div>
+    </form>
+    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>

@@ -1,2 +1,10 @@
 <ion-nav #myNav swipeBackEnabled="false"></ion-nav>
-
+<section class="loading-mask" *ngIf="current&&current!=100"></section>
+<div class="loading-container" *ngIf="current&&current!=100">
+	<div class="loading-wrap">
+		<p>资源更新中{{current}}%</p>
+		<div class="download-progress-container">
+		  <div class="download-progress" [style.width]="current + '%'"></div>
+		</div>
+	</div>
+</div>
