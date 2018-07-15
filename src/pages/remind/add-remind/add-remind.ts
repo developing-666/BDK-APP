@@ -42,12 +42,7 @@ export class AddRemindPage {
 			: `${this.modeText}其它提醒`;
 
 	clientele: any = undefined;
-	infoContent: any = {
-		audio: {
-			audioUrl: 'http://58.247.96.174:7070/audios/task/2018/20180715/b2488a9896d3491eaaf49e3ced4236f7.m4a',
-			duration: 5
-		}
-	};
+	infoContent: any;
 	formData: any = {
 		title: undefined,
 		planRemindTime: undefined
@@ -122,7 +117,10 @@ export class AddRemindPage {
 		})
 	}
 	done() {
-		// this.uploadAudio();
+		console.log(this.addRemindForm.valid);
+		console.log(this.formData);
+		console.log(this.infoContent);
+		this.uploadAudio();
 		if (this.addRemindForm.valid) {
 			const imgUpload = this.upoadImage();
 			const audioUpload = this.uploadAudio();
@@ -152,7 +150,7 @@ export class AddRemindPage {
 	upoadImage(): Observable<any> {
 		return Observable.create(observer => {
 			this.paths = [];
-			if (this.infoContent.pics.length == 0) {
+			if (!this.infoContent.pics || this.infoContent.pics.length == 0) {
 				observer.next(true);
 			} else {
 				const imgHttp: Array<Observable<any>> = [];

@@ -3,6 +3,7 @@ import { Component, Output, Input, EventEmitter,AfterContentInit } from '@angula
 import { AlertController, NavController, NavParams, App } from 'ionic-angular';
 
 import { AddRemindPage } from '../../pages/remind/add-remind/add-remind';
+import { SettingRecordPage}from '../../pages/clientele/setting-record/setting-record';
 
 import { AppApi } from '../../providers/app-api';
 @Component({
@@ -68,5 +69,13 @@ export class RemindItemComponent implements AfterContentInit {
     }
 	itemClick(){
 		this.detail.emit(this.remind);
+	}
+	write(e){
+		e.stopPropagation();
+		e.preventDefault();
+		this.app.getRootNav()
+			.push(SettingRecordPage, {
+				remind: this.remind
+			});
 	}
 }

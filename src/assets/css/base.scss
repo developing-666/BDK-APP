@@ -1,17 +1,17 @@
 @import "ionic.globals";
-$colors: ( 
-    primary : #3dcbbd, 
-    secondary : #11a593, 
-    warning : #ffaa33, 
-    danger : #fe4739, 
-    success : #6ed91f, 
-    light : #999, 
-    dark : #666, 
-    link : #488aff, 
-    gray : #c5c5c5, 
-    icon : #828282, 
-    font : #333, 
-    border : #ddd, 
+$colors: (
+    primary : #3dcbbd,
+    secondary : #11a593,
+    warning : #ffaa33,
+    danger : #fe4739,
+    success : #6ed91f,
+    light : #999,
+    dark : #666,
+    link : #488aff,
+    gray : #c5c5c5,
+    icon : #828282,
+    font : #333,
+    border : #ddd,
     bg : #fafafa
 );
 $border : 0.55px solid color($colors, border);
@@ -280,6 +280,9 @@ $designWidth: 750; //如设计图是750
             .mark {
                 display: none;
             }
+			.write-btn-wrapper{
+				display: none;
+			}
             @if($hasHandle) {
                 padding-right: rem(60);
                 .mark {
@@ -441,6 +444,25 @@ $designWidth: 750; //如设计图是750
         top: 1.9rem;
         content: '';
     }
+	&.write-in{
+		.label{
+			.remind-content{
+				.remark{
+					padding-right:7rem;
+				}
+				.clientele-info{
+					padding-right:7rem;
+				}
+				.write-btn-wrapper{
+					position: absolute;right: 0;top:3.4rem;
+					display: flex;height: calc(100% - 3.4rem);align-items: center;
+					.write-btn{
+
+					}
+				}
+			}
+		}
+	}
     &.disabled {
         .item:before {
             background-color: color($colors, gray);

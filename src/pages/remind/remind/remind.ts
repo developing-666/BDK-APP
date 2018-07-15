@@ -203,6 +203,11 @@ export class RemindPage {
                 this.deleteIds.push(item.id);
             }
         } else {
+			let refresh: any = () => {
+	            this.currentPage = 1;
+	            this.getData();
+	            return Promise.resolve();
+	        };
             this.app.getRootNav()
                 .push(SettingRecordPage, {
                     remind: item

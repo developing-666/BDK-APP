@@ -1,19 +1,29 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>写入跟进记录</ion-title>
-    </ion-navbar>
+	<ion-navbar>
+		<ion-title>写入跟进记录</ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content>
-    <form class="setting-record-form full-form gray" novalidate>
-        <clientele-item *ngIf="remind.customer" [data]="remind.customer"></clientele-item>
-        <remind-item [remind]="remind"></remind-item>
-        <info-input [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="content"
-            [placeholder]="placeholder" (voiceBarClick)="voiceBarClick()"></info-input>
-        <set-state></set-state>
-        <div class="btn-wrapper">
-            <button class="large" type="submit" ion-button block round (tap)="setting()">提交</button>
-        </div>
-    </form>
-    <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
+	<form #settingRecordForm="ngForm" class="setting-record-form full-form gray" novalidate>
+		<clientele-item *ngIf="remind.customer" [data]="remind.customer"></clientele-item>
+		<remind-item [remind]="remind"></remind-item>
+		<ion-list class="form-input-wrapper">
+			<ion-item *ngIf="remind?.type==='NORAML'" [ngClass]="{'invalid':(settingRecordForm.controls.title?.touched || settingRecordForm.submitted) && settingRecordForm.controls.title.invalid}">
+				<ion-label>提醒题目</ion-label>
+				<ion-input name="title" [(ngModel)]="formData.title" required placeholder="请输入标题"></ion-input>
+			</ion-item>
+			<info-input [ngClass]="{'invalid':(settingRecordForm.controls.content?.touched || settingRecordForm.submitted) && settingRecordForm.controls.content.invalid}" [(ngModel)]="infoContent" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
+			    name="content" (voiceBarClick)="voiceBarClick()"></info-input>
+			<button ion-item [ngClass]="{'invalid':(settingRecordForm.controls.time?.touched || settingRecordForm.submitted) && settingRecordForm.controls.time.invalid}">
+				<ion-label>提醒时间</ion-label>
+				<ion-datetime name="time" [(ngModel)]="nextFollowTime" required placeholder="请选择提醒时间" pickerFormat="YYYY-MM-DD HH:mm" cancelText="取消" doneText="确定"></ion-datetime>
+			</button>
+		</ion-list>
+		<set-state [(ngModel)]="formData.followStatus" name="followStatus"></set-state>
+		<div class="btn-wrapper">
+			<button class="large" [disabled]="settingRecordForm.invalid" type="submit" ion-button block round (tap)="setting()">提交</button>
+		</div>
+	</form>
+	<ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>
 </ion-content>
