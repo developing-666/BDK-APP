@@ -15,7 +15,7 @@ export class PhoneHideNumberPipe implements PipeTransform {
   transform(value: string, ...args) {
     let phone:String = '';
       if (value) {
-        phone = value.substr(0,3) + '****' + value.substr(6,4);
+        phone = value.substr(0,3) + '****' + value.substr(7,4);
       }
     return phone;
   }

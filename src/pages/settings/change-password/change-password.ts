@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
@@ -19,15 +19,16 @@ import { ForgetPasswordPage } from '../../login/forget-password/forget-password'
 })
 export class ChangePasswordPage {
     ngForm: FormGroup;
-    formData:any = {
-        oldPassword:'',
-        newPassword:''
+    formData: any = {
+        oldPassword: '',
+        newPassword: ''
     };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private fb: FormBuilder,
         private appApi: AppApi,
+        private toastCtrl: ToastController
     ) {
         this.createForm();
     }
@@ -36,28 +37,39 @@ export class ChangePasswordPage {
         console.log('ionViewDidLoad ChangePasswordPage');
     }
 
-    /** 
-     * 创建表单 
-     */    
-    createForm() {
-        this.ngForm = this.fb.group({
-        old: ['',[Validators.required,Validators.minLength(6)]], 
-        new: ['',[Validators.required,Validators.minLength(6)]],
-        affirm: ['',[Validators.required,Validators.minLength(6)]], 
-      },{updateOn: 'blur'});
-    }
-    get old() { return this.ngForm.get('old'); }
-    get new() { return this.ngForm.get('new'); }
-    get affirm() { return this.ngForm.get('affirm'); }
+    /**
+     * 创建表单
+     */
 
-    /** 
-     * 提交 
-     */    
+    createForm() {
+        this.ngForm = this.fb.group(
+            {
+                old: ['', [Validators.required, Validators.minLength(6)]],
+                new: ['', [Validators.required, Validators.minLength(6)]],
+                affirm: ['', [Validators.required, Validators.minLength(6)]]
+            },
+            { updateOn: 'blur' }
+        );
+    }
+    get old() {
+        return this.ngForm.get('old');
+    }
+    get new() {
+        return this.ngForm.get('new');
+    }
+    get affirm() {
+        return this.ngForm.get('affirm');
+    }
+
+    /**
+     * 提交
+     */
+
     submit() {
         console.log(this.formData);
-        this.appApi.resetPassword(this.formData).subscribe(d=>{
+        this.appApi.resetPassword(this.formData).subscribe(d => {
             console.log(d);
-            
+            this.presentToast();
         });
     }
 
@@ -65,4 +77,15 @@ export class ChangePasswordPage {
         this.navCtrl.push(ForgetPasswordPage);
     }
 
+    presentToast() {
+        const toast = this.toastCtrl.create({
+            message: '密码修改成功！',
+            position: 'middle',
+            duration: 1500
+        });
+        toast.onDidDismiss(() => {
+            this.navCtrl.pop();
+        });
+        toast.present();
+    }
 }
