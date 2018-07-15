@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.dafu.app.bdk" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.dafu.bdk" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>不丢客</name>
     <description>帮你跟好客户,一个都不能丢</description>
     <author email="zwq8299174@126.com" href="http://zwq8299174.github.io/">tH3-Mo!e</author>
@@ -119,10 +119,10 @@
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />
     <plugin name="cordova-plugin-code-push" spec="^1.11.11" />
     <plugin name="cordova-plugin-zip" spec="^3.1.0" />
-    <plugin name="jpush-phonegap-plugin" spec="^3.4.2">
-        <variable name="APP_KEY" value="d141f6f1f912af0d92cb7419" />
-    </plugin>
     <plugin name="cordova-plugin-media" spec="^5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
+    </plugin>
+    <plugin name="jpush-phonegap-plugin" spec="^3.4.2">
+        <variable name="APP_KEY" value="a780b638538e75727d3b7f8f" />
     </plugin>
 </widget>

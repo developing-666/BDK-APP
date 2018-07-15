@@ -171,15 +171,15 @@ export class Helper {
 		}
 		console.log('jPush------------------------------------------');
 		console.log(window['plugins'].jPushPlugin.init);
-		console.log(this.jPush.init);
 		window['plugins'].jPushPlugin.init();
-		if (this.nativeService.isIos()) {
-			window['plugins'].jPushPlugin.setDebugModeFromIos();
-			window['plugins'].jPushPlugin.setApplicationIconBadgeNumber(0);
-		} else {
-			window['plugins'].jPushPlugin.setDebugMode(true);
-			window['plugins'].jPushPlugin.setStatisticsOpen(true);
-		}
+		window['plugins'].jPushPlugin.setDebugMode(true);
+		// if (this.nativeService.isIos()) {
+		// 	window['plugins'].jPushPlugin.setDebugModeFromIos();
+		// 	window['plugins'].jPushPlugin.setApplicationIconBadgeNumber(0);
+		// } else {
+		// 	window['plugins'].jPushPlugin.setDebugMode(true);
+		// 	window['plugins'].jPushPlugin.setStatisticsOpen(true);
+		// }
 		// this.jPush.init();
 		// this.jPush.setDebugMode(IS_DEBUG);
 		// this.jPushAddEventListener();

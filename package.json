@@ -128,11 +128,11 @@
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-code-push": {},
       "cordova-plugin-zip": {},
-      "jpush-phonegap-plugin": {
-        "APP_KEY": "d141f6f1f912af0d92cb7419"
-      },
       "cordova-plugin-media": {
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+      },
+      "jpush-phonegap-plugin": {
+        "APP_KEY": "a780b638538e75727d3b7f8f"
       }
     },
     "platforms": [
