@@ -16,7 +16,6 @@ export class VoiceBarComponent implements OnChanges {
         private nativeService: NativeService,
 	) {}
 	ngOnChanges(changes: SimpleChanges){
-		console.log(changes);
 		let dataChange = changes.data.currentValue;
 		if(dataChange){
 			this.nativeService.preloadAudio(dataChange.audioUrl).subscribe(e => {

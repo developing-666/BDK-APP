@@ -1,6 +1,6 @@
 {
   "name": "BDK-APP",
-  "app_id": "",
+  "app_id": "com.dafu.app.bdk",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

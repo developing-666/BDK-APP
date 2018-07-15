@@ -42,6 +42,8 @@ import { Keyboard } from '@ionic-native/keyboard';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Media } from '@ionic-native/media';
 import { Base64 } from '@ionic-native/base64';
+import { JPush } from '@jiguang-ionic/jpush';
+
 
 //ionic第三方插件
 
@@ -60,7 +62,6 @@ import { Logger } from '../providers/logger';
 import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from './modal-transitions';
 import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
-import { JPush } from '../../typings/modules/jpush/index';
 import { Validators } from '../providers/validators';
 // 参考文档:https://docs.fundebug.com/notifier/javascript/framework/ionic2.html
 //import * as fundebug from 'fundebug-javascript';

@@ -6,7 +6,7 @@
             [id]="id" [name]="name" [ngStyle]="textareaStyle"></textarea>
         <div class="voice-bar-wrapper" (tap)="voiceBarTap($event)" *ngIf="isRecord">
             <voice-bar *ngIf="innerValue?.audio" [data]="innerValue?.audio"></voice-bar>
-            <p class="placeholder" *ngIf="!audio">{{placeholder}}</p>
+            <p class="placeholder" *ngIf="!innerValue?.audio">{{placeholder}}</p>
         </div>
     </div>
     <div class="accessory">

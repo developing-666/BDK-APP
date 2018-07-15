@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NativeService } from './native-service';
-import { JPush } from '../../typings/modules/jpush/index';
+import { JPush } from '@jiguang-ionic/jpush';
 import { Observable } from 'rxjs/Rx';
 import { DEFAULT_AVATAR, IS_DEBUG } from './constants';
 import { FileService } from './file-service';
@@ -23,14 +23,15 @@ import * as AlloyLever from 'alloylever';
 @Injectable()
 export class Helper {
 
-	constructor(private jPush: JPush,
+	constructor(
+		private jPush: JPush,
 		public logger: Logger,
 		private fileService: FileService,
 		private nativeService: NativeService,
 		private storage: Storage,
 		private events: Events,
-		private globalData: GlobalData) {
-	}
+		private globalData: GlobalData
+	) { }
 
 	/**
 	 * 设置日志监控app的版本号
@@ -168,8 +169,19 @@ export class Helper {
 		if (!this.nativeService.isMobile()) {
 			return;
 		}
-		this.jPush.init();
-		this.jPush.setDebugMode(IS_DEBUG);
+		console.log('jPush------------------------------------------');
+		console.log(window['plugins'].jPushPlugin.init);
+		console.log(this.jPush.init);
+		window['plugins'].jPushPlugin.init();
+		if (this.nativeService.isIos()) {
+			window['plugins'].jPushPlugin.setDebugModeFromIos();
+			window['plugins'].jPushPlugin.setApplicationIconBadgeNumber(0);
+		} else {
+			window['plugins'].jPushPlugin.setDebugMode(true);
+			window['plugins'].jPushPlugin.setStatisticsOpen(true);
+		}
+		// this.jPush.init();
+		// this.jPush.setDebugMode(IS_DEBUG);
 		// this.jPushAddEventListener();
 	}
 
@@ -209,10 +221,10 @@ export class Helper {
 		if (!this.nativeService.isMobile()) {
 			return;
 		}
-		this.jPush.setAlias({ sequence: 1, alias: this.globalData.userId }, (result) => {
+		this.jPush.setAlias({ sequence: 1, alias: this.globalData.userId }).then(result => {
 			console.log('jpush-设置别名成功:');
 			console.log(result);
-		}, (error) => {
+		}).catch(error => {
 			console.log('jpush-设置别名失败:' + error.code);
 		});
 	}
@@ -221,10 +233,10 @@ export class Helper {
 		if (!this.nativeService.isMobile()) {
 			return;
 		}
-		this.jPush.deleteAlias({ sequence: 2 }, (result) => {
+		this.jPush.deleteAlias({ sequence: 2 }).then(result => {
 			console.log('jpush-删除别名成功');
 			console.log(result);
-		}, (error) => {
+		}).catch(error => {
 			console.log('jpush-设删除别名失败:' + error.code);
 		});
 	}
@@ -239,10 +251,10 @@ export class Helper {
 		if (this.nativeService.isIos()) {
 			tags.push('ios');
 		}
-		this.jPush.setTags({ sequence: 3, tags }, (result) => {
+		this.jPush.setTags({ sequence: 3, tags }).then(result => {
 			console.log('jpush-设置标签成功');
 			console.log(result);
-		}, (error) => {
+		}).catch(error => {
 			console.log('jpush-设置标签失败:' + error.code);
 		});
 	}
@@ -251,10 +263,10 @@ export class Helper {
 		if (!this.nativeService.isMobile()) {
 			return;
 		}
-		this.jPush.deleteTags({ sequence: 4, tags }, (result) => {
+		this.jPush.deleteTags({ sequence: 4, tags }).then(result => {
 			console.log('jpush-删除标签成功');
 			console.log(result);
-		}, (error) => {
+		}).catch(error => {
 			console.log('jpush-删除标签失败:' + error.code);
 		});
 	}

@@ -68,7 +68,6 @@ export class RemindPage {
     ) {}
 
     ionViewDidLoad() {
-        console.log(this.today);
 
         this.getData();
     }
@@ -86,7 +85,6 @@ export class RemindPage {
                 }
             })
             .subscribe(d => {
-                console.log(d);
                 if (this.currentPage == 1) {
                     this.reminds = d.items;
                 } else {
@@ -99,7 +97,6 @@ export class RemindPage {
                         e.complete();
                     }, 200);
                 }
-                console.log(this.reminds);
             },err=>{
 				console.log(err);
 				if (e) {
