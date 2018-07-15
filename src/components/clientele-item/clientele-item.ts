@@ -54,13 +54,9 @@ export class ClienteleItemComponent {
         alert.present();
     }
     itemRemind(item) {
-        let callback = (): any => {
-            this.remind.emit(item);
-            return Promise.resolve();
-        };
+        this.remind.emit(item);
         this.app.getRootNav().push(AddClienteleRemindPage, {
-            item,
-            callback
+            item
         });
     }
     itemDelete(item) {

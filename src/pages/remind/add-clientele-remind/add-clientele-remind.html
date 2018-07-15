@@ -18,7 +18,7 @@
                         cancelText="取消" doneText="确定"></ion-datetime>
                 </button>
                 <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
-                    [(ngModel)]="content" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
+                    [(ngModel)]="infoContent" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
                     name="content" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-list>
         </div>
