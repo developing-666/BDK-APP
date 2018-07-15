@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -14,17 +14,24 @@ export class ForgetPasswordPage {
     formData: any = {
         validCode: 1234
     };
+    showVerificationCode: boolean = true; //显示验证码按钮
+    time: number = 60; //倒计时
+    interval: any; //setInterval
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private appApi: AppApi,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private toastCtrl: ToastController
     ) {
         this.createForm();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ForgetPasswordPage');
+    }
+    ionViewWillLeave() {
+        this.countDownEnd();
     }
     /**
      * 创建表单
@@ -33,7 +40,7 @@ export class ForgetPasswordPage {
         this.ngForm = this.fb.group(
             {
                 phone: ['', [Validators.required, Validators.phone]],
-                password: ['', [Validators.required, Validators.minLength(6)]],
+                newPassword: ['', [Validators.required, Validators.minLength(6)]],
                 validCode: [
                     '',
                     [
@@ -49,8 +56,8 @@ export class ForgetPasswordPage {
     get phone() {
         return this.ngForm.get('phone');
     }
-    get password() {
-        return this.ngForm.get('password');
+    get newPassword() {
+        return this.ngForm.get('newPassword');
     }
     get validCode() {
         return this.ngForm.get('validCode');
@@ -59,7 +66,12 @@ export class ForgetPasswordPage {
     /**
      * 重置密码
      */
-    resetPassword() {}
+    resetPassword() {
+        this.appApi.forgetPassword(this.formData).subscribe(d=>{
+            console.log(d);
+            this.presentToast();
+        });
+    }
 
     /** 
      * 获取验证码 
@@ -67,6 +79,32 @@ export class ForgetPasswordPage {
     getCode() {
         this.appApi.getCode(this.formData.phone).subscribe(d => {
             console.log(d);
+            this.showVerificationCode = false;
+            this.interval = setInterval(() => {
+                console.log(this.time);
+                this.time > 0 ? this.time-- : this.countDownEnd();
+            }, 1000);
         });
+    }
+    
+    /**
+     * 倒计时结束
+     */
+    countDownEnd() {
+        clearInterval(this.interval);
+        this.showVerificationCode = true;
+        this.time = 60;
+    }
+
+    presentToast() {
+        const toast = this.toastCtrl.create({
+            message: '充值修改成功！',
+            position: 'middle',
+            duration: 1500
+        });
+        toast.onDidDismiss(() => {
+            this.navCtrl.pop();
+        });
+        toast.present();
     }
 }

@@ -225,5 +225,11 @@ export class AppApi {
 	 */
 	upoadAudio(opts){
 		return this._http.postFormData('/upoad/audio', opts);
-	}
+    }
+    /** 
+     * 忘记密码 
+     */    
+    forgetPassword(opts) {
+        return this._http.post('/forgetPassword', opts);
+    }
 }

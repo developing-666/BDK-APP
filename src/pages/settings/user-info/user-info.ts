@@ -217,8 +217,8 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                this.avatar =
-                                    'data:image/jpeg;base64,' + imageUrl;
+                                this.avatar = imageUrl;
+                                console.log('avatar======',this.avatar);
                             });
                     }
                 },
@@ -233,8 +233,9 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                this.avatar =
-                                    'data:image/jpeg;base64,' + imageUrl;
+                                this.avatar = imageUrl;
+                                    console.log('avatar======',this.avatar);
+                                    
                             });
                     }
                 },

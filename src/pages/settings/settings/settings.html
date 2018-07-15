@@ -3,7 +3,7 @@
 	<ion-navbar>
 		<ion-title>设置</ion-title>
 		<ion-buttons end>
-				<button ion-button icon-only clear>
+				<button ion-button icon-only clear  (tap)="toSettingPage()">
 					<i class="iconfont">
 						&#xe678;
 					</i>
@@ -21,7 +21,8 @@
 			</ion-avatar>
 			<div class="user-info">
 				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
-				<p>个人用户版</p>
+				<p *ngIf="userInfo?.type == 'NORAML'" >个人用户版</p>
+				<p *ngIf="userInfo?.type == 'COMPANY'" >企业版</p>
 				<p>【免费】</p>
 			</div>
 		</button>
@@ -62,7 +63,8 @@
         </div>
         
         <div class="submit" (tap)="test()">
-                <button ion-button round block>切换为企业版</button>
+            <button ion-button round block  *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" >切换为企业版</button>
+            <button ion-button round block  *ngIf="userInfo?.type == 'COMPANY'" >切换为个人版</button>
             </div>
 
 	</div>
