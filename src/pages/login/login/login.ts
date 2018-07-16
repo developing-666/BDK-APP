@@ -2,6 +2,7 @@ import { ViewChild, Component } from '@angular/core';
 
 import { App, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { NativeService } from '../../../providers/native-service';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -34,6 +35,7 @@ export class LoginPage {
 		private httpHeader:HttpHeader,
         private storage: Storage,
         private globalData:GlobalData,
+        private nativeService: NativeService,
     ) {
         this.createForm();
     }
@@ -41,6 +43,7 @@ export class LoginPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
+		this.nativeService.statusBarStyle('#ffffff',true); // 设置状态栏颜色
     }
 
     /**
@@ -74,6 +77,7 @@ export class LoginPage {
             console.log(d);
             this.httpHeader.token = d;
             this.storage.set('token',d);
+			this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
                 this.viewCtrl.dismiss();

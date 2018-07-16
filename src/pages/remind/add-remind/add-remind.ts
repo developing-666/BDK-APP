@@ -50,7 +50,6 @@ export class AddRemindPage {
 	planRemindTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
 	paths: Array<any> = [];
 	audio: any = {
-		// duration: 10,
 		type: 'TASK'
 	};
 	blankClick: any = e => {
@@ -266,6 +265,12 @@ export class AddRemindPage {
 			this.infoContent = {}
 		}
 		this.infoContent.audio = this.audio;
+	}
+	deleteClick(){
+		this.audio = {
+			type: 'TASK'
+		};
+		delete this.infoContent.audio;
 		console.log(this.infoContent);
 	}
 	choose() {

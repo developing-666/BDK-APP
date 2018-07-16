@@ -15,6 +15,7 @@
         <div class="no-result-tag">
             <img src="../../../assets/imgs/no-clientele.png" />
             <p>为找到相关客户</p>
+			<button class="add-clientele" ion-button block round (tap)="add()">添加客户</button>
         </div>
     </div>
     <ion-list class="clientele-list" *ngIf="clienteles.length!=0">

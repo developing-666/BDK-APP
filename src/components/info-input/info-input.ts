@@ -39,7 +39,7 @@ export class InfoInputComponent implements ControlValueAccessor {
 	disabled: boolean = false;
 	isRecord: boolean = false;
 	inputValue: string = undefined;
-	innerValue: any = null;
+	innerValue: any = undefined;
 	textareaStyle: any = {};
 	get value(): any {
 		if (this.innerValue.content || this.innerValue.audio) {
@@ -62,11 +62,13 @@ export class InfoInputComponent implements ControlValueAccessor {
 		private appApi: AppApi,
 	) { }
 	valueInit() {
-		this.innerValue = {
-			content: this.inputValue,
-			audio: undefined,
-			pics: []
-		};
+		if (!this.innerValue) {
+			this.innerValue = {
+				content: this.inputValue,
+				audio: undefined,
+				pics: []
+			};
+		}
 	}
 	textareaFocus(e) {
 		this.inputFoucs.emit(e);
@@ -78,9 +80,7 @@ export class InfoInputComponent implements ControlValueAccessor {
 		this.inputBlur.emit(e);
 	}
 	textareaInput() {
-		if (!this.innerValue || !this.innerValue.content) {
-			this.valueInit();
-		}
+		this.valueInit();
 		this.innerValue.content = this.inputValue;
 
 		this.change(this.innerValue);
@@ -96,9 +96,7 @@ export class InfoInputComponent implements ControlValueAccessor {
 		// this.keyboard.show();
 	}
 	pickerPhoto() {
-		if (!this.innerValue || !this.innerValue.content) {
-			this.valueInit();
-		}
+		this.valueInit();
 		let count = 9 - this.innerValue.pics.length;
 		if (count === 0 || count < 0) {
 			alert('最多添加9张图片');
@@ -131,9 +129,7 @@ export class InfoInputComponent implements ControlValueAccessor {
 		);
 	}
 	takePicture() {
-		if (!this.innerValue || !this.innerValue.content) {
-			this.valueInit();
-		}
+		this.valueInit();
 		const imgOptions: CameraOptions = {
 			quality: 50,
 			destinationType: this.camera.DestinationType.DATA_URL,
