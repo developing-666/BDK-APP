@@ -60,6 +60,7 @@
     "cordova-plugin-add-swift-support": "^1.7.2",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-appminimize": "^1.0.0",
+    "cordova-plugin-badge": "^0.8.7",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-code-push": "^1.11.11",
     "cordova-plugin-device": "^2.0.2",
@@ -69,6 +70,7 @@
     "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-jcore": "^1.2.1",
+    "cordova-plugin-local-notification": "^0.9.0-beta.2",
     "cordova-plugin-media": "^5.0.2",
     "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
@@ -132,8 +134,9 @@
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
       "jpush-phonegap-plugin": {
-        "APP_KEY": "a780b638538e75727d3b7f8f"
-      }
+        "APP_KEY": "310e05d25f0914973bdb0c13"
+      },
+      "cordova-plugin-local-notification": {}
     },
     "platforms": [
       "ios",

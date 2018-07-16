@@ -31,11 +31,12 @@ export class SettingRecordPage {
 	@ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
 	@ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
 	refresh: any = this.navParams.get('refresh');
-	remind: any = this.navParams.get('remind') ? this.navParams.get('remind') : {};
+	customerId:string = this.navParams.get('customerId');
+	remind: any = this.navParams.get('remind');
 	placeholder: string = '点击输入跟进情况文字备注或语音备注';
 	infoContent: any;
 	formData: any = {
-		taskId: this.remind.id,
+		taskId: this.remind?this.remind.id:undefined,
 		title: undefined,
 		nextFollowTime: undefined
 	};
@@ -58,7 +59,7 @@ export class SettingRecordPage {
 
 	ionViewDidLoad() {
 		this.inputPanel.scrollEnable();
-		console.log('inputPanel')
+		console.log(this.remind)
 	}
 
 	openInputPanel() {
@@ -95,9 +96,12 @@ export class SettingRecordPage {
 				if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
 					const audio = d[1] === true ? undefined : JSON.parse(d[1].response).data;
 					console.log(audio);
-					if (this.remind.type === 'CUSTOMER') {
+					if (this.remind && this.remind.type === 'CUSTOMER') {
 						this.formData.customerId = this.remind.customerId;
 					};
+					if(this.customerId){
+						this.formData.customerId = this.customerId;
+					}
 					this.formData.content = this.infoContent.content;
 					if (audio) {
 						this.formData.audio = {}
@@ -179,7 +183,7 @@ export class SettingRecordPage {
 	followCreate() {
 		this.appApi.followCreate(this.formData).subscribe(d => {
 			console.log(d);
-			// this.success();
+			this.success();
 		});
 	}
 	success() {

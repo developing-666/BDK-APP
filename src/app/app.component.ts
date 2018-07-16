@@ -74,6 +74,10 @@ export class MyApp {
 		private codePush: CodePush,
 		private zone:NgZone,
 	) {
+		platform.resume.subscribe(d=>{
+			console.log('我又回来了');
+			this.assetsSync();
+		});
 		platform.ready().then(() => {
 			this.nativeService.getVersionNumber().subscribe((v) => {
 				this.httpHeader.appVersion = v;
@@ -114,7 +118,7 @@ export class MyApp {
 			//   this.nativeService.splashScreenHide(); // 隐藏启动页
 			// });
 			this.registerBackButtonAction(); // 注册android返回按键事件
-			// this.versionService.checkVersion(); // 检查版本更新
+			this.versionService.checkVersion(); // 检查版本更新
 			// this.assetsSync(); // 启动app检查热更新
 			// Utils.sessionStorageClear(); // 清除数据缓存
 		});
