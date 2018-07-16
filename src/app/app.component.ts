@@ -76,7 +76,7 @@ export class MyApp {
 	) {
 		platform.resume.subscribe(d=>{
 			console.log('我又回来了');
-			this.assetsSync();
+			// this.assetsSync();
 		});
 		platform.ready().then(() => {
 			this.nativeService.getVersionNumber().subscribe((v) => {
