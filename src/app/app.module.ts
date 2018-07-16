@@ -43,7 +43,8 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Media } from '@ionic-native/media';
 import { Base64 } from '@ionic-native/base64';
 import { JPush } from '@jiguang-ionic/jpush';
-
+import { SMS } from '@ionic-native/sms';
+import { PhonegapLocalNotification } from '@ionic-native/phonegap-local-notification';
 
 //ionic第三方插件
 
@@ -139,7 +140,9 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		Keyboard,
 		Media,
 		Device,
-		Base64
+		Base64,
+		SMS,
+		PhonegapLocalNotification
 	]
 })
 export class AppModule {

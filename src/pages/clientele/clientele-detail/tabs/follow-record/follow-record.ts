@@ -12,7 +12,7 @@ export class FollowRecordPage {
 	currentPage: number = 1;
 	totalPages: number = 1;
 	id: string = this.navParams.get('id');
-	reminds: Array<any> = [];
+	record: Array<any> = [];
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -35,11 +35,10 @@ export class FollowRecordPage {
 			})
 			.subscribe(
 				d => {
-					console.log(d);
 					if (this.currentPage == 1) {
-						this.reminds = d.items;
+						this.record = d.items;
 					} else {
-						this.reminds = this.reminds.concat(d.items);
+						this.record = this.record.concat(d.items);
 					}
 					this.totalPages = d.totalPages;
 					this.currentPage++;

@@ -1,6 +1,6 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ToastController, Navbar } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Navbar,Events } from 'ionic-angular';
 import moment from 'moment';
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
@@ -62,7 +62,8 @@ export class AddClienteleRemindPage {
 		public toastCtrl: ToastController,
 		public nativeService: NativeService,
 		public ft: FileTransfer,
-		private globalData: GlobalData
+		private globalData: GlobalData,
+        private events: Events,
 	) { }
 	ionViewDidLoad() {
 		// this.navBar.backButtonClick = (e: UIEvent) => {
@@ -176,9 +177,7 @@ export class AddClienteleRemindPage {
 		});
 		toast.onDidDismiss(() => {
 			this.navCtrl.pop();
-			// this.refresh().then(() => {
-			//
-			// });
+			this.events.publish('remind:create',this.formData.customerId);
 		});
 		toast.present();
 	}

@@ -23,7 +23,7 @@ export class LoginPage {
     ngForm: FormGroup;
     formData: any = {
         phone: '18501667661',
-        password: '123456'
+        password: '123123'
     };
     constructor(
         public navCtrl: NavController,

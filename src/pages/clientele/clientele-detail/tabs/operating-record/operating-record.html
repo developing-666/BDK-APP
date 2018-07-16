@@ -11,10 +11,10 @@
 					<div class="start">
 						<span class="time">
 							<em></em>
-							<i>{{item?.operateTime | date:'HH:mm'}}</i>
+							<i>{{item?.operateTime | moment:'HH:mm'}}</i>
 						</span>
 					</div>
-					<span class="date">{{item?.operateTime | date:'yyyy/MM/dd E'}}</span>
+					<span class="date">{{item?.operateTime | moment:'YYYY/MM/DD ddd'}}</span>
 				</h3>
 				<div class="record-info">
 					<p class="operater">{{item?.operater?.name}}</p>

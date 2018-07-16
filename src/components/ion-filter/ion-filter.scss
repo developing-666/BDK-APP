@@ -10,7 +10,7 @@ ion-filter {
         .panel-line{
             display: flex;border-bottom: $border;justify-content: space-between;
             .name {
-                color: color($colors,dark);height:rem(86);display: flex;align-items: center;width: rem(120);
+                color: color($colors,dark);height:rem(86);display: flex;align-items: center;width: rem(140);
             }
             .tag-container{align-content: flex-start;
                 width: calc(100% - 7rem);padding-top: rem(18);display: flex;flex-wrap:wrap;justify-content: space-around;
@@ -23,6 +23,11 @@ ion-filter {
                         padding: 0;
                     }
                 }
+				.no-tag{
+					@include round-tag('', color($colors, primary), false);
+					font-size: 1.2rem;
+					padding: 0;width: 6rem;text-align: center;
+				}
             }
         }
     }

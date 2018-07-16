@@ -22,6 +22,7 @@
                         <span class="tag" *ngFor="let tag of item.options;let tagIndex = index" (tap)="tagTap(itemIndex,tag)" [ngClass]="{'active':value[activeIndex]?.value && (value[activeIndex]?.value[itemIndex]?.value.indexOf(tag.label)>-1||value[this.activeIndex].value[itemIndex].value==tag.label)}">
                             {{tag.label}}
                         </span>
+						<i class="no-tag" *ngIf="item.options.length==0">无</i>
                     </div>
                 </div>
             </div>

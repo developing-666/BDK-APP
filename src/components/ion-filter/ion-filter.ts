@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, } from '@angular/core';
+import {Events} from 'ionic-angular';
 
 import { FILTERDATA } from '../../providers/constants';
 
@@ -26,17 +26,24 @@ export class IonFilterComponent implements OnInit {
     backIn: boolean = false;
     activeIndex: number = 0;
     value: any = [];
-    constructor(public globalData: GlobalData, public appApi: AppApi) {}
+    constructor(
+		public globalData: GlobalData,
+		public appApi: AppApi,
+        private events: Events,
+	) {}
     ngOnInit() {
         this.panelHide();
         this.queryLabelByType();
-        
+		this.events.subscribe('tags:change', () => {
+			this.filterData[0].options[0].options = this.globalData.CUSTOMER_LABEL;
+			this.filterData[0].options[1].options = this.globalData.CUSTOMER_LABELS;
+		});
     }
     queryLabelByType() {
         const post1 = this.appApi.queryLabelByType('CUSTOMER_LABEL');
         const post2 = this.appApi.queryLabelByType('CUSTOMER_LABELS');
         const result = Observable.combineLatest(post1, post2);
-       
+
         result.subscribe(d => {
             this.globalData.CUSTOMER_LABEL = d[0];
             this.globalData.CUSTOMER_LABELS = d[1];
@@ -47,7 +54,6 @@ export class IonFilterComponent implements OnInit {
             }, e => {
                 console.log(e);
             });
-        
     }
     initValue() {
         for (let item of this.filterData) {

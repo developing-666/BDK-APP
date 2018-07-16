@@ -127,4 +127,5 @@
         <variable name="APP_KEY" value="310e05d25f0914973bdb0c13" />
     </plugin>
     <plugin name="cordova-plugin-local-notification" spec="^0.9.0-beta.2" />
+    <plugin name="cordova-sms-plugin" spec="^0.1.11" />
 </widget>

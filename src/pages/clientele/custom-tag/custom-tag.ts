@@ -1,6 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams,AlertController,Navbar } from 'ionic-angular';
-
+import { NavController, NavParams,AlertController,Navbar,Events } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
@@ -20,7 +19,8 @@ export class CustomTagPage {
         public navParams: NavParams,
         public alertCtrl: AlertController,
         public appApi: AppApi,
-        public globalData: GlobalData
+        public globalData: GlobalData,
+        private events: Events,
     ) {}
 
     ionViewDidLoad() {
@@ -82,6 +82,7 @@ export class CustomTagPage {
             console.log(d);
             this.tags = d;
             this.globalData.CUSTOMER_LABELS = d;
+			this.events.publish('tags:change');
         });
     }
     labelCreate(t) {
