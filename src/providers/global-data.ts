@@ -28,6 +28,8 @@ export class GlobalData {
         CHECK_SUCCESS:'CHECK_SUCCESS',
         CHECK_FAIL:'CHECK_FAIL'
     };
+    //模态弹出登录页
+    modalLoginPage:Boolean = false;
     
 	private _header:any = {};
     get userId(): string {

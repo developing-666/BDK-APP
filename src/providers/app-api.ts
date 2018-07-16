@@ -237,5 +237,11 @@ export class AppApi {
      */
 	forgetPassword(opts) {
 		return this._http.post('/forgetPassword', opts);
-	}
+    }
+    /** 
+     * 退出登录 
+     */    
+    logout() {
+        return this._http.post('/logout');
+    }
 }

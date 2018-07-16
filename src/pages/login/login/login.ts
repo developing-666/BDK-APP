@@ -1,6 +1,7 @@
 import { ViewChild, Component } from '@angular/core';
 
 import { App, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -11,6 +12,7 @@ import { HttpHeader } from '../../../providers/http-header';
 import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
 import { SignInPage } from '../sign-in/sign-in';
+import { GlobalData } from '../../../providers/global-data';
 
 @Component({
     selector: 'page-login',
@@ -29,7 +31,9 @@ export class LoginPage {
         private appApi: AppApi,
         private fb: FormBuilder,
         private app: App,
-		private httpHeader:HttpHeader
+		private httpHeader:HttpHeader,
+        private storage: Storage,
+        private globalData:GlobalData,
     ) {
         this.createForm();
     }
@@ -68,8 +72,10 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
-			this.httpHeader.token = d;
+            this.httpHeader.token = d;
+            this.storage.set('token',d);
             if (this.viewCtrl.isOverlay) {
+                this.globalData.modalLoginPage = false;
                 this.viewCtrl.dismiss();
             } else {
                 this.navCtrl.setRoot(HomePage); // 重新设置首页
