@@ -30,7 +30,6 @@ export class NotFollowPage {
         console.log(this.id);
         this.queryTaskDetailByPage();
 		this.events.subscribe('remind:create', (id) => {
-			console.log('remind:create')
 			if(this.id===id){
 				this.currentPage = 1;
 		        this.queryTaskDetailByPage();

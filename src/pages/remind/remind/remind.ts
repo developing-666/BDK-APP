@@ -69,7 +69,6 @@ export class RemindPage {
 
 	ionViewDidLoad() {
 		this.events.subscribe('remind:create', (id) => {
-			console.log('remind:create111111')
 			this.currentPage = 1;
 			this.getData();
 		});
