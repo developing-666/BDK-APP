@@ -102,11 +102,11 @@ export class NativeService {
 	/**
 	 * 状态栏
 	 */
-	statusBarStyle(): void {
+	statusBarStyle(color:string = '#3dcbbd'): void {
 		if (this.isMobile()) {
 			this.statusBar.overlaysWebView(false);
 			this.statusBar.styleLightContent();
-			this.statusBar.backgroundColorByHexString('#3dcbbd'); // 3261b3
+			this.statusBar.backgroundColorByHexString(color); // 3261b3
 		}
 	}
 
