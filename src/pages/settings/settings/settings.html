@@ -62,9 +62,9 @@
 	
         </div>
         
-        <div class="submit" (tap)="test()">
-            <button ion-button round block  *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" >切换为企业版</button>
-            <button ion-button round block  *ngIf="userInfo?.type == 'COMPANY'" >切换为个人版</button>
+        <div class="submit">
+            <button ion-button round block  *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" (tap)="changeUserInfoType('COMPANY')">切换为企业版</button>
+            <button ion-button round block  *ngIf="userInfo?.type == 'COMPANY'" (tap)="changeUserInfoType('NORAML')">切换为个人版</button>
             </div>
 
 	</div>
