@@ -86,7 +86,30 @@ export class SettingPage {
         });
         await actionSheet.present();
     }
-
+	/**
+     * 注销账号
+     */
+    logout() {
+        const actionSheet = this.actionSheetController.create({
+            buttons: [
+                {
+                    text: '退出登录',
+                    handler: () => {
+                        console.log('Delete clicked');
+                        this.storage.set('token','');
+                        this.httpHeader.token = '';
+                        this.globalData.initData();
+                        this.navCtrl.setRoot(LoginPage);
+                    }
+                },
+                {
+                    text: '取消',
+                    role: 'cancel'
+                }
+            ]
+        });
+        actionSheet.present();
+    }
     /**
      * 清理缓存
      */

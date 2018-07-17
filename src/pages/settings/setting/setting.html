@@ -11,10 +11,10 @@
 					<ion-label>修改密码</ion-label>
 					<ion-note item-end>修改</ion-note>
 				</button>
-				<button ion-item (tap)="cancellationAccount()">
+				<!-- <button ion-item (tap)="cancellationAccount()">
 					<ion-label>注销账号</ion-label>
 					<ion-note item-end>注销账号</ion-note>
-				</button>
+				</button> -->
 				<button ion-item (tap)="toPushMessagePage()">
 					<ion-label>推送消息设置</ion-label>
 				</button>
@@ -26,6 +26,6 @@
 		</ion-list>
 	</form>
 	<div class="submit">
-		<button ion-button round block>退出登录</button>
+		<button ion-button round block (tap)="logout()">退出登录</button>
 	</div>
 </ion-content>
