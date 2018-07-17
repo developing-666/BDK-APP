@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 
 import { Validators } from '../../../providers/validators';
 import { AppApi } from './../../../providers/app-api';
 import { ForgetPasswordPage } from '../../login/forget-password/forget-password';
+import { HttpHeader } from '../../../providers/http-header';
+import { LoginPage } from './../../login/login/login';
+import { GlobalData } from '../../../providers/global-data';
 
 /**
  * Generated class for the ChangePasswordPage page.
@@ -28,7 +32,10 @@ export class ChangePasswordPage {
         public navParams: NavParams,
         private fb: FormBuilder,
         private appApi: AppApi,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private storage: Storage,
+        private globalData:GlobalData,
+		private httpHeader:HttpHeader,
     ) {
         this.createForm();
     }
@@ -84,7 +91,10 @@ export class ChangePasswordPage {
             duration: 1500
         });
         toast.onDidDismiss(() => {
-            this.navCtrl.pop();
+            this.storage.set('token','');
+            this.httpHeader.token = '';
+            this.globalData.initData();
+            this.navCtrl.setRoot(LoginPage);
         });
         toast.present();
     }

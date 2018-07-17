@@ -1,3 +1,27 @@
 page-user-agreement {
-
+    .main-wrap {
+        padding: 0 rem(30);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .p1 {
+            font-size: rem(36);
+            color: color($colors, font);
+            line-height: rem(68);
+            text-align: center;
+        }
+        .p2 {
+            font-size: rem(30);
+            color: color($colors, dark);
+            line-height: rem(48);
+        }
+        .p3 {
+            font-size: rem(36);
+            color: color($colors, font);
+            line-height: rem(76);
+        }
+        .text-center {
+            text-align: center;
+        }
+    }
 }
