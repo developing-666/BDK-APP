@@ -38,7 +38,7 @@ export class NotFollowPage {
     }
 	ionViewWillUnload(){
 		console.log('ionViewWillUnload');
-		this.events.unsubscribe('tags:change');
+		this.events.unsubscribe('remind:create');
 	}
     queryTaskDetailByPage(e?: any) {
         this.appApi
