@@ -1,8 +1,19 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import {
+    NavController,
+    NavParams,
+    ActionSheetController,
+    Alert
+} from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { Storage } from '@ionic/storage';
 
+import { HttpHeader } from '../../../providers/http-header';
 import { PushMessagePage } from '../push-message/push-message';
 import { ChangePasswordPage } from '../change-password/change-password';
+import { LoginPage } from './../../login/login/login';
+import { AppApi } from './../../../providers/app-api';
+import { GlobalData } from '../../../providers/global-data';
 
 /**
  * Generated class for the SettingPage page.
@@ -19,27 +30,32 @@ export class SettingPage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        public actionSheetController: ActionSheetController
+        public actionSheetController: ActionSheetController,
+        private appApi: AppApi,
+        private file: File,
+        private storage: Storage,
+        private globalData:GlobalData,
+		private httpHeader:HttpHeader,
     ) {}
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingPage');
     }
 
+    /**
+     * 跳转修改密码页面
+     */
 
-    /** 
-     * 跳转修改密码页面 
-     */    
     toChangePasswordPage() {
         this.navCtrl.push(ChangePasswordPage);
     }
-    /** 
-     * 跳转推送消息设置页面 
-     */    
+    /**
+     * 跳转推送消息设置页面
+     */
+
     toPushMessagePage() {
         this.navCtrl.push(PushMessagePage);
     }
-
 
     /**
      * 注销账号
@@ -53,6 +69,10 @@ export class SettingPage {
                     role: 'destructive',
                     handler: () => {
                         console.log('Delete clicked');
+                        this.storage.set('token','');
+                        this.httpHeader.token = '';
+                        this.globalData.initData();
+                        this.navCtrl.setRoot(LoginPage);
                     }
                 },
                 {
@@ -79,6 +99,16 @@ export class SettingPage {
                     role: 'destructive',
                     handler: () => {
                         console.log('Delete clicked');
+                        this.file
+                            .checkDir(this.file.dataDirectory, 'documents')
+                            .then(d => {
+                                console.log('Directory exists', d);
+                                alert('Directory exists:' + d);
+                            })
+                            .catch(err => {
+                                console.log("Directory doesn't exist");
+                                alert('Directory doesnt exist:' + err);
+                            });
                     }
                 },
                 {
@@ -92,6 +122,4 @@ export class SettingPage {
         });
         await actionSheet.present();
     }
-
-    
 }

@@ -109,4 +109,10 @@ export class GlobalData {
     set header(value: any) {
         this._header = value;
     }
+
+    initData() {
+        this.user = {};
+        this.token = '';
+        this.applyCompanyInfo = {};
+    }
 }
