@@ -13,6 +13,7 @@ import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
 import { SignInPage } from '../sign-in/sign-in';
 import { GlobalData } from '../../../providers/global-data';
+import { UserAgreementPage } from '../user-agreement/user-agreement';
 
 @Component({
     selector: 'page-login',
@@ -99,6 +100,13 @@ export class LoginPage {
         this.navCtrl.push(SignInPage, {
             callback: callback
         });
+    }
+
+    /** 
+     * 跳转用户协议页面 
+     */    
+    toUserAgreementPage() {
+        this.navCtrl.push(UserAgreementPage);
     }
 
     /**
