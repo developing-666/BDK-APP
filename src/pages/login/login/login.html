@@ -31,7 +31,7 @@
 				<div class="agreement">
 					<ion-item>
 						<ion-checkbox [(ngModel)]="mushrooms" formControlName="agreement"></ion-checkbox>
-						<ion-label>用户协议</ion-label>
+						<ion-label (tap)="toUserAgreementPage()">用户协议</ion-label>
 					</ion-item>
 				</div>
 				<span>忘记密码</span>

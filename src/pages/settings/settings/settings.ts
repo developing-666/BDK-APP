@@ -128,8 +128,20 @@ export class SettingsPage {
         });
     }
 
-    test() {
-        
+    changeUserInfoType(type:String) {
+        let param = { 
+            type:''
+        };
+        if (type == 'NORAML') {
+            param.type='NORAML';
+        }else {
+            param.type='COMPANY';
+        }
+        this.appApi.updateUserInfo(param).subscribe(d => {
+            console.log('updateUserInfo', d);
+            this.userInfo.type = param.type;
+            this.globalData.user.type = param.type;
+        });
     }
 
 }
