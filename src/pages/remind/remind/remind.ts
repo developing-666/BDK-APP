@@ -99,7 +99,9 @@ export class RemindPage {
 				} else {
 					this.reminds = this.reminds.concat(d.items);
 				}
-				this.getNotificationData();
+				if(this.nativeService.isMobile()){
+					this.getNotificationData();
+				}
 				this.totalPages = d.totalPages;
 				this.currentPage++;
 				if (e) {
@@ -132,19 +134,14 @@ export class RemindPage {
 				text: item.content,
 				sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
 				data: { secret: '5666' },
-				trigger:{at: new Date(new Date().getTime() + 3600)}
+				trigger:{at: new Date(item.content.planRemindTime)}
 			})
 		};
 		this.setNotification();
 
 	}
 	setNotification() {
-		console.log(this.notificationData);
-		this.localNotifications.cancelAll().then(()=>{
-			alert(1)
-		}).catch(()=>{
-			alert(2)
-		})
+		console.log(this.localNotifications);
 		this.localNotifications.clearAll().then(()=>{
 			this.localNotifications.schedule(this.notificationData);
 		}).catch(()=>{
