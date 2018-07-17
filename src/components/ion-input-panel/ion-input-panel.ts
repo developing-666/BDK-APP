@@ -148,6 +148,7 @@ export class IonInputPanelComponent implements OnInit {
                     this.complete = false;
                     this.mediaObj.release();
                     this.mediaObj = null;
+					this.Media.pause();
                     this.Media.removeEventListener('ended', () => {
                         this.playing = false;
                     });

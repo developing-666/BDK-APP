@@ -101,6 +101,7 @@ $designWidth: 750; //如设计图是750
 
 @mixin round-tag($size:'default', $color:false, $out-line:true) {
     display: inline-block;
+	cursor: pointer;
     @include tag-size($size);
     @if($out-line) {
         @if($color) {

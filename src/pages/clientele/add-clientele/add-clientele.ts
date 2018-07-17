@@ -34,7 +34,7 @@ export class AddClientelePage implements OnInit {
         company: undefined,
         industry:undefined,
         label: undefined,
-        labels: undefined,
+        labels: [],
         remark: undefined,
     };
     phones: Array<any> = [];

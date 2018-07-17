@@ -24,18 +24,18 @@ export class HomePage {
         public navCtrl: NavController,
         private elementRef: ElementRef,
         private renderer: Renderer,
-        private event: Events
+        private events: Events
     ) {}
     ionViewDidLoad() {
         let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
-        this.event.subscribe('hideTabs', () => {
+        this.events.subscribe('hideTabs', () => {
             this.renderer.setElementStyle(tabs, 'display', 'none');
             let SelectTab = this.tabRef.getSelected()._elementRef.nativeElement;
             let content = this.queryElement(SelectTab, '.scroll-content');
             this.mb = content.style['margin-bottom'];
             this.renderer.setElementStyle(content, 'margin-bottom', '0');
         });
-        this.event.subscribe('showTabs', () => {
+        this.events.subscribe('showTabs', () => {
             this.renderer.setElementStyle(tabs, 'display', '');
             let SelectTab = this.tabRef.getSelected()._elementRef.nativeElement;
             let content = this.queryElement(SelectTab, '.scroll-content');

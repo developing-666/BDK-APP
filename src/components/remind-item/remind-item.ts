@@ -11,6 +11,7 @@ import { AppApi } from '../../providers/app-api';
     templateUrl: 'remind-item.html'
 })
 export class RemindItemComponent implements AfterContentInit {
+    @Output() refresh: EventEmitter<any> = new EventEmitter();
     @Output() goDelay: EventEmitter<any> = new EventEmitter();
     @Output() delay: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
@@ -73,8 +74,13 @@ export class RemindItemComponent implements AfterContentInit {
 	write(e){
 		e.stopPropagation();
 		e.preventDefault();
+		let refresh: any = () => {
+			this.refresh.emit(true);
+			return Promise.resolve();
+		};
 		this.app.getRootNav()
 			.push(SettingRecordPage, {
+				refresh,
 				remind: this.remind
 			});
 	}

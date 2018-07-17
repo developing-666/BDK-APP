@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams,AlertController } from 'ionic-angular';
-
+import { Component,ViewChild } from '@angular/core';
+import { NavController, NavParams,AlertController,Navbar,Events } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
@@ -9,6 +8,7 @@ import { AppApi } from '../../../providers/app-api';
     templateUrl: 'custom-tag.html'
 })
 export class CustomTagPage {
+	@ViewChild(Navbar) navBar: Navbar;
     callback: any = this.navParams.get('callback');
     tag: Array<any> = this.navParams.get('tag');
     tags: Array<any> = [];
@@ -19,11 +19,17 @@ export class CustomTagPage {
         public navParams: NavParams,
         public alertCtrl: AlertController,
         public appApi: AppApi,
-        public globalData: GlobalData
+        public globalData: GlobalData,
+        private events: Events,
     ) {}
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad ClienteleTagPage');
+		this.navBar.backButtonClick = (e: UIEvent) => {
+			this.tag = [];
+			this.callback(this.tag).then(() => {
+	            this.navCtrl.pop();
+	        });
+        };
         if (this.globalData.CUSTOMER_LABELS.length > 0) {
             this.tags = this.globalData.CUSTOMER_LABELS;
         } else {
@@ -76,6 +82,7 @@ export class CustomTagPage {
             console.log(d);
             this.tags = d;
             this.globalData.CUSTOMER_LABELS = d;
+			this.events.publish('tags:change');
         });
     }
     labelCreate(t) {

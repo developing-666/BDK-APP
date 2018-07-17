@@ -1,6 +1,8 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController,Searchbar } from 'ionic-angular';
 
+
+import { AddClientelePage } from '../add-clientele/add-clientele';
 import { SearchResultPage}from '../search-result/search-result';
 
 import { AppApi } from './../../../providers/app-api';
@@ -24,6 +26,7 @@ export class SearchClientelePage {
         this.searchhistory();
     }
     ionViewDidEnter() {
+		this.keywords = '';
         setTimeout(() => {
             this.searchbar.setFocus();
         }, 200);
@@ -48,7 +51,7 @@ export class SearchClientelePage {
         });
     }
     itemTap(name) {
-        this.navCtrl.push(SearchResultPage, { 
+        this.navCtrl.push(SearchResultPage, {
             name,
             type:'search'
         });
@@ -83,4 +86,9 @@ export class SearchClientelePage {
         });
         alert.present();
     }
+	add() {
+		this.navCtrl.push(AddClientelePage, {
+			type: 'add'
+		});
+	}
 }

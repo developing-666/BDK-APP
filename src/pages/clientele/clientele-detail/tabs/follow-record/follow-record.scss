@@ -21,4 +21,97 @@ page-follow-record {
 			}
         }
     }
+	.record-item{
+        &.item-block {
+            &:last-child {
+                border: none;
+            }
+            padding-left: rem(60);
+            position: relative;
+            .item-inner {
+                padding-right: 1rem;
+            }
+        }
+        .top-line {
+            position: absolute;
+            display: inline-block;
+            height: 2.2rem;
+            width: 1px;
+            background-color: color($colors, border);
+            left: 1.5rem;
+            top: 0;
+        }
+
+        &.item:before {
+            position: absolute;
+            display: inline-block;
+            height: rem(20);
+            width: rem(20);
+            background-color: color($colors, primary);
+            left: 1rem;
+            top: 0.9rem;
+            content: '';
+            border-radius: 50%;
+            z-index: 2;
+        }
+        &.item:after {
+            position: absolute;
+            display: inline-block;
+            height: 100%;
+            width: 1px;
+            background-color: color($colors, border);
+            left: 1.5rem;
+            top: 1.9rem;
+            content: '';
+        }
+        .label {
+            margin: 0;
+            .record-content {
+                position: relative;
+                padding-bottom: rem(16);
+            }
+            h3 {
+                height: rem(68);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                @extend .fn-text-overflow;
+                margin-bottom: 0;
+                .start {
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                }
+                .time {
+                    @include tag(color($colors, primary));
+                }
+                .title {
+                    font-size: rem(32);
+                    color: #000;
+                    font-weight: bold;
+                    margin-left: rem(20);
+                    line-height: 1;
+                }
+                .date {
+                    color: color($colors, light);
+                    align-items: flex-end;
+                    line-height: 1;
+                }
+            }
+            .record-info {
+                @include text-overflow();
+                margin: 0;
+                .operater{
+                    line-height: rem(50);
+                    font-size: 1.4rem;
+                    color: color($colors, dark);
+                }
+                .operat-content{
+                    line-height: rem(50);
+                    font-size: 1.2rem;
+                    color: color($colors, light);
+                }
+            }
+        }
+    }
 }

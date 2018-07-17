@@ -15,6 +15,7 @@ import { AlertController, Loading, LoadingController, Platform, ToastController 
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { CallNumber } from '@ionic-native/call-number';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { SMS } from '@ionic-native/sms';
 
 import { Position } from '../model/type';
 import {
@@ -58,7 +59,8 @@ export class NativeService {
 		private loadingCtrl: LoadingController,
 		public logger: Logger,
 		private diagnostic: Diagnostic,
-		private codePush: CodePush
+		private codePush: CodePush,
+		private sms: SMS
 	) { }
 
 	/**
@@ -102,10 +104,14 @@ export class NativeService {
 	/**
 	 * 状态栏
 	 */
-	statusBarStyle(color:string = '#3dcbbd'): void {
+	statusBarStyle(color:string = '#3dcbbd',dark:boolean = false): void {
 		if (this.isMobile()) {
 			this.statusBar.overlaysWebView(false);
-			this.statusBar.styleLightContent();
+			if(dark){
+				this.statusBar.styleDefault();
+			}else{
+				this.statusBar.styleLightContent();
+			}
 			this.statusBar.backgroundColorByHexString(color); // 3261b3
 		}
 	}
@@ -413,7 +419,13 @@ export class NativeService {
 			});
 		});
 	}
-
+	/**
+	 * 发短信
+	 * @param number
+	 */
+	sendSMS(num: string): any {
+		return this.sms.send(num, 'Hello world!');
+	}
 	/**
 	 * 拨打电话
 	 * @param number

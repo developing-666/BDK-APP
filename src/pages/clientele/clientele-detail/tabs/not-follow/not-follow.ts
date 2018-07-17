@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, List,App } from 'ionic-angular';
+import { NavController, NavParams, List,App,Events } from 'ionic-angular';
 
 
 
@@ -21,14 +21,25 @@ export class NotFollowPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public appApi: AppApi,
-		public app:App
+		public app:App,
+        private events: Events,
     ) {}
 
     ionViewDidLoad() {
         console.log(this.item);
         console.log(this.id);
         this.queryTaskDetailByPage();
+		this.events.subscribe('remind:create', (id) => {
+			if(this.id===id){
+				this.currentPage = 1;
+		        this.queryTaskDetailByPage();
+			}
+		});
     }
+	ionViewWillUnload(){
+		console.log('ionViewWillUnload');
+		this.events.unsubscribe('remind:create');
+	}
     queryTaskDetailByPage(e?: any) {
         this.appApi
             .queryTaskDetailByPage({
@@ -95,8 +106,7 @@ export class NotFollowPage {
             return Promise.resolve();
         };
         this.app.getRootNav().push(AddClienteleRemindPage, {
-			item:this.item,
-            callback
+			item:this.item
         });
 	}
 }

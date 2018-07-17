@@ -1,14 +1,13 @@
 import { Component, Output, EventEmitter, Input,ElementRef } from '@angular/core';
 
-
-
-import { AddClientelePage}from'../../pages/clientele/add-clientele/add-clientele';
-
 import { AlertController, NavController, NavParams,App } from 'ionic-angular';
 
-
+import { AddClientelePage}from'../../pages/clientele/add-clientele/add-clientele';
 import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/add-clientele-remind';
+
+import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
+
 @Component({
     selector: 'clientele-item',
     templateUrl: 'clientele-item.html'
@@ -28,7 +27,8 @@ export class ClienteleItemComponent {
         private alertCtrl: AlertController,
         private $el: ElementRef,
         private appApi: AppApi,
-        public app: App
+        public app: App,
+        private nativeService: NativeService,
     ) {}
     presentConfirm(item: any) {
         let alert = this.alertCtrl.create({
@@ -62,7 +62,10 @@ export class ClienteleItemComponent {
     itemDelete(item) {
         this.presentConfirm(item);
     }
-    itemClick(item) {
+    itemClick(e,item) {
+		e.stopPropagation();
+		e.preventDefault();
+		console.log(item)
         let callback = (done): any => {
             console.log(done);
 
@@ -77,10 +80,16 @@ export class ClienteleItemComponent {
         }
         this.details.emit(item);
     }
-    message(p) {
+    message(e,p) {
+		e.stopPropagation();
+		e.preventDefault();
+		this.nativeService.sendSMS(p);
         console.log(p);
     }
-    phone(p) {
+    phone(e,p) {
+		e.stopPropagation();
+		e.preventDefault();
+		this.nativeService.callNumber(p);
         console.log(p);
     }
     getHeight() {

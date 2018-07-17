@@ -1,5 +1,5 @@
 <ion-item-sliding [ngClass]="{'no-push':noPush}">
-    <ion-item class="clientele-item" detail-push (tap)="itemClick(data)">
+    <ion-item class="clientele-item" detail-push (click)="itemClick($event,data)">
         <div class="progress" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
@@ -25,12 +25,12 @@
             </div>
         </div>
         <ion-buttons item-end>
-            <button class="message" clear ion-button icon-only (tap)="message(data.phone)">
+            <button class="message" clear ion-button icon-only (click)="message($event,data.phone)">
                 <i class="iconfont">
                     &#xe67e;
                 </i>
             </button>
-            <button class="phone" clear ion-button icon-only (tap)="phone(data.phone)">
+            <button class="phone" clear ion-button icon-only (click)="phone($event,data.phone)">
                 <i class="iconfont">
                     &#xe67b;
                 </i>
