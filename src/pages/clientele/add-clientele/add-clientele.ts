@@ -24,7 +24,9 @@ export class AddClientelePage implements OnInit {
     city: Array<any> = [];
     industry: Array<any> = INDUSTRY;
     formData: any = {
+		id:undefined,
         followStatus: undefined,
+		phones:[],
         name: undefined,
         post: undefined,
         provinceId: undefined,
@@ -50,6 +52,15 @@ export class AddClientelePage implements OnInit {
     ) {
         if (this.type === 'edit') {
 			this.labelsString = this.item.labels?this.item.labels.join(','):'';
+			if(this.item.phone){
+				let phone = this.item.phone;
+				let phones = this.item.phones;
+				if(phones&&phones.length>0){
+					this.phones = [phone,...phones];
+				}else{
+					this.phones = [phone];
+				}
+			}
             for (let name in this.formData){
                 this.formData[name] = this.item[name];
             }
@@ -64,28 +75,24 @@ export class AddClientelePage implements OnInit {
         }
     }
     add() {
-        let phone = this.phonePicker.getPhone();
-        console.log(this.addClienteleForm);
-        this.valid = false;
-        if (this.phones.length == 0) {
-            if (phone) {
-                this.formData.phone = phone;
-                this.valid = true;
-            }
-            this.formData.phones = null;
-        } else {
-            this.valid = true;
-            if (phone) {
-                this.formData.phone = phone;
-                this.formData.phones = this.phones.slice(0);
-            } else {
-                this.formData.phone = this.phones.slice(0, 1);
-                this.formData.phones = this.phones.slice(1);
-            }
+        let phones = this.phonePicker.getPhone();
+        if (phones.length != 0) {
+			this.valid = true;
+            this.formData.phone = phones[0];
+			this.formData.phones = [];
+			for (let item of phones.slice(1)) {
+			    if(item&&item.match(/^1[3|4|5|7|8|9][0-9]{9}$/)){
+					this.formData.phones.push(item);
+				}
+			}
         }
         if (this.addClienteleForm.valid && this.valid) {
             console.log(this.formData);
-            this.customerCreate();
+			if(this.type === 'edit'){
+				this.customerUpdate();
+			}else{
+				this.customerCreate();
+			}
         }
     }
     addTag() {
@@ -115,16 +122,28 @@ export class AddClientelePage implements OnInit {
         this.appApi.customerCreate(this.formData).subscribe(
             d => {
                 console.log(d);
-                this.presentToast();
+                this.presentToast('创建成功');
             },
             e => {
                 this.submitIng = false;
             }
         );
     }
-    presentToast() {
+	customerUpdate() {
+        this.submitIng = true;
+        this.appApi.customerUpdate(this.formData).subscribe(
+            d => {
+                console.log(d);
+                this.presentToast('更新成功');
+            },
+            e => {
+                this.submitIng = false;
+            }
+        );
+    }
+    presentToast(msg) {
         const toast = this.toastCtrl.create({
-            message: '创建成功',
+            message: msg,
             position: 'middle',
             duration: 1500
         });

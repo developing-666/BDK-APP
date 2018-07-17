@@ -3,7 +3,9 @@
     <div class="filter-bar">
         <div class="filter-item" *ngFor="let item of filterData;let i = index" [ngClass]="{'open':activeIndex == i && openPanel}"
             (tap)="open(i)">
-            <span class="name">{{item.name}}</span>
+            <span class="name" *ngIf="i==0 || (i!=0&&(!value || value.length==0 || !value[i].value))">{{item.name}}</span>
+            <span class="name" *ngIf="i==1&&(value && value.length!=0 && value[i].value)">{{value[i].value | followStatus:'state'}}</span>
+			<span class="name" *ngIf="i==2&&(value && value.length!=0 && value[i].value)">{{value[i].value | sortName}}</span>
             <i class="iconfont">&#xe683;</i>
         </div>
     </div>

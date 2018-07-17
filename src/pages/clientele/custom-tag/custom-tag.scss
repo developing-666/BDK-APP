@@ -14,7 +14,7 @@ page-custom-tag {
         .tag-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
+            // justify-content: space-around;
             .tag-item {
                 @include round-tag();
                 margin-bottom: 1rem;

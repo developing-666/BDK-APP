@@ -16,7 +16,8 @@ phone-number-input {
                 height: 100%;
             }
             .phone-input-container {
-                width: calc(100% - #{rem(100)});
+                // width: calc(100% - #{rem(100)});
+                width:100%;
                 display: flex;
                 justify-content: space-between;
                 padding: 0 1rem;
@@ -56,11 +57,8 @@ phone-number-input {
                 }
             }
         }
-        .ng-invalid.ng-touched,
-        .added.ng-invalid {
-            .phone-input-wrapper{
-                border-color: color($colors,danger);
-            }
+        .phone-input-wrapper.invalid{
+            border-color: color($colors,danger);
         }
     }
 }

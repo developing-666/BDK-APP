@@ -14,6 +14,8 @@ import { NewRemindPage } from '../new-remind/new-remind';
 import { SettingRecordPage } from '../../clientele/setting-record/setting-record';
 
 import { AppApi } from '../../../providers/app-api';
+import { NativeService } from '../../../providers/native-service';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import moment from 'moment';
 import { CalendarComponentOptions } from 'ion2-calendar';
@@ -35,6 +37,7 @@ export class RemindPage {
 		value: moment().format('YYYY-MM-DD')
 	};
 	reminds: Array<any> = [];
+	notificationData:Array<any> = [];
 	calendarOpt: CalendarComponentOptions = {
 		from: this.startDay,
 		monthFormat: 'YYYY 年 MM 月 ',
@@ -64,7 +67,9 @@ export class RemindPage {
 		public modalCtrl: ModalController,
 		public appApi: AppApi,
 		public alertCtrl: AlertController,
-		public toastCtrl: ToastController
+		public toastCtrl: ToastController,
+		private localNotifications: LocalNotifications,
+		public nativeService: NativeService,
 	) { }
 
 	ionViewDidLoad() {
@@ -94,6 +99,7 @@ export class RemindPage {
 				} else {
 					this.reminds = this.reminds.concat(d.items);
 				}
+				this.getNotificationData();
 				this.totalPages = d.totalPages;
 				this.currentPage++;
 				if (e) {
@@ -109,6 +115,42 @@ export class RemindPage {
 					}, 200);
 				}
 			});
+	}
+	getNotificationData(){
+		if (this.reminds.length==0) return;
+		let arr:Array<any> = [];
+		for (let item of this.reminds) {
+		    if(!item.isExpired){
+				arr.push(item);
+			}
+		}
+		if(arr.length==0) return;
+		for (let item of arr) {
+			this.notificationData.push({
+				id: item.id,
+				title:item.title,
+				text: item.content,
+				sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
+				data: { secret: '5666' },
+				trigger:{at: new Date(new Date().getTime() + 3600)}
+			})
+		};
+		this.setNotification();
+
+	}
+	setNotification() {
+		console.log(this.notificationData);
+		this.localNotifications.cancelAll().then(()=>{
+			alert(1)
+		}).catch(()=>{
+			alert(2)
+		})
+		this.localNotifications.clearAll().then(()=>{
+			this.localNotifications.schedule(this.notificationData);
+		}).catch(()=>{
+			this.nativeService.alert('本地通知清除错误');
+		})
+
 	}
 	wantDelete() {
 		if (this.hideTabs) {

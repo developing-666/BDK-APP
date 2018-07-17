@@ -10,7 +10,6 @@ page-clientele-tag {
 		.tag-container{
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-around;
 			.tag-item{
 				@include round-tag();margin-bottom: 1rem;background-color: #fff;position: relative;margin-right:1rem;
 				&.active{
@@ -39,7 +38,7 @@ page-clientele-tag {
 		}
 		.submit{
 			margin-top: rem(200);
-            width: calc(100% - 1rem); 
+            width: calc(100% - 1rem);
 		}
 	}
 }

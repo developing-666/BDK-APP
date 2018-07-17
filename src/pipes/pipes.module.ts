@@ -6,6 +6,7 @@ import { FollowStatusPipe } from './follow-status/follow-status';
 import { PhoneHideNumberPipe } from './phone-hide-number/phone-hide-number';
 import { MomentPipe } from './moment/moment';
 import { GetImgPipe } from './get-img/get-img';
+import { SortNamePipe } from './sort-name/sort-name';
 
 export { MapToIterable } from './map-to-iterable';
 export { OrderBy } from './order-by';
@@ -19,7 +20,8 @@ export { TrustResourceUrl } from './bypass-trust-res-url';
 		FollowStatusPipe,
 		MomentPipe,
 		GetImgPipe,
-        PhoneHideNumberPipe
+        PhoneHideNumberPipe,
+    SortNamePipe
 	],
 	declarations: [
 		MapToIterable,
@@ -28,7 +30,8 @@ export { TrustResourceUrl } from './bypass-trust-res-url';
 		FollowStatusPipe,
 		MomentPipe,
 		GetImgPipe,
-        PhoneHideNumberPipe
+        PhoneHideNumberPipe,
+    SortNamePipe
 	]
 })
 export class PipesModule { }

@@ -9,4 +9,7 @@ page-add-clientele {
 			}
 		}
 	}
+	.list .item .note{
+		max-width: 60%;@extend .fn-text-overflow;
+	}
 }

@@ -51,6 +51,13 @@ export class AppApi {
 	customerCreate(opts?: any): any {
 		return this._http.post('/customer/create', opts);
 	}
+	/**
+     * 更新客户信息
+     * @param opts
+     */
+	customerUpdate(opts?: any): any {
+		return this._http.put('/customer/update', opts);
+	}
     /**
      * 查询客户列表
      * @param opts
@@ -238,9 +245,9 @@ export class AppApi {
 	forgetPassword(opts) {
 		return this._http.post('/forgetPassword', opts);
     }
-    /** 
-     * 退出登录 
-     */    
+    /**
+     * 退出登录
+     */
     logout() {
         return this._http.post('/logout');
     }

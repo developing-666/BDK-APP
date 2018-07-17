@@ -25,7 +25,7 @@ export class ClienteleTagPage {
 
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad ClienteleTagPage');
-		if (this.globalData.CUSTOMER_LABEL.length > 0) {
+		if (this.globalData.CUSTOMER_LABEL && this.globalData.CUSTOMER_LABEL.length > 0) {
 			this.tags = this.globalData.CUSTOMER_LABEL;
 		} else {
 			this.queryLabelByType();
