@@ -37,7 +37,7 @@ export class RemindPage {
 		value: moment().format('YYYY-MM-DD')
 	};
 	reminds: Array<any> = [];
-	notificationData:Array<any> = [];
+	notificationData: Array<any> = [];
 	calendarOpt: CalendarComponentOptions = {
 		from: this.startDay,
 		monthFormat: 'YYYY 年 MM 月 ',
@@ -99,9 +99,9 @@ export class RemindPage {
 				} else {
 					this.reminds = this.reminds.concat(d.items);
 				}
-				if(this.nativeService.isMobile()){
+				//if(this.nativeService.isMobile()){
 					this.getNotificationData();
-				}
+				//}
 				this.totalPages = d.totalPages;
 				this.currentPage++;
 				if (e) {
@@ -118,33 +118,33 @@ export class RemindPage {
 				}
 			});
 	}
-	getNotificationData(){
-		if (this.reminds.length==0) return;
-		let arr:Array<any> = [];
+	getNotificationData() {
+		if (this.reminds.length == 0) return;
+		let arr: Array<any> = [];
 		for (let item of this.reminds) {
-		    if(!item.isExpired){
+			if (!item.isExpired) {
 				arr.push(item);
 			}
 		}
-		if(arr.length==0) return;
+		if (arr.length == 0) return;
 		for (let item of arr) {
+			let time = moment(item.planRemindTime).valueOf();
 			this.notificationData.push({
 				id: item.id,
-				title:item.title,
+				title: item.title,
 				text: item.content,
 				sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
 				data: { secret: '5666' },
-				trigger:{at: new Date(item.content.planRemindTime)}
+				trigger: { at: new Date(time)},
 			})
 		};
 		this.setNotification();
 
 	}
 	setNotification() {
-		console.log(this.localNotifications);
-		this.localNotifications.clearAll().then(()=>{
+		this.localNotifications.clearAll().then(() => {
 			this.localNotifications.schedule(this.notificationData);
-		}).catch(()=>{
+		}).catch(() => {
 			this.nativeService.alert('本地通知清除错误');
 		})
 

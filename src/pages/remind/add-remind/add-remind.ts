@@ -47,6 +47,7 @@ export class AddRemindPage {
 		title: undefined,
 		planRemindTime: undefined
 	};
+	minTime =moment().format('YYYY-MM-DDTHH:mm:ssZ');
 	planRemindTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
 	paths: Array<any> = [];
 	audio: any = {
