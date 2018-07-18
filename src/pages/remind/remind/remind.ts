@@ -88,6 +88,7 @@ export class RemindPage {
 			.queryTaskDetailByPage({
 				currentPageIndex: this.currentPage,
 				params: {
+                    queryUnFollow:true,
 					queryFetchCustomer: true,
 					queryPlanRemindTimeStart: this.activeDay.value,
 					queryPlanRemindTimeEnd: this.activeDay.value

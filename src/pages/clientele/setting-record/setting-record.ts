@@ -37,7 +37,8 @@ export class SettingRecordPage {
 	infoContent: any;
 	formData: any = {
 		taskId: this.remind?this.remind.id:undefined,
-		title: undefined,
+		title: this.remind?this.remind.title:undefined,
+        customerId: this.customerId ? this.customerId : undefined,
 		nextFollowTime: undefined
 	};
 	nextFollowTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');

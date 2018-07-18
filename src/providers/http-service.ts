@@ -103,11 +103,15 @@ export class HttpService {
             this.request(url, options, noLoading).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
 				if (res.status === 1) {
-					observer.next(res.data);
+                    if (url.indexOf('valid')>-1) {
+                        observer.next(res);
+                    } else {
+                        observer.next(res.data);
+                    }
 				} else {
 					// IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
 					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
-					observer.error(res.data);
+					observer.error(res);
 				}
 			}, error => {
 				//  401,403 token无效或过期需要重新登录

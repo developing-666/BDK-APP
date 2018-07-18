@@ -43,13 +43,13 @@ export class NotFollowPage {
     queryTaskDetailByPage(e?: any) {
         this.appApi
             .queryTaskDetailByPage({
-                currentPageIndex: 1,
+                currentPageIndex: this.currentPage,
                 params: {
+                    queryUnFollow:true,
                     queryCustomerId: this.id
                 }
             })
-            .subscribe(
-                d => {
+            .subscribe(d => {
                     console.log(d);
                     if (this.currentPage == 1) {
                         this.reminds = d.items;
@@ -63,16 +63,14 @@ export class NotFollowPage {
                             e.complete();
                         }, 200);
                     }
-                },
-                err => {
+                }, err => {
                     console.log(err);
                     if (e) {
                         setTimeout(() => {
                             e.complete();
                         }, 200);
                     }
-                }
-            );
+                });
     }
     delete(item) {
         this.reminds.splice(item.index, 1);

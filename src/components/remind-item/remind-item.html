@@ -13,7 +13,7 @@
 				<span class="date">{{remind.planRemindTime | moment:'YYYY/MM/DD ddd'}}</span>
 			</h3>
 			<p class="clientele-info" *ngIf="remind.type==='CUSTOMER'&&remind.customer">
-				<span class="start">{{remind?.customer?.post}}</span>
+				<span class="start">{{remind?.customer?.name}}</span>
 				<span>{{remind?.customer?.company}}</span>
 			</p>
 			<div class="remark">

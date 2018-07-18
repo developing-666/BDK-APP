@@ -1,8 +1,21 @@
-import { Component, Output, EventEmitter, Input,ElementRef } from '@angular/core';
+import {
+    Component,
+    Output,
+    EventEmitter,
+    Input,
+    ElementRef,
+    OnInit
+} from '@angular/core';
 
-import { AlertController, NavController, NavParams,App } from 'ionic-angular';
+import {
+    AlertController,
+    NavController,
+    NavParams,
+    App,
+    Events
+} from 'ionic-angular';
 
-import { AddClientelePage}from'../../pages/clientele/add-clientele/add-clientele';
+import { AddClientelePage } from '../../pages/clientele/add-clientele/add-clientele';
 import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/add-clientele-remind';
 
 import { NativeService } from '../../providers/native-service';
@@ -29,7 +42,18 @@ export class ClienteleItemComponent {
         private appApi: AppApi,
         public app: App,
         private nativeService: NativeService,
+        public events: Events
     ) {}
+    ngOnInit() {
+        console.log(123123123);
+        this.events.subscribe('tags:change', this.update);
+    }
+    ngOnDestroy() {
+        this.events.unsubscribe('tags:change', this.update);
+    }
+    update(){
+
+    }
     presentConfirm(item: any) {
         let alert = this.alertCtrl.create({
             title: '确认删除？',
@@ -62,10 +86,10 @@ export class ClienteleItemComponent {
     itemDelete(item) {
         this.presentConfirm(item);
     }
-    itemClick(e,item) {
-		e.stopPropagation();
-		e.preventDefault();
-		console.log(item)
+    itemClick(e, item) {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log(item);
         let callback = (done): any => {
             console.log(done);
 
@@ -80,16 +104,16 @@ export class ClienteleItemComponent {
         }
         this.details.emit(item);
     }
-    message(e,p) {
-		e.stopPropagation();
-		e.preventDefault();
-		this.nativeService.sendSMS(p);
+    message(e, p) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.nativeService.sendSMS(p);
         console.log(p);
     }
-    phone(e,p) {
-		e.stopPropagation();
-		e.preventDefault();
-		this.nativeService.callNumber(p);
+    phone(e, p) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.nativeService.callNumber(p);
         console.log(p);
     }
     getHeight() {

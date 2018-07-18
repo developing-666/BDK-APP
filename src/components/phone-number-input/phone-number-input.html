@@ -1,10 +1,14 @@
 <div class="phone-wrapper">
     <form novalidate #phoneForm="ngForm" [ngClass]="{'added':addEd}" (ngSubmit)="add()">
-        <div class="phone-input-wrapper" [ngClass]="{'invalid':(phoneForm.controls['phone'+i]?.touched || addEd) && phoneForm.controls['phone'+i].invalid}" *ngFor="let item of inputs;let i = index">
+        <div class="phone-input-wrapper" [ngClass]="{'invalid':(phoneForm.controls['phone'+i]?.touched || addEd) && (phoneForm.controls['phone'+i]?.invalid || !valid[i])}"
+            *ngFor="let item of inputs;let i = index">
             <div class="phone-input-container">
-                <span>电话</span>
-                <input class="phone-input" [name]="'phone'+i" type="tel" [(ngModel)]="values[i]" required pattern="^1[3|4|5|7|8|9][0-9]{9}$" (input)="input($event)"
-                    placeholder="请输入电话号码">
+                <div class="label">
+                    <i class="iconfont delete" (tap)="delete(i)">&#xe66b;</i>
+                    <span>电话</span>
+                </div>
+                <input class="phone-input" [attr.data-index]="i" [name]="'phone'+i" type="tel" [(ngModel)]="values[i]" required pattern="^1[3|4|5|7|8|9][0-9]{9}$"
+                    (input)="input($event)" placeholder="请输入电话号码">
             </div>
             <button ion-button icon-only clear hidden>
                 <i class="iconfont">

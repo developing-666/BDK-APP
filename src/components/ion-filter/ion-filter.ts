@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output,OnDestroy } from '@angular/core';
 import {Events} from 'ionic-angular';
 
 import { FILTERDATA } from '../../providers/constants';
@@ -34,10 +34,16 @@ export class IonFilterComponent implements OnInit {
     ngOnInit() {
         this.panelHide();
         this.queryLabelByType();
-		this.events.subscribe('tags:change', () => {
-			this.filterData[0].options[0].options = this.globalData.CUSTOMER_LABEL;
-			this.filterData[0].options[1].options = this.globalData.CUSTOMER_LABELS;
-		});
+        this.events.subscribe('tags:change', this.update);
+    }
+    ngOnDestroy(): void {
+        this.events.unsubscribe('tags:change', this.update);
+    }
+    update(){
+        console.log('update');
+        
+        this.filterData[0].options[0].options = this.globalData.CUSTOMER_LABEL;
+        this.filterData[0].options[1].options = this.globalData.CUSTOMER_LABELS;
     }
     queryLabelByType() {
         const post1 = this.appApi.queryLabelByType('CUSTOMER_LABEL');
@@ -47,8 +53,7 @@ export class IonFilterComponent implements OnInit {
         result.subscribe(d => {
             this.globalData.CUSTOMER_LABEL = d[0];
             this.globalData.CUSTOMER_LABELS = d[1];
-            this.filterData[0].options[0].options = d[0];
-            this.filterData[0].options[1].options = d[1];
+            this.update();
             this.getOpts();
             this.initValue();
             }, e => {

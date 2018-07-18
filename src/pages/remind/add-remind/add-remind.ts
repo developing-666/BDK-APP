@@ -220,7 +220,7 @@ export class AddRemindPage {
 		const toast = this.toastCtrl.create({
 			message: '创建成功',
 			position: 'middle',
-			duration: 1500
+			// duration: 1500
 		});
 		toast.onDidDismiss(() => {
 			this.refresh().then(() => {

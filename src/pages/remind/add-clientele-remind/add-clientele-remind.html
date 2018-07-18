@@ -14,7 +14,7 @@
                 </ion-item>
                 <button ion-item [ngClass]="{'invalid':(addRemindForm.controls.time?.touched || addRemindForm.submitted) && addRemindForm.controls.time.invalid}">
                     <ion-label>提醒时间</ion-label>
-                    <ion-datetime name="time" [(ngModel)]="planRemindTime" required placeholder="请选择提醒时间" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" [min]="planRemindTime"
+                    <ion-datetime name="time" [(ngModel)]="planRemindTime" required placeholder="请选择提醒时间" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" [min]="minTime"
                         cancelText="取消" doneText="确定"></ion-datetime>
                 </button>
                 <info-input [ngClass]="{'invalid':(addRemindForm.controls.content?.touched || addRemindForm.submitted) && addRemindForm.controls.content.invalid}"
