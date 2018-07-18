@@ -13,12 +13,12 @@
 							<em></em>
 							<i>{{item?.operateTime | moment:'HH:mm'}}</i>
 						</span>
+                        <span class="title">{{item?.content}}</span>
 					</div>
 					<span class="date">{{item?.operateTime | moment:'YYYY/MM/DD ddd'}}</span>
 				</h3>
 				<div class="record-info">
 					<p class="operater">{{item?.operater?.name}}</p>
-					<p class="operat-content">{{item?.content}}</p>
 				</div>
 			</div>
 		</ion-item>
