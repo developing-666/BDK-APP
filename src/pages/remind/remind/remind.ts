@@ -100,7 +100,7 @@ export class RemindPage {
 					this.reminds = this.reminds.concat(d.items);
 				}
 				//if(this.nativeService.isMobile()){
-					this.getNotificationData();
+					// this.getNotificationData();
 				//}
 				this.totalPages = d.totalPages;
 				this.currentPage++;
@@ -118,37 +118,36 @@ export class RemindPage {
 				}
 			});
 	}
-	getNotificationData() {
-		if (this.reminds.length == 0) return;
-		let arr: Array<any> = [];
-		for (let item of this.reminds) {
-			if (!item.isExpired) {
-				arr.push(item);
-			}
-		}
-		if (arr.length == 0) return;
-		for (let item of arr) {
-			let time = moment(item.planRemindTime).valueOf();
-			this.notificationData.push({
-				id: item.id,
-				title: item.title,
-				text: item.content,
-				sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
-				data: { secret: '5666' },
-				trigger: { at: new Date(time)},
-			})
-		};
-		this.setNotification();
-
-	}
-	setNotification() {
-		this.localNotifications.clearAll().then(() => {
-			this.localNotifications.schedule(this.notificationData);
-		}).catch(() => {
-			this.nativeService.alert('本地通知清除错误');
-		})
-
-	}
+	// getNotificationData() {
+	// 	if (this.reminds.length == 0) return;
+	// 	let arr: Array<any> = [];
+	// 	for (let item of this.reminds) {
+	// 		if (!item.isExpired) {
+	// 			arr.push(item);
+	// 		}
+	// 	}
+	// 	if (arr.length == 0) return;
+	// 	for (let item of arr) {
+	// 		let time = moment(item.planRemindTime).valueOf();
+	// 		this.notificationData.push({
+	// 			id: item.id,
+	// 			title: item.title,
+	// 			text: item.content,
+	// 			sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
+	// 			data: { secret: '5666' },
+	// 			trigger: { at: new Date(time)},
+	// 		})
+	// 	};
+	// 	this.setNotification();
+	//
+	// }
+	// setNotification() {
+	// 	this.localNotifications.clearAll().then(() => {
+	// 		this.localNotifications.schedule(this.notificationData);
+	// 	}).catch(() => {
+	// 		this.nativeService.alert('本地通知清除错误');
+	// 	})
+	// }
 	wantDelete() {
 		if (this.hideTabs) {
 			this.events.publish('showTabs');
