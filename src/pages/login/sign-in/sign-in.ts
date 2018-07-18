@@ -23,6 +23,8 @@ export class SignInPage {
     time: number = 60; //倒计时
     interval: any; //setInterval
     canRegister: boolean = false; //手机号可以注册
+    showRegisterResult: boolean = false; //显示 验证手机号提示文字
+    registerResult: string = '';//验证手机号提示文字
     callback = this.navParams.get('callback');
     constructor(
         public navCtrl: NavController,
@@ -87,6 +89,7 @@ export class SignInPage {
             }, 1000);
         });
     }
+
     /**
      * 倒计时结束
      */
@@ -107,6 +110,14 @@ export class SignInPage {
             this.registerSuccess();
         });
     }
+
+
+    /**
+     * 手机号码改变时
+     */
+    phoneChange() {
+        this.showRegisterResult = false;
+    }
     /**
      * 验证手机号
      */
@@ -116,9 +127,14 @@ export class SignInPage {
                 .signInPhoneValid({
                     phone: this.formData.phone
                 })
-                .subscribe(d => {
-                    console.log(d);
-                    this.canRegister = true;
+                .subscribe(res => {
+                    console.log(res);
+                    this.showRegisterResult = true;
+                    if (res.code == 0) {
+                        this.canRegister = true;
+                    }else {
+                        this.registerResult = res.message;
+                    }
                 });
         }
     }
