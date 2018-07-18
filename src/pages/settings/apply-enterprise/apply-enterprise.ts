@@ -41,7 +41,7 @@ export class ApplyEnterprisePage {
         this.checkStatus == this.globalData.checkStatus.CHECK_SUCCESS;
     isCheckFail: Boolean =
         this.checkStatus == this.globalData.checkStatus.CHECK_FAIL;
-    canEdit: boolean = false;
+    canEdit: boolean = true;
     callback: any = this.navParams.get('callback');
     /**
      * set get

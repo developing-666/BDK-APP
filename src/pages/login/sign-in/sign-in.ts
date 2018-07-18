@@ -4,6 +4,7 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
+import { NativeService } from '../../../providers/native-service';
 import { Validators } from '../../../providers/validators';
 import { GlobalData } from '../../../providers/global-data';
 import { Utils } from '../../../providers/utils';
@@ -15,8 +16,8 @@ import { Utils } from '../../../providers/utils';
 export class SignInPage {
     ngForm: FormGroup;
     formData: any = {
-        phone: '18611112222',
-        validCode: 1234
+        phone: '',
+        validCode: ''
     };
     showVerificationCode: boolean = true; //显示验证码按钮
     time: number = 60; //倒计时
@@ -29,23 +30,15 @@ export class SignInPage {
         private appApi: AppApi,
         private fb: FormBuilder,
         private globalData: GlobalData,
-        public toastController: ToastController
+        public toastController: ToastController,
+        private nativeService: NativeService,
     ) {
         this.createForm();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad SignInPage');
-
-        let obj = {
-            a: 123,
-            b: 456
-        };
-        let obj1 = {
-            data: this.formData
-        };
-        let obj2 = Utils.extend(true, {}, obj, obj1);
-        console.log(obj2);
+        this.nativeService.statusBarStyle(); // 设置状态栏颜色
     }
 
     ionViewWillLeave() {
@@ -90,7 +83,6 @@ export class SignInPage {
             console.log(d);
             this.showVerificationCode = false;
             this.interval = setInterval(() => {
-                console.log(this.time);
                 this.time > 0 ? this.time-- : this.countDownEnd();
             }, 1000);
         });
