@@ -4,6 +4,7 @@ import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
+import { NativeService } from '../../../providers/native-service';
 
 @Component({
     selector: 'page-forget-password',
@@ -22,13 +23,15 @@ export class ForgetPasswordPage {
         public navParams: NavParams,
         private appApi: AppApi,
         private fb: FormBuilder,
-        private toastCtrl: ToastController
+        private toastCtrl: ToastController,
+        private nativeService: NativeService,
     ) {
         this.createForm();
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ForgetPasswordPage');
+		this.nativeService.statusBarStyle('#ffffff',true); // 设置状态栏颜色
     }
     ionViewWillLeave() {
         this.countDownEnd();

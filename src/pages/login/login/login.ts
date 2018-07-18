@@ -15,6 +15,7 @@ import { HomePage } from '../../home/home';
 import { SignInPage } from '../sign-in/sign-in';
 import { GlobalData } from '../../../providers/global-data';
 import { UserAgreementPage } from '../user-agreement/user-agreement';
+import { ForgetPasswordPage } from '../forget-password/forget-password';
 
 @Component({
     selector: 'page-login',
@@ -112,12 +113,10 @@ export class LoginPage {
     toUserAgreementPage() {
         this.navCtrl.push(UserAgreementPage);
     }
-
-    /**
-     * 测试
-     */
-    change() {
-        console.log(this.ngForm);
-        console.log('this.agreement', this.phone);
+    /** 
+     * 跳转忘记密码页面 
+     */    
+    toForgetPasswordPage() {
+        this.navCtrl.push(ForgetPasswordPage);
     }
 }
