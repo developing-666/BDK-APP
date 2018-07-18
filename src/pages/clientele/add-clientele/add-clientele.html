@@ -56,12 +56,6 @@
 				</button>
 			</ion-item-group>
 			<ion-item-group>
-				<button ion-item>
-					<ion-label>省份</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()">
-						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
-					</ion-select>
-				</button>
 				<button ion-item (tap)="addTag()">
 					<ion-label>客户标签</ion-label>
 					<ion-note [ngClass]="{'active':formData.label}" item-end>{{formData.label?formData.label:'请选择客户标签'}}</ion-note>

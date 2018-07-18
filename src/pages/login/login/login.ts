@@ -3,6 +3,7 @@ import { ViewChild, Component } from '@angular/core';
 import { App, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NativeService } from '../../../providers/native-service';
+import { Helper } from '../../../providers/helper';
 
 import { AppApi } from '../../../providers/app-api';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -38,6 +39,7 @@ export class LoginPage {
         private storage: Storage,
         private globalData:GlobalData,
         private nativeService: NativeService,
+        private helper: Helper,
     ) {
         this.createForm();
     }
@@ -77,8 +79,10 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
-            this.httpHeader.token = d;
-            this.storage.set('token',d);
+            this.httpHeader.token = d.token;
+            this.storage.set('token',d.token);
+			this.globalData.userId = d.jpushAlias;
+			this.helper.setAlias();
 			this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
@@ -107,15 +111,15 @@ export class LoginPage {
         });
     }
 
-    /** 
-     * 跳转用户协议页面 
-     */    
+    /**
+     * 跳转用户协议页面
+     */
     toUserAgreementPage() {
         this.navCtrl.push(UserAgreementPage);
     }
-    /** 
-     * 跳转忘记密码页面 
-     */    
+    /**
+     * 跳转忘记密码页面
+     */
     toForgetPasswordPage() {
         this.navCtrl.push(ForgetPasswordPage);
     }

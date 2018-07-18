@@ -33,7 +33,7 @@ export class SettingRecordPage {
 	refresh: any = this.navParams.get('refresh');
 	customerId:string = this.navParams.get('customerId');
 	remind: any = this.navParams.get('remind');
-	placeholder: string = '点击输入跟进情况文字备注或语音备注';
+	placeholder: string = '点击输入跟进情况备注';
 	infoContent: any;
 	formData: any = {
 		taskId: this.remind?this.remind.id:undefined,

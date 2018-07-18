@@ -57,7 +57,7 @@
         "call-number": "^1.0.1",
         "code-push": "^2.0.4",
         "com-badrit-base64": "^0.2.0",
-        "cordova-android": "7.1.0",
+        "cordova-android": "^7.1.0",
         "cordova-ios": "4.5.4",
         "cordova-plugin-add-swift-support": "^1.7.2",
         "cordova-plugin-app-version": "^0.1.9",

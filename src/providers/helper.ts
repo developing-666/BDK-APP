@@ -188,10 +188,10 @@ export class Helper {
 	private jPushAddEventListener() {
 		this.jPush.getUserNotificationSettings().then(result => {
 			if (result == 0) {
-				this.nativeService.alert('系统设置中已关闭应用推送');
+				// this.nativeService.alert('系统设置中已关闭应用推送');
 				console.log('jpush-系统设置中已关闭应用推送');
 			} else if (result > 0) {
-				this.nativeService.alert('系统设置中已关闭应用推送');
+				// this.nativeService.alert('系统设置中已关闭应用推送');
 				console.log('jpush-系统设置中打开了应用推送');
 			}
 		});
