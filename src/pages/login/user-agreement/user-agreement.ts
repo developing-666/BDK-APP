@@ -25,7 +25,7 @@ export class UserAgreementPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserAgreementPage');
-    this.nativeService.statusBarStyle('#ffffff',true); // 设置状态栏颜色
+    this.nativeService.statusBarStyle(); // 设置状态栏颜色
   }
 
 }

@@ -31,7 +31,7 @@ export class ForgetPasswordPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ForgetPasswordPage');
-		this.nativeService.statusBarStyle('#ffffff',true); // 设置状态栏颜色
+		this.nativeService.statusBarStyle(); // 设置状态栏颜色
     }
     ionViewWillLeave() {
         this.countDownEnd();
