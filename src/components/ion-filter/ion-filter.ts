@@ -26,6 +26,10 @@ export class IonFilterComponent implements OnInit {
     backIn: boolean = false;
     activeIndex: number = 0;
     value: any = [];
+    update:any = () => {
+        this.filterData[0].options[0].options = this.globalData.CUSTOMER_LABEL;
+        this.filterData[0].options[1].options = this.globalData.CUSTOMER_LABELS;
+    }
     constructor(
 		public globalData: GlobalData,
 		public appApi: AppApi,
@@ -38,12 +42,6 @@ export class IonFilterComponent implements OnInit {
     }
     ngOnDestroy(): void {
         this.events.unsubscribe('tags:change', this.update);
-    }
-    update(){
-        console.log('update');
-        
-        this.filterData[0].options[0].options = this.globalData.CUSTOMER_LABEL;
-        this.filterData[0].options[1].options = this.globalData.CUSTOMER_LABELS;
     }
     queryLabelByType() {
         const post1 = this.appApi.queryLabelByType('CUSTOMER_LABEL');

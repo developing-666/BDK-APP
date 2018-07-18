@@ -59,6 +59,10 @@ export class RemindPage {
 	};
 	prevDayDisabled: boolean = false;
 	nextDayDisabled: boolean = false;
+    update: any = () => {
+        this.currentPage = 1;
+        this.getData();
+    }
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -73,13 +77,14 @@ export class RemindPage {
 	) { }
 
 	ionViewDidLoad() {
-		this.events.subscribe('remind:create', (id) => {
-			this.currentPage = 1;
-			this.getData();
-		});
+		this.events.subscribe('remind:create',this.update);
+        this.events.subscribe('followRecord:update', this.update);
 		this.getData();
 	}
-
+    ionViewWillUnload(){
+        this.events.unsubscribe('remind:create', this.update);
+        this.events.unsubscribe('followRecord:update', this.update);
+    }
 	foldCalendar() {
 		this.fold = !this.fold;
 	}
@@ -166,14 +171,7 @@ export class RemindPage {
 		console.log(e);
 	}
 	add() {
-		let refresh: any = () => {
-			this.currentPage = 1;
-			this.getData();
-			return Promise.resolve();
-		};
-		let profileModal = this.modalCtrl.create(NewRemindPage, {
-			refresh
-		});
+		let profileModal = this.modalCtrl.create(NewRemindPage);
 		profileModal.present();
 	}
 	change() {
@@ -253,7 +251,6 @@ export class RemindPage {
 			};
 			this.app.getRootNav()
 				.push(SettingRecordPage, {
-					refresh,
 					remind: item
 				});
 		}

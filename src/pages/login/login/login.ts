@@ -81,8 +81,10 @@ export class LoginPage {
             console.log(d);
             this.httpHeader.token = d.token;
             this.storage.set('token',d.token);
-			this.globalData.userId = d.jpushAlias;
-			this.helper.setAlias();
+            this.globalData.userId = d.jpushAlias;
+            this.globalData.userTag = d.jpushTag;
+            this.helper.setAlias();
+            this.helper.setTags(this.globalData.userTag);
 			this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;

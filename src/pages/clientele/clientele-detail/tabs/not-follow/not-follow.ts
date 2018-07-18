@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, List,App,Events } from 'ionic-angular';
-
-
+import { NavController, NavParams, List, App, Events } from 'ionic-angular';
 
 import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
 
@@ -15,41 +13,44 @@ export class NotFollowPage {
     currentPage: number = 1;
     totalPages: number = 1;
     id: string = this.navParams.get('id');
-	item:any = this.navParams.get('item');
+    item: any = this.navParams.get('item');
     reminds: Array<any> = [];
+    update: any = id => {
+        console.log(id);
+        if (this.id === id) {
+            this.currentPage = 1;
+            this.queryTaskDetailByPage();
+        }
+    };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         public appApi: AppApi,
-		public app:App,
-        private events: Events,
+        public app: App,
+        private events: Events
     ) {}
 
     ionViewDidLoad() {
-        console.log(this.item);
-        console.log(this.id);
         this.queryTaskDetailByPage();
-		this.events.subscribe('remind:create', (id) => {
-			if(this.id===id){
-				this.currentPage = 1;
-		        this.queryTaskDetailByPage();
-			}
-		});
+        this.events.subscribe('remind:create', this.update);
+        this.events.subscribe('followRecord:update', this.update);
     }
-	ionViewWillUnload(){
-		console.log('ionViewWillUnload');
-		this.events.unsubscribe('remind:create');
-	}
+    ionViewWillUnload() {
+        this.events.unsubscribe('remind:create', this.update);
+        this.events.unsubscribe('followRecord:update', this.update);
+    }
     queryTaskDetailByPage(e?: any) {
         this.appApi
             .queryTaskDetailByPage({
                 currentPageIndex: this.currentPage,
                 params: {
-                    queryUnFollow:true,
+                    queryUnFollow: true,
+                    queryFetchCustomer: true,
                     queryCustomerId: this.id
                 }
             })
-            .subscribe(d => {
+            .subscribe(
+                d => {
                     console.log(d);
                     if (this.currentPage == 1) {
                         this.reminds = d.items;
@@ -63,14 +64,16 @@ export class NotFollowPage {
                             e.complete();
                         }, 200);
                     }
-                }, err => {
+                },
+                err => {
                     console.log(err);
                     if (e) {
                         setTimeout(() => {
                             e.complete();
                         }, 200);
                     }
-                });
+                }
+            );
     }
     delete(item) {
         this.reminds.splice(item.index, 1);
@@ -90,21 +93,21 @@ export class NotFollowPage {
     loadMore(e) {
         console.log(e);
     }
-    itemClick(e, item){
+    itemClick(e, item) {
         e.stopPropagation();
         e.preventDefault();
     }
-	add(){
-		let callback = (done): any => {
+    add() {
+        let callback = (done): any => {
             console.log(done);
             // if (done) {
-			// 	this.currentPage = 1;
-		    //     this.queryTaskDetailByPage();
+            // 	this.currentPage = 1;
+            //     this.queryTaskDetailByPage();
             // }
             return Promise.resolve();
         };
         this.app.getRootNav().push(AddClienteleRemindPage, {
-			item:this.item
+            item: this.item
         });
-	}
+    }
 }

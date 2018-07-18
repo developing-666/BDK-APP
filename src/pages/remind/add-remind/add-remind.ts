@@ -1,12 +1,12 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, ToastController, Events } from 'ionic-angular';
 import moment from 'moment';
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
 import { InfoInputComponent } from '../../../components/info-input/info-input';
 
-import { ClientelePage } from '../../clientele/clientele/clientele';
+
 import { SearchResultPage } from '../../clientele/search-result/search-result';
 
 import {
@@ -32,7 +32,6 @@ export class AddRemindPage {
 	@ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
 	callback: any = this.navParams.get('callback');
 	item: any = this.navParams.get('item');
-	refresh: any = this.navParams.get('refresh');
 	type: any = this.navParams.get('type');
 	mode: string = this.navParams.get('mode');
 	modeText: string = this.mode == 'delay' ? '延迟' : '新增';
@@ -70,7 +69,8 @@ export class AddRemindPage {
 		public toastCtrl: ToastController,
 		public nativeService: NativeService,
 		public ft: FileTransfer,
-		private globalData: GlobalData
+        private globalData: GlobalData,
+        private events: Events,
 	) {
 		if (this.item) {
 			console.log(this.item);
@@ -214,18 +214,17 @@ export class AddRemindPage {
 		this.appApi.taskCreate(this.formData).subscribe(d => {
 			console.log(d);
 			this.success();
+            this.events.publish('remind:create', this.formData.customerId);
 		});
 	}
 	success() {
 		const toast = this.toastCtrl.create({
 			message: '创建成功',
 			position: 'middle',
-			// duration: 1500
+			duration: 1500
 		});
 		toast.onDidDismiss(() => {
-			this.refresh().then(() => {
-				this.navCtrl.pop();
-			});
+            this.navCtrl.pop();
 		});
 		toast.present();
 	}

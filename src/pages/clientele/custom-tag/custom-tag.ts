@@ -1,16 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, Navbar, Events } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
+import { Utils } from '../../../providers/utils';
 @Component({
 	selector: 'page-custom-tag',
 	templateUrl: 'custom-tag.html'
 })
 export class CustomTagPage {
-	@ViewChild(Navbar) navBar: Navbar;
 	callback: any = this.navParams.get('callback');
-	tag: Array<any> = this.navParams.get('tag');
+    tag: Array<any> = Utils.extend(true, [], this.navParams.get('tag'));
 	tags: Array<any> = [];
 	deleteIng: boolean = false;
 	deleteId: string = '';
@@ -24,12 +24,6 @@ export class CustomTagPage {
 	) { }
 
 	ionViewDidLoad() {
-		this.navBar.backButtonClick = (e: UIEvent) => {
-			this.tag = [];
-			this.callback(this.tag).then(() => {
-				this.navCtrl.pop();
-			});
-		};
 		if (this.globalData.CUSTOMER_LABELS && this.globalData.CUSTOMER_LABELS.length > 0) {
 			this.tags = this.globalData.CUSTOMER_LABELS;
 		} else {

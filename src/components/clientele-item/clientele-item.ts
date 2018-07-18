@@ -21,10 +21,17 @@ import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
 
+function aaa(a) {
+    console.log(this);
+    
+}
+
+
 @Component({
     selector: 'clientele-item',
     templateUrl: 'clientele-item.html'
 })
+
 export class ClienteleItemComponent {
     @Output() remind: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
@@ -34,6 +41,11 @@ export class ClienteleItemComponent {
     @Input() data: any = {};
     @Input() index: number = undefined;
     labels: Array<any> = this.data.labels ? this.data.labels : [];
+    update: any = id => {
+        if (this.data.id === id) {
+            this.customerDetails();
+        }
+    }
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -45,14 +57,11 @@ export class ClienteleItemComponent {
         public events: Events
     ) {}
     ngOnInit() {
-        console.log(123123123);
-        this.events.subscribe('tags:change', this.update);
+        this.events.subscribe('clientele:update', this.update);
     }
     ngOnDestroy() {
-        this.events.unsubscribe('tags:change', this.update);
-    }
-    update(){
-
+        console.log('ngOnDestroy');
+        this.events.unsubscribe('clientele:update', this.update);
     }
     presentConfirm(item: any) {
         let alert = this.alertCtrl.create({
@@ -119,5 +128,11 @@ export class ClienteleItemComponent {
     getHeight() {
         return this.$el.nativeElement.querySelector('.item-wrapper')
             .offsetHeight;
+    }
+    customerDetails(){
+        this.appApi.customerDetails(this.data.id).subscribe(d => {
+            console.log(d);
+            this.data = d;
+        });
     }
 }

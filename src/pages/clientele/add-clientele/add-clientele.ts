@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController,Events } from 'ionic-angular';
 
 import { ClienteleTagPage } from '../clientele-tag/clientele-tag';
 import { CustomTagPage } from '../custom-tag/custom-tag';
@@ -48,7 +48,8 @@ export class AddClientelePage implements OnInit {
         public navCtrl: NavController,
         public navParams: NavParams,
         public globalData: GlobalData,
-        private appApi: AppApi
+        private appApi: AppApi,
+        public events:Events,
     ) {
         if (this.type === 'edit') {
 			this.labelsString = this.item.labels?this.item.labels.join(','):'';
@@ -135,6 +136,7 @@ export class AddClientelePage implements OnInit {
             d => {
                 console.log(d);
                 this.presentToast('更新成功');
+                this.events.publish('clientele:update', this.formData.id);
             },
             e => {
                 this.submitIng = false;

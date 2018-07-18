@@ -31,7 +31,6 @@ export class AddClienteleRemindPage {
 	@ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
 	callback: any = this.navParams.get('callback');
 	item: any = this.navParams.get('item');
-	refresh: any = this.navParams.get('refresh');
 	mode: string = this.navParams.get('mode');
 	clientele: any = undefined;
 	infoContent: any;
@@ -168,6 +167,7 @@ export class AddClienteleRemindPage {
 		this.appApi.taskCreate(this.formData).subscribe(d => {
 			console.log(d);
 			this.success();
+            this.events.publish('remind:create', this.formData.customerId);
 		});
 	}
 	success() {
@@ -178,7 +178,6 @@ export class AddClienteleRemindPage {
 		});
 		toast.onDidDismiss(() => {
 			this.navCtrl.pop();
-			this.events.publish('remind:create',this.formData.customerId);
 		});
 		toast.present();
 	}

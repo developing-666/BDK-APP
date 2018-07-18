@@ -4,7 +4,7 @@
             *ngFor="let item of inputs;let i = index">
             <div class="phone-input-container">
                 <div class="label">
-                    <i class="iconfont delete" (tap)="delete(i)">&#xe66b;</i>
+                    <i class="iconfont delete" (click)="delete(i)">&#xe66b;</i>
                     <span>电话</span>
                 </div>
                 <input class="phone-input" [attr.data-index]="i" [name]="'phone'+i" type="tel" [(ngModel)]="values[i]" required pattern="^1[3|4|5|7|8|9][0-9]{9}$"
@@ -22,7 +22,7 @@
                 <span>添加电话</span>
             </button>
             <p class="phone-item fn-left" *ngFor="let item of phonesNums;let i = index">
-                <i class="iconfont" (tap)="delete(i)">&#xe66b;</i>
+                <i class="iconfont" (click)="delete(i)">&#xe66b;</i>
                 <span>{{item}}</span>
             </p>
         </div>

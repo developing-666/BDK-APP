@@ -13,9 +13,10 @@ ion-filter {
                 color: color($colors,dark);height:rem(86);display: flex;align-items: center;width: rem(140);
             }
             .tag-container{align-content: flex-start;
-                width: calc(100% - 7rem);padding-top: rem(18);display: flex;flex-wrap:wrap;justify-content: space-around;
+                width: calc(100% - 7rem);padding-top: rem(18);display: flex;flex-wrap:wrap;
+                // justify-content: space-around;
                 .tag{
-                    @include round-tag();font-size: 1.2rem;padding:0;width: 6rem;overflow: hidden;text-align: center;
+                    @include round-tag();font-size: 1.2rem;overflow: hidden;text-align: center;margin-right: 1rem;
                     @extend .transition-02;margin-bottom:0.9rem;
                     &.active{
                         @include round-tag('', color($colors, primary), false);

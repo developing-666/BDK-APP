@@ -5,6 +5,7 @@ export class GlobalData {
     private _CUSTOMER_LABEL: Array<any>;
     private _CUSTOMER_LABELS: Array<any>;
     private _userId: string; // 用户id
+    private _userTag: Array<string>; // 用户标签
     private _username: string; // 用户名
     private _user; // 用户详细信息
 
@@ -23,15 +24,15 @@ export class GlobalData {
     private _applyCompanyInfo: any = {};
 
     //申请状态
-    checkStatus:any = {
-        WAIT_CHECK:'WAIT_CHECK',
-        CHECK_SUCCESS:'CHECK_SUCCESS',
-        CHECK_FAIL:'CHECK_FAIL'
+    checkStatus: any = {
+        WAIT_CHECK: 'WAIT_CHECK',
+        CHECK_SUCCESS: 'CHECK_SUCCESS',
+        CHECK_FAIL: 'CHECK_FAIL'
     };
     //模态弹出登录页
-    modalLoginPage:Boolean = false;
-    
-	private _header:any = {};
+    modalLoginPage: Boolean = false;
+
+    private _header: any = {};
     get userId(): string {
         return this._userId;
     }
@@ -39,7 +40,13 @@ export class GlobalData {
     set userId(value: string) {
         this._userId = value;
     }
+    get userTag(): Array<string> {
+        return this._userTag;
+    }
 
+    set userTag(value: Array<string>) {
+        this._userTag = value;
+    }
     get username(): string {
         return this._username;
     }
@@ -103,7 +110,7 @@ export class GlobalData {
     set CUSTOMER_LABELS(value: any) {
         this._CUSTOMER_LABELS = value;
     }
-	get header() {
+    get header() {
         return this._header;
     }
     set header(value: any) {

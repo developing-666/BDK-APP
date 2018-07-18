@@ -66,7 +66,7 @@ export class IonInputPanelComponent implements OnInit {
         console.log('Hello IonInputPanelComponent Component');
     }
     ngOnInit() {
-        iNoBounce.enable();
+        //iNoBounce.enable();
         if (this.platform.is('ios')) {
             this.keyboardShow = this.keyboard.onKeyboardShow().subscribe(e => {
                 this.keyboardHeight = e.keyboardHeight;
@@ -82,17 +82,17 @@ export class IonInputPanelComponent implements OnInit {
         }
     }
     ngOnDestroy() {
-        iNoBounce.disable();
+        //iNoBounce.disable();
         if (this.platform.is('ios')) {
             this.keyboardShow.unsubscribe();
             this.keyboardHide.unsubscribe();
         }
     }
     scrollDisable() {
-        iNoBounce.enable();
+        //iNoBounce.enable();
     }
     scrollEnable() {
-        iNoBounce.disable();
+        //iNoBounce.disable();
     }
     open() {
         this.panelOpen = !this.panelOpen;

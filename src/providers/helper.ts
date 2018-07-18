@@ -221,6 +221,8 @@ export class Helper {
 		if (!this.nativeService.isMobile()) {
 			return;
 		}
+        console.log(this.globalData.userId);
+        
 		this.jPush.setAlias({ sequence: 1, alias: this.globalData.userId }).then(result => {
 			console.log('jpush-设置别名成功:');
 			console.log(result);
@@ -251,6 +253,8 @@ export class Helper {
 		if (this.nativeService.isIos()) {
 			tags.push('ios');
 		}
+        console.log(tags);
+        
 		this.jPush.setTags({ sequence: 3, tags }).then(result => {
 			console.log('jpush-设置标签成功');
 			console.log(result);
