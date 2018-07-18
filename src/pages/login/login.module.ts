@@ -4,6 +4,7 @@ import { LoginPage } from './login/login';
 import { SignInPage } from './sign-in/sign-in';
 import { ForgetPasswordPage } from './forget-password/forget-password';
 import { UserAgreementPage } from './user-agreement/user-agreement';
+import { GuidePage } from './guide/guide';
 
 @NgModule({
 	imports: [IonicModule],
@@ -11,13 +12,15 @@ import { UserAgreementPage } from './user-agreement/user-agreement';
 		LoginPage,
 		SignInPage,
 		ForgetPasswordPage,
-		UserAgreementPage
+        UserAgreementPage,
+        GuidePage,
 	],
 	entryComponents: [
 		LoginPage,
 		SignInPage,
 		ForgetPasswordPage,
-		UserAgreementPage
+		UserAgreementPage,
+        GuidePage,
 	],
 	providers: [],
 	exports: [IonicModule]

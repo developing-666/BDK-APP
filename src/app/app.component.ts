@@ -42,6 +42,7 @@ import { ClienteleDetailPage } from '../pages/clientele/clientele-detail/cliente
 
 import { Device } from '@ionic-native/device';
 import * as VConsole from '../assets/lib/vconsole.min';
+import { GuidePage } from '../pages/login/guide/guide';
 function _window(): any {
     // return the global native browser window object
     return window;
@@ -92,26 +93,34 @@ export class MyApp {
             // this.nav.setRoot(LoginPage); // 设置首页
             // this.nav.setRoot(HomePage); // 设置首页
             this.nativeService.statusBarStyle(); // 设置状态栏颜色
-			this.nativeService.splashScreenHide(); // 隐藏启动页
+            this.nativeService.splashScreenHide(); // 隐藏启动页
             this.assertNetwork(); // 检测网络
             // this.helper.funDebugInit(); // 初始化fundebug
             // this.helper.alloyLeverInit(); // 本地"开发者工具"
             this.helper.initJpush(); // 初始化极光推送
             // this.jPushOpenNotification(); // 处理打开推送消息事件
-            // 订阅重新登录事件
-            this.events.subscribe('user:reLogin', () => {
-                if (this.globalData.modalLoginPage == false) {
-                    this.modalCtrl.create(LoginPage).present();
-                    this.globalData.modalLoginPage = true;
-                }
-            });
-            // 从缓存中获取token
-            this.storage.get('token').then(token => {
-                if (token) {
-                    this.httpHeader.token = token;
-                    this.nav.setRoot(HomePage); // 设置首页
+
+            this.storage.get('notFirstOpen').then(notFirstOpen => {
+                console.log('notFirstOpen', notFirstOpen);
+                if (notFirstOpen) {
+                    // 订阅重新登录事件
+                    this.events.subscribe('user:reLogin', () => {
+                        if (this.globalData.modalLoginPage == false) {
+                            this.modalCtrl.create(LoginPage).present();
+                            this.globalData.modalLoginPage = true;
+                        }
+                    });
+                    // 从缓存中获取token
+                    this.storage.get('token').then(token => {
+                        if (token) {
+                            this.httpHeader.token = token;
+                            this.nav.setRoot(HomePage); // 设置首页
+                        } else {
+                            this.nav.setRoot(LoginPage); // 设置首页
+                        }
+                    });
                 } else {
-                    this.nav.setRoot(LoginPage); // 设置首页
+                    this.nav.setRoot(GuidePage); // 设置首页
                 }
             });
 
