@@ -67,7 +67,10 @@ export class SettingsPage {
      */    
     toUserInfoPage() {
         let callback = (d):any => {
-            this.userInfo = d;
+            for (const name in d) {
+                console.log(name);
+                this.userInfo[name] = d[name];
+            }
             return Promise.resolve();
         }
         this.app.getRootNav().push(UserInfoPage,{
