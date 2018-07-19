@@ -94,6 +94,8 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <engine name="android" spec="^7.1.0" />
+    <engine name="ios" spec="^4.5.4" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
@@ -122,10 +124,8 @@
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
-    <plugin name="jpush-phonegap-plugin" spec="~3.4.1">
+    <plugin name="jpush-phonegap-plugin" spec="^3.4.2">
         <variable name="APP_KEY" value="fae3c4774ec570d93166b3a6" />
     </plugin>
-    <engine name="ios" spec="~4.5.4" />
-    <engine name="android" spec="~7.1.0" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
 </widget>

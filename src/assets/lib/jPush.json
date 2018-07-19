@@ -1,0 +1,49 @@
+
+
+//打开某个页面
+{
+	"type":"launch",
+	"page":"HomePage",
+	"data":{
+		"xxx":"xxx"
+	}
+}
+
+
+
+//提醒创建
+{
+	"type":"remind",
+	"event":"create",
+	"data":{
+		"type":"other/clientele"
+	}
+}
+
+//提醒跟进
+{
+	"type":"follow",
+	"event":"create",
+	"data":{
+		"taskId":"123"
+	}
+}
+
+
+//跟进详情
+{
+	"type":"follow",
+	"event":"detail",
+	"data":{
+		"id":"123"
+	}
+}
+
+//客户详情
+{
+	"type":"clientele",
+	"event":"detail",
+	"data":{
+		"id":"123"
+	}
+}

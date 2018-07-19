@@ -98,43 +98,41 @@ export class SettingRecordPage{
     }
 
     setting() {
-        console.log(this.formData);
-        
-        // if (this.settingRecordForm.valid) {
-        //     const imgUpload = this.upoadImage();
-        //     const audioUpload = this.uploadAudio();
-        //     const result = Observable.combineLatest(imgUpload, audioUpload);
-        //     result.subscribe(d => {
-        //         if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
-        //             const audio =
-        //                 d[1] === true
-        //                     ? undefined
-        //                     : JSON.parse(d[1].response).data;
-        //             console.log(audio);
-        //             if (this.remind && this.remind.type === 'CUSTOMER') {
-        //                 this.formData.customerId = this.remind.customerId;
-        //             }
-        //             if (this.customerId) {
-        //                 this.formData.customerId = this.customerId;
-        //             }
-        //             this.formData.content = this.infoContent.content;
-        //             if (audio) {
-        //                 this.formData.audio = {};
-        //                 this.formData.audio.path = audio
-        //                     ? audio.path
-        //                     : undefined;
-        //                 this.formData.audio.duration = this.audio.duration;
-        //             }
-        //             this.formData.pics = this.paths;
-        //             this.formData.nextFollowTime = moment(this.nextFollowTime)
-        //                 .utc()
-        //                 .format();
-        //             console.log('formData======================');
-        //             console.log(this.formData);
-        //             this.followCreate();
-        //         }
-        //     });
-        // }
+        if (this.settingRecordForm.valid) {
+            const imgUpload = this.upoadImage();
+            const audioUpload = this.uploadAudio();
+            const result = Observable.combineLatest(imgUpload, audioUpload);
+            result.subscribe(d => {
+                if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
+                    const audio =
+                        d[1] === true
+                            ? undefined
+                            : JSON.parse(d[1].response).data;
+                    console.log(audio);
+                    if (this.remind && this.remind.type === 'CUSTOMER') {
+                        this.formData.customerId = this.remind.customerId;
+                    }
+                    if (this.customerId) {
+                        this.formData.customerId = this.customerId;
+                    }
+                    this.formData.content = this.infoContent.content;
+                    if (audio) {
+                        this.formData.audio = {};
+                        this.formData.audio.path = audio
+                            ? audio.path
+                            : undefined;
+                        this.formData.audio.duration = this.audio.duration;
+                    }
+                    this.formData.pics = this.paths;
+                    this.formData.nextFollowTime = moment(this.nextFollowTime)
+                        .utc()
+                        .format();
+                    console.log('formData======================');
+                    console.log(this.formData);
+                    this.followCreate();
+                }
+            });
+        }
     }
     upoadImage(): Observable<any> {
         return Observable.create(observer => {

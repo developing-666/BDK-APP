@@ -3,6 +3,8 @@ import { NavController, NavParams, List, App, Events } from 'ionic-angular';
 
 import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
 
+import { SettingRecordPage}from '../../../../clientele/setting-record/setting-record';
+
 import { AppApi } from '../../../../../providers/app-api';
 @Component({
     selector: 'page-not-follow',
@@ -96,9 +98,10 @@ export class NotFollowPage {
     itemClick(e, item) {
         e.stopPropagation();
         e.preventDefault();
-		this.app.getRootNav().push(AddClienteleRemindPage, {
-            item: this.item
-        });
+		this.app.getRootNav()
+			.push(SettingRecordPage, {
+				remind: item
+			});
     }
     add() {
         let callback = (done): any => {
