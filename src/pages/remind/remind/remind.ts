@@ -79,11 +79,13 @@ export class RemindPage {
 	ionViewDidLoad() {
 		this.events.subscribe('remind:create',this.update);
         this.events.subscribe('followRecord:update', this.update);
+        this.events.subscribe('delay:update', this.update);
 		this.getData();
 	}
     ionViewWillUnload(){
         this.events.unsubscribe('remind:create', this.update);
         this.events.unsubscribe('followRecord:update', this.update);
+        this.events.unsubscribe('delay:update', this.update);
     }
 	foldCalendar() {
 		this.fold = !this.fold;
@@ -231,9 +233,6 @@ export class RemindPage {
 	}
 	goDelay() {
 		this.list.closeSlidingItems();
-	}
-	delay(item) {
-		this.change();
 	}
 	itemClick(item) {
 		if (this.hideTabs) {

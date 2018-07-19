@@ -7,8 +7,6 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
 import { Utils } from '../../providers/utils';
@@ -78,9 +76,15 @@ export class PhoneNumberInputComponent implements OnChanges {
     getPhone(): any {
         this.addEd = true;
         console.log(this.values);
-        if (this.phoneForm.valid) {
-            return this.values;
+        if (Array.from(new Set(this.values)).length != this.values.length) {
+            this.nativeService.alert('电话号码重复');
+            return [];
+        } else {
+            if (this.phoneForm.valid) {
+                return this.values;
+            }
         }
+        
     }
     delete(i) {
         this.inputs.splice(i, 1);

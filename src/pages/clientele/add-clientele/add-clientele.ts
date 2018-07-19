@@ -63,7 +63,9 @@ export class AddClientelePage implements OnInit {
 				}
 			}
             for (let name in this.formData){
-                this.formData[name] = this.item[name];
+                if (this.item[name]){
+                    this.formData[name] = this.item[name];
+                }
             }
         }
     }

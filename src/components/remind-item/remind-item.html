@@ -1,81 +1,81 @@
 <ion-item-sliding>
-	<ion-item class="remind-item" (click)="itemClick()">
-		<em class="top-line"></em>
-		<div class="remind-content">
-			<h3>
-				<div class="start">
-					<span class="time">
-						<em></em>
-						<i>{{remind.planRemindTime | moment:'HH:mm'}}</i>
-					</span>
-					<span class="title">{{remind?.title}}</span>
-				</div>
-				<span class="date">{{remind.planRemindTime | moment:'YYYY/MM/DD ddd'}}</span>
-			</h3>
-			<p class="clientele-info" *ngIf="remind.type==='CUSTOMER'&&remind.customer">
-				<span class="start">{{remind?.customer?.name}}</span>
-				<span>{{remind?.customer?.company}}</span>
-			</p>
-			<div class="remark">
-				<div class="remark-text">
-					{{remind?.content}}
-				</div>
-				<div class="remark-voice-container" *ngIf="remind?.audio">
-					<voice-bar [data]="remind?.audio"></voice-bar>
-				</div>
-				<div class="remark-img-container" *ngIf="remind?.pics.length>0">
-					<img *ngFor="let item of remind.pics" [src]="item | getImg:'x200'">
-				</div>
-			</div>
-			<div class="write-btn-wrapper">
-				<button class="write-btn" ion-button round (click)="write($event)">写入跟进</button>
-			</div>
-			<i class="iconfont mark">
-				&#xe640;
-			</i>
-		</div>
-		<div class="return-wrapper" *ngIf="remind?.comments&&remind?.comments.length>0">
-			<div class="return">
-				<div class="return-from">
-					<div class="name-wrapper">
-						<span class="name">
-							<em></em>
-							<i>丁伟</i>
-						</span>
-					</div>
-					<div class="return-voice-container">
-						<voice-bar></voice-bar>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="return-wrapper" hidden>
-			<div class="return">
-				<div class="return-from">
-					<div class="name-wrapper">
-						<span class="name">
-							<em></em>
-							<i>丁伟</i>
-						</span>
-					</div>
-					<span class="return-text">具体预算多少钱呢？具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢</span>
-				</div>
-				<div class="return-img-container">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-					<img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
-				</div>
-			</div>
-		</div>
-	</ion-item>
-	<ion-item-options side="right" class="item-options">
-		<button class="delay" ion-button (click)="itemDelay($event)">
-			<span>延时</span>
-			<span>设置</span>
-		</button>
-		<button ion-button color="danger" (click)="presentConfirm($event)">
-			删除
-		</button>
-	</ion-item-options>
+    <ion-item class="remind-item" (click)="itemClick($event)">
+        <em class="top-line"></em>
+        <div class="remind-content">
+            <h3>
+                <div class="start">
+                    <span class="time">
+                        <em></em>
+                        <i>{{remind.planRemindTime | moment:'HH:mm'}}</i>
+                    </span>
+                    <span class="title">{{remind?.title | slice :0:10}}</span>
+                </div>
+                <span class="date">{{remind.planRemindTime | moment:'YYYY/MM/DD ddd'}}</span>
+            </h3>
+            <p class="clientele-info" *ngIf="remind.type==='CUSTOMER'&&remind.customer">
+                <span class="start">{{remind?.customer?.name | slice :0:4}}</span>
+                <span>{{remind?.customer?.company | slice :0:12}}</span>
+            </p>
+            <div class="remark">
+                <div class="remark-text">
+                    {{remind?.content | slice :0:50}}
+                </div>
+                <div class="remark-voice-container" *ngIf="remind?.audio">
+                    <voice-bar [data]="remind?.audio"></voice-bar>
+                </div>
+                <div class="remark-img-container" *ngIf="remind?.pics.length>0">
+                    <img *ngFor="let item of remind.pics" [src]="item | getImg:'x200'">
+                </div>
+            </div>
+            <div class="write-btn-wrapper">
+                <button class="write-btn" ion-button round (click)="write($event)">写入跟进</button>
+            </div>
+            <i class="iconfont mark">
+                &#xe640;
+            </i>
+        </div>
+        <div class="return-wrapper" *ngIf="remind?.comments&&remind?.comments.length>0">
+            <div class="return">
+                <div class="return-from">
+                    <div class="name-wrapper">
+                        <span class="name">
+                            <em></em>
+                            <i>丁伟</i>
+                        </span>
+                    </div>
+                    <div class="return-voice-container">
+                        <voice-bar></voice-bar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="return-wrapper" hidden>
+            <div class="return">
+                <div class="return-from">
+                    <div class="name-wrapper">
+                        <span class="name">
+                            <em></em>
+                            <i>丁伟</i>
+                        </span>
+                    </div>
+                    <span class="return-text">具体预算多少钱呢？具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢具体预算多少钱呢</span>
+                </div>
+                <div class="return-img-container">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                    <img src="http://img.zcool.cn/community/014f945aff15a6a801218cf4e9dea3.jpeg@260w_195h_1c_1e_1o_100sh.jpg">
+                </div>
+            </div>
+        </div>
+    </ion-item>
+    <ion-item-options side="right" class="item-options">
+        <button class="delay" ion-button (click)="itemDelay($event)">
+            <span>延时</span>
+            <span>设置</span>
+        </button>
+        <button ion-button color="danger" (click)="presentConfirm($event)">
+            删除
+        </button>
+    </ion-item-options>
 </ion-item-sliding>

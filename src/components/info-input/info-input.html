@@ -2,8 +2,8 @@
     <div class="remark-container">
         <!-- <p class="hint" (tap)="openInputPanel()">点击输入提醒文字备注或语音备注</p> -->
         <textarea class="remark-input" (focus)="textareaFocus($event)" (blur)="textareaBlur($event)" type="text" *ngIf="!isRecord"
-            [(ngModel)]="inputValue" [disabled]="disabled" (ngModelChange)="textareaInput()" [placeholder]="placeholder" #remarkInput
-            [id]="id" [name]="name" [ngStyle]="textareaStyle"></textarea>
+            maxlength="150" [(ngModel)]="inputValue" [disabled]="disabled" (ngModelChange)="textareaInput()" [placeholder]="placeholder"
+            #remarkInput [id]="id" [name]="name" [ngStyle]="textareaStyle"></textarea>
         <div class="voice-bar-wrapper" (tap)="voiceBarTap($event)" *ngIf="isRecord">
             <voice-bar *ngIf="innerValue?.audio" [data]="innerValue?.audio"></voice-bar>
             <p class="placeholder" *ngIf="!innerValue?.audio">{{placeholder}}</p>

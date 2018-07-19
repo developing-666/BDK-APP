@@ -3,7 +3,7 @@ import { NavController, NavParams, List, App, Events } from 'ionic-angular';
 
 import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
 
-import { SettingRecordPage}from '../../../../clientele/setting-record/setting-record';
+import { AddRemindPage } from '../../../../remind/add-remind/add-remind';
 
 import { AppApi } from '../../../../../providers/app-api';
 @Component({
@@ -36,10 +36,12 @@ export class NotFollowPage {
         this.queryTaskDetailByPage();
         this.events.subscribe('remind:create', this.update);
         this.events.subscribe('followRecord:update', this.update);
+        this.events.subscribe('delay:update', this.update);
     }
     ionViewWillUnload() {
         this.events.unsubscribe('remind:create', this.update);
         this.events.unsubscribe('followRecord:update', this.update);
+        this.events.unsubscribe('delay:update', this.update);
     }
     queryTaskDetailByPage(e?: any) {
         this.appApi
@@ -95,13 +97,12 @@ export class NotFollowPage {
     loadMore(e) {
         console.log(e);
     }
-    itemClick(e, item) {
-        e.stopPropagation();
-        e.preventDefault();
-		this.app.getRootNav()
-			.push(SettingRecordPage, {
-				remind: item
-			});
+    itemClick(item) {
+        this.app.getRootNav().push(AddRemindPage, {
+            item,
+            mode: 'delay',
+            type: item.customerId ? 'clientele' : 'other'
+        });
     }
     add() {
         let callback = (done): any => {

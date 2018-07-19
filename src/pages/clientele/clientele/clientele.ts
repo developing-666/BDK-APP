@@ -150,6 +150,6 @@ export class ClientelePage {
     }
     doRefresh(e) {
         this.currentPage = 1;
-        this.customerQuery(this.initQueryParams, e);
+        this.customerQuery(this.queryParams, e);
     }
 }

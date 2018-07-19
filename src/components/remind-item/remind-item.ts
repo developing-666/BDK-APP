@@ -68,7 +68,9 @@ export class RemindItemComponent implements AfterContentInit {
             type: this.remind.customerId ? 'clientele' : 'other'
         });
     }
-	itemClick(){
+	itemClick(e){
+        e.stopPropagation();
+        e.preventDefault();
 		this.detail.emit(this.remind);
 	}
 	write(e){

@@ -12,7 +12,8 @@ import {
     NavController,
     NavParams,
     App,
-    Events
+    Events,
+    ActionSheetController
 } from 'ionic-angular';
 
 import { AddClientelePage } from '../../pages/clientele/add-clientele/add-clientele';
@@ -23,15 +24,12 @@ import { AppApi } from '../../providers/app-api';
 
 function aaa(a) {
     console.log(this);
-
 }
-
 
 @Component({
     selector: 'clientele-item',
     templateUrl: 'clientele-item.html'
 })
-
 export class ClienteleItemComponent {
     @Output() remind: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
@@ -45,7 +43,7 @@ export class ClienteleItemComponent {
         if (this.data.id === id) {
             this.customerDetails();
         }
-    }
+    };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -54,13 +52,13 @@ export class ClienteleItemComponent {
         private appApi: AppApi,
         public app: App,
         private nativeService: NativeService,
-        public events: Events
+        public events: Events,
+        public actionSheetCtrl: ActionSheetController
     ) {}
     ngOnInit() {
         this.events.subscribe('clientele:update', this.update);
     }
     ngOnDestroy() {
-        console.log('ngOnDestroy');
         this.events.unsubscribe('clientele:update', this.update);
     }
     presentConfirm(item: any) {
@@ -113,26 +111,65 @@ export class ClienteleItemComponent {
         }
         this.details.emit(item);
     }
-	choosePhone(){
-		
-	}
+    choosePhone() {
+        let phones: Array<any> = [
+            {
+                text: this.data.phone,
+                handler: () => {
+                    this.customerCall(this.data.phone);
+                }
+            }
+        ];
+        for (const phone of this.data.phones) {
+            phones.push({
+                text: phone,
+                handler: () => {
+                    this.customerCall(phone);
+                }
+            });
+        };
+        let actionSheet = this.actionSheetCtrl.create({
+            buttons: [
+                ...phones,
+                {
+                    text: '取消',
+                    role: 'cancel'
+                }
+            ]
+        });
+        actionSheet.present();
+    }
     message(e, p) {
         e.stopPropagation();
         e.preventDefault();
         this.nativeService.sendSMS(p);
         console.log(p);
     }
-    phone(e, p) {
+    phone(e) {
         e.stopPropagation();
         e.preventDefault();
-        this.nativeService.callNumber(p);
-        console.log(p);
+        // this.nativeService.callNumber(p);
+        if (this.data.phones.length == 0) {
+            this.customerCall(this.data.phone);
+        } else {
+            this.choosePhone();
+        }
+    }
+    customerCall(phone) {
+        this.appApi
+            .customerCall({
+                customerId: this.data.id,
+                phone
+            })
+            .subscribe(d => {
+                console.log(d);
+            });
     }
     getHeight() {
         return this.$el.nativeElement.querySelector('.item-wrapper')
             .offsetHeight;
     }
-    customerDetails(){
+    customerDetails() {
         this.appApi.customerDetails(this.data.id).subscribe(d => {
             console.log(d);
             this.data = d;

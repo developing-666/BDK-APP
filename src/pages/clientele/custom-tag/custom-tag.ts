@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events, ToastController } from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
@@ -20,7 +20,8 @@ export class CustomTagPage {
 		public alertCtrl: AlertController,
 		public appApi: AppApi,
 		public globalData: GlobalData,
-		private events: Events,
+        private events: Events,
+        private toastCtrl: ToastController
 	) { }
 
 	ionViewDidLoad() {
@@ -46,8 +47,20 @@ export class CustomTagPage {
 				{
 					text: '确定',
 					handler: data => {
-						console.log(data);
-						this.labelCreate(data.tag);
+                        if (data.tag.length > 7) {
+                            let toast = this.toastCtrl.create(
+                                {
+                                    message:
+                                        '标签不能多于7字',
+                                    duration: 1500,
+                                    position: 'top',
+                                    cssClass: 'danger'
+                                }
+                            );
+                            toast.present();
+                        } else {
+                            this.labelCreate(data.tag);
+                        }
 					}
 				}
 			]

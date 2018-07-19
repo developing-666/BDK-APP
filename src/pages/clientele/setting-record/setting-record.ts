@@ -1,18 +1,21 @@
-import { Component, ViewChild, ApplicationRef} from '@angular/core';
+import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ToastController, Events } from "ionic-angular";
+import {
+    NavController,
+    NavParams,
+    ToastController,
+    Events
+} from 'ionic-angular';
 import moment from 'moment';
-
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
 import { InfoInputComponent } from '../../../components/info-input/info-input';
 
-
 import {
-	FileTransfer,
-	FileUploadOptions,
-	FileTransferObject,
-	FileUploadResult
+    FileTransfer,
+    FileUploadOptions,
+    FileTransferObject,
+    FileUploadResult
 } from '@ionic-native/file-transfer';
 import { APP_SERVE_URL } from '../../../providers/constants';
 import { GlobalData } from '../../../providers/global-data';
@@ -26,7 +29,7 @@ import { Observable } from 'rxjs/Rx';
     selector: 'page-setting-record',
     templateUrl: 'setting-record.html'
 })
-export class SettingRecordPage{
+export class SettingRecordPage {
     @ViewChild('settingRecordForm') settingRecordForm: NgForm;
     @ViewChild(InfoInputComponent) infoInput: InfoInputComponent;
     @ViewChild(IonInputPanelComponent) inputPanel: IonInputPanelComponent;
@@ -34,10 +37,13 @@ export class SettingRecordPage{
     type: string = this.navParams.get('type');
     customerId: string = this.navParams.get('customerId');
     remind: any = this.navParams.get('remind');
-    placeholder: string = '点击输入跟进情况备注';
+    placeholder: string = '点击输入,在此写入跟进情况';
     infoContent: any;
     formData: any = {
-        followStatus: this.remind && this.remind.customerId ? this.remind.customer.followStatus:undefined,
+        followStatus:
+            this.remind && this.remind.customerId
+                ? this.remind.customer.followStatus
+                : undefined,
         taskId: this.remind ? this.remind.id : undefined,
         title: this.remind ? this.remind.title : undefined,
         customerId: this.customerId ? this.customerId : undefined,
@@ -210,9 +216,13 @@ export class SettingRecordPage{
         this.appApi.followCreate(this.formData).subscribe(d => {
             console.log(d);
             this.success();
-            let id = this.customerId ? this.customerId : this.remind ? this.remind.customerId : undefined;
+            let id = this.customerId
+                ? this.customerId
+                : this.remind
+                    ? this.remind.customerId
+                    : undefined;
             console.log(id);
-            this.events.publish('followRecord:update',id);
+            this.events.publish('followRecord:update', id);
             this.events.publish('clientele:update', id);
         });
     }
