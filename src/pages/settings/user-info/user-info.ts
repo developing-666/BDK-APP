@@ -27,7 +27,17 @@ import { NativeService } from '../../../providers/native-service';
 export class UserInfoPage {
     ngForm: FormGroup;
     canEdit: boolean = false;
-    formData: any = {};
+    formData: any = {
+        name:undefined,
+        phone:undefined,
+        work:undefined,
+        provinceId:undefined,
+        cityId:undefined,
+        gender:undefined,
+        birthday:undefined,
+        company:undefined,
+        industry:undefined,
+    };
     provinces: Array<any> = this.globalData.provinces;
     city: Array<any> = [];
     industrys: Array<any> = INDUSTRY;
@@ -86,7 +96,7 @@ export class UserInfoPage {
             {
                 name: ['', Validators.required],
                 phone: ['', [Validators.phone, Validators.required]],
-                work: ['', [Validators.required]],
+                work: [''],
                 provinceId: [''],
                 cityId: [''],
                 gender: [''],
@@ -146,6 +156,9 @@ export class UserInfoPage {
      * 根据省份获取城市
      */
     queryCitiesByProvinceId() {
+        if(this.formData.provinceId == null || this.formData.provinceId == ''){
+            return;
+        }
         this.appApi
             .queryCitiesByProvinceId(this.formData.provinceId)
             .subscribe(d => {
@@ -168,7 +181,7 @@ export class UserInfoPage {
      * 更新用户信息
      */
     updateUserInfo() {
-        this.appApi.updateUserInfo(this.userInfo).subscribe(d => {
+        this.appApi.updateUserInfo(this.formData).subscribe(d => {
             console.log('updateUserInfo', d);
             this.canEdit = false;
             this.callback(d).then();
