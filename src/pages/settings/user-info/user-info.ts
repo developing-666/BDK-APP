@@ -28,6 +28,7 @@ export class UserInfoPage {
     ngForm: FormGroup;
     canEdit: boolean = false;
     formData: any = {
+        avatar:DEFAULT_AVATAR,
         name:undefined,
         phone:undefined,
         work:undefined,
@@ -42,7 +43,6 @@ export class UserInfoPage {
     city: Array<any> = [];
     industrys: Array<any> = INDUSTRY;
     callback: any = this.navParams.get('callback');
-    avatar: String = DEFAULT_AVATAR;
     private _userInfo: any;
     public get userInfo(): any {
         return this._userInfo;
@@ -50,18 +50,22 @@ export class UserInfoPage {
     public set userInfo(value: any) {
         this._userInfo = value;
         console.log('userInfo value', value);
-
+        
         if (value != null && value != {}) {
-            this.formData.name = value.name;
-            this.formData.phone = value.phone;
-            this.formData.work = value.work;
-            this.formData.gender = value.gender;
-            this.formData.birthday = value.birthday;
-            this.formData.company = value.company;
-            this.formData.industry = value.industry;
-            if (value.provinceId) {
-                this.formData.provinceId = value.provinceId;
-                this.formData.cityId = value.cityId;
+
+            for (const name in value) {
+                if (value[name] != null) {
+                    this.formData[name] = value[name];
+                }
+            }
+            if (this.formData.avatar.indexOf('base64')>-1) {
+                this.appApi.upoadImage({
+                    data:this.formData.avatar,
+                    type:'USER_AVATAR'
+                }).subscribe(d=>{
+                    this.formData.avatar = d.url;
+                    console.log('avatar======',this.formData.avatar);
+                });
             }
         }
     }
@@ -94,14 +98,14 @@ export class UserInfoPage {
     createForm() {
         this.ngForm = this.fb.group(
             {
-                name: ['', Validators.required],
+                name: ['', [Validators.required,Validators.maxLength(15)]],
                 phone: ['', [Validators.phone, Validators.required]],
-                work: [''],
+                work: ['',[Validators.maxLength(15)]],
                 provinceId: [''],
                 cityId: [''],
                 gender: [''],
                 birthday: [''],
-                company: [''],
+                company: ['',[Validators.maxLength(30)]],
                 industry: ['']
             },
             { updateOn: 'blur' }
@@ -181,10 +185,15 @@ export class UserInfoPage {
      * 更新用户信息
      */
     updateUserInfo() {
-        this.appApi.updateUserInfo(this.formData).subscribe(d => {
+        this.appApi.updateUserInfo({
+            avatar:this.formData.avatar
+        }).subscribe(d => {
             console.log('updateUserInfo', d);
             this.canEdit = false;
-            this.callback(d).then();
+            for (const name in this.formData) {
+                this.globalData.user[name] = this.formData[name];
+            }
+            this.callback(this.formData).then();
         });
     }
 
@@ -198,6 +207,8 @@ export class UserInfoPage {
             if (this.ngForm.valid) {
                 this.updateUserInfo();
             } else {
+                console.log(this.ngForm);
+                
                 this.presentToast();
             }
         } else {
@@ -230,8 +241,14 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                this.avatar = imageUrl;
-                                console.log('avatar======',this.avatar);
+                                // this.formData.avatar = imageUrl;
+                                this.appApi.upoadImage({
+                                    data:imageUrl,
+                                    type:'USER_AVATAR'
+                                }).subscribe(d=>{
+                                    this.formData.avatar = d.url;
+                                    console.log('avatar======',this.formData.avatar);
+                                });
                             });
                     }
                 },
@@ -246,8 +263,15 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                this.avatar = imageUrl;
-                                    console.log('avatar======',this.avatar);
+                                // this.formData.avatar = imageUrl;
+                                    console.log('avatar======',this.formData.avatar);
+                                this.appApi.upoadImage({
+                                    data:imageUrl,
+                                    type:'USER_AVATAR'
+                                }).subscribe(d=>{
+                                    this.formData.avatar = d.url;
+                                    console.log('avatar======',this.formData.avatar);
+                                });
                                     
                             });
                     }

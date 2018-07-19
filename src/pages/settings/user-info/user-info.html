@@ -25,7 +25,7 @@
                 <button [ngClass]="{'unactive':!canEdit}" type="button" ion-item (tap)="presentActionSheet()">
                     <ion-label>头像</ion-label>
                     <ion-avatar item-right>
-                        <img [src]="avatar">
+                        <img [src]="formData.avatar |getImg:'x200'">
                     </ion-avatar>
                 </button>
             </ion-item-group>
@@ -33,7 +33,7 @@
             <ion-item-group>
                 <ion-item [ngClass]="{'invalid':(name.touched && name.invalid)}">
                     <ion-label>昵称</ion-label>
-                    <ion-input type="text" placeholder="请输入昵称" formControlName="name" [(ngModel)]="formData.name" [disabled]="!canEdit"></ion-input>
+                    <ion-input type="text" maxLength="15" placeholder="请输入昵称" formControlName="name" [(ngModel)]="formData.name" [disabled]="!canEdit"></ion-input>
                 </ion-item>
                 <ion-item [ngClass]="{'invalid':(phone.touched && phone.invalid)}">
                     <ion-label>手机</ion-label>
@@ -43,7 +43,7 @@
             <ion-item-group>
                 <ion-item [ngClass]="{'invalid':(work.touched && work.invalid)}">
                     <ion-label>职务</ion-label>
-                    <ion-input type="text" placeholder="请输入您的职务" formControlName="work" [(ngModel)]="formData.work" [disabled]="!canEdit"></ion-input>
+                    <ion-input type="text" maxLength="15" placeholder="请输入您的职务" formControlName="work" [(ngModel)]="formData.work" [disabled]="!canEdit"></ion-input>
                 </ion-item>
                 <button ion-item [ngClass]="{'invalid':(provinceId.touched && provinceId.invalid),'unactive':!canEdit}">
                     <ion-label>省份</ion-label>
@@ -77,7 +77,7 @@
             <ion-item-group>
                 <ion-item [ngClass]="{'invalid':(company.touched && company.invalid)}">
                     <ion-label>公司</ion-label>
-                    <ion-input type="text" placeholder="请输入公司名称" formControlName="company" [(ngModel)]="formData.company" [disabled]="!canEdit"></ion-input>
+                    <ion-input type="text" maxLength="30" placeholder="请输入公司名称" formControlName="company" [(ngModel)]="formData.company" [disabled]="!canEdit"></ion-input>
                 </ion-item>
                 <button ion-item [ngClass]="{'invalid':(industry.touched && industry.invalid),'unactive':!canEdit}">
                     <ion-label>行业</ion-label>
