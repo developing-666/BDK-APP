@@ -3,7 +3,7 @@
 //打开某个页面
 {
 	"type":"launch",
-	"page":"HomePage",
+	"event":"HomePage",
 	"data":{
 		"xxx":"xxx"
 	}
