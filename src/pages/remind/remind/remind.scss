@@ -44,7 +44,7 @@ page-remind {
                     width: rem(310);
                     @include flex-center();
                     padding-top: rem(200);
-                    background: url('./assets/imgs/no-remind.png') no-repeat center 3rem;
+                    background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
                     background-size: rem(200);
                     content: '暂无提醒任务';
                     font-size: rem(30);

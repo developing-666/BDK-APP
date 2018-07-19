@@ -6,7 +6,7 @@ page-follow-record {
                 width: rem(310);
                 @include flex-center();
                 padding-top: rem(200);
-                background: url('../../../assets/imgs/no-remind.png') no-repeat center 3rem;
+                background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
                 background-size: rem(200);
                 content: '暂无跟进记录';
                 font-size: rem(30);
