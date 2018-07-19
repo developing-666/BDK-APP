@@ -23,7 +23,7 @@ import { AppApi } from '../../providers/app-api';
 
 function aaa(a) {
     console.log(this);
-    
+
 }
 
 
@@ -113,6 +113,9 @@ export class ClienteleItemComponent {
         }
         this.details.emit(item);
     }
+	choosePhone(){
+		
+	}
     message(e, p) {
         e.stopPropagation();
         e.preventDefault();

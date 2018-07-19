@@ -52,6 +52,15 @@ export class AppApi {
 		return this._http.post('/customer/create', opts);
 	}
 	/**
+	 * 获取客户电话
+	 * @param  customerId 客户ID
+	 */
+	customerCall(customerId): any {
+		return this._http.post('/customer/call', {
+			customerId
+		});
+	}
+	/**
      * 更新客户信息
      * @param opts
      */
