@@ -15,6 +15,12 @@ ion-buttons.buttons-group {
     border-top: 1px solid color($colors, border);
     margin: 0 0 1rem;
 }
+.slides .swiper-container>.swiper-pagination-progress{
+	top: auto;bottom: 0;height: 2px;
+	.swiper-pagination-progressbar{
+		background: color($colors,primary);
+	}
+}
 
 .toast-md{
     .toast-wrapper.toast-middle {

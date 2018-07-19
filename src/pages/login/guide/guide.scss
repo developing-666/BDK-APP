@@ -1,4 +1,8 @@
 page-guide {
+	.scroll-content{
+		background: linear-gradient(180deg, #f0faf4, #feffff);
+		overflow: hidden;
+	}
     .main-wrap {
         .slide {
             width: 100vw;

@@ -96,6 +96,9 @@ export class NotFollowPage {
     itemClick(e, item) {
         e.stopPropagation();
         e.preventDefault();
+		this.app.getRootNav().push(AddClienteleRemindPage, {
+            item: this.item
+        });
     }
     add() {
         let callback = (done): any => {
