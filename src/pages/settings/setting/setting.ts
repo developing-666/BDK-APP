@@ -95,9 +95,8 @@ export class SettingPage {
                 {
                     text: '退出登录',
                     handler: () => {
-                        console.log('Delete clicked');
-                        this.storage.set('token','');
-                        this.httpHeader.token = '';
+                        this.storage.remove('token');
+                        this.httpHeader.token = undefined;
                         this.globalData.initData();
                         this.navCtrl.setRoot(LoginPage);
                     }

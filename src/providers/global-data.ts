@@ -118,8 +118,8 @@ export class GlobalData {
     }
 
     initData() {
-        this.user = {};
-        this.token = '';
-        this.applyCompanyInfo = {};
+        this.user = undefined;
+        this.token = undefined;
+        this.applyCompanyInfo = undefined;
     }
 }

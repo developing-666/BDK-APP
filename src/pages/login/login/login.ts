@@ -35,11 +35,11 @@ export class LoginPage {
         private appApi: AppApi,
         private fb: FormBuilder,
         private app: App,
-		private httpHeader:HttpHeader,
+        private httpHeader: HttpHeader,
         private storage: Storage,
-        private globalData:GlobalData,
+        private globalData: GlobalData,
         private nativeService: NativeService,
-        private helper: Helper,
+        private helper: Helper
     ) {
         this.createForm();
     }
@@ -47,7 +47,7 @@ export class LoginPage {
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad LoginPage');
-		this.nativeService.statusBarStyle('#ffffff',true); // 设置状态栏颜色
+        this.nativeService.statusBarStyle('#ffffff', true); // 设置状态栏颜色
     }
 
     /**
@@ -80,12 +80,14 @@ export class LoginPage {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
             this.httpHeader.token = d.token;
-            this.storage.set('token',d.token);
+            this.storage.set('token', d.token);
+            this.storage.set('user', d);
+            this.globalData.user = d;
             this.globalData.userId = d.jpushAlias;
             this.globalData.userTag = d.jpushTag;
             this.helper.setAlias();
             this.helper.setTags(this.globalData.userTag);
-			this.nativeService.statusBarStyle(); // 设置状态栏颜色
+            this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
                 this.viewCtrl.dismiss();

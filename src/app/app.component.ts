@@ -114,6 +114,9 @@ export class MyApp {
                     this.storage.get('token').then(token => {
                         if (token) {
                             this.httpHeader.token = token;
+                            this.storage.get('user').then(u => {
+                                this.globalData.user = u;
+                            })
                             this.nav.setRoot(HomePage); // 设置首页
                         } else {
                             this.nav.setRoot(LoginPage); // 设置首页

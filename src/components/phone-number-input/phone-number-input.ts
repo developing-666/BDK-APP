@@ -56,7 +56,15 @@ export class PhoneNumberInputComponent implements OnChanges {
     input(e) {
         if (this.phoneForm.valid) {
             this.appApi.customerValid(e.target.value).subscribe(d => {
-                this.valid[e.target.dataset.index] = true;
+                console.log(d);
+                if (d.code !== 0) {
+                    this.nativeService.showToast({
+                        message: d.message,
+                        cssClass: 'danger'
+                    });
+                } else {
+                    this.valid[e.target.dataset.index] = true;
+                }
             });
         }
     }
@@ -82,9 +90,10 @@ export class PhoneNumberInputComponent implements OnChanges {
         } else {
             if (this.phoneForm.valid) {
                 return this.values;
+            } else {
+                return [];
             }
         }
-        
     }
     delete(i) {
         this.inputs.splice(i, 1);

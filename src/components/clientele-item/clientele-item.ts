@@ -22,6 +22,8 @@ import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
 
+import { GlobalData } from '../../providers/global-data';
+
 function aaa(a) {
     console.log(this);
 }
@@ -53,7 +55,8 @@ export class ClienteleItemComponent {
         public app: App,
         private nativeService: NativeService,
         public events: Events,
-        public actionSheetCtrl: ActionSheetController
+        public actionSheetCtrl: ActionSheetController,
+        public globalData: GlobalData
     ) {}
     ngOnInit() {
         this.events.subscribe('clientele:update', this.update);
@@ -112,9 +115,18 @@ export class ClienteleItemComponent {
         this.details.emit(item);
     }
     choosePhone() {
+        let auths =
+            this.globalData.user &&
+            this.globalData.user.auths &&
+            this.globalData.user.auths.indexOf('ROLE_SHOW_PHONE') > -1
+                ? true
+                : false;
+        const reg = /^(\d{3})\d{4}(\d{4})$/;
         let phones: Array<any> = [
             {
-                text: this.data.phone,
+                text: auths
+                    ? this.data.phone
+                    : this.data.phone.toString().replace(reg, '$1****$2'),
                 handler: () => {
                     this.customerCall(this.data.phone);
                 }
@@ -122,12 +134,12 @@ export class ClienteleItemComponent {
         ];
         for (const phone of this.data.phones) {
             phones.push({
-                text: phone,
+                text: auths ? phone : phone.toString().replace(reg, '$1****$2'),
                 handler: () => {
                     this.customerCall(phone);
                 }
             });
-        };
+        }
         let actionSheet = this.actionSheetCtrl.create({
             buttons: [
                 ...phones,
@@ -163,6 +175,7 @@ export class ClienteleItemComponent {
             })
             .subscribe(d => {
                 console.log(d);
+                this.nativeService.callNumber(d);
             });
     }
     getHeight() {
