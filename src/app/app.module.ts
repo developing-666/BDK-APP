@@ -1,11 +1,16 @@
 //Angular以及ionic框架相关
-import { ErrorHandler, NgModule,LOCALE_ID } from '@angular/core';
+import { ErrorHandler, NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeZh from '@angular/common/locales/zh';
 import localeZhExtra from '@angular/common/locales/extra/zh';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { Config, IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {
+    Config,
+    IonicApp,
+    IonicModule,
+    IonicErrorHandler
+} from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
 //业务相关组件、页面、模块
@@ -16,7 +21,6 @@ import { LoginModule } from '../pages/login/login.module';
 import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
-
 
 import { AlphaScrollModule } from '../modules/alpha-scroll/index';
 
@@ -60,7 +64,12 @@ import { Utils } from '../providers/utils';
 import { GlobalData } from '../providers/global-data';
 //import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
 import { Logger } from '../providers/logger';
-import { ModalFromRightEnter, ModalFromRightLeave, ModalScaleEnter, ModalScaleLeave } from './modal-transitions';
+import {
+    ModalFromRightEnter,
+    ModalFromRightLeave,
+    ModalScaleEnter,
+    ModalScaleLeave
+} from './modal-transitions';
 import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
 import { Validators } from '../providers/validators';
@@ -78,88 +87,81 @@ import { Validators } from '../providers/validators';
 //	}
 //}
 
-
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
-	declarations: [
-		MyApp,
-		HomePage
-	],
-	imports: [
-		LoginModule,
-		RemindModule,
-		ClienteleModule,
-		BrowserModule,
-		HttpModule,
-		AlphaScrollModule.forRoot(),
-		IonicModule.forRoot(MyApp, {
-			//			mode: 'ios', // android是'md'
-			backButtonText: ''
-		}),
-		IonicStorageModule.forRoot(),
-		SettingsPageModule
-	],
-	bootstrap: [IonicApp],
-	entryComponents: [
-		MyApp,
-		HomePage
-	],
-	providers: [
-		{ provide: LOCALE_ID, useValue: 'zh' },
-		AppApi,
-		StatusBar,
-		SplashScreen,
-		AppVersion,
-		Camera,
-		Toast,
-		File,
-		FileTransfer,
-		FileOpener,
-		InAppBrowser,
-		ImagePicker,
-		Network,
-		AppMinimize,
-		Diagnostic,
-		HTTP,
-		JPush,
-		CodePush,
-		CallNumber,
-		BarcodeScanner,
-		{ provide: ErrorHandler, useClass: IonicErrorHandler },
-		NativeService,
-		HttpHeader,
-		HttpService,
-		FileService,
-		Helper,
-		Utils,
-		GlobalData,
-		Logger,
-		CommonService,
-		VersionService,
-		Validators,
-		Keyboard,
-		Media,
-		Device,
-		Base64,
-		SMS,
-		LocalNotifications
-	]
+    declarations: [MyApp, HomePage],
+    imports: [
+        LoginModule,
+        RemindModule,
+        ClienteleModule,
+        BrowserModule,
+        HttpModule,
+        AlphaScrollModule.forRoot(),
+        IonicModule.forRoot(MyApp, {
+            //			mode: 'ios', // android是'md'
+            backButtonText: '',
+        }),
+        IonicStorageModule.forRoot(),
+        SettingsPageModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [MyApp, HomePage],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'zh' },
+        AppApi,
+        StatusBar,
+        SplashScreen,
+        AppVersion,
+        Camera,
+        Toast,
+        File,
+        FileTransfer,
+        FileOpener,
+        InAppBrowser,
+        ImagePicker,
+        Network,
+        AppMinimize,
+        Diagnostic,
+        HTTP,
+        JPush,
+        CodePush,
+        CallNumber,
+        BarcodeScanner,
+        { provide: ErrorHandler, useClass: IonicErrorHandler },
+        NativeService,
+        HttpHeader,
+        HttpService,
+        FileService,
+        Helper,
+        Utils,
+        GlobalData,
+        Logger,
+        CommonService,
+        VersionService,
+        Validators,
+        Keyboard,
+        Media,
+        Device,
+        Base64,
+        SMS,
+        LocalNotifications
+    ]
 })
 export class AppModule {
-	constructor(public config: Config) {
-		this.setCustomTransitions();
-	}
+    constructor(public config: Config) {
+        this.setCustomTransitions();
+    }
 
-	private setCustomTransitions() {
-		this.config.setTransition(
-			'modal-from-right-enter',
-			ModalFromRightEnter
-		);
-		this.config.setTransition(
-			'modal-from-right-leave',
-			ModalFromRightLeave
-		);
-		this.config.setTransition('modal-scale-enter', ModalScaleEnter);
-		this.config.setTransition('modal-scale-leave', ModalScaleLeave);
-	}
+    private setCustomTransitions() {
+        this.config.setTransition(
+            'modal-from-right-enter',
+            ModalFromRightEnter
+        );
+        this.config.setTransition(
+            'modal-from-right-leave',
+            ModalFromRightLeave
+        );
+        this.config.setTransition('modal-scale-enter', ModalScaleEnter);
+        this.config.setTransition('modal-scale-leave', ModalScaleLeave);
+    }
 }

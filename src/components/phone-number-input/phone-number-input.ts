@@ -72,6 +72,7 @@ export class PhoneNumberInputComponent implements OnChanges {
         console.log(this.value);
         this.addEd = true;
         if (
+            this.inputs.length < 3 &&
             this.phoneForm.valid &&
             (this.valid.length === 0 || this.valid[this.values.length - 1])
         ) {

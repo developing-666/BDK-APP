@@ -25,8 +25,13 @@ export class SearchClientelePage {
     ionViewDidLoad() {
         this.searchhistory();
     }
+    ionViewWillEnter(){
+        this.keywords = '';
+        this.loaded = false;
+        this.results = [];
+    }
     ionViewDidEnter() {
-		this.keywords = '';
+		
         setTimeout(() => {
             this.searchbar.setFocus();
         }, 200);

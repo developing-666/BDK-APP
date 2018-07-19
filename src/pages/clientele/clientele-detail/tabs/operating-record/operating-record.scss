@@ -1,5 +1,27 @@
 page-operating-record {
-    .record-item{
+    .content {
+        &.no-result {
+            &:before {
+                height: rem(278);
+                width: rem(310);
+                @include flex-center();
+                padding-top: rem(200);
+                background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
+                background-size: rem(200);
+                content: '暂无操作记录';
+                font-size: rem(30);
+                margin-top: rem(200);
+                position: absolute;
+                z-index: 2;
+                left: 50%;
+                margin-left: rem(-310/2);
+            }
+            .button.large {
+                margin-top: 30rem;
+            }
+        }
+    }
+    .record-item {
         &.item-block {
             &:last-child {
                 border: none;
@@ -19,7 +41,6 @@ page-operating-record {
             left: 1.5rem;
             top: 0;
         }
-
         &.item:before {
             position: absolute;
             display: inline-block;
@@ -79,12 +100,12 @@ page-operating-record {
             .record-info {
                 @include text-overflow();
                 margin: 0;
-                .operater{
+                .operater {
                     line-height: rem(50);
                     font-size: 1.4rem;
                     color: color($colors, dark);
                 }
-                .operat-content{
+                .operat-content {
                     line-height: rem(50);
                     font-size: 1.2rem;
                     color: color($colors, light);

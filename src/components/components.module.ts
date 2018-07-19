@@ -1,4 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { IonicModule } from 'ionic-angular';
 import { VoiceBarComponent } from './voice-bar/voice-bar';
 import { RemindItemComponent } from './remind-item/remind-item';
@@ -12,6 +13,9 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 
 import { PipesModule } from '../pipes/pipes.module';
 import { AppApi } from '../providers/app-api';
+
+import * as ionicGalleryModal from '../modules/ion-gallery/index';
+
 @NgModule({
     declarations: [
         VoiceBarComponent,
@@ -24,10 +28,7 @@ import { AppApi } from '../providers/app-api';
         IonAudioComponent,
         PhoneNumberInputComponent
     ],
-    imports: [
-        IonicModule,
-        PipesModule
-    ],
+    imports: [IonicModule, PipesModule, ionicGalleryModal.GalleryModalModule],
     exports: [
         VoiceBarComponent,
         RemindItemComponent,
@@ -40,7 +41,13 @@ import { AppApi } from '../providers/app-api';
         PhoneNumberInputComponent
     ],
     entryComponents: [],
-    providers: [AppApi]
+    providers: [
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: ionicGalleryModal.GalleryModalHammerConfig
+        },
+        AppApi
+    ]
 })
 export class ComponentsModule {
     public static forRoot(): ModuleWithProviders {

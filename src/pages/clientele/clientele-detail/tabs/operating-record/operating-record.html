@@ -1,8 +1,7 @@
-<ion-content>
+<ion-content [ngClass]="{'no-result':record.length===0}">
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>
-    <p class="simple-no-result" *ngIf="record.length==0&&currentPage!=1">暂无操作记录</p>
     <ion-list>
         <ion-item class="record-item" *ngFor="let item of record">
             <em class="top-line"></em>

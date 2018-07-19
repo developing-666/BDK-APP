@@ -37,7 +37,8 @@ export class SettingRecordPage {
     type: string = this.navParams.get('type');
     customerId: string = this.navParams.get('customerId');
     remind: any = this.navParams.get('remind');
-    placeholder: string = '点击输入,在此写入跟进情况';
+    placeholder: string =
+        '点击输入,在此写入跟进情况。可使用输入法自带的语音进行输入';
     infoContent: any;
     formData: any = {
         followStatus:
