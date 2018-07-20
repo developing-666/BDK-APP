@@ -13,7 +13,7 @@
                 <ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" (blur)="signInPhoneValid()" (input)="canRegister=false" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码" (ngModelChange)="phoneChange()"></ion-input>
                 <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
                 <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
-                <ion-note class="tip success" *ngIf="phone.valid && showRegisterResult && canRegister" item-end>手机号码可以注册！</ion-note>
+                <ion-note class="tip success" *ngIf="phone.valid && showRegisterResult && canRegister" item-end>手机号码可以注册</ion-note>
                 <ion-note class="tip error" *ngIf="phone.valid && showRegisterResult && !canRegister" item-end>{{registerResult}}</ion-note>
 			</ion-item>
 			<ion-item>

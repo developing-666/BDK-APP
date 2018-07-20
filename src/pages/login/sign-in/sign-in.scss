@@ -17,9 +17,11 @@ page-sign-in {
                     display: flex;
                     align-items: center;
                     &.error {
+                        margin-right: 1.4rem;
                         color: color($colors,danger);
                     }
                     &.success {
+                        margin-right: 1.4rem;
                         color: color($colors,success);
 
                     }

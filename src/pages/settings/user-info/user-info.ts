@@ -185,9 +185,7 @@ export class UserInfoPage {
      * 更新用户信息
      */
     updateUserInfo() {
-        this.appApi.updateUserInfo({
-            avatar:this.formData.avatar
-        }).subscribe(d => {
+        this.appApi.updateUserInfo(this.formData).subscribe(d => {
             console.log('updateUserInfo', d);
             this.canEdit = false;
             for (const name in this.formData) {
