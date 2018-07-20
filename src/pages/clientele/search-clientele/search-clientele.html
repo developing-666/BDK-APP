@@ -1,5 +1,6 @@
 <ion-header>
-    <ion-searchbar debounce="500" placeholder="请输入客户姓名或公司名进行搜索" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消" [showCancelButton]="true" #searchbar
+<ion-searchbar debounce="500" placeholder="请输入客户姓名或公司名进行搜索" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消"
+    [showCancelButton]="true" #searchbar
         (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
     </ion-searchbar>
 </ion-header>

@@ -99,7 +99,6 @@ page-follow-record {
                 }
             }
             .record-info {
-                @include text-overflow();
                 margin: 0;
                 .operater{
                     line-height: rem(50);
@@ -107,6 +106,8 @@ page-follow-record {
                     color: color($colors, dark);
                 }
                 .operat-content{
+                    white-space: normal;
+                    word-break: break-all;
                     line-height: rem(50);
                     font-size: 1.2rem;
                     color: color($colors, light);

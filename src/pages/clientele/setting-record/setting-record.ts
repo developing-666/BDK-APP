@@ -130,11 +130,13 @@ export class SettingRecordPage {
                     //     this.formData.audio.duration = this.audio.duration;
                     // }
                     this.formData.pics = this.paths;
-                    this.formData.nextTask.content = this.remindContent.content;
-                    this.formData.nextTask.pics = this.nextRemindPaths;
-                    this.formData.nextTask.planRemindTime = moment(this.planRemindTime)
-                        .subtract(8, 'hours')
-                        .format();
+                    if (this.remindContent){
+                        this.formData.nextTask.content = this.remindContent.content;
+                        this.formData.nextTask.pics = this.nextRemindPaths;
+                        this.formData.nextTask.planRemindTime = moment(this.planRemindTime)
+                            .subtract(8, 'hours')
+                            .format();
+                    }
                     console.log('formData======================');
                     console.log(this.formData);
                     this.followCreate();
@@ -178,33 +180,28 @@ export class SettingRecordPage {
     upoadRemindImage(): Observable<any> {
         return Observable.create(observer => {
             this.nextRemindPaths = [];
-            if (this.remindContent.pics.length == 0) {
+            if (!this.remindContent  || this.remindContent.pics.length == 0) {
                 observer.next(true);
             } else {
                 const imgHttp: Array<Observable<any>> = [];
                 for (let data of this.remindContent.pics) {
-                    imgHttp.push(
-                        this.appApi.upoadImage({
+                    imgHttp.push(this.appApi.upoadImage({
                             data,
                             type: 'FOLLOW'
-                        })
-                    );
+                        }));
                 }
                 const result = Observable.combineLatest(...imgHttp);
-                result.subscribe(
-                    d => {
+                result.subscribe(d => {
                         if (d.length == this.remindContent.pics.length) {
                             for (let item of d) {
                                 this.nextRemindPaths.push(item.path);
                             }
                             observer.next(true);
                         }
-                    },
-                    e => {
+                    }, e => {
                         console.log(e);
                         this.nativeService.alert('图片上传失败,请重试');
-                    }
-                );
+                    });
             }
         });
     }

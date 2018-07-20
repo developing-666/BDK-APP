@@ -161,7 +161,7 @@ export class ClienteleItemComponent {
         e.stopPropagation();
         e.preventDefault();
         // this.nativeService.callNumber(p);
-        if (this.data.phones.length == 0) {
+        if (!this.data.phones || this.data.phones.length == 0) {
             this.customerCall(this.data.phone);
         } else {
             this.choosePhone();
@@ -170,7 +170,7 @@ export class ClienteleItemComponent {
     customerCall(phone) {
         this.appApi
             .customerCall({
-				businessType:'BDK_CUSTOMER',
+                businessType: 'BDK_CUSTOMER',
                 customerId: this.data.id,
                 phone
             })

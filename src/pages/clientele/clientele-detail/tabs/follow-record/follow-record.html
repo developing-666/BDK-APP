@@ -12,13 +12,13 @@
                             <em></em>
                             <i>{{item?.createTime | moment:'HH:mm'}}</i>
                         </span>
-                        <span class="title">{{item?.title}}</span>
+                        <span class="title">{{item?.title | slice :0:10}}</span>
                     </div>
                     <span class="date">{{item?.createTime | moment:'YYYY/MM/DD ddd'}}</span>
                 </h3>
                 <div class="record-info">
-                    <p class="operater">{{item?.onwer?.name}}</p>
-                    <p class="operat-content">{{item?.content}}</p>
+                    <p class="operater">{{item?.onwer?.name | slice :0:4}}</p>
+                    <p class="operat-content">{{item?.content | slice :0:50}}</p>
                 </div>
                 <div class="record-img-container" *ngIf="item?.pics.length>0">
                     <img *ngFor="let item of item.pics" [src]="item | getImg:'x200'">
