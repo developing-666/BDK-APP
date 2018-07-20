@@ -84,6 +84,8 @@ export class InfoInputComponent implements ControlValueAccessor {
 		this.innerValue.content = this.inputValue;
 
 		this.change(this.innerValue);
+        console.log(this.remarkInput.nativeElement.scrollHeight);
+        
 		this.textareaStyle = {
 			height: `${this.remarkInput.nativeElement.scrollHeight}px`
 		};
@@ -195,9 +197,15 @@ export class InfoInputComponent implements ControlValueAccessor {
 		this.disabled = isDisabled;
 	}
 	writeValue(obj: any): void {
-		console.log(obj);
 		this.innerValue = obj;
 		this.inputValue = obj ? obj.content : '';
+        if (obj && obj.content){
+            setTimeout(() => {
+                this.textareaStyle = {
+                    height: `${this.remarkInput.nativeElement.scrollHeight}px`
+                };
+            }, 0);
+        }
 	}
 
 }

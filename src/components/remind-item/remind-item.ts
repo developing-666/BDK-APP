@@ -1,4 +1,11 @@
-import { Component, Output, Input, EventEmitter,OnChanges,SimpleChanges } from '@angular/core';
+import {
+    Component,
+    Output,
+    Input,
+    EventEmitter,
+    OnChanges,
+    SimpleChanges
+} from '@angular/core';
 
 import { AlertController, ModalController, App } from 'ionic-angular';
 
@@ -20,6 +27,8 @@ export class RemindItemComponent implements OnChanges {
     @Output() detail: EventEmitter<any> = new EventEmitter();
     @Input() remind: any = {};
     @Input() index: number = undefined;
+    @Input() view: boolean = false;
+    contentMax: number = 50;
     planRemindTime: string = '';
     pics: Array<any> = [];
     constructor(
@@ -28,10 +37,12 @@ export class RemindItemComponent implements OnChanges {
         public app: App,
         public modalCtrl: ModalController
     ) {}
-    ngOnChanges(changes: SimpleChanges){
-        console.log(changes);
+    ngOnChanges(changes: SimpleChanges) {
         if (changes.remind) {
             this.getPics();
+        }
+        if (changes.view) {
+            this.contentMax = this.view ? 150 : 50;
         }
     }
     presentConfirm(e) {

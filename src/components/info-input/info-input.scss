@@ -21,7 +21,6 @@ info-input {
             max-height: 6rem;
         }
         .remark-input {
-            line-height: 2.4rem;
             border: none;
             background-color: transparent;
             font-size: 1.4rem;
@@ -29,6 +28,7 @@ info-input {
             resize: none;
             line-height: 2.4rem;
             min-height: 2.4rem;
+            height: auto;
             &::-webkit-input-placeholder {
                 color: color($colors, light);
                 opacity: 1;

@@ -40,6 +40,7 @@ export class SettingRecordPage {
     placeholder: string =
         '点击输入,在此写入跟进情况。可使用输入法自带的语音进行输入';
     infoContent: any;
+    remindContent: any;
     formData: any = {
         followStatus:
             this.remind && this.remind.customerId
@@ -48,13 +49,15 @@ export class SettingRecordPage {
         taskId: this.remind ? this.remind.id : undefined,
         title: this.remind ? this.remind.title : undefined,
         customerId: this.customerId ? this.customerId : undefined,
-        nextFollowTime: undefined
+        nextTask: {}
     };
-    nextFollowTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
-	nextFollowRemind:boolean = false;
+    minTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+    // planRemindTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+    planRemindTime = undefined;
+    nextFollowRemind: boolean = false;
     paths: Array<any> = [];
+    nextRemindPaths: Array<any> = [];
     audio: any = {
-        // duration: 10,
         type: 'TASK'
     };
     constructor(
@@ -69,15 +72,7 @@ export class SettingRecordPage {
         public events: Events
     ) {}
     ionViewDidLoad() {
-        console.log(this.remind);
-        // if  {
-        //     this.formData.followStatus = this.remind.customer.followStatus;
-        // }
         console.log(this.formData.followStatus);
-        // setTimeout(() => {
-        //     this.formData.followStatus = 6666666;
-        //     console.log(this.formData.followStatus);
-        // }, 2000);
     }
 
     openInputPanel() {
@@ -108,15 +103,18 @@ export class SettingRecordPage {
     setting() {
         if (this.settingRecordForm.valid) {
             const imgUpload = this.upoadImage();
-            const audioUpload = this.uploadAudio();
-            const result = Observable.combineLatest(imgUpload, audioUpload);
+            const upoadRemindImage = this.upoadRemindImage();
+            const result = Observable.combineLatest(
+                imgUpload,
+                upoadRemindImage
+            );
             result.subscribe(d => {
                 if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
-                    const audio =
-                        d[1] === true
-                            ? undefined
-                            : JSON.parse(d[1].response).data;
-                    console.log(audio);
+                    // const audio =
+                    //     d[1] === true
+                    //         ? undefined
+                    //         : JSON.parse(d[1].response).data;
+                    // console.log(audio);
                     if (this.remind && this.remind.type === 'CUSTOMER') {
                         this.formData.customerId = this.remind.customerId;
                     }
@@ -124,16 +122,18 @@ export class SettingRecordPage {
                         this.formData.customerId = this.customerId;
                     }
                     this.formData.content = this.infoContent.content;
-                    if (audio) {
-                        this.formData.audio = {};
-                        this.formData.audio.path = audio
-                            ? audio.path
-                            : undefined;
-                        this.formData.audio.duration = this.audio.duration;
-                    }
+                    // if (audio) {
+                    //     this.formData.audio = {};
+                    //     this.formData.audio.path = audio
+                    //         ? audio.path
+                    //         : undefined;
+                    //     this.formData.audio.duration = this.audio.duration;
+                    // }
                     this.formData.pics = this.paths;
-                    this.formData.nextFollowTime = moment(this.nextFollowTime)
-                        .utc()
+                    this.formData.nextTask.content = this.remindContent.content;
+                    this.formData.nextTask.pics = this.nextRemindPaths;
+                    this.formData.nextTask.planRemindTime = moment(this.planRemindTime)
+                        .subtract(8, 'hours')
                         .format();
                     console.log('formData======================');
                     console.log(this.formData);
@@ -163,6 +163,39 @@ export class SettingRecordPage {
                         if (d.length == this.infoContent.pics.length) {
                             for (let item of d) {
                                 this.paths.push(item.path);
+                            }
+                            observer.next(true);
+                        }
+                    },
+                    e => {
+                        console.log(e);
+                        this.nativeService.alert('图片上传失败,请重试');
+                    }
+                );
+            }
+        });
+    }
+    upoadRemindImage(): Observable<any> {
+        return Observable.create(observer => {
+            this.nextRemindPaths = [];
+            if (this.remindContent.pics.length == 0) {
+                observer.next(true);
+            } else {
+                const imgHttp: Array<Observable<any>> = [];
+                for (let data of this.remindContent.pics) {
+                    imgHttp.push(
+                        this.appApi.upoadImage({
+                            data,
+                            type: 'FOLLOW'
+                        })
+                    );
+                }
+                const result = Observable.combineLatest(...imgHttp);
+                result.subscribe(
+                    d => {
+                        if (d.length == this.remindContent.pics.length) {
+                            for (let item of d) {
+                                this.nextRemindPaths.push(item.path);
                             }
                             observer.next(true);
                         }
