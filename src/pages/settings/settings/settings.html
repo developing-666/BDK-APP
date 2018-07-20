@@ -17,7 +17,7 @@
 	<div class="main-wrapper">
 		<button ion-item class="user-header" (tap)="toUserInfoPage()">
 			<ion-avatar class="user-avatar" item-left >
-				<img [src]="avatar">
+				<img [src]="userInfo?.avatar | getImg:'x200'">
 			</ion-avatar>
 			<div class="user-info">
 				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
