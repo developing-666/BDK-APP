@@ -105,21 +105,21 @@ page-remind {
                 }
             }
         }
-		.avtive-day-bar{margin-top: 1rem;background-color: #fff;border-bottom:$border;width: 100%;
-			height: rem(80);display: flex;justify-content: space-between;align-items: center;padding:0 1rem;
-			.control{color:color($colors,light);display: flex;align-items: center;
-				.iconfont{font-size: 1.6rem;}
-                &.disabled{
-                    color:color($colors, gray);
-                    .iconfont {
-                        color: color($colors, gray);
-                    }
-                }
+		.avtive-day-bar-wrapper{padding-top: 1rem;width: 100%;background-color:color($colors,bg);
+			.avtive-day-bar{background-color: #fff;border-bottom:$border;width: 100%;
+				height: rem(80);display: flex;justify-content: space-between;align-items: center;padding:0 1rem;
+				.control{color:color($colors,light);display: flex;align-items: center;
+					.iconfont{font-size: 1.6rem;}
+	                &.disabled{
+	                    color:color($colors, gray);
+	                    .iconfont {
+	                        color: color($colors, gray);
+	                    }
+	                }
+				}
+				.avtive-day{font-size: 1.6rem;}
 			}
-			.avtive-day{font-size: 1.6rem;}
 		}
-
-
 	}
 	.add-remind{position: fixed;right: 1rem;bottom:8rem;border-radius:50%;width: rem(100);height:rem(100);@include flex-center;font-size:2.4rem;z-index: 99;}
 	.bottom-bar {

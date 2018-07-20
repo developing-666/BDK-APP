@@ -22,17 +22,19 @@
         <i class="iconfont" *ngIf="!fold">&#xe67c;</i>
         <i class="iconfont" *ngIf="fold">&#xe674;</i>
     </p>
-    <div class="avtive-day-bar">
-        <div class="control" (tap)="prevDay()" [ngClass]="{'disabled':prevDayDisabled}">
-            <i class="iconfont">&#xe661;</i>
-            <span>上一天</span>
-        </div>
-        <span class="avtive-day">{{activeDay.display}}</span>
-        <div class="control" (tap)="nextDay()">
-            <span>下一天</span>
-            <i class="iconfont">&#xe613;</i>
-        </div>
-    </div>
+	<div class="avtive-day-bar-wrapper">
+		<div class="avtive-day-bar">
+	        <div class="control" (tap)="prevDay()" [ngClass]="{'disabled':prevDayDisabled}">
+	            <i class="iconfont">&#xe661;</i>
+	            <span>上一天</span>
+	        </div>
+	        <span class="avtive-day">{{activeDay.display}}</span>
+	        <div class="control" (tap)="nextDay()">
+	            <span>下一天</span>
+	            <i class="iconfont">&#xe613;</i>
+	        </div>
+	    </div>
+	</div>
     <ion-content class="scroll-container" [ngClass]="{}">
         <ion-refresher (ionRefresh)="doRefresh($event)">
             <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>

@@ -45,7 +45,7 @@ $designWidth: 750; //如设计图是750
     @include flex-center();
     em {
         display: inline-block;
-        width: rem(15);
+        width: rem(12);
         height: rem(15);
         position: absolute;
         left: 0;
