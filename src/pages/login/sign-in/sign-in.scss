@@ -1,32 +1,3 @@
 page-sign-in {
-    .main-form {
-        .item.item-block {
-            .item-inner {
-                position: relative;
-                .input {
-                    &.invalid {
-                        border-bottom: 0.55px solid color($colors, danger);
-                    }
-                }
-                .tip {
-                    position: absolute;
-                    right: 0;
-                    margin: 0;
-                    padding: 0;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    &.error {
-                        margin-right: 1.4rem;
-                        color: color($colors,danger);
-                    }
-                    &.success {
-                        margin-right: 1.4rem;
-                        color: color($colors,success);
-
-                    }
-                }
-            }
-        }
-    }
+    
 }

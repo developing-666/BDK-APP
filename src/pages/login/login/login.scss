@@ -17,31 +17,4 @@ page-login {
 		}
 		.submit{margin-bottom: 0;}
 	}
-    .main-form {
-        .item.item-block {
-            .item-inner {
-                position: relative;
-                .input {
-                    &.invalid {
-                        border-bottom: 0.55px solid color($colors, danger);
-                    }
-                }
-                .tip {
-                    position: absolute;
-                    right: 0;
-                    margin: 0;
-                    padding: 0;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    &.error {
-                        color: color($colors,danger);
-                    }
-                    &.success {
-                        color: color($colors,success);
-                    }
-                }
-            }
-        }
-    }
 }

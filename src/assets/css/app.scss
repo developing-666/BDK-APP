@@ -209,6 +209,9 @@ ion-buttons.buttons-group {
             }
             .get-code{
                 @include flex-center;border-bottom: $border;padding:0;margin:0;height: 100%;
+                &.code-error {
+                    border-bottom: 0.55px solid color($colors, danger);
+                }
             }
         }
     }
@@ -258,6 +261,48 @@ ion-buttons.buttons-group {
             background-position: right 1rem center;padding-right:2.4rem;
         }
 		ion-item-group{margin-bottom: 1rem;}
+    }
+}
+
+.icon-form {
+    .item.item-block {
+        &.item-md.item-input{
+            & .item-inner{   
+                border:0 !important;
+                box-shadow:none !important;
+                -webkit-box-shadow:none !important;
+            }
+        }
+        .item-inner {
+            position: relative;
+            .input {
+                &.invalid {
+                    border-bottom: 0.55px solid color($colors, danger);
+                }
+            }
+            .tip {
+                position: absolute;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                &.error {
+                    margin-right: 1.4rem;
+                    color: color($colors,danger);
+                }
+                &.code-error {
+                    margin-right: 9.4rem;
+                    color: color($colors,danger);
+                }
+                &.success {
+                    margin-right: 1.4rem;
+                    color: color($colors,success);
+
+                }
+            }
+        }
     }
 }
 

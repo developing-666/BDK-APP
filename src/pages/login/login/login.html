@@ -6,23 +6,23 @@
 		<h1>欢迎使用不丢客</h1>
 		<h2>帮你跟好客户，一个都不能丢。</h2>
 	</div>
-	<div class="main-form login-form">
+	<div class="main-form login-form icon-form">
 		<form [formGroup]="ngForm" novalidate (ngSubmit)="login()">
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65e;</i>
 				</ion-label>
 				<ion-input [ngClass]="{'invalid':(phone.touched && phone.invalid)}" formControlName="phone" [(ngModel)]="formData.phone" type="tel" placeholder="请输入您的手机/400号码"></ion-input>
-                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号！</ion-note>
-                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号！</ion-note>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.required" item-end>请输入手机号</ion-note>
+                <ion-note class="tip error" *ngIf="phone.touched && phone.errors?.phone" item-end>请输入正确的手机号</ion-note>
 			</ion-item>
 			<ion-item>
 				<ion-label>
 					<i class="iconfont">&#xe65c;</i>
 				</ion-label>
 				<ion-input [ngClass]="{'invalid':(password.touched && password.invalid)}" formControlName="password" [(ngModel)]="formData.password" type="password" placeholder="请输入您的密码"></ion-input>
-                <ion-note class="tip" *ngIf="password.touched && password.errors?.required" item-end>请输入密码！</ion-note>
-                <ion-note class="tip" *ngIf="password.touched && password.errors?.minlength" item-end>请输入至少6位密码！</ion-note>
+                <ion-note class="tip error" *ngIf="password.touched && password.errors?.required" item-end>请输入密码</ion-note>
+                <ion-note class="tip error" *ngIf="password.touched && password.errors?.minlength" item-end>请输入至少6位密码</ion-note>
             </ion-item>
             <!-- <button type="button" ion-button full (tap)="change()">测试</button> -->
             <button class="login submit large" type="submit" [disabled]="(ngForm.invalid || !mushrooms)" ion-button block round>登录</button>
