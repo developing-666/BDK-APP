@@ -1,4 +1,24 @@
 page-remind {
+	&>.content{
+		&.no-result {
+			&:before {
+				height: rem(278);
+				width: rem(310);
+				@include flex-center();
+				padding-top: rem(200);
+				margin-top: rem(-278/2);
+				background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
+				background-size: rem(200);
+				content: '暂无提醒任务';
+				font-size: rem(30);
+				position: absolute;
+				z-index: 2;
+				left:50%;
+				top:50%;
+				margin-left: rem(-310/2);
+			}
+		}
+	}
     ion-calendar{
         padding:0;
         .week-toolbar{
@@ -35,8 +55,8 @@ page-remind {
 	.remind-list-container {
 	    @include flex-center();
 	    flex-wrap: wrap;
-        &>.scroll-content{overflow: hidden;}
-        .scroll-container {
+        &>.scroll-content{overflow: hidden;background-color: transparent;z-index: 9;}
+        .scroll-container {background-color: transparent;
             height: calc(100% - 301px - 2rem - 5rem);
             &.no-result {
                 &:before {
