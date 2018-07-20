@@ -99,6 +99,7 @@ export class AddRemindPage {
     }
     ionViewDidLoad() {
         this.nativeService.statusBarStyle(); // 设置状态栏颜色
+		// this.nativeService.overlaysWebView(false);
         // this.navBar.backButtonClick = (e: UIEvent) => {
         //     // todo something
         //     this.callback().then(() => {
@@ -106,6 +107,9 @@ export class AddRemindPage {
         //     });
         // };
     }
+	ionViewWillLeave(){
+		// this.nativeService.overlaysWebView(true);
+	}
     delay() {
         this.appApi
             .taskLazy({

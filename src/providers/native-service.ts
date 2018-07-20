@@ -118,13 +118,22 @@ export class NativeService {
                 });
         }
     }
-
+	overlaysWebView(r){
+		if(this.isIos()){
+			this.statusBar.overlaysWebView(r);
+		}
+	}
     /**
      * 状态栏
      */
     statusBarStyle(color: string = '#3dcbbd', dark: boolean = false): void {
         if (this.isMobile()) {
-            this.statusBar.overlaysWebView(false);
+			// if(this.isAndroid()){
+	        //     this.statusBar.overlaysWebView(false);
+			// }else{
+			// 	this.statusBar.overlaysWebView(true);
+			// }
+			this.statusBar.overlaysWebView(false);
             if (dark) {
                 this.statusBar.styleDefault();
             } else {

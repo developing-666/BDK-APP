@@ -4,6 +4,10 @@ import { ViewController, NavParams, Slides, Platform } from 'ionic-angular';
 import { Photo } from '../interfaces/photo-interface';
 import { Subject } from 'rxjs/Subject';
 
+
+
+
+import { NativeService } from '../../../providers/native-service';
 @Component({
     selector: 'gallery-modal',
     templateUrl: 'gallery-modal.html'
@@ -43,7 +47,8 @@ export class GalleryModal implements OnInit {
         params: NavParams,
         private element: ElementRef,
         private platform: Platform,
-        private domSanitizer: DomSanitizer
+        private domSanitizer: DomSanitizer,
+		public nativeService:NativeService
     ) {
         this.photos = params.get('photos') || [];
         this.closeIcon = params.get('closeIcon') || 'arrow-back';
@@ -61,6 +66,7 @@ export class GalleryModal implements OnInit {
      * Closes the modal (when user click on CLOSE)
      */
     public dismiss() {
+		this.nativeService.statusBarStyle();
         this.viewCtrl.dismiss();
     }
 
@@ -87,6 +93,7 @@ export class GalleryModal implements OnInit {
     }
 
     ionViewDidEnter() {
+		this.nativeService.statusBarStyle('#000000'); // 设置状态栏颜色
         this.resize(false);
         this.slidesStyle.visibility = 'visible';
     }
