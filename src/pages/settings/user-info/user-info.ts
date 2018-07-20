@@ -13,6 +13,7 @@ import { GlobalData } from '../../../providers/global-data';
 import { INDUSTRY } from '../../../providers/constants';
 import { DEFAULT_AVATAR } from '../../../providers/constants';
 import { NativeService } from '../../../providers/native-service';
+import { ChangePasswordPage } from '../change-password/change-password';
 /**
  * Generated class for the UserInfoPage page.
  *
@@ -212,6 +213,10 @@ export class UserInfoPage {
         } else {
             this.canEdit = true;
         }
+    }
+
+    toChangePasswordPage() {
+        this.navCtrl.push(ChangePasswordPage);
     }
 
     presentToast() {

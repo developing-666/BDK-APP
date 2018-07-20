@@ -12,9 +12,7 @@ import { NativeService } from '../../../providers/native-service';
 })
 export class ForgetPasswordPage {
     ngForm: FormGroup;
-    formData: any = {
-        validCode: 1234
-    };
+    formData: any = {};
     showVerificationCode: boolean = true; //显示验证码按钮
     time: number = 60; //倒计时
     interval: any; //setInterval

@@ -87,7 +87,7 @@
                 </button>
             </ion-item-group>
             <ion-item-group>
-                <button ion-item [ngClass]="{'disabled':!canEdit,'unactive':!canEdit}">
+                <button ion-item [ngClass]="{'disabled':!canEdit,'unactive':!canEdit}" (tap)="toChangePasswordPage()">
                     <ion-label>修改密码</ion-label>
                     <ion-note item-end></ion-note>
                 </button>
