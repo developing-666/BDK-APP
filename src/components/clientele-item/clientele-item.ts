@@ -170,6 +170,7 @@ export class ClienteleItemComponent {
     customerCall(phone) {
         this.appApi
             .customerCall({
+				businessType:'BDK_CUSTOMER',
                 customerId: this.data.id,
                 phone
             })

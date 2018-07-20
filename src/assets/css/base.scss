@@ -471,7 +471,18 @@ $designWidth: 750; //如设计图是750
                 .time {
                     @include tag(color($colors, gray));
                 }
+				.title{
+					color: color($colors, danger);text-decoration:line-through;
+					i{
+						color: color($colors, light);
+					}
+				}
             }
+			.remark{
+				.remark-text{
+					// text-decoration:line-through;
+				}
+			}
         }
     }
     &.pitch-on {

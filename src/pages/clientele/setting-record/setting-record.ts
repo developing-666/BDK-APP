@@ -51,6 +51,7 @@ export class SettingRecordPage {
         nextFollowTime: undefined
     };
     nextFollowTime = moment().format('YYYY-MM-DDTHH:mm:ssZ');
+	nextFollowRemind:boolean = false;
     paths: Array<any> = [];
     audio: any = {
         // duration: 10,

@@ -16,6 +16,10 @@
             <info-input [ngClass]="{'invalid':(settingRecordForm.controls?.content?.touched || settingRecordForm.submitted) && settingRecordForm.controls?.content.invalid}"
                 [placeholder]="placeholder" [(ngModel)]="infoContent" required #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()"
                 name="content" (voiceBarClick)="voiceBarClick()"></info-input>
+			<ion-item>
+				<ion-label>下次跟进提醒</ion-label>
+				<ion-toggle [(ngModel)]="nextFollowRemind"></ion-toggle>
+			</ion-item>
             <ion-item-group hidden>
                 <ion-item [ngClass]="{'invalid':(settingRecordForm.controls.title?.touched || settingRecordForm.submitted) && settingRecordForm.controls.title.invalid}">
                     <ion-label>提醒标题</ion-label>
