@@ -443,6 +443,28 @@ $designWidth: 750; //如设计图是750
         top: 1.9rem;
         content: '';
     }
+    &.time-out {
+        .item:before {
+            background-color: color($colors, danger);
+        }
+        .label {
+            h3 {
+                .time {
+                    @include tag(color($colors, danger));
+                }
+                .title {
+                    i {
+                        color: color($colors, danger);
+                    }
+                }
+            }
+            .remark {
+                .remark-text {
+                    // text-decoration:line-through;
+                }
+            }
+        }
+    }
 	&.write-in{
 		.label{
 			.remind-content{
@@ -462,7 +484,7 @@ $designWidth: 750; //如设计图是750
 			}
 		}
 	}
-    &.disabled {
+    &.done {
         .item:before {
             background-color: color($colors, gray);
         }
@@ -516,6 +538,11 @@ $designWidth: 750; //如设计图是750
         @extend .transition-02;
         &.active {
             @include round-tag('large', color($colors, primary), false);
+        }
+        &.disabled{
+            opacity: 0.4;
+            cursor: default;
+            pointer-events: none;
         }
     }
 }

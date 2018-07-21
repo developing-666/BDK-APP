@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams, App, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, App, Events, Content } from 'ionic-angular';
 
 import { AppApi } from '../../../../../providers/app-api';
 
@@ -9,14 +9,18 @@ import { SettingRecordPage } from '../../../setting-record/setting-record';
     templateUrl: 'follow-record.html'
 })
 export class FollowRecordPage {
+    @ViewChild(Content) content: Content;
     currentPage: number = 1;
     totalPages: number = 1;
     id: string = this.navParams.get('id');
     record: Array<any> = [];
     update: any = () => {
-            this.currentPage = 1;
+        this.currentPage = 1;
+        this.content.scrollToTop(0);
+        setTimeout(() => {
             this.queryCustomerFollowDetailByPage();
-        }
+        }, 0);
+    };
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -29,7 +33,7 @@ export class FollowRecordPage {
         this.queryCustomerFollowDetailByPage();
         this.events.subscribe('followRecord:update', this.update);
     }
-    ionViewWillUnload(){
+    ionViewWillUnload() {
         this.events.unsubscribe('followRecord:update', this.update);
     }
     queryCustomerFollowDetailByPage(e?: any) {
@@ -78,12 +82,9 @@ export class FollowRecordPage {
     itemClick(item) {
         console.log(item);
 
-        // this.app
-        //     .getRootNav()
-        //     .push(SettingRecordPage, {
-        //         item,
-        //         type: 'check'
-        //     });
+        this.app.getRootNav().push(SettingRecordPage, {
+            followId: item.id
+        });
     }
     add() {
         this.app.getRootNav().push(SettingRecordPage, {

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, List, App, Events } from 'ionic-angular';
+import { NavController, NavParams, List, App, Events, Content } from 'ionic-angular';
 
 import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
 
@@ -11,6 +11,7 @@ import { AppApi } from '../../../../../providers/app-api';
     templateUrl: 'not-follow.html'
 })
 export class NotFollowPage {
+    @ViewChild(Content) content: Content;
     @ViewChild(List) list: List;
     currentPage: number = 1;
     totalPages: number = 1;
@@ -21,7 +22,10 @@ export class NotFollowPage {
         console.log(id);
         if (this.id === id) {
             this.currentPage = 1;
-            this.queryTaskDetailByPage();
+            this.content.scrollToTop(0);
+            setTimeout(() => {
+                this.queryTaskDetailByPage();
+            }, 0);
         }
     };
     constructor(

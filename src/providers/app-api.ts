@@ -159,6 +159,12 @@ export class AppApi {
 		return this._http.get('/user/queryUserInfo');
 	}
     /**
+     * 获取用户跟进信息
+     */
+    queryCustomerFollowById(id): any {
+        return this._http.get('/customerfollow/queryCustomerFollowById/'+id);
+    }
+    /**
      * 更新用户信息
      */
 	updateUserInfo(opts?: any): any {

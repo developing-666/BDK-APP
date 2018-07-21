@@ -193,6 +193,8 @@ export class InfoInputComponent implements ControlValueAccessor {
 		this.touched.push(fn);
 	}
 	setDisabledState(isDisabled: boolean): void {
+        console.log(isDisabled);
+        
 		this.disabled = isDisabled;
 	}
 	writeValue(obj: any): void {

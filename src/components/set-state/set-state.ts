@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { FOLLOWSTATUS } from '../../providers/constants';
@@ -20,7 +20,7 @@ export class SetStateComponent implements ControlValueAccessor {
     touched: any = [];
     disabled: boolean = false;
     innerValue: any = '';
-    change = (_: any) => { };
+    change = (_: any) => {};
     get value(): any {
         return this.innerValue;
     }
@@ -33,7 +33,7 @@ export class SetStateComponent implements ControlValueAccessor {
     constructor() {}
 
     statusTap(code) {
-        if (code != this.innerValue) {
+        if (code != this.innerValue && !this.disabled) {
             this.value = code;
         }
     }

@@ -37,6 +37,7 @@ export class SettingRecordPage {
     type: string = this.navParams.get('type');
     customerId: string = this.navParams.get('customerId');
     remind: any = this.navParams.get('remind');
+    followId: string = this.navParams.get('followId');
     placeholder: string =
         '点击输入,在此写入跟进情况。可使用输入法自带的语音进行输入';
     infoContent: any;
@@ -73,6 +74,9 @@ export class SettingRecordPage {
     ) {}
     ionViewDidLoad() {
         console.log(this.formData.followStatus);
+        if(this.followId){
+            this.getData();
+        }
     }
 
     openInputPanel() {
@@ -99,7 +103,20 @@ export class SettingRecordPage {
     recordEnd(e) {
         console.log(e);
     }
-
+    getData() {
+        this.appApi
+            .queryCustomerFollowById(this.followId)
+            .subscribe(d => {
+                this.formData.title = d.title;
+                this.infoContent = {};
+                this.infoContent.content = d.content;
+                this.infoContent.pics = d.pics;
+                this.remind = d.taskDetail;
+                this.remind.customer = d.customerDetail;
+                this.formData.followStatus = d.customerDetail.followStatus;
+                
+            });
+    }
     setting() {
         if (this.settingRecordForm.valid) {
             const imgUpload = this.upoadImage();
@@ -130,10 +147,12 @@ export class SettingRecordPage {
                     //     this.formData.audio.duration = this.audio.duration;
                     // }
                     this.formData.pics = this.paths;
-                    if (this.remindContent){
+                    if (this.remindContent) {
                         this.formData.nextTask.content = this.remindContent.content;
                         this.formData.nextTask.pics = this.nextRemindPaths;
-                        this.formData.nextTask.planRemindTime = moment(this.planRemindTime)
+                        this.formData.nextTask.planRemindTime = moment(
+                            this.planRemindTime
+                        )
                             .subtract(8, 'hours')
                             .format();
                     }
@@ -180,28 +199,33 @@ export class SettingRecordPage {
     upoadRemindImage(): Observable<any> {
         return Observable.create(observer => {
             this.nextRemindPaths = [];
-            if (!this.remindContent  || this.remindContent.pics.length == 0) {
+            if (!this.remindContent || this.remindContent.pics.length == 0) {
                 observer.next(true);
             } else {
                 const imgHttp: Array<Observable<any>> = [];
                 for (let data of this.remindContent.pics) {
-                    imgHttp.push(this.appApi.upoadImage({
+                    imgHttp.push(
+                        this.appApi.upoadImage({
                             data,
                             type: 'FOLLOW'
-                        }));
+                        })
+                    );
                 }
                 const result = Observable.combineLatest(...imgHttp);
-                result.subscribe(d => {
+                result.subscribe(
+                    d => {
                         if (d.length == this.remindContent.pics.length) {
                             for (let item of d) {
                                 this.nextRemindPaths.push(item.path);
                             }
                             observer.next(true);
                         }
-                    }, e => {
+                    },
+                    e => {
                         console.log(e);
                         this.nativeService.alert('图片上传失败,请重试');
-                    });
+                    }
+                );
             }
         });
     }
