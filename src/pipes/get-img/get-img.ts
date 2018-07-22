@@ -1,3 +1,4 @@
+import { Utils } from './../../providers/utils';
 import { Pipe, PipeTransform } from '@angular/core';
 
 
@@ -9,11 +10,7 @@ export class GetImgPipe implements PipeTransform {
 		if (value.indexOf('base64') > -1) {
 			return value;
 		} else {
-			const index = value.lastIndexOf('.');
-			const len = value.length;
-			const path = value.substring(0, index);
-			const suffix = value.substring(index, len);
-			return `${path}_-${size}${suffix}`;
+            return Utils.getPicUrl(value);;
 		}
 	}
 }

@@ -13,7 +13,7 @@
         <div class="accessory-list">
             <div class="imgs-container">
                 <div class="img-item" [ngClass]="{'disabled':disabled}" *ngFor="let item of innerValue?.pics;let i =index">
-                    <img [src]="item | getImg:'x200'">
+                    <img [src]="item | getImg:'x200'" (tap)="viewImg(i)">
                     <i class="delete iconfont" (tap)="deleteImg(i)">&#xe681;</i>
                 </div>
             </div>

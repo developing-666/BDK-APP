@@ -4,7 +4,7 @@ import { registerLocaleData } from '@angular/common';
 import localeZh from '@angular/common/locales/zh';
 import localeZhExtra from '@angular/common/locales/extra/zh';
 import { HttpModule } from '@angular/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import {
     Config,
     IonicApp,
@@ -23,6 +23,7 @@ import { ClienteleModule } from '../pages/clientele/clientele.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
 
 import { AlphaScrollModule } from '../modules/alpha-scroll/index';
+import * as ionicGalleryModal from '../modules/ion-gallery/index';
 
 //Ionic原生相关
 import { StatusBar } from '@ionic-native/status-bar';
@@ -99,14 +100,19 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
         AlphaScrollModule.forRoot(),
         IonicModule.forRoot(MyApp, {
             //			mode: 'ios', // android是'md'
-            backButtonText: '',
+            backButtonText: ''
         }),
         IonicStorageModule.forRoot(),
-        SettingsPageModule
+        SettingsPageModule,
+        ionicGalleryModal.GalleryModalModule
     ],
     bootstrap: [IonicApp],
     entryComponents: [MyApp, HomePage],
     providers: [
+        {
+            provide: HAMMER_GESTURE_CONFIG,
+            useClass: ionicGalleryModal.GalleryModalHammerConfig
+        },
         { provide: LOCALE_ID, useValue: 'zh' },
         AppApi,
         StatusBar,

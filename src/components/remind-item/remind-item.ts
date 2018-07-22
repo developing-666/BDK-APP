@@ -15,6 +15,7 @@ import { SettingRecordPage } from '../../pages/clientele/setting-record/setting-
 import { AppApi } from '../../providers/app-api';
 
 import { GalleryModal } from '../../modules/ion-gallery/index';
+import { Utils } from '../../providers/utils';
 @Component({
     selector: 'remind-item',
     templateUrl: 'remind-item.html'
@@ -102,17 +103,10 @@ export class RemindItemComponent implements OnChanges {
             remind: this.remind
         });
     }
-    getPicUrl(value) {
-        const index = value.lastIndexOf('.');
-        const len = value.length;
-        const path = value.substring(0, index);
-        const suffix = value.substring(index, len);
-        return `${path}_-x-${suffix}`;
-    }
     getPics() {
         for (const pic of this.remind.pics) {
             this.pics.push({
-                url: this.getPicUrl(pic),
+                url: Utils.getPicUrl(pic),
                 title: this.remind.title
             });
         }

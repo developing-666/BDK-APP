@@ -14,7 +14,7 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { PipesModule } from '../pipes/pipes.module';
 import { AppApi } from '../providers/app-api';
 
-import * as ionicGalleryModal from '../modules/ion-gallery/index';
+// import * as ionicGalleryModal from '../modules/ion-gallery/index';
 
 @NgModule({
     declarations: [
@@ -28,7 +28,11 @@ import * as ionicGalleryModal from '../modules/ion-gallery/index';
         IonAudioComponent,
         PhoneNumberInputComponent
     ],
-    imports: [IonicModule, PipesModule, ionicGalleryModal.GalleryModalModule],
+    imports: [
+        IonicModule,
+        PipesModule,
+        // ionicGalleryModal.GalleryModalModule
+    ],
     exports: [
         VoiceBarComponent,
         RemindItemComponent,
@@ -42,10 +46,10 @@ import * as ionicGalleryModal from '../modules/ion-gallery/index';
     ],
     entryComponents: [],
     providers: [
-        {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: ionicGalleryModal.GalleryModalHammerConfig
-        },
+        // {
+        //     provide: HAMMER_GESTURE_CONFIG,
+        //     useClass: ionicGalleryModal.GalleryModalHammerConfig
+        // },
         AppApi
     ]
 })

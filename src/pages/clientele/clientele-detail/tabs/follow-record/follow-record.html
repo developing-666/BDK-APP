@@ -3,7 +3,7 @@
         <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-item class="record-item" *ngFor="let item of record" (tap)="itemClick(item)">
+        <ion-item class="record-item" *ngFor="let item of record" (click)="itemClick($event,item)">
             <em class="top-line"></em>
             <div class="record-content">
                 <h3>
@@ -21,7 +21,7 @@
                     <p class="operat-content">{{item?.content | slice :0:50}}</p>
                 </div>
                 <div class="record-img-container" *ngIf="item?.pics.length>0">
-                    <img *ngFor="let item of item.pics" [src]="item | getImg:'x200'">
+                    <img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'x200'" (click)="getPics($event,item,i)">
                 </div>
             </div>
         </ion-item>

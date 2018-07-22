@@ -1,9 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, App, Events, Content } from 'ionic-angular';
+import {
+    NavController,
+    NavParams,
+    App,
+    Events,
+    Content,
+    ModalController
+} from 'ionic-angular';
 
 import { AppApi } from '../../../../../providers/app-api';
-
 import { SettingRecordPage } from '../../../setting-record/setting-record';
+
+import { GalleryModal } from '../../../../../modules/ion-gallery/index';
+import { Utils } from '../../../../../providers/utils';
+
 @Component({
     selector: 'page-follow-record',
     templateUrl: 'follow-record.html'
@@ -14,6 +24,7 @@ export class FollowRecordPage {
     totalPages: number = 1;
     id: string = this.navParams.get('id');
     record: Array<any> = [];
+    pics: Array<any> = [];
     update: any = () => {
         this.currentPage = 1;
         this.content.scrollToTop(0);
@@ -26,7 +37,8 @@ export class FollowRecordPage {
         public navParams: NavParams,
         public appApi: AppApi,
         public app: App,
-        public events: Events
+        public events: Events,
+        public modalCtrl: ModalController
     ) {}
 
     ionViewDidLoad() {
@@ -79,7 +91,9 @@ export class FollowRecordPage {
         console.log(e);
         this.queryCustomerFollowDetailByPage(e);
     }
-    itemClick(item) {
+    itemClick(e, item) {
+        e.stopPropagation();
+        e.preventDefault();
         console.log(item);
 
         this.app.getRootNav().push(SettingRecordPage, {
@@ -90,5 +104,24 @@ export class FollowRecordPage {
         this.app.getRootNav().push(SettingRecordPage, {
             customerId: this.id
         });
+    }
+    getPics(e,item, i) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.pics = [];
+        for (const pic of item.pics) {
+            this.pics.push({
+                url: Utils.getPicUrl(pic),
+                title: item.title
+            });
+        }
+        this.viewImg(i);
+    }
+    viewImg(i) {
+        let modal = this.modalCtrl.create(GalleryModal, {
+            photos: this.pics,
+            initialSlide: i
+        });
+        modal.present();
     }
 }
