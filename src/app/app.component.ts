@@ -74,20 +74,6 @@ export class MyApp {
         private codePush: CodePush,
         private zone: NgZone
     ) {
-        document.addEventListener(
-            'startcallbutton',
-            function() {
-                console.log('startcallbutton');
-            },
-            false
-        );
-        document.addEventListener(
-            'endcallbutton',
-            function() {
-                console.log('endcallbutton');
-            },
-            false
-        );
         platform.resume.subscribe(d => {
             console.log('我又回来了');
             // this.assetsSync();

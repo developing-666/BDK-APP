@@ -39,6 +39,19 @@ page-remind {
                 height: calc(0.5rem + 36px); overflow: hidden;
             }
         }
+        ion-calendar-month{
+            .days {
+                button.days-btn.marked:not(.on-selected) {
+                    color: #333;position: relative;
+                    &::after{
+                        content: '';
+                        position:absolute;width: 0.4rem;height: 0.4rem;border-radius:50%;background: color($colors,danger);
+                        right:.5rem;
+                        top:.5rem;
+                    }
+                }
+            }
+        }
     }
     .fold-bar{background-color: #fff;
         height: rem(40);@include flex-center();

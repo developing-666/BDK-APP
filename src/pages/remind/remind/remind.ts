@@ -1,3 +1,4 @@
+import { Utils } from './../../../providers/utils';
 import { Component, ViewChild } from '@angular/core';
 import {
     NavController,
@@ -19,7 +20,7 @@ import { NativeService } from '../../../providers/native-service';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
 import moment from 'moment';
-import { CalendarComponentOptions } from 'ion2-calendar';
+import { CalendarComponentOptions, DayConfig } from 'ion2-calendar';
 @Component({
     selector: 'page-remind',
     templateUrl: 'remind.html'
@@ -34,6 +35,7 @@ export class RemindPage {
     deleteIds: Array<string> = [];
     startDay: Date = moment('2018-01-01').toDate();
     today: number = moment().valueOf();
+    currentMonth: string = moment().startOf('month').format('YYYY-MM-DD');
     activeDay: any = {
         display: moment().format('MM月DD日'),
         value: moment().format('YYYY-MM-DD')
@@ -67,6 +69,7 @@ export class RemindPage {
         setTimeout(() => {
             this.getData();
         }, 0);
+        this.queryTaskCountByDate(this.currentMonth);
     };
     constructor(
         public navCtrl: NavController,
@@ -86,6 +89,7 @@ export class RemindPage {
         this.events.subscribe('followRecord:update', this.update);
         this.events.subscribe('delay:update', this.update);
         this.getData();
+        this.queryTaskCountByDate(this.currentMonth);
     }
     ionViewWillUnload() {
         this.events.unsubscribe('remind:create', this.update);
@@ -203,17 +207,33 @@ export class RemindPage {
     }
     monthChange(m) {
         console.log(m);
-        this.queryTaskCountByDate(m);
+        this.currentMonth = m.newMonth.string;
+        this.queryTaskCountByDate(this.currentMonth);
     }
-    queryTaskCountByDate(m){
+    queryTaskCountByDate(m) {
         this.appApi
-            .queryTaskCountByDate({ 
-                startDate: m.newMonth.string,
-                endDate: moment(m.newMonth.string).endOf('month')
-             })
+            .queryTaskCountByDate({
+                startDate: m,
+                endDate: moment(m).endOf('month').format('YYYY-MM-DD')
+            })
             .subscribe(d => {
                 console.log(d);
+                if (d.length > 0) {
+                    this.daysConfig(d);
+                }
             });
+    }
+    daysConfig(d) {
+        let daysConfig: DayConfig[] = [];
+        for (const day of d) {
+            daysConfig.push({
+                date: moment(day.date).toDate(),
+                marked: true
+            });
+        }
+        this.calendarOpt = Utils.extend(true, {}, this.calendarOpt, {
+            daysConfig
+        });
     }
     prevDay() {
         if (this.prevDayDisabled) return;
