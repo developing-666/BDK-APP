@@ -5,8 +5,6 @@ import {
     Output,
     ViewChild,
     ElementRef,
-    OnChanges,
-    SimpleChanges
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ActionSheetController, ModalController } from 'ionic-angular';
@@ -71,10 +69,7 @@ export class InfoInputComponent implements ControlValueAccessor {
         private appApi: AppApi,
         public modalCtrl: ModalController
     ) {}
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
-        
-    }
+    OnChanges
     valueInit() {
         if (!this.innerValue) {
             this.innerValue = {
@@ -137,6 +132,7 @@ export class InfoInputComponent implements ControlValueAccessor {
                         this.change(this.innerValue);
                     }
                 }
+                this.getPics();
             },
             err => {
                 alert('获取图片失败,请重试');
@@ -159,6 +155,7 @@ export class InfoInputComponent implements ControlValueAccessor {
                 if (this.innerValue.pics.indexOf(base64Image) == -1) {
                     this.innerValue.pics.push(base64Image);
                     this.change(this.innerValue);
+                    this.getPics();
                 }
             },
             err => {
@@ -193,6 +190,7 @@ export class InfoInputComponent implements ControlValueAccessor {
     deleteImg(i) {
         this.innerValue.pics.splice(i, 1);
         this.change(this.innerValue);
+        this.getPics();
     }
     voiceBarTap(e) {
         console.log(e);
@@ -228,6 +226,10 @@ export class InfoInputComponent implements ControlValueAccessor {
     writeValue(obj: any): void {
         this.innerValue = obj;
         this.inputValue = obj ? obj.content : '';
+        if (obj && obj.pics){
+            console.log(this.innerValue.pics);
+            this.getPics();
+        }
         if (obj && obj.content) {
             setTimeout(() => {
                 this.textareaStyle = {

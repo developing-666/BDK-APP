@@ -74,6 +74,20 @@ export class MyApp {
         private codePush: CodePush,
         private zone: NgZone
     ) {
+        document.addEventListener(
+            'startcallbutton',
+            function() {
+                console.log('startcallbutton');
+            },
+            false
+        );
+        document.addEventListener(
+            'endcallbutton',
+            function() {
+                console.log('endcallbutton');
+            },
+            false
+        );
         platform.resume.subscribe(d => {
             console.log('我又回来了');
             // this.assetsSync();
@@ -116,7 +130,7 @@ export class MyApp {
                             this.httpHeader.token = token;
                             this.storage.get('user').then(u => {
                                 this.globalData.user = u;
-                            })
+                            });
                             this.nav.setRoot(HomePage); // 设置首页
                         } else {
                             this.nav.setRoot(LoginPage); // 设置首页
@@ -223,6 +237,8 @@ export class MyApp {
 
     // 注册android返回按键事件
     registerBackButtonAction() {
+        console.log(this.platform);
+
         if (!this.nativeService.isAndroid()) {
             return;
         }

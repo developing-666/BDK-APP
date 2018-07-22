@@ -203,6 +203,17 @@ export class RemindPage {
     }
     monthChange(m) {
         console.log(m);
+        this.queryTaskCountByDate(m);
+    }
+    queryTaskCountByDate(m){
+        this.appApi
+            .queryTaskCountByDate({ 
+                startDate: m.newMonth.string,
+                endDate: moment(m.newMonth.string).endOf('month')
+             })
+            .subscribe(d => {
+                console.log(d);
+            });
     }
     prevDay() {
         if (this.prevDayDisabled) return;
