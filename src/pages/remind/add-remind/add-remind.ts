@@ -5,7 +5,8 @@ import {
     NavParams,
     ModalController,
     ToastController,
-    Events
+    Events,
+	ViewController
 } from 'ionic-angular';
 import moment from 'moment';
 
@@ -27,6 +28,7 @@ import { Utils } from '../../../providers/utils';
 import { NativeService } from '../../../providers/native-service';
 
 import { Observable } from 'rxjs/Rx';
+
 @Component({
     selector: 'page-add-remind',
     templateUrl: 'add-remind.html'
@@ -75,7 +77,8 @@ export class AddRemindPage {
         public nativeService: NativeService,
         public ft: FileTransfer,
         private globalData: GlobalData,
-        private events: Events
+        private events: Events,
+		public viewCtrl: ViewController
     ) {
         if (this.item) {
             console.log(this.item);
@@ -138,10 +141,7 @@ export class AddRemindPage {
             });
     }
     done() {
-        console.log(this.addRemindForm.valid);
-        console.log(this.formData);
-        console.log(this.infoContent);
-        this.uploadAudio();
+        // this.uploadAudio();
         if (this.addRemindForm.valid) {
             const imgUpload = this.upoadImage();
             const audioUpload = this.uploadAudio();

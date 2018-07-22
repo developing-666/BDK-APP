@@ -170,16 +170,6 @@ export class Helper {
 			return;
 		}
 		console.log('jPush------------------------------------------');
-		console.log(window['plugins'].jPushPlugin.init);
-		//window['plugins'].jPushPlugin.init();
-		// window['plugins'].jPushPlugin.setDebugMode(true);
-		// if (this.nativeService.isIos()) {
-		// 	window['plugins'].jPushPlugin.setDebugModeFromIos();
-		// 	window['plugins'].jPushPlugin.setApplicationIconBadgeNumber(0);
-		// } else {
-		// 	window['plugins'].jPushPlugin.setDebugMode(true);
-		// 	window['plugins'].jPushPlugin.setStatisticsOpen(true);
-		// }
 		this.jPush.init();
 		this.jPush.setDebugMode(IS_DEBUG);
 		this.jPushAddEventListener();
@@ -200,7 +190,7 @@ export class Helper {
 			this.setIosIconBadgeNumber(0);
 			const content = this.nativeService.isIos() ? event['aps'].alert : event['alert'];
 			console.log('jpush.openNotification' + content);
-			this.events.publish('jpush.openNotification', content);
+			this.events.publish('jpush.openNotification', event);
 		}, false);
 
 		// 收到通知时会触发该事件
@@ -222,7 +212,7 @@ export class Helper {
 			return;
 		}
         console.log(this.globalData.userId);
-        
+
 		this.jPush.setAlias({ sequence: 1, alias: this.globalData.userId }).then(result => {
 			console.log('jpush-设置别名成功:');
 			console.log(result);
@@ -254,7 +244,7 @@ export class Helper {
 			tags.push('ios');
 		}
         console.log(tags);
-        
+
 		this.jPush.setTags({ sequence: 3, tags }).then(result => {
 			console.log('jpush-设置标签成功');
 			console.log(result);

@@ -4,7 +4,8 @@ import {
     NavController,
     NavParams,
     ToastController,
-    Events
+    Events,
+	ViewController
 } from 'ionic-angular';
 
 import { ClienteleTagPage } from '../clientele-tag/clientele-tag';

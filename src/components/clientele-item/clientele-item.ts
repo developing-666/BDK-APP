@@ -96,10 +96,9 @@ export class ClienteleItemComponent {
     itemDelete(item) {
         this.presentConfirm(item);
     }
-    itemClick(e, item) {
-        e.stopPropagation();
+    itemClick(e,item) {
+		e.stopPropagation();
         e.preventDefault();
-        console.log(item);
         if (this.detail) {
             this.navCtrl.push(AddClientelePage, {
                 customerId: item.id,

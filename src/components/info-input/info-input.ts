@@ -34,8 +34,6 @@ export class InfoInputComponent implements ControlValueAccessor {
     @Output() inputFoucs: EventEmitter<any> = new EventEmitter();
     @Output() inputBlur: EventEmitter<any> = new EventEmitter();
     @Output() voiceBarClick: EventEmitter<any> = new EventEmitter();
-    @Input()
-    placeholder: string = '点击输入提醒备注,可使用输入法自带的语音进行输入';
     @Input() id: string;
     @Input() name: string;
     @Input() type: string = 'task';
@@ -69,7 +67,6 @@ export class InfoInputComponent implements ControlValueAccessor {
         private appApi: AppApi,
         public modalCtrl: ModalController
     ) {}
-    OnChanges
     valueInit() {
         if (!this.innerValue) {
             this.innerValue = {

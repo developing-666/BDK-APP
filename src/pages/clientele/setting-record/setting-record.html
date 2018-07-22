@@ -15,7 +15,7 @@
                     <ion-input name="title" maxlength="15" [disabled]="followId!==undefined" [(ngModel)]="formData.title" required placeholder="请输入标题"></ion-input>
                 </ion-item>
                 <info-input [ngClass]="{'invalid':(settingRecordForm.controls?.content?.touched || settingRecordForm.submitted) && settingRecordForm.controls?.content.invalid}"
-                    [disabled]="followId!==undefined" [placeholder]="placeholder" [(ngModel)]="infoContent" required #infoInput
+                    [disabled]="followId!==undefined" [(ngModel)]="infoContent" required #infoInput
                     (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="content" (voiceBarClick)="voiceBarClick()"></info-input>
                 <ion-item *ngIf="followId===undefined">
                     <ion-label>下次跟进提醒</ion-label>
@@ -30,11 +30,11 @@
                 </ion-item>
                 <button ion-item [ngClass]="{'invalid':(settingRecordForm.controls.time?.touched || settingRecordForm.submitted) && settingRecordForm.controls.time.invalid}">
                     <ion-label>下次提醒时间</ion-label>
-                    <ion-datetime name="time" [disabled]="followId!==undefined" [(ngModel)]="planRemindTime" required placeholder="请选择提下次醒时间"
+                    <ion-datetime name="time" [disabled]="followId!==undefined" [(ngModel)]="planRemindTime" required placeholder="请选择下次提醒时间"
                         pickerFormat="YYYY-MM-DD HH:mm" [min]="minTime" cancelText="取消" doneText="确定"></ion-datetime>
                 </button>
                 <info-input [ngClass]="{'invalid':(settingRecordForm.controls.nextContent?.touched || settingRecordForm.submitted) && settingRecordForm.controls.nextContent.invalid}"
-                    [disabled]="followId!==undefined" placeholder="点击输入下次提醒备注,可使用输入法自带的语音进行输入" [(ngModel)]="remindContent" required
+                    [disabled]="followId!==undefined" [(ngModel)]="remindContent" required
                     #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="nextContent" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-item-group>
         </ion-list>

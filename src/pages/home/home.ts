@@ -1,10 +1,11 @@
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
-import { NavController, Tabs, Events} from 'ionic-angular';
+import { NavController, Tabs, Events,ViewController} from 'ionic-angular';
 
 import { RemindPage } from '../remind/remind/remind';
 import { ClientelePage } from '../clientele/clientele/clientele';
 import { SettingsPage } from '../settings/settings/settings';
 
+import {JpushNotification}from '../../providers/jpush-notification';
 
 import { SearchResultPage } from '../clientele/search-result/search-result';
 @Component({
@@ -24,9 +25,12 @@ export class HomePage {
         public navCtrl: NavController,
         private elementRef: ElementRef,
         private renderer: Renderer,
-        private events: Events
+        private events: Events,
+		public viewCtrl: ViewController,
+		private jpushNotification:JpushNotification,
     ) {}
     ionViewDidLoad() {
+		console.log(13123);
         let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
         this.events.subscribe('hideTabs', () => {
             this.renderer.setElementStyle(tabs, 'display', 'none');

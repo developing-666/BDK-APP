@@ -6,7 +6,7 @@ import {
     ModalController,
     Nav,
     Platform,
-    ToastController
+    ToastController,
 } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
@@ -14,6 +14,7 @@ import { LoginPage } from '../pages/login/login/login';
 
 import { UserInfo } from '../model/user-info';
 
+import {JpushNotification}from '../providers/jpush-notification';
 import { NativeService } from '../providers/native-service';
 import { Helper } from '../providers/helper';
 import { Storage } from '@ionic/storage';
@@ -54,7 +55,7 @@ function _window(): any {
     templateUrl: 'app.html'
 })
 export class MyApp {
-    @ViewChild('myNav') nav: Nav;
+    @ViewChild(Nav) nav: Nav;
     current: any;
     constructor(
         private platform: Platform,
@@ -72,7 +73,8 @@ export class MyApp {
         private device: Device,
         private httpHeader: HttpHeader,
         private codePush: CodePush,
-        private zone: NgZone
+        private zone: NgZone,
+		private jpushNotification:JpushNotification,
     ) {
         platform.resume.subscribe(d => {
             console.log('我又回来了');
@@ -98,7 +100,7 @@ export class MyApp {
             // this.helper.funDebugInit(); // 初始化fundebug
             // this.helper.alloyLeverInit(); // 本地"开发者工具"
             this.helper.initJpush(); // 初始化极光推送
-            // this.jPushOpenNotification(); // 处理打开推送消息事件
+			this.jPushOpenNotification(); // 处理打开推送消息事件
 
             this.storage.get('notFirstOpen').then(notFirstOpen => {
                 console.log('notFirstOpen', notFirstOpen);
@@ -258,28 +260,34 @@ export class MyApp {
                 : this.nativeService.minimize();
         }, 1);
     }
-
-    // 极光推送
+	// 极光推送
     jPushOpenNotification() {
         // 当点击极光推送消息跳转到指定页面
         this.events.subscribe('jpush.openNotification', content => {
-            const childNav = this.nav.getActiveChildNav();
-            if (childNav) {
-                const tab = childNav.getSelected();
-                const activeVC = tab.getActive();
-                // if (activeVC.component == AboutPage) {//如果当前所在页面就是将要跳转到的页面则不处理
-                //   return;
-                // }
-                const activeNav = activeVC.getNav();
-                activeNav.popToRoot({}).then(() => {
-                    // 导航跳到最顶层
-                    childNav.select(1); // 选中第四个tab
-                    const t = childNav.getSelected(); // 获取选中的tab
-                    const v = t.getActive(); // 通过当前选中的tab获取ViewController
-                    const n = v.getNav(); // 通过当前视图的ViewController获取的NavController
-                    // n.push(AboutPage); // 跳转到指定页面
-                });
-            }
+		console.log('接收极光推送通知----------------------------------');
+		console.log(content.extras);
+		console.log(content.extras.event);
+		console.log(content.extras.data);
+		console.log(content.extras.type);
+		this.nav.popToRoot();
+		this.jpushNotification.done(content.extras,undefined);
+            // const childNav = this.nav.getActiveChildNav();
+            // if (childNav) {
+            //     const tab = childNav.getSelected();
+            //     const activeVC = tab.getActive();
+            //     // if (activeVC.component == AboutPage) {//如果当前所在页面就是将要跳转到的页面则不处理
+            //     //   return;
+            //     // }
+            //     const activeNav = activeVC.getNav();
+            //     activeNav.popToRoot({}).then(() => {
+            //         // 导航跳到最顶层
+            //         childNav.select(1); // 选中第四个tab
+            //         const t = childNav.getSelected(); // 获取选中的tab
+            //         const v = t.getActive(); // 通过当前选中的tab获取ViewController
+            //         const n = v.getNav(); // 通过当前视图的ViewController获取的NavController
+            //         // n.push(AboutPage); // 跳转到指定页面
+            //     });
+            // }
         });
     }
 }

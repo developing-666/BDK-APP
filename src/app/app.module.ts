@@ -63,6 +63,7 @@ import { FileService } from '../providers/file-service';
 import { Helper } from '../providers/helper';
 import { Utils } from '../providers/utils';
 import { GlobalData } from '../providers/global-data';
+import {JpushNotification}from '../providers/jpush-notification';
 //import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
 import { Logger } from '../providers/logger';
 import {
@@ -100,7 +101,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
         AlphaScrollModule.forRoot(),
         IonicModule.forRoot(MyApp, {
             //			mode: 'ios', // android是'md'
-            backButtonText: ''
+            backButtonText: '',
+			swipeBackEnabled:true
         }),
         IonicStorageModule.forRoot(),
         SettingsPageModule,
@@ -150,7 +152,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
         Device,
         Base64,
         SMS,
-        LocalNotifications
+        LocalNotifications,
+		JpushNotification
     ]
 })
 export class AppModule {

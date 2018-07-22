@@ -4,7 +4,8 @@ import {
     NavController,
     NavParams,
     ToastController,
-    Events
+    Events,
+	ViewController
 } from 'ionic-angular';
 import moment from 'moment';
 
@@ -38,8 +39,6 @@ export class SettingRecordPage {
     customerId: string = this.navParams.get('customerId');
     remind: any = this.navParams.get('remind');
     followId: string = this.navParams.get('followId');
-    placeholder: string =
-        '点击输入,在此写入跟进情况。可使用输入法自带的语音进行输入';
     infoContent: any;
     remindContent: any;
     formData: any = {
@@ -70,7 +69,8 @@ export class SettingRecordPage {
         public nativeService: NativeService,
         public ft: FileTransfer,
         private globalData: GlobalData,
-        public events: Events
+        public events: Events,
+		public viewCtrl: ViewController
     ) {}
     ionViewDidLoad() {
         console.log(this.formData.followStatus);
@@ -114,7 +114,7 @@ export class SettingRecordPage {
                 this.remind = d.taskDetail;
                 this.remind.customer = d.customerDetail;
                 this.formData.followStatus = d.customerDetail.followStatus;
-                
+
             });
     }
     setting() {
