@@ -100,15 +100,9 @@ export class ClienteleItemComponent {
         e.stopPropagation();
         e.preventDefault();
         console.log(item);
-        let callback = (done): any => {
-            console.log(done);
-
-            return Promise.resolve();
-        };
         if (this.detail) {
             this.navCtrl.push(AddClientelePage, {
-                callback,
-                item,
+                customerId: item.id,
                 type: 'edit'
             });
         }

@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ToastController,Events } from 'ionic-angular';
+import {
+    NavController,
+    NavParams,
+    ToastController,
+    Events
+} from 'ionic-angular';
 
 import { ClienteleTagPage } from '../clientele-tag/clientele-tag';
 import { CustomTagPage } from '../custom-tag/custom-tag';
@@ -17,16 +22,16 @@ import { Utils } from '../../../providers/utils';
 export class AddClientelePage implements OnInit {
     @ViewChild('addClienteleForm') addClienteleForm: NgForm;
     @ViewChild('phonePicker') phonePicker: PhoneNumberInputComponent;
+    customerId: string = this.navParams.get('customerId');
     item: any = this.navParams.get('item');
-    callback: any = this.navParams.get('callback');
     type: string = this.navParams.get('type');
     provinces: Array<any> = this.globalData.provinces;
     city: Array<any> = [];
     industry: Array<any> = INDUSTRY;
     formData: any = {
-		id:undefined,
+        id: undefined,
         followStatus: undefined,
-		phones:[],
+        phones: [],
         name: undefined,
         post: undefined,
         provinceId: undefined,
@@ -34,10 +39,10 @@ export class AddClientelePage implements OnInit {
         gender: 'M',
         birthday: undefined,
         company: undefined,
-        industry:undefined,
+        industry: undefined,
         label: undefined,
         labels: [],
-        remark: undefined,
+        remark: undefined
     };
     phones: Array<any> = [];
     valid: boolean = false;
@@ -49,53 +54,34 @@ export class AddClientelePage implements OnInit {
         public navParams: NavParams,
         public globalData: GlobalData,
         private appApi: AppApi,
-        public events:Events,
+        public events: Events
     ) {
         if (this.type === 'edit') {
-			this.labelsString = this.item.labels?this.item.labels.join(','):'';
-			if(this.item.phone){
-				let phone = this.item.phone;
-				let phones = this.item.phones;
-				if(phones&&phones.length>0){
-					this.phones = [phone,...phones];
-				}else{
-					this.phones = [phone];
-				}
-			}
-            for (let name in this.formData){
-                if (this.item[name]){
-                    this.formData[name] = this.item[name];
-                }
-            }
+            this.customerDetails();
         }
     }
     ngOnInit() {
         this.queryProvinces();
     }
-    ionViewDidLoad() {
-        if (this.type === 'edit' && this.item.provinceId) {
-            this.queryCitiesByProvinceId();
-        }
-    }
     add() {
         let phones = this.phonePicker.getPhone();
         if (phones.length != 0) {
-			this.valid = true;
+            this.valid = true;
             this.formData.phone = phones[0];
-			this.formData.phones = [];
-			for (let item of phones.slice(1)) {
-			    if(item&&item.match(/^1[3|4|5|7|8|9][0-9]{9}$/)){
-					this.formData.phones.push(item);
-				}
-			}
+            this.formData.phones = [];
+            for (let item of phones.slice(1)) {
+                if (item && item.match(/^1[3|4|5|7|8|9][0-9]{9}$/)) {
+                    this.formData.phones.push(item);
+                }
+            }
         }
         if (this.addClienteleForm.valid && this.valid) {
             console.log(this.formData);
-			if(this.type === 'edit'){
-				this.customerUpdate();
-			}else{
-				this.customerCreate();
-			}
+            if (this.type === 'edit') {
+                this.customerUpdate();
+            } else {
+                this.customerCreate();
+            }
         }
     }
     addTag() {
@@ -132,7 +118,7 @@ export class AddClientelePage implements OnInit {
             }
         );
     }
-	customerUpdate() {
+    customerUpdate() {
         this.submitIng = true;
         this.appApi.customerUpdate(this.formData).subscribe(
             d => {
@@ -152,9 +138,7 @@ export class AddClientelePage implements OnInit {
             duration: 1500
         });
         toast.onDidDismiss(() => {
-            this.callback(true).then(() => {
-                this.navCtrl.pop();
-            });
+            this.navCtrl.pop();
         });
         toast.present();
     }
@@ -174,5 +158,24 @@ export class AddClientelePage implements OnInit {
                 console.log(d);
                 this.city = d;
             });
+    }
+    customerDetails() {
+        this.appApi.customerDetails(this.customerId).subscribe(d => {
+            this.labelsString = d.labels ? d.labels.join(',') : '';
+            if (d.phone) {
+                let phone = d.phone;
+                let phones = d.phones && d.phones.length > 0 ? d.phones : [];
+                this.phones = [phone, ...phones];
+            }
+            for (let name in this.formData) {
+                if (d[name]) {
+                    this.formData[name] = d[name];
+                }
+            }
+            if (d.provinceId) {
+                this.queryCitiesByProvinceId();
+            }
+            console.log(this.formData);
+        });
     }
 }
