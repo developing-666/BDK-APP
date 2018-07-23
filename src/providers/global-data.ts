@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalData {
+	private _nav :any = undefined;
     private _CUSTOMER_LABEL: Array<any>;
     private _CUSTOMER_LABELS: Array<any>;
     private _userId: string; // 用户id
@@ -116,7 +117,12 @@ export class GlobalData {
     set header(value: any) {
         this._header = value;
     }
-
+	get nav() {
+        return this._nav;
+    }
+    set nav(value: any) {
+        this._nav = value;
+    }
     initData() {
         this.user = undefined;
         this.token = undefined;

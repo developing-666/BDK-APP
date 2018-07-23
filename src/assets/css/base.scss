@@ -184,14 +184,14 @@ $designWidth: 750; //如设计图是750
             &.wait {
                 .left-wrapper {
                     .line {
-                        transform: rotate(135deg);
+                        transform: rotate(225deg);
                     }
                 }
             }
             &.already {
                 .left-wrapper {
                     .line {
-                        transform: rotate(225deg);
+						transform: rotate(135deg);
                     }
                 }
             }

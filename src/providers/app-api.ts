@@ -204,7 +204,7 @@ export class AppApi {
     }
     /**
      * 按日期查询提醒
-     * @param opts 
+     * @param opts
      */
     queryTaskCountByDate(opts) {
         return this._http.post('/task/queryTaskCountByDate', opts);
@@ -260,6 +260,13 @@ export class AppApi {
     followCreate(opts) {
         return this._http.post('/customerfollow/create', opts);
     }
+	/**
+	 * 获取提醒详情
+	 * @param  id 提醒ID
+	 */
+	queryTaskById(id){
+		return this._http.get('/task/queryTaskById/'+id);
+	}
     /**
      * 忘记密码
      */

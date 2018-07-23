@@ -1,7 +1,7 @@
 <ion-content [ngClass]="{'no-result':record.length===0}">
 	<ion-refresher (ionRefresh)="doRefresh($event)">
-		<ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
-	</ion-refresher>
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
 	<ion-list>
 		<ion-item class="record-item" *ngFor="let item of record">
 			<em class="top-line"></em>
@@ -10,19 +10,25 @@
 					<div class="start">
 						<span class="time">
 							<em></em>
-							<i>{{item?.operateTime | date:'HH:mm'}}</i>
+							<i>{{item?.callTime | moment:'HH:mm'}}</i>
 						</span>
 					</div>
-					<span class="date">{{item?.operateTime | date:'yyyy/MM/dd E'}}</span>
+					<span class="date">{{item?.callTime | moment:'YYYY/MM/DD ddd'}}</span>
 				</h3>
 				<div class="record-info">
-					<p class="operater">{{item?.operater?.name}}</p>
-					<p class="operat-content">{{item?.content}}</p>
+					<p class="operater" *ngIf="item?.callType=='CALL_OUT'">呼出&nbsp;&nbsp;{{item?.caller?.name}}</p>
+					<p class="operater" *ngIf="item?.callType=='CALL_IN'">客户呼入&nbsp;&nbsp;{{item?.caller?.name}}</p>
+					<voice-bar *ngIf="item?.callStatus==1" [data]="getRecord(item)"></voice-bar>
+					<!-- <p class="operat-content">{{item?.content}}</p> -->
+				</div>
+				<div class="record-status">
+					<span *ngIf="item?.callStatus==1">接通&nbsp;&nbsp;通话时间长{{item?.callTimeDuration}}秒</span>
+					<span *ngIf="item?.callStatus!=1">未接通</span>
 				</div>
 			</div>
 		</ion-item>
 	</ion-list>
-	<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
-		<ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
-	</ion-infinite-scroll>
+	<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

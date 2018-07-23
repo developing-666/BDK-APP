@@ -8,9 +8,9 @@ import { AppApi } from '../../../../../providers/app-api';
 })
 export class CallRecordPage {
 	currentPage: number = 1;
-	totalPages: number = 1;
 	id: string = this.navParams.get('id');
 	record: Array<any> = [];
+	isHasNext: boolean = false;
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -30,14 +30,15 @@ export class CallRecordPage {
 			})
 			.subscribe(
 				d => {
-					console.log(d);
+					this.isHasNext = d.isHasNext;
 					if (this.currentPage == 1) {
 						this.record = d.items;
 					} else {
 						this.record = this.record.concat(d.items);
 					}
-					this.totalPages = d.totalPages;
-					this.currentPage++;
+					setTimeout(() => {
+						this.currentPage++;
+					}, 0);
 					if (e) {
 						setTimeout(() => {
 							e.complete();
@@ -53,6 +54,12 @@ export class CallRecordPage {
 					}
 				}
 			);
+	}
+	getRecord(item) {
+		return {
+			audioUrl: item.recordPath,
+			duration: item.callTimeDuration
+		}
 	}
 	doRefresh(e) {
 		this.currentPage = 1;

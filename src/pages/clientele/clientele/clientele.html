@@ -17,7 +17,7 @@
     <ion-filter [ngClass]="{'ion-filter-ios':plt.is('ios'),'ion-filter-md':plt.is('android')}" (panelHidden)="filterHide($event)">
     </ion-filter>
 </ion-header>
-<ion-content #content>
+<ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>
@@ -37,7 +37,3 @@
         <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
-
-<!--<ion-select interface="popover" [(ngModel)]="value" placeholder="标签筛选" [selectOptions]="selectOptions">
-	<ion-option *ngFor="let opt of opts" [value]="opt.val">{{opt.name}}</ion-option>
-</ion-select>-->

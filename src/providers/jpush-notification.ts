@@ -5,6 +5,7 @@ import {
 	App
 } from 'ionic-angular';
 
+import {GlobalData} from './global-data';
 
 import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
 import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
@@ -18,18 +19,24 @@ export class JpushNotification {
 	activePage:any = undefined;
 	constructor(
 		private app:App,
-		// public navCtrl: NavController,
+		private globalData: GlobalData,
 	) { }
 	getCurrentPage() {
 		// const activeNav = this.navCtrl.getActive();
 		// console.log(activeNav);
 	}
-	done(d,page) {
-		this.activePage = page;
+	done(d) {
+		let nav = this.globalData.nav;
+		if (nav.length() > 1) {
+			if(nav.getActive().name=='ClienteleDetailPage'){
+				nav.popToRoot({
+					animation: 'md-transition'
+				});
+			}else{
+				nav.popToRoot();
+			}
+		}
 		console.log('type-----------------');
-		let data = JSON.parse(JSON.stringify(d));
-		console.log(data);
-		console.log(data.type==='follow');
 
 		switch(d.type){
 			case 'remind':this.remind(d); break;
@@ -48,9 +55,9 @@ export class JpushNotification {
 	}
 	follow(d){
 		// this.navCtrl.popToRoot();
-		console.log('follow')
-		this.app.getRootNavs().push(SettingRecordPage,{
-			followId:d.taskId
+		console.log('follow----SettingRecordPage');
+		this.app.getRootNav().push(SettingRecordPage,{
+			taskId:JSON.parse(d.data).taskId
 		});
 	}
 	clientele(d){

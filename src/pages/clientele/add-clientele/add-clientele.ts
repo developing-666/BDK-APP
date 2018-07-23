@@ -56,12 +56,11 @@ export class AddClientelePage implements OnInit {
         public globalData: GlobalData,
         private appApi: AppApi,
         public events: Events
-    ) {
-        if (this.type === 'edit') {
+    ) {}
+    ngOnInit() {
+		if (this.type === 'edit') {
             this.customerDetails();
         }
-    }
-    ngOnInit() {
         this.queryProvinces();
     }
     add() {
@@ -113,6 +112,7 @@ export class AddClientelePage implements OnInit {
             d => {
                 console.log(d);
                 this.presentToast('创建成功');
+				this.events.publish('clientele:create');
             },
             e => {
                 this.submitIng = false;
@@ -146,7 +146,6 @@ export class AddClientelePage implements OnInit {
     queryProvinces() {
         if (this.provinces.length == 0) {
             this.appApi.queryProvinces().subscribe(d => {
-                console.log(d);
                 this.globalData.provinces = d;
                 this.provinces = d;
             });
@@ -156,7 +155,6 @@ export class AddClientelePage implements OnInit {
         this.appApi
             .queryCitiesByProvinceId(this.formData.provinceId)
             .subscribe(d => {
-                console.log(d);
                 this.city = d;
             });
     }
@@ -177,6 +175,7 @@ export class AddClientelePage implements OnInit {
                 this.queryCitiesByProvinceId();
             }
             console.log(this.formData);
+            console.log(this.addClienteleForm.valid);
         });
     }
 }

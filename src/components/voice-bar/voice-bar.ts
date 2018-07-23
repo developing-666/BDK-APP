@@ -31,7 +31,11 @@ export class VoiceBarComponent implements OnChanges {
 	barWidth() {
 		let width: string = 'auto';
 		if (this.data.audioUrl) {
-			width = `${Math.round((this.data.duration / 60) * 1000) / 10}%`;
+			if(this.data.duration>=60){
+				width = '100%';
+			}else{
+				width = `${Math.round((this.data.duration / 60) * 1000) / 10}%`;
+			}
 		}
 		return width;
 	}

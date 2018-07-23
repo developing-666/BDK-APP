@@ -25,8 +25,8 @@ import { ForgetPasswordPage } from '../forget-password/forget-password';
 export class LoginPage {
     ngForm: FormGroup;
     formData: any = {
-        phone: '18501667661',
-        password: '123123'
+        phone: 18501608992,
+        password: 'shenlei88'
     };
     constructor(
         public navCtrl: NavController,

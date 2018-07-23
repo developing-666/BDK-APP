@@ -80,7 +80,6 @@ export class InfoInputComponent implements ControlValueAccessor {
         this.inputFoucs.emit(e);
         this.keyboard.hideKeyboardAccessoryBar(true);
         this.keyboard.disableScroll(true);
-        console.log(e);
     }
     textareaBlur(e) {
         this.inputBlur.emit(e);

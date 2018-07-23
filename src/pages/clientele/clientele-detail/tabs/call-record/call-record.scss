@@ -29,7 +29,7 @@ page-call-record {
 			padding-left: rem(60);
 			position: relative;
 			.item-inner {
-				padding-right: 1rem;
+				padding-right: 1rem;border-bottom: none;
 			}
 		}
 		.top-line {
@@ -67,7 +67,6 @@ page-call-record {
 			margin: 0;
 			.record-content {
 				position: relative;
-				padding-bottom: rem(16);
 			}
 			h3 {
 				height: rem(68);
@@ -100,16 +99,20 @@ page-call-record {
 			.record-info {
 				@include text-overflow();
 				margin: 0;
+				padding-bottom: 1rem;
 				.operater {
-					line-height: rem(50);
+					line-height: rem(60);
 					font-size: 1.4rem;
-					color: color($colors, dark);
+					color: color($colors, dark);margin: 0;
 				}
 				.operat-content {
 					line-height: rem(50);
 					font-size: 1.2rem;
 					color: color($colors, light);
 				}
+			}
+			.record-status{
+				height: rem(70);display: flex;align-items: center;font-size: 1.2rem;color: color($colors,light);padding: 0 0.5rem;background-color: #f6f6f6;border-top: $border;
 			}
 		}
 	}

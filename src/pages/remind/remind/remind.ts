@@ -291,6 +291,7 @@ export class RemindPage {
             };
             this.app.getRootNav().push(SettingRecordPage, {
                 remind: item
+                // taskId:item.id
             });
         }
     }
