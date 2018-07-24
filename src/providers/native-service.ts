@@ -509,7 +509,7 @@ export class NativeService {
      * @param number
      */
     sendSMS(num: string): any {
-        return this.sms.send(num, 'Hello world!');
+        return this.sms.send(num, '');
     }
     /**
      * 拨打电话

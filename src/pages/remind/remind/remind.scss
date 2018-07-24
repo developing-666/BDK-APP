@@ -41,7 +41,7 @@ page-remind {
         }
         ion-calendar-month{
             .days {
-                button.days-btn.marked:not(.on-selected) {
+                button.days-btn.marked{
                     color: #333;position: relative;
                     &::after{
                         content: '';

@@ -103,7 +103,6 @@ export class HttpService {
 		console.log(options);
 		return Observable.create(observer => {
             this.request(url, options, noLoading).subscribe(res => {
-				console.log(res.status);
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
 				if (res.status === 1) {
                     if (url.indexOf('valid')>-1) {
@@ -160,6 +159,7 @@ export class HttpService {
 			this.nativeService.alert('请求超时,请稍后再试!');
 		} else {
 			const status = err.status;
+            if (status == 401) return;
 			let msg = '请求发生异常';
 			for(let state in HTTPSTATUS){
 				if(parseInt(state)==status){

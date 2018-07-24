@@ -78,6 +78,7 @@ export class MyApp {
 	) {
 		platform.resume.subscribe(d => {
 			console.log('我又回来了');
+            this.helper.setIosIconBadgeNumber(0);
 			// this.assetsSync();
 		});
 		platform.ready().then(() => {
@@ -99,7 +100,7 @@ export class MyApp {
 			this.assertNetwork(); // 检测网络
 			// this.helper.funDebugInit(); // 初始化fundebug
 			// this.helper.alloyLeverInit(); // 本地"开发者工具"
-
+            
 			this.storage.get('notFirstOpen').then(notFirstOpen => {
 				console.log('notFirstOpen', notFirstOpen);
 				if (notFirstOpen) {
@@ -120,6 +121,7 @@ export class MyApp {
 							this.nav.setRoot(HomePage); // 设置首页
 							this.jPushOpenNotification(); // 处理打开推送消息事件
 							this.helper.initJpush(); // 初始化极光推送
+                            this.helper.setIosIconBadgeNumber(0);
 						} else {
 						//打开推送时，未登录状态未解决
 							this.nav.setRoot(LoginPage); // 设置首页
