@@ -1,6 +1,6 @@
 page-new-remind {
 	.content {
-	    background-color: rgba(color($colors, bg), 0.9);
+	    background-color: rgba(color($colors, bg), 0.9);border-top-left-radius: 0.5rem;border-top-right-radius: 0.5rem;
 	}
 	.new-remind-container{position: absolute;top:0;left:0;right:0;bottom: 0;@include flex-center();
 		flex-direction: column;

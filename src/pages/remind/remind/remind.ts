@@ -134,7 +134,6 @@ export class RemindPage {
                     }
                 },
                 err => {
-                    console.log(err);
                     if (e) {
                         setTimeout(() => {
                             e.complete();

@@ -25,8 +25,8 @@ import { ForgetPasswordPage } from '../forget-password/forget-password';
 export class LoginPage {
     ngForm: FormGroup;
     formData: any = {
-        phone: 18501608992,
-        password: 'shenlei88'
+        phone: 18501667661,
+        password: '123456'
     };
     constructor(
         public navCtrl: NavController,
@@ -79,12 +79,13 @@ export class LoginPage {
     login() {
         this.appApi.login(this.formData).subscribe(d => {
             console.log(d);
-            this.httpHeader.token = d.token;
-            this.storage.set('token', d.token);
-            this.storage.set('user', d);
-            this.globalData.user = d;
-            this.globalData.userId = d.jpushAlias;
-            this.globalData.userTag = d.jpushTag;
+			let data = d.data;
+            this.httpHeader.token = data.token;
+            this.storage.set('token', data.token);
+            this.storage.set('user', data);
+            this.globalData.user = data;
+            this.globalData.userId = data.jpushAlias;
+            this.globalData.userTag = data.jpushTag;
             this.helper.setAlias();
             this.helper.setTags(this.globalData.userTag);
             this.nativeService.statusBarStyle(); // 设置状态栏颜色
@@ -94,7 +95,6 @@ export class LoginPage {
             } else {
                 this.navCtrl.setRoot(HomePage); // 重新设置首页
             }
-            // this.app.getRootNav().push(AddClientelePage);
         });
     }
 

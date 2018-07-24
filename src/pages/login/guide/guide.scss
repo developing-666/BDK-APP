@@ -11,14 +11,13 @@ page-guide {
             flex-direction: column;
             background: linear-gradient(180deg, #f0faf4, #feffff);
             .img-block {
-                margin-top: rem(170);
+                margin-top: 12.7vh;
                 width: 100%;
                 display: flex;
                 justify-content: center;
                 align-content: center;
                 img {
-                    width: rem(650);
-                    height: rem(612);
+                    height: 45vh;
                 }
             }
             .p1 {

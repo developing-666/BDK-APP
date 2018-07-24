@@ -30,7 +30,6 @@ export class HomePage {
 		private jpushNotification:JpushNotification,
     ) {}
     ionViewDidLoad() {
-		console.log(13123);
         let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
         this.events.subscribe('hideTabs', () => {
             this.renderer.setElementStyle(tabs, 'display', 'none');

@@ -8,8 +8,8 @@ import {
 import {GlobalData} from './global-data';
 
 import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
-import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
+import {ClienteleDetailPage} from '../pages/clientele/clientele-detail/clientele-detail';
 
 @Injectable()
 /**
@@ -37,7 +37,7 @@ export class JpushNotification {
 			}
 		}
 		console.log('type-----------------');
-
+		console.log(d.type);
 		switch(d.type){
 			case 'remind':this.remind(d); break;
 			case 'follow':this.follow(d); break;
@@ -45,22 +45,33 @@ export class JpushNotification {
 		}
 	}
 	remind(d){
-		// if(this.activePage.anme==='AddRemindPage'){
-		//
-		// }else{
-		//
-		// }
-		// this.navCtrl.popToRoot();
-		this.app.getRootNavs().push(AddRemindPage);
+		this.app.getRootNav().push(AddRemindPage,{
+			type:JSON.parse(d.data).type
+		});
 	}
 	follow(d){
 		// this.navCtrl.popToRoot();
 		console.log('follow----SettingRecordPage');
-		this.app.getRootNav().push(SettingRecordPage,{
-			taskId:JSON.parse(d.data).taskId
-		});
+		if(d.event=='create'){
+			this.app.getRootNav().push(SettingRecordPage,{
+				taskId:JSON.parse(d.data).taskId
+			});
+		}else{
+			this.app.getRootNav().push(SettingRecordPage,{
+				followId:JSON.parse(d.data).id
+			});
+		}
+
 	}
 	clientele(d){
-
+		this.app.getRootNav().push(
+			ClienteleDetailPage,
+			{
+				id: JSON.parse(d.data).id
+			},
+			{
+				animation: 'md-transition'
+			}
+		);
 	}
 }

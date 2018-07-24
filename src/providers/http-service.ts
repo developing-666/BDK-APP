@@ -100,12 +100,11 @@ export class HttpService {
 		options.headers.append('DAFU-REQUEST-TIME', header.requestTime);
         options.headers.append('DAFU-APP-SIGN', header.appSign);
         options.headers.append('DAFU-TOKEN', header.token);
-		console.log(options);
 		return Observable.create(observer => {
             this.request(url, options, noLoading).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
 				if (res.status === 1) {
-                    if (url.indexOf('valid')>-1) {
+                    if (url.indexOf('valid')>-1 || url.indexOf('login')>-1) {
                         observer.next(res);
                     } else {
                         observer.next(res.data);
@@ -159,7 +158,7 @@ export class HttpService {
 			this.nativeService.alert('请求超时,请稍后再试!');
 		} else {
 			const status = err.status;
-            if (status == 401) return;
+            if (status == 401) return err;
 			let msg = '请求发生异常';
 			for(let state in HTTPSTATUS){
 				if(parseInt(state)==status){
