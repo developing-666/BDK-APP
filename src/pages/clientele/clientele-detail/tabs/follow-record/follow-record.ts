@@ -20,8 +20,8 @@ import { Utils } from '../../../../../providers/utils';
 })
 export class FollowRecordPage {
     @ViewChild(Content) content: Content;
+	isHasNext: boolean = false;
     currentPage: number = 1;
-    totalPages: number = 1;
     id: string = this.navParams.get('id');
     record: Array<any> = [];
     pics: Array<any> = [];
@@ -59,13 +59,15 @@ export class FollowRecordPage {
             })
             .subscribe(
                 d => {
+					this.isHasNext = d.isHasNext;
                     if (this.currentPage == 1) {
                         this.record = d.items;
                     } else {
                         this.record = this.record.concat(d.items);
                     }
-                    this.totalPages = d.totalPages;
-                    this.currentPage++;
+					setTimeout(() => {
+						this.currentPage++;
+					}, 0);
                     if (e) {
                         setTimeout(() => {
                             e.complete();

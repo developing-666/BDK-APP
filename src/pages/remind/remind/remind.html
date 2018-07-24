@@ -43,7 +43,7 @@
             <remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'has-handle':hideTabs,'done':item.isDone,'pitch-on':deleteIds.indexOf(item.id)>-1,'time-out':item.isExpired}"
                 [remind]="item" [index]="$index" (delete)="delete($event)" (goDelay)="goDelay()" (detail)="itemClick($event)"></remind-item>
         </ion-list>
-        <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
             <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-content>
