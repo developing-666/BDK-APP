@@ -349,7 +349,7 @@ export class NativeService {
                             err,
                             '使用cordova-plugin-camera获取照片失败'
                         );
-                        this.alert('获取照片失败');
+                        // this.alert('获取照片失败');
                     }
                     observer.error(false);
                 });
@@ -418,7 +418,7 @@ export class NativeService {
                 })
                 .catch(err => {
                     this.logger.log(err, '通过图库选择多图失败');
-                    this.alert('获取照片失败');
+                    // this.alert('获取照片失败');
                     observer.error(false);
                 });
         });

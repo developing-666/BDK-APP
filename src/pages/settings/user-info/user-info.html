@@ -41,9 +41,9 @@
                 </ion-item>
             </ion-item-group>
             <ion-item-group>
-                <ion-item [ngClass]="{'invalid':(work.touched && work.invalid)}">
+                <ion-item [ngClass]="{'invalid':(post.touched && post.invalid)}">
                     <ion-label>职务</ion-label>
-                    <ion-input type="text" maxLength="15" placeholder="请输入您的职务" formControlName="work" [(ngModel)]="formData.work" [disabled]="!canEdit"></ion-input>
+                    <ion-input type="text" maxLength="15" placeholder="请输入您的职务" formControlName="post" [(ngModel)]="formData.post" [disabled]="!canEdit"></ion-input>
                 </ion-item>
                 <button ion-item [ngClass]="{'invalid':(provinceId.touched && provinceId.invalid),'unactive':!canEdit}">
                     <ion-label>省份</ion-label>
