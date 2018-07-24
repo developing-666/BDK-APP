@@ -29,10 +29,10 @@ export class UserInfoPage {
     ngForm: FormGroup;
     canEdit: boolean = false;
     formData: any = {
-        avatar:DEFAULT_AVATAR,
+        avatar:this.globalData.user.avatar,
         name:undefined,
         phone:undefined,
-        work:undefined,
+        post:undefined,
         provinceId:undefined,
         cityId:undefined,
         gender:undefined,
@@ -54,7 +54,7 @@ export class UserInfoPage {
         
         if (value != null && value != {}) {
 
-            for (const name in value) {
+            for (const name in this.formData) {
                 if (value[name] != null) {
                     this.formData[name] = value[name];
                 }
@@ -101,7 +101,7 @@ export class UserInfoPage {
             {
                 name: ['', [Validators.required,Validators.maxLength(15)]],
                 phone: ['', [Validators.phone, Validators.required]],
-                work: ['',[Validators.maxLength(15)]],
+                post: ['',[Validators.maxLength(15)]],
                 provinceId: [''],
                 cityId: [''],
                 gender: [''],
@@ -118,8 +118,8 @@ export class UserInfoPage {
     get phone() {
         return this.ngForm.get('phone');
     }
-    get work() {
-        return this.ngForm.get('work');
+    get post() {
+        return this.ngForm.get('post');
     }
     get provinceId() {
         return this.ngForm.get('provinceId');
@@ -186,7 +186,13 @@ export class UserInfoPage {
      * 更新用户信息
      */
     updateUserInfo() {
-        this.appApi.updateUserInfo(this.formData).subscribe(d => {
+        let param = this.formData;
+        if(param.avatar.indexOf('base64')>-1){
+            param.avatar = null;
+        }
+        console.log('updateUserInfo-param',param);
+        
+        this.appApi.updateUserInfo(param).subscribe(d => {
             console.log('updateUserInfo', d);
             this.canEdit = false;
             for (const name in this.formData) {
@@ -244,7 +250,8 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                // this.formData.avatar = imageUrl;
+                                console.log('拍照 获取成功',imageUrl);
+                                
                                 this.appApi.upoadImage({
                                     data:imageUrl,
                                     type:'USER_AVATAR'
@@ -266,7 +273,7 @@ export class UserInfoPage {
                             })
                             .subscribe(imageUrl => {
                                 // 获取成功
-                                // this.formData.avatar = imageUrl;
+                                console.log('相册 获取成功',imageUrl);
                                     console.log('avatar======',this.formData.avatar);
                                 this.appApi.upoadImage({
                                     data:imageUrl,
