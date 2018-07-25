@@ -93,7 +93,7 @@ export class HttpService {
 		//  添加请求头
 		const header = this.httpHeader.getHeader();
 		this.globalData.header = header;
-		// options.withCredentials = true;
+		options.withCredentials = true;
 		options.headers = options.headers || new Headers();
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO', header.appInfo);
