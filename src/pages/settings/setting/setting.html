@@ -20,7 +20,7 @@
 				</button>
 				<ion-item (tap)="clearCache()">
 					<ion-label>清除本地缓存</ion-label>
-					<ion-note item-end>0.08M</ion-note>
+					<ion-note item-end>{{fileSize | sizeTransform}}</ion-note>
 				</ion-item>
 			</ion-item-group>
 		</ion-list>
