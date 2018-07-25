@@ -33,7 +33,7 @@
             [data]="item" [index]="i" [detail]="detail"></clientele-item>
     </ion-list>
     <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="currentPage<=totalPages">
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
         <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

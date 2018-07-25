@@ -44,7 +44,7 @@ export class ClientelePage {
 		orderBy: 'DESC'
 	};
 	currentPage: number = 1;
-	totalPages: number = 0;
+	isHasNext: boolean = false;
 	clienteles: Array<any> = [];
 	value: string = '';
 	openSelect: Boolean = false;
@@ -117,13 +117,15 @@ export class ClientelePage {
 			})
 			.subscribe(
 				d => {
+					this.isHasNext = d.isHasNext;
 					if (this.currentPage == 1) {
 						this.clienteles = d.items;
 					} else {
 						this.clienteles = this.clienteles.concat(d.items);
 					}
-					this.totalPages = d.totalPages;
-					this.currentPage++;
+					setTimeout(() => {
+                        this.currentPage++;
+                    }, 0);
 					if (e) {
 						setTimeout(() => {
 							e.complete();
