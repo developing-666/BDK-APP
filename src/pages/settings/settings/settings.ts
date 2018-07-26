@@ -56,21 +56,21 @@ export class SettingsPage {
     public set userInfo(value: any) {
         this._userInfo = value;
         console.log('userInfo-value',value);
-        
+
         if (value == undefined || value.avatar == null) {
             this._userInfo.avatar = DEFAULT_AVATAR;
             this.globalData.user.avatar = DEFAULT_AVATAR;
         }
     }
 
-
-    ngOnInit() {
-        this.getApplyCompany();
-        this.queryUserInfo();
-    }
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingsPage');
+		this.queryUserInfo();
+		this.getApplyCompany();
     }
+	ionViewWillEnter(){
+        this.userInfo = this.globalData.user;
+	}
     changeStatus() {
         this.isWaitCheck =
             this.checkStatus == this.globalData.checkStatus.WAIT_CHECK;

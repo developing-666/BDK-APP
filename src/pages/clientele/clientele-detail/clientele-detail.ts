@@ -17,10 +17,10 @@ import { AppApi } from './../../../providers/app-api';
 export class ClienteleDetailPage {
     @ViewChild(Navbar) navBar: Navbar;
     @ViewChild(ClienteleItemComponent) clienteleItem: ClienteleItemComponent;
-    tabPage1 = OperatingRecordPage;
-    tabPage2 = NotFollowPage;
-    tabPage3 = FollowRecordPage;
-    tabPage4 = CallRecordPage;
+    tabPage1 = NotFollowPage;
+    tabPage2 = FollowRecordPage;
+    tabPage3 = CallRecordPage;
+	tabPage4 = OperatingRecordPage;
     id: string = this.navParams.get('id');
     clienteleDetail: any = {};
     tabStyle: any = undefined;

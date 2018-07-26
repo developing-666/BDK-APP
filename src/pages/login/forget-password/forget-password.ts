@@ -74,9 +74,9 @@ export class ForgetPasswordPage {
         });
     }
 
-    /** 
-     * 获取验证码 
-     */ 
+    /**
+     * 获取验证码
+     */
     getCode() {
         this.appApi.getCode(this.formData.phone).subscribe(d => {
             console.log(d);
@@ -87,7 +87,7 @@ export class ForgetPasswordPage {
             }, 1000);
         });
     }
-    
+
     /**
      * 倒计时结束
      */
@@ -99,7 +99,7 @@ export class ForgetPasswordPage {
 
     presentToast() {
         const toast = this.toastCtrl.create({
-            message: '充值修改成功！',
+            message: '密码重置成功',
             position: 'middle',
             duration: 1500
         });

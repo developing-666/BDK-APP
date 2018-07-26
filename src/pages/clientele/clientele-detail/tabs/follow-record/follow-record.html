@@ -21,7 +21,7 @@
                     <p class="operat-content">{{item?.content | slice :0:50}}</p>
                 </div>
                 <div class="record-img-container" *ngIf="item?.pics.length>0">
-                    <img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'x200'" (click)="getPics($event,item,i)">
+                    <img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'200'" (click)="getPics($event,item,i)">
                 </div>
             </div>
         </ion-item>

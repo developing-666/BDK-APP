@@ -47,7 +47,7 @@ export class InfoInputComponent implements ControlValueAccessor {
     textareaStyle: any = {};
     pics: Array<any> = [];
     get value(): any {
-        if (this.innerValue.content || this.innerValue.audio) {
+        if (this.innerValue.content) {
             return this.innerValue;
         } else {
             return undefined;
@@ -87,9 +87,11 @@ export class InfoInputComponent implements ControlValueAccessor {
     textareaInput() {
         this.valueInit();
         this.innerValue.content = this.inputValue;
-
-        this.change(this.innerValue);
-
+		if(this.innerValue.content){
+			this.change(this.innerValue);
+		}else{
+			this.change(undefined);
+		}
         this.textareaStyle = {
             height: `${this.remarkInput.nativeElement.scrollHeight}px`
         };
@@ -125,7 +127,9 @@ export class InfoInputComponent implements ControlValueAccessor {
                         this.innerValue.pics.push(
                             'data:image/jpg;base64,' + item
                         );
-                        this.change(this.innerValue);
+						if(this.innerValue.content){
+							this.change(this.innerValue);
+						}
                     }
                 }
                 this.getPics();
@@ -150,7 +154,9 @@ export class InfoInputComponent implements ControlValueAccessor {
                 let base64Image = 'data:image/jpg;base64,' + imageUrl;
                 if (this.innerValue.pics.indexOf(base64Image) == -1) {
                     this.innerValue.pics.push(base64Image);
-                    this.change(this.innerValue);
+					if(this.innerValue.content){
+						this.change(this.innerValue);
+					}
                     this.getPics();
                 }
             },
@@ -197,7 +203,8 @@ export class InfoInputComponent implements ControlValueAccessor {
             this.pics.push({
                 url: Utils.getPicUrl(pic)
             });
-        }
+        };
+		console.log(this.pics);
     }
     viewImg(i) {
         let modal = this.modalCtrl.create(GalleryModal, {

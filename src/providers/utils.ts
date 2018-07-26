@@ -308,11 +308,17 @@ export class Utils {
         }
         return el;
     }
-    static getPicUrl(value) {
-        const index = value.lastIndexOf('.');
-        const len = value.length;
-        const path = value.substring(0, index);
-        const suffix = value.substring(index, len);
-        return `${path}_-x-${suffix}`;
+    static getPicUrl(value,size:string = '-') {
+		if(!value) return '';
+		if (value.indexOf('base64') > -1) {
+			return value;
+		} else {
+			const index = value.lastIndexOf('.');
+	        const len = value.length;
+	        const path = value.substring(0, index);
+	        const suffix = value.substring(index, len);
+	        return `${path}_-x${size}${suffix}`;
+		}
+
     }
 }

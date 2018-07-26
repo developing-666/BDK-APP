@@ -7,11 +7,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class GetImgPipe implements PipeTransform {
 	transform(value: string, size: string) {
-        if(!value) return '';
-		if (value.indexOf('base64') > -1) {
-			return value;
-		} else {
-            return Utils.getPicUrl(value);;
-		}
+        return Utils.getPicUrl(value,size);
 	}
 }

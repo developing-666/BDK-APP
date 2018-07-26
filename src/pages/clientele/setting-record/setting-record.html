@@ -38,7 +38,7 @@
                     #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="nextContent" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-item-group>
         </ion-list>
-        <set-state [(ngModel)]="formData.followStatus" [disabled]="followId!==undefined" name="followStatus"></set-state>
+        <set-state [(ngModel)]="formData.followStatus" *ngIf="remind?.customerId" [disabled]="followId!==undefined" name="followStatus"></set-state>
         <div class="btn-wrapper" *ngIf="followId===undefined">
             <button class="large" [disabled]="settingRecordForm.invalid" type="submit" ion-button block round (tap)="setting()">提交</button>
         </div>

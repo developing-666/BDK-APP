@@ -17,13 +17,11 @@
 	<div class="main-wrapper">
 		<button ion-item class="user-header" (tap)="toUserInfoPage()">
 			<ion-avatar class="user-avatar" item-left >
-				<img [src]="userInfo?.avatar | getImg:'x200'">
+				<img [src]="userInfo?.avatar | getImg:'200'">
 			</ion-avatar>
 			<div class="user-info">
 				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
-				<p *ngIf="userInfo?.type == 'NORAML'" >个人用户版</p>
-				<p *ngIf="userInfo?.type == 'COMPANY'" >企业版</p>
-				<p>【免费】</p>
+				<p>{{userInfo?.type == 'NORAML'?'个人用户版':'企业版'}}【免费】</p>
 			</div>
 		</button>
 
@@ -59,9 +57,9 @@
 					<ion-label>设置</ion-label>
 				</button>
 			</ion-list>
-	
+
         </div>
-        
+
         <div class="submit">
             <button ion-button round block  *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" (tap)="changeUserInfoType('COMPANY')">切换为企业版</button>
             <button ion-button round block  *ngIf="userInfo?.type == 'COMPANY'" (tap)="changeUserInfoType('NORAML')">切换为个人版</button>

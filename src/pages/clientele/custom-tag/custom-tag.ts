@@ -110,7 +110,7 @@ export class CustomTagPage {
 	}
 	confirm() {
 		let alert = this.alertCtrl.create({
-			title: '确认删除?',
+			title: '删除操作会影响所有拥有该标签的客户，是否确定删除?',
 			buttons: [
 				{
 					text: '取消',
@@ -129,7 +129,9 @@ export class CustomTagPage {
 	labelDelete() {
 		this.appApi.labelDelete(this.deleteId).subscribe(d => {
 			console.log(d);
+			this.deleteId = '';
 			this.queryLabelByType();
+			this.events.publish('tags:change');
 		});
 	}
 }

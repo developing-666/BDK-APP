@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, App, Events, ToastController } from 'ionic-angular';
+import { NavController, NavParams, AlertController,Events, ToastController } from 'ionic-angular';
 
 
 import { GlobalData } from '../../../providers/global-data';
@@ -14,6 +14,7 @@ export class ClienteleTagPage {
     tags: Array<any> = [];
     deleteIng: boolean = false;
     deleteId: string = '';
+	tmp:any = this.navParams.get('tag');
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -112,14 +113,17 @@ export class ClienteleTagPage {
         }
     }
     wantDelete() {
-        this.tag = '';
         this.deleteId = '';
         this.deleteIng = !this.deleteIng;
-        console.log(this.deleteIng);
+		if(this.deleteIng){
+	        this.tag = '';
+		}else{
+			this.tag = this.tmp;
+		}
     }
     confirm() {
         let alert = this.alertCtrl.create({
-            title: '确认删除?',
+            title: '删除操作会影响所有拥有该标签的客户，是否确定删除?',
             buttons: [
                 {
                     text: '取消',
@@ -138,6 +142,7 @@ export class ClienteleTagPage {
     labelDelete() {
         this.appApi.labelDelete(this.deleteId).subscribe(d => {
             console.log(d);
+			this.deleteId = '';
             this.queryLabelByType();
         });
     }

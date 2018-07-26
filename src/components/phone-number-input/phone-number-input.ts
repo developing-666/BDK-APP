@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { AlertController} from 'ionic-angular';
+
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
 import { Utils } from '../../providers/utils';
@@ -18,6 +20,7 @@ import { Utils } from '../../providers/utils';
 export class PhoneNumberInputComponent implements OnChanges {
     @ViewChild('phoneForm') phoneForm: NgForm;
     @Input() phones: Array<string> = [];
+    @Input() edit: boolean = false;
     phoneError: boolean = false;
     addEd: boolean = false;
     changed: any = [];
@@ -39,7 +42,11 @@ export class PhoneNumberInputComponent implements OnChanges {
             this.changed.forEach(f => f(value));
         }
     }
-    constructor(private appApi: AppApi, public nativeService: NativeService) {}
+    constructor(
+		private appApi: AppApi,
+		public nativeService: NativeService,
+		public alertCtrl: AlertController,
+	) {}
     ngOnChanges(changes: SimpleChanges) {
         console.log();
         if (
@@ -58,10 +65,14 @@ export class PhoneNumberInputComponent implements OnChanges {
             this.appApi.customerValid(e.target.value).subscribe(d => {
                 console.log(d);
                 if (d.code !== 0) {
-                    this.nativeService.showToast({
-                        message: d.message,
-                        cssClass: 'danger'
-                    });
+					if(d.code == 3 && !this.edit){
+						this.alreadyExist(e.target.value,d.data.name);
+					}else{
+						this.nativeService.showToast({
+	                        message: d.message,
+	                        cssClass: 'danger'
+	                    });
+					}
                 } else {
                     this.valid[e.target.dataset.index] = true;
                 }
@@ -101,6 +112,23 @@ export class PhoneNumberInputComponent implements OnChanges {
         this.values.splice(i, 1);
         this.valid.splice(i, 1);
     }
+	alreadyExist(phone,name){
+		let prompt = this.alertCtrl.create({
+			title: `手机号码${phone},有一个您的历史客户${name},是否恢复此客户？`,
+			buttons: [
+				{
+					text: '取消'
+				},
+				{
+					text: '确定',
+					handler: data => {
+
+					}
+				}
+			]
+		});
+		prompt.present();
+	}
     // custom-form-item
     // registerOnChange(fn: any): void {
     //     this.onChange = fn;

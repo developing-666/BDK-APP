@@ -51,15 +51,15 @@ export class GalleryModal implements OnInit {
 		public nativeService:NativeService
     ) {
         this.photos = params.get('photos') || [];
-        this.closeIcon = params.get('closeIcon') || 'arrow-back';
+        this.closeIcon = params.get('closeIcon') || 'close';
         this.initialSlide = params.get('initialSlide') || 0;
-
         this.initialImage = this.photos[this.initialSlide] || {};
     }
 
     public ngOnInit() {
         // call resize on init
         this.resize({});
+		console.log(this.photos);
     }
 
     /**

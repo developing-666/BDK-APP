@@ -26,7 +26,7 @@
                     <voice-bar [data]="remind?.audio"></voice-bar>
                 </div>
                 <div class="remark-img-container" *ngIf="remind?.pics.length>0">
-                    <img *ngFor="let item of remind.pics;let i = index" [src]="item | getImg:'x200'" (tap)="viewImg(i)">
+                    <img *ngFor="let item of remind.pics;let i = index" [src]="item | getImg:'200'" (tap)="viewImg(i)">
                 </div>
             </div>
             <div class="write-btn-wrapper">
