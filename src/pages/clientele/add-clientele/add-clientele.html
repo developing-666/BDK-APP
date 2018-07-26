@@ -31,6 +31,20 @@
 				</button>
 			</ion-item-group>
 			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':(addClienteleForm.controls.email?.touched || addClienteleForm.submitted) && addClienteleForm.controls.email.invalid}">
+					<ion-label>电子邮箱</ion-label>
+					<ion-input placeholder="请输入电子邮箱" type="email" [(ngModel)]="formData.email" name="email"></ion-input>
+				</ion-item>
+				<ion-item [ngClass]="{'invalid':(addClienteleForm.controls.qq?.touched || addClienteleForm.submitted) && addClienteleForm.controls.qq.invalid}">
+					<ion-label>QQ</ion-label>
+					<ion-input placeholder="请输入QQ号" type="number" [(ngModel)]="formData.qq" name="qq"></ion-input>
+				</ion-item>
+				<ion-item>
+					<ion-label>微信</ion-label>
+					<ion-input placeholder="请输入微信账号" type="text" [(ngModel)]="formData.wechat" name="wechat"></ion-input>
+				</ion-item>
+			</ion-item-group>
+			<ion-item-group>
 				<button ion-item>
 					<ion-label>性别</ion-label>
 					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.gender" name="gender">

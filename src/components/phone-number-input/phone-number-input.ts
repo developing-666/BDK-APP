@@ -7,7 +7,9 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { AlertController} from 'ionic-angular';
+import { AlertController,NavController} from 'ionic-angular';
+
+import { ClienteleDetailPage } from '../../pages/clientele/clientele-detail/clientele-detail';
 
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
@@ -46,6 +48,7 @@ export class PhoneNumberInputComponent implements OnChanges {
 		private appApi: AppApi,
 		public nativeService: NativeService,
 		public alertCtrl: AlertController,
+		public navCtrl:NavController
 	) {}
     ngOnChanges(changes: SimpleChanges) {
         console.log();
@@ -66,7 +69,7 @@ export class PhoneNumberInputComponent implements OnChanges {
                 console.log(d);
                 if (d.code !== 0) {
 					if(d.code == 3 && !this.edit){
-						this.alreadyExist(e.target.value,d.data.name);
+						this.alreadyExist(e.target.value,d.data);
 					}else{
 						this.nativeService.showToast({
 	                        message: d.message,
@@ -112,22 +115,33 @@ export class PhoneNumberInputComponent implements OnChanges {
         this.values.splice(i, 1);
         this.valid.splice(i, 1);
     }
-	alreadyExist(phone,name){
+	alreadyExist(phone,data){
 		let prompt = this.alertCtrl.create({
-			title: `手机号码${phone},有一个您的历史客户${name},是否恢复此客户？`,
+			title: `手机号码${phone},有一个您的历史客户${data.name},是否恢复此客户？`,
 			buttons: [
 				{
 					text: '取消'
 				},
 				{
 					text: '确定',
-					handler: data => {
-
+					handler: () => {
+						this.enableCustomer(data.id);
 					}
 				}
 			]
 		});
 		prompt.present();
+	}
+	enableCustomer(id){
+		this.appApi.enableCustomer(id).subscribe(d=>{
+			console.log(d);
+			this.navCtrl.pop();
+			this.navCtrl.push(ClienteleDetailPage,{
+				id
+			},{
+				animation: 'md-transition'
+			});
+		});
 	}
     // custom-form-item
     // registerOnChange(fn: any): void {

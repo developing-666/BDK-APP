@@ -3,11 +3,11 @@
 	<ion-navbar>
 		<ion-title>设置</ion-title>
 		<ion-buttons end>
-				<button ion-button icon-only clear  (tap)="toSettingPage()">
-					<i class="iconfont">
-						&#xe678;
-					</i>
-				</button>
+			<button ion-button icon-only clear (tap)="toSettingPage()">
+				<i class="iconfont">
+					&#xe678;
+				</i>
+			</button>
 		</ion-buttons>
 	</ion-navbar>
 
@@ -16,27 +16,29 @@
 <ion-content>
 	<div class="main-wrapper">
 		<button ion-item class="user-header" (tap)="toUserInfoPage()">
-			<ion-avatar class="user-avatar" item-left >
+			<ion-avatar class="user-avatar" item-left>
 				<img [src]="userInfo?.avatar | getImg:'200'">
 			</ion-avatar>
 			<div class="user-info">
-				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
-				<p>{{userInfo?.type == 'NORAML'?'个人用户版':'企业版'}}【免费】</p>
+				<p class="phone">{{ userInfo?.phone | phoneHideNumber}}</p>
+				<div class="type-block">
+					<p>{{userInfo?.type == 'NORAML'?'个人用户版':'企业版'}}【免费】</p>
+				</div>
 			</div>
 		</button>
 
 		<div class="user-list full-form">
 			<ion-list>
 				<ion-item-group>
-				<button ion-item (tap)="toApplyEnterprisePage()">
-					<button clear ion-button icon-only item-start>
-						<i class="iconfont">&#xe677;</i>
+					<button ion-item (tap)="toApplyEnterprisePage()">
+						<button clear ion-button icon-only item-start>
+							<i class="iconfont">&#xe677;</i>
+						</button>
+						<ion-label>申请企业版</ion-label>
+						<ion-note item-end class="P-WAIT_CHECK" *ngIf="isWaitCheck">审核中</ion-note>
+						<ion-note item-end class="P-CHECK_SUCCESS" *ngIf="isCheckSuccess">申请已通过</ion-note>
+						<ion-note item-end class="P-CHECK_FAIL" *ngIf="isCheckFail">申请失败</ion-note>
 					</button>
-					<ion-label>申请企业版</ion-label>
-					<ion-note item-end class="P-WAIT_CHECK" *ngIf="isWaitCheck">审核中</ion-note>
-					<ion-note item-end class="P-CHECK_SUCCESS" *ngIf="isCheckSuccess">申请已通过</ion-note>
-					<ion-note item-end class="P-CHECK_FAIL" *ngIf="isCheckFail">申请失败</ion-note>
-				</button>
 				</ion-item-group>
 				<button ion-item (tap)="toAboutUsPage()">
 					<button clear ion-button icon-only item-start>
@@ -58,12 +60,12 @@
 				</button>
 			</ion-list>
 
-        </div>
+		</div>
 
-        <div class="submit">
-            <button ion-button round block  *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" (tap)="changeUserInfoType('COMPANY')">切换为企业版</button>
-            <button ion-button round block  *ngIf="userInfo?.type == 'COMPANY'" (tap)="changeUserInfoType('NORAML')">切换为个人版</button>
-            </div>
+		<div class="submit">
+			<button ion-button round block *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" (tap)="changeUserInfoType('COMPANY')">切换为企业版</button>
+			<button ion-button round block *ngIf="userInfo?.type == 'COMPANY'" (tap)="changeUserInfoType('NORAML')">切换为个人版</button>
+		</div>
 
 	</div>
 

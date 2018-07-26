@@ -78,6 +78,13 @@ export class AppApi {
     customerDetails(id) {
         return this._http.get('/customer/queryCustomerById/' + id);
     }
+	/**
+	 * 恢复历史客户
+	 * @param  id 客户idea
+	 */
+	enableCustomer(id) {
+        return this._http.get('/customer/enableCustomer/' + id);
+    }
     /**
      * 验证新客户手机号
      * @param phone
