@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Events,IonicPage, NavController, NavParams, App } from 'ionic-angular';
 
 import { UserInfoPage } from './../user-info/user-info';
 import { AppApi } from './../../../providers/app-api';
@@ -32,7 +32,8 @@ export class SettingsPage {
         public navParams: NavParams,
         private app: App,
         private appApi: AppApi,
-        public globalData: GlobalData
+        public globalData: GlobalData,
+		private events: Events,
     ) {
         // this.applyCompanyInfo = this.globalData.applyCompanyInfo;
     }
@@ -40,6 +41,8 @@ export class SettingsPage {
         return this._applyCompanyInfo;
     }
     public set applyCompanyInfo(value: any) {
+        console.log('set applyCompanyInfo',value);
+        
         this._applyCompanyInfo = value;
         this.checkStatus = value.checkStatus;
     }
@@ -56,21 +59,31 @@ export class SettingsPage {
     public set userInfo(value: any) {
         this._userInfo = value;
         console.log('userInfo-value',value);
-
+        
         if (value == undefined || value.avatar == null) {
             this._userInfo.avatar = DEFAULT_AVATAR;
             this.globalData.user.avatar = DEFAULT_AVATAR;
         }
     }
 
+
+    ngOnInit() {
+    }
     ionViewDidLoad() {
         console.log('ionViewDidLoad SettingsPage');
-		this.queryUserInfo();
-		this.getApplyCompany();
     }
-	ionViewWillEnter(){
+    ionViewWillEnter(){
+        console.log('ionViewWillEnter SettingsPage');
+        // this.applyCompanyInfo = this.globalData.applyCompanyInfo;
         this.userInfo = this.globalData.user;
-	}
+        this.getApplyCompany();
+        this.events.subscribe('user:motalLogin',()=>{
+            this.userInfo = this.globalData.user;
+            this.getApplyCompany();
+            console.log('user:motalLogin','this.applyCompanyInfo:',this.applyCompanyInfo,'this.globalData.applyCompanyInfo:',this.globalData.applyCompanyInfo,'this.userInfo:',this.userInfo,'this.globalData.user',this.globalData.user);
+            
+        });
+    }
     changeStatus() {
         this.isWaitCheck =
             this.checkStatus == this.globalData.checkStatus.WAIT_CHECK;
@@ -130,7 +143,9 @@ export class SettingsPage {
      */
 
     toSettingPage() {
-        this.app.getRootNav().push(SettingPage);
+
+					this.events.publish('user:reLogin'); //  跳转到登录页面
+        // this.app.getRootNav().push(SettingPage);
     }
 
     /**
@@ -153,6 +168,8 @@ export class SettingsPage {
 
     getApplyCompany() {
         this.appApi.applyCompanyQueryInfo().subscribe(d => {
+            console.log('api.applyCompanyQueryInfo',d);
+            
             this.globalData.applyCompanyInfo = d;
             this.applyCompanyInfo = d;
         });
