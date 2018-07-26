@@ -1,6 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
 
-import { App, NavController, NavParams, ViewController } from 'ionic-angular';
+import { App, NavController, NavParams, ViewController,Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NativeService } from '../../../providers/native-service';
 import { Helper } from '../../../providers/helper';
@@ -39,7 +39,8 @@ export class LoginPage {
         private storage: Storage,
         private globalData: GlobalData,
         private nativeService: NativeService,
-        private helper: Helper
+        private helper: Helper,
+		private events: Events,
     ) {
         this.createForm();
     }
@@ -91,6 +92,7 @@ export class LoginPage {
             this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
+                this.events.publish('user:motalLogin'); //  motal登录后刷新数据
                 this.viewCtrl.dismiss();
             } else {
                 this.navCtrl.setRoot(HomePage); // 重新设置首页
@@ -126,5 +128,16 @@ export class LoginPage {
      */
     toForgetPasswordPage() {
         this.navCtrl.push(ForgetPasswordPage);
+    }
+
+
+    /**
+     * 获取企业版信息
+     */
+
+    getApplyCompany() {
+        this.appApi.applyCompanyQueryInfo().subscribe(d => {
+            this.globalData.applyCompanyInfo = d;
+        });
     }
 }
