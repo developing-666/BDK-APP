@@ -17,7 +17,7 @@ page-settings {
             .user-avatar{
                 margin: 0;
                 padding: 0;
-                width: rem(142);
+                width: rem(164);
                 height: rem(152);
                 @include flex-center;
                 img{
@@ -32,15 +32,37 @@ page-settings {
                 .user-info {
                     width: 100%;
                     display: flex;
-                    flex-wrap: wrap;
-                    p {
+                    flex-direction: column;
+                    justify-content: center;
+                    .phone {
+                        margin-bottom: rem(14);
+                        width: 100%;
+                        font-size: rem(44);
                         color: #fff;
-                        font-size: rem(28);
-                        &:first-child {
-                            font-size: rem(44);
-                            width: 100%;
+                        line-height: 1;
+                    }
+                    .type-block {
+                        margin-top: rem(14);
+                        width: 100%;
+                        display: flex;
+                        p {
+                            margin-bottom: 0;
+                            color: #fff;
+                            font-size: rem(28);
+                            line-height: 1;
+                        }
+                        .p2 {
+                            margin-left: rem(10);
                         }
                     }
+                    // p {
+                    //     color: #fff;
+                    //     font-size: rem(28);
+                    //     &:first-child {
+                    //         font-size: rem(44);
+                    //         width: 100%;
+                    //     }
+                    // }
                 }
 
             }

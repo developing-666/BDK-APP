@@ -20,10 +20,12 @@
 				<img [src]="userInfo?.avatar | getImg:'x200'">
 			</ion-avatar>
 			<div class="user-info">
-				<p>{{ userInfo?.phone | phoneHideNumber}}</p>
-				<p *ngIf="userInfo?.type == 'NORAML'" >个人用户版</p>
-				<p *ngIf="userInfo?.type == 'COMPANY'" >企业版</p>
-				<p>【免费】</p>
+                <p class="phone">{{ userInfo?.phone | phoneHideNumber}}</p>
+                <div class="type-block">
+                    <p *ngIf="userInfo?.type == 'NORAML'" >个人用户版</p>
+                    <p *ngIf="userInfo?.type == 'COMPANY'" >企业版</p>
+                    <p class="p2">【免费】</p>
+                </div>
 			</div>
 		</button>
 

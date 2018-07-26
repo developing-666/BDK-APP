@@ -170,6 +170,10 @@ export class SettingPage {
     }
 
     removeCacheFile(path: string = this.file.tempDirectory) {
+        if (this.fileSize == 0) {
+            this.presentNoDataToast();
+            return;
+        }
         this.file
             .listDir(path, '')
             .then(d => {
@@ -238,5 +242,17 @@ export class SettingPage {
         // toast.onDidDismiss(() => {
         // });
         toast.present();
+    }
+
+    presentNoDataToast() {
+        const toast = this.toastCtrl.create({
+            message: '暂无可清理缓存',
+            position: 'middle',
+            duration: 1500
+        });
+        // toast.onDidDismiss(() => {
+        // });
+        toast.present();
+
     }
 }
