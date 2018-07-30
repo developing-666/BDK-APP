@@ -17,7 +17,7 @@
                     <span class="date">{{item?.operateTime | moment:'YYYY/MM/DD ddd'}}</span>
                 </h3>
                 <div class="record-info">
-                    <p class="operater">{{item?.operater?.name}}&nbsp;&nbsp;{{item?.content}}</p>
+                    <p class="operater">{{item?.operater?.name}}&nbsp;&nbsp;{{item?.content}}&nbsp;&nbsp;{{item?.type=='客户分配'?item?.assign?.name:''}}</p>
                 </div>
             </div>
         </ion-item>

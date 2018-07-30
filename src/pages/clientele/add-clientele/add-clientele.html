@@ -6,7 +6,7 @@
 <ion-content>
 	<form class="add-clientele-form full-form" #addClienteleForm="ngForm" novalidate>
 		<set-state [(ngModel)]="formData.followStatus" name="followStatus"></set-state>
-		<phone-number-input [phones]="phones" name="phones" [edit] = "edit" #phonePicker></phone-number-input>
+		<phone-number-input [phones]="phones" name="phones" [edit] = "type=='edit'" #phonePicker></phone-number-input>
 		<ion-list>
 			<ion-item-group>
 				<ion-item [ngClass]="{'invalid':(addClienteleForm.controls.name?.touched || addClienteleForm.submitted) && addClienteleForm.controls.name.invalid}">

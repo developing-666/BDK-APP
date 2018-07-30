@@ -51,7 +51,7 @@ export class PhoneNumberInputComponent implements OnChanges {
 		public navCtrl:NavController
 	) {}
     ngOnChanges(changes: SimpleChanges) {
-        console.log();
+        console.log(changes);
         if (
             changes.phones.currentValue &&
             changes.phones.currentValue.length > 0
