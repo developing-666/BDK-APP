@@ -217,7 +217,8 @@ export class Helper {
 			console.log('jpush-设置别名成功:');
 			console.log(result);
 		}).catch(error => {
-			console.log('jpush-设置别名失败:' + error.code);
+            console.log('jpush-设置别名失败:' + error.code);
+            this.setAlias();
 		});
 	}
 
