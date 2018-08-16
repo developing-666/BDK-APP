@@ -16,7 +16,7 @@ import {
     ActionSheetController
 } from 'ionic-angular';
 
-import { AddClientelePage } from '../../pages/clientele/add-clientele/add-clientele';
+import { ClienteleDetailPage } from '../../pages/clientele/clientele-detail/clientele-detail';
 import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/add-clientele-remind';
 
 import { NativeService } from '../../providers/native-service';
@@ -24,22 +24,25 @@ import { AppApi } from '../../providers/app-api';
 
 import { GlobalData } from '../../providers/global-data';
 
-function aaa(a) {
-    console.log(this);
-}
-
 @Component({
     selector: 'clientele-item',
     templateUrl: 'clientele-item.html'
 })
 export class ClienteleItemComponent {
-    @Output() remind: EventEmitter<any> = new EventEmitter();
-    @Output() delete: EventEmitter<any> = new EventEmitter();
-    @Output() details: EventEmitter<any> = new EventEmitter();
-    @Input() noPush: boolean = false;
-    @Input() detail: boolean = true;
-    @Input() data: any = {};
-    @Input() index: number = undefined;
+    @Output()
+    remind: EventEmitter<any> = new EventEmitter();
+    @Output()
+    delete: EventEmitter<any> = new EventEmitter();
+    @Output()
+    details: EventEmitter<any> = new EventEmitter();
+    @Input()
+    noPush: boolean = false;
+    @Input()
+    detail: boolean = true;
+    @Input()
+    data: any = {};
+    @Input()
+    index: number = undefined;
     labels: Array<any> = this.data.labels ? this.data.labels : [];
     update: any = id => {
         if (this.data.id === id) {
@@ -96,14 +99,19 @@ export class ClienteleItemComponent {
     itemDelete(item) {
         this.presentConfirm(item);
     }
-    itemClick(e,item) {
-		e.stopPropagation();
+    itemClick(e, item) {
+        e.stopPropagation();
         e.preventDefault();
         if (this.detail) {
-            this.navCtrl.push(AddClientelePage, {
-                customerId: item.id,
-                type: 'edit'
-            });
+            this.navCtrl.push(
+                ClienteleDetailPage,
+                {
+                    id: item.id
+                },
+                {
+                    animation: 'md-transition'
+                }
+            );
         }
         this.details.emit(item);
     }

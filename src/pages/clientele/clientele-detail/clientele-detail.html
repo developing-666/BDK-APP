@@ -1,10 +1,13 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar [hideBackButton]="true">
+        <button ion-button icon-only (tap)="close()">
+            <ion-icon name="close"></ion-icon>
+        </button>
         <ion-title>客户详情</ion-title>
     </ion-navbar>
 </ion-header>
 <ion-content>
-    <clientele-item [hidden]="hideItem" [data]="clienteleDetail" #clienteleItem></clientele-item>
+    <clientele-item [hidden]="hideItem" (details)="itemDetails($event)" [data]="clienteleDetail" #clienteleItem [detail]="detail"></clientele-item>
     <div class="record-tab-container" *ngIf="tabStyle" [ngStyle]="tabStyle">
         <ion-tabs tabsPlacement="top">
             <ion-tab tabTitle="未跟提醒" [root]="tabPage1" [rootParams]="tabParams"></ion-tab>
