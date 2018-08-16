@@ -89,7 +89,7 @@ page-remind {
                 }
             }
             .scroll-content {
-                margin-bottom: 0 !important;
+                margin-bottom: 0 !important;margin-top: 0;
             }
             .list {
                 margin-top: 0;
@@ -118,8 +118,9 @@ page-remind {
                 }
             }
         }
-		.avtive-day-bar-wrapper{padding-top: 1rem;width: 100%;background-color:color($colors,bg);
-			.avtive-day-bar{background-color: #fff;border-bottom:$border;width: 100%;
+		.avtive-day-bar-wrapper{padding-top: 1rem;width: 100%;background-color:color($colors,bg);border-bottom:$border;
+			.avtive-day-bar{
+				background-color: #fff;width: 100%;
 				height: rem(80);display: flex;justify-content: space-between;align-items: center;padding:0 1rem;
 				.control{color:color($colors,light);display: flex;align-items: center;
 					.iconfont{font-size: 1.6rem;}
@@ -134,7 +135,7 @@ page-remind {
 			}
 		}
 	}
-	.add-remind{position: fixed;right: 1rem;bottom:8rem;border-radius:50%;width: rem(100);height:rem(100);@include flex-center;font-size:2.4rem;z-index: 99;}
+	.add-remind{position: fixed;right: 1rem;bottom:8rem;border-radius:50%;width: rem(100);height:rem(100);@include flex-center;font-size:2.4rem;z-index: 99;box-shadow: 0 0 1rem rgba(0,0,0,0.3)}
 	.bottom-bar {
         z-index: 999;
 	    width: 100%;

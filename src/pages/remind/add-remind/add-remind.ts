@@ -155,7 +155,7 @@ export class AddRemindPage {
 					if (this.type == 'clientele') {
 						this.formData.customerId = this.clientele.id;
 					}
-					this.formData.content = this.infoContent.content;
+					this.formData.content = this.infoContent?this.infoContent.content:undefined;
 					if (audio) {
 						this.formData.audio = {};
 						this.formData.audio.path = audio
@@ -177,7 +177,7 @@ export class AddRemindPage {
 	upoadImage(): Observable<any> {
 		return Observable.create(observer => {
 			this.paths = [];
-			if (!this.infoContent.pics || this.infoContent.pics.length == 0) {
+			if (!this.infoContent || !this.infoContent.pics || this.infoContent.pics.length == 0) {
 				observer.next(true);
 			} else {
 				const imgHttp: Array<Observable<any>> = [];

@@ -85,7 +85,7 @@ export class AddClienteleRemindPage {
 				if (d[0] && (d[1] === true || d[1].responseCode === 200)) {
 					const audio = d[1] === true ? undefined : JSON.parse(d[1].response).data;
 					console.log(audio);
-					this.formData.content = this.infoContent.content;
+					this.formData.content = this.infoContent?this.infoContent.content:undefined;
 					if (audio) {
 						this.formData.audio = {}
 						this.formData.audio.path = audio ? audio.path : undefined;
@@ -103,7 +103,7 @@ export class AddClienteleRemindPage {
 	upoadImage(): Observable<any> {
 		return Observable.create(observer => {
 			this.paths = [];
-			if (!this.infoContent || !this.infoContent.pics || (this.infoContent.pics && this.infoContent.pics.length == 0)) {
+			if (!this.infoContent || !this.infoContent || !this.infoContent.pics || (this.infoContent.pics && this.infoContent.pics.length == 0)) {
 				observer.next(true);
 			} else {
 				const imgHttp: Array<Observable<any>> = [];

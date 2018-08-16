@@ -73,6 +73,8 @@ export class RemindPage {
         }, 0);
         this.queryTaskCountByDate(this.currentMonth);
     };
+	draging:boolean = false;
+	addBtnStyle:any = {};
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -347,4 +349,20 @@ export class RemindPage {
         });
         toast.present();
     }
+	press(e){
+		e.preventDefault();
+		this.draging = true;
+		console.log(123123123)
+	}
+	touchmove(e){
+		if (this.draging) {
+		    this.addBtnStyle = {
+				top:(e.changedTouches[0].pageY - 25)+'px',
+				left:(e.changedTouches[0].pageX - 25)+'px',
+				bottom:'auto',
+				right:'auto'
+			}
+			console.log()
+		}
+	}
 }
