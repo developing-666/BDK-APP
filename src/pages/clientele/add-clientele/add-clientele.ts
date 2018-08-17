@@ -5,7 +5,7 @@ import {
     NavParams,
     ToastController,
     Events,
-	ViewController
+    ViewController
 } from 'ionic-angular';
 
 import { ClienteleTagPage } from '../clientele-tag/clientele-tag';
@@ -21,8 +21,10 @@ import { Utils } from '../../../providers/utils';
     templateUrl: 'add-clientele.html'
 })
 export class AddClientelePage implements OnInit {
-    @ViewChild('addClienteleForm') addClienteleForm: NgForm;
-    @ViewChild('phonePicker') phonePicker: PhoneNumberInputComponent;
+    @ViewChild('addClienteleForm')
+    addClienteleForm: NgForm;
+    @ViewChild('phonePicker')
+    phonePicker: PhoneNumberInputComponent;
     customerId: string = this.navParams.get('customerId');
     item: any = this.navParams.get('item');
     type: string = this.navParams.get('type');
@@ -37,6 +39,9 @@ export class AddClientelePage implements OnInit {
         post: undefined,
         provinceId: undefined,
         cityId: undefined,
+        email: undefined,
+        qq: undefined,
+        wechat: undefined,
         gender: 'M',
         birthday: undefined,
         company: undefined,
@@ -58,7 +63,7 @@ export class AddClientelePage implements OnInit {
         public events: Events
     ) {}
     ngOnInit() {
-		if (this.type === 'edit') {
+        if (this.type === 'edit') {
             this.customerDetails();
         }
         this.queryProvinces();
@@ -112,7 +117,7 @@ export class AddClientelePage implements OnInit {
             d => {
                 console.log(d);
                 this.presentToast('创建成功');
-				this.events.publish('clientele:create');
+                this.events.publish('clientele:create');
             },
             e => {
                 this.submitIng = false;

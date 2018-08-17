@@ -68,7 +68,7 @@ export class PhoneNumberInputComponent implements OnChanges {
             this.appApi.customerValid(e.target.value).subscribe(d => {
                 console.log(d);
                 if (d.code !== 0) {
-					if(d.code == 3 && !this.edit){
+					if(d.code == 5 && !this.edit){
 						this.alreadyExist(e.target.value,d.data);
 					}else{
 						this.nativeService.showToast({

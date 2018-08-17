@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, Navbar } from 'ionic-angular';
+import { NavController, NavParams, Navbar} from 'ionic-angular';
 
-
+import {AddClientelePage}from '../add-clientele/add-clientele';
 import { OperatingRecordPage } from './tabs/operating-record/operating-record';
 import { NotFollowPage } from './tabs/not-follow/not-follow';
 import { FollowRecordPage } from './tabs/follow-record/follow-record';
@@ -25,6 +25,7 @@ export class ClienteleDetailPage {
     clienteleDetail: any = {};
     tabStyle: any = undefined;
     hideItem: boolean = false;
+	detail: boolean = false;
 	tabParams: any = {
         id: this.navParams.get('id')
     };
@@ -57,4 +58,20 @@ export class ClienteleDetailPage {
             }, 0);
         });
     }
+    itemDetails(item) {
+		this.navCtrl.push(
+			AddClientelePage,
+			{
+				customerId: item.id,
+                type: 'edit'
+            }
+        )
+    }
+    close(){
+        this.navCtrl.pop({
+            // animate: false,
+            animation: 'md-transition'
+        });
+    }
+
 }

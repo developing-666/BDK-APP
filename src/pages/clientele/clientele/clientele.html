@@ -32,7 +32,7 @@
         <clientele-item (details)="itemDetails($event)" (delete)="itemDelete($event)" (remind)="itemRemind($event)" *ngFor="let item of clienteles;let i = index"
             [data]="item" [index]="i" [detail]="detail"></clientele-item>
     </ion-list>
-    <p class="no-more" *ngIf="currentPage>totalPages&&clienteles.length!=0">没有更多了</p>
+    <p class="no-more" *ngIf="isHasNext&&clienteles.length!=0">没有更多了</p>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
         <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
