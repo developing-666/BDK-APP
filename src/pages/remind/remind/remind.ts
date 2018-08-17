@@ -352,7 +352,6 @@ export class RemindPage {
 	press(e){
 		e.preventDefault();
 		this.draging = true;
-		console.log(123123123)
 	}
 	touchmove(e){
 		if (this.draging) {
@@ -362,7 +361,9 @@ export class RemindPage {
 				bottom:'auto',
 				right:'auto'
 			}
-			console.log()
 		}
+	}
+	touchend(){
+		this.draging = false;
 	}
 }

@@ -27,6 +27,10 @@ export class SettingsPage {
 
 	_userInfo: any = this.globalData.user;
 	avatar: String = DEFAULT_AVATAR;
+	update:any = ()=>{
+		this.userInfo = this.globalData.user;
+		this.getApplyCompany();
+	}
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
@@ -70,19 +74,17 @@ export class SettingsPage {
 	ngOnInit() {
 	}
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad SettingsPage');
+		this.events.subscribe('user:modalLogin', this.update);
+	}
+	ionViewWillUnload(){
+		this.events.unsubscribe('user:modalLogin', this.update);
 	}
 	ionViewWillEnter() {
 		console.log('ionViewWillEnter SettingsPage');
 		// this.applyCompanyInfo = this.globalData.applyCompanyInfo;
 		this.userInfo = this.globalData.user;
 		this.getApplyCompany();
-		this.events.subscribe('user:motalLogin', () => {
-			this.userInfo = this.globalData.user;
-			this.getApplyCompany();
-			console.log('user:motalLogin', 'this.applyCompanyInfo:', this.applyCompanyInfo, 'this.globalData.applyCompanyInfo:', this.globalData.applyCompanyInfo, 'this.userInfo:', this.userInfo, 'this.globalData.user', this.globalData.user);
 
-		});
 	}
 	changeStatus() {
 		this.isWaitCheck =

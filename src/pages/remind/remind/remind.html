@@ -14,7 +14,7 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs,'fold':fold,'no-result':reminds.length===0}" (touchmove)="touchmove($event)">
+<ion-content class="remind-list-container" [ngClass]="{'hide-tabs':hideTabs,'fold':fold,'no-result':reminds.length===0}" (touchmove)="touchmove($event)" (touchend)="touchend($event)">
     <ion-calendar [ngClass]="{'fold':fold}" [(ngModel)]="activeDay.value" (onChange)="dayChange($event)" (monthChange)="monthChange($event)"
         [format]="'YYYY-MM-DD'" [options]="calendarOpt">
     </ion-calendar>
@@ -57,7 +57,7 @@
             <span>全选</span>
         </div>
     </div>
-    <button class="add-remind" ion-button icon-only (tap)="add()" (press)="press($event)" [ngStyle]="addBtnStyle">
+    <button class="add-remind" [ngClass]="{'draging':draging}" ion-button icon-only (tap)="add()" (press)="press($event)" [ngStyle]="addBtnStyle">
         <ion-icon name="add"></ion-icon>
     </button>
 </ion-content>
