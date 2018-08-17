@@ -152,7 +152,7 @@ export class SettingRecordPage {
 					// }
 					this.formData.pics = this.paths;
 					if (this.remindContent) {
-						this.formData.nextTask.content = this.remindContent.content;
+						this.formData.nextTask.content = this.remindContent?this.remindContent.content:undefined;
 						this.formData.nextTask.pics = this.nextRemindPaths;
 						this.formData.nextTask.planRemindTime = moment(
 							this.planRemindTime

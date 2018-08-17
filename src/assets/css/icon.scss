@@ -6,61 +6,73 @@
 //     url('//at.alicdn.com/t/font_665262_ptcde8t5sei885mi.ttf') format('truetype'),
 //     url('//at.alicdn.com/t/font_665262_ptcde8t5sei885mi.svg#iconfont') format('svg');
 // }
-
 @font-face {
-	font-family: 'iconfont';  /* project id 665262 */
-    src: url('http://at.alicdn.com/t/font_665262_ptcde8t5sei885mi.eot');
-    src: url('http://at.alicdn.com/t/font_665262_ptcde8t5sei885mi.eot?#iefix') format('embedded-opentype'),
-    url('http://at.alicdn.com/t/font_665262_ptcde8t5sei885mi.woff') format('woff'),
-    url('http://at.alicdn.com/t/font_665262_ptcde8t5sei885mi.ttf') format('truetype'),
-    url('http://at.alicdn.com/t/font_665262_ptcde8t5sei885mi.svg#iconfont') format('svg');
+	font-family: 'iconfont';
+	/* project id 665262 */
+	src: url("//at.alicdn.com/t/font_665262_c8fck6uigqv.eot");
+	src: url("//at.alicdn.com/t/font_665262_c8fck6uigqv.eot?#iefix") format('embedded-opentype'), url("//at.alicdn.com/t/font_665262_c8fck6uigqv.woff") format('woff'), url("//at.alicdn.com/t/font_665262_c8fck6uigqv.ttf") format('truetype'), url("//at.alicdn.com/t/font_665262_c8fck6uigqv.svg#iconfont") format('svg');
 }
 .iconfont {
-    font-family: 'iconfont' !important;
-    font-size: 2rem;
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
-    speak: none;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-stroke-width: 0.2px;
+	font-family: 'iconfont' !important;
+	font-size: 2rem;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
+	speak: none;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-stroke-width: 0.2px;
+}
+.colours-icon {
+	width: 1em;
+	height: 1em;
+	vertical-align: -0.15em;
+	fill: currentColor;
+	overflow: hidden;
 }
 [class^="ion-ios-icon-"]:before,
 [class*=" ion-ios-icon-"]:before,
 [class^="ion-md-icon-"]:before,
 [class*=" ion-md-icon-"]:before {
-    @extend .iconfont;
-    font-size: inherit;
+	@extend .iconfont;
+	font-size: inherit;
+}
+.ion-ios-icon-manage-outline:before,
+.ion-md-icon-manage-outline:before {
+	content: '\e68f';
+}
+.ion-ios-icon-manage:before,
+.ion-md-icon-manage:before {
+	content: '\e68e';
 }
 .ion-ios-icon-remind-outline:before,
 .ion-md-icon-remind-outline:before {
-    content: '\e667';
+	content: '\e667';
 }
 .ion-ios-icon-remind:before,
 .ion-md-icon-remind:before {
-    content: '\e664';
+	content: '\e664';
 }
 .ion-ios-icon-clientele-outline:before,
 .ion-md-icon-clientele-outline:before {
-    content: '\e666';
+	content: '\e666';
 }
 .ion-ios-icon-clientele:before,
 .ion-md-icon-clientele:before {
-    content: '\e663';
+	content: '\e663';
 }
 .ion-ios-icon-setting-outline:before,
 .ion-md-icon-setting-outline:before {
-    content: '\e678';
+	content: '\e678';
 }
 .ion-ios-icon-setting:before,
 .ion-md-icon-setting:before {
-    content: '\e67a';
+	content: '\e67a';
 }
-.tabs .tab-button[aria-selected=true]{
-	.icon:before{
+.tabs .tab-button[aria-selected=true] {
+	.icon:before {
 		color: color($colors,primary);
 	}
 }

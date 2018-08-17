@@ -1,0 +1,20 @@
+page-manage {
+	.content{
+		.scroll-content{
+			background-color: #fff;overflow: hidden;
+		}
+	}
+	.list-container{
+		display: flex;flex-wrap: wrap;padding:rem(30);
+		.list-item{
+			width: 50%;border-right: $border;height: rem(276);display: flex;justify-content: center;align-items: center;flex-wrap: wrap;
+			.colours-icon{
+				width: rem(166);height: rem(166);
+			}
+			p{width: 100%;font-size: rem(36);color: color($colors,dark);text-align: center;line-height: rem(60)}
+			&:nth-child(even){
+				border-right: none;
+			}
+		}
+	}
+}

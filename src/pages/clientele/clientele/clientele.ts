@@ -71,9 +71,11 @@ export class ClientelePage {
 	ionViewDidLoad() {
 		this.customerQuery(this.initQueryParams);
 		this.events.subscribe('clientele:create', this.update);
+		this.events.subscribe('user:modalLogin', this.update);
 	}
 	ionViewWillUnload() {
 		this.events.unsubscribe('clientele:create', this.update);
+		this.events.unsubscribe('user:modalLogin', this.update);
 	}
 	add() {
 		let callback = (done): any => {

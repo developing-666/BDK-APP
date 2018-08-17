@@ -7,7 +7,7 @@
                     <i class="iconfont delete" (click)="delete(i)">&#xe66b;</i>
                     <span>电话</span>
                 </div>
-                <input class="phone-input" [attr.data-index]="i" [name]="'phone'+i" type="tel" [(ngModel)]="values[i]" required  maxlength="11"
+                <input class="phone-input" [attr.data-index]="i" [name]="'phone'+i" type="tel" [(ngModel)]="values[i]" pattern="^[0-9]{6,13}$" required maxlength="13" minlength="6"
                     (blur)="input($event)" placeholder="请输入电话号码">
             </div>
             <button ion-button icon-only clear hidden>

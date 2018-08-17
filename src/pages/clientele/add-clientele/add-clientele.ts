@@ -14,6 +14,7 @@ import { PhoneNumberInputComponent } from '../../../components/phone-number-inpu
 
 import { AppApi } from './../../../providers/app-api';
 import { GlobalData } from '../../../providers/global-data';
+import { NativeService } from '../../../providers/native-service';
 import { INDUSTRY } from '../../../providers/constants';
 import { Utils } from '../../../providers/utils';
 @Component({
@@ -59,6 +60,7 @@ export class AddClientelePage implements OnInit {
         public navCtrl: NavController,
         public navParams: NavParams,
         public globalData: GlobalData,
+		public nativeService: NativeService,
         private appApi: AppApi,
         public events: Events
     ) {}
@@ -75,11 +77,15 @@ export class AddClientelePage implements OnInit {
             this.formData.phone = phones[0];
             this.formData.phones = [];
             for (let item of phones.slice(1)) {
-                if (item && item.match(/^1[3|4|5|7|8|9][0-9]{9}$/)) {
+                if (item){
                     this.formData.phones.push(item);
                 }
             }
         }
+		if(!this.valid){
+			this.nativeService.alert('请输入正确的电话号码');
+			return false;
+		}
         if (this.addClienteleForm.valid && this.valid) {
             console.log(this.formData);
             if (this.type === 'edit') {
@@ -88,6 +94,7 @@ export class AddClientelePage implements OnInit {
                 this.customerCreate();
             }
         }
+
     }
     addTag() {
         let callback = (tag): any => {

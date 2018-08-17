@@ -6,10 +6,10 @@ import localeZhExtra from '@angular/common/locales/extra/zh';
 import { HttpModule } from '@angular/http';
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import {
-    Config,
-    IonicApp,
-    IonicModule,
-    IonicErrorHandler
+	Config,
+	IonicApp,
+	IonicModule,
+	IonicErrorHandler
 } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -18,6 +18,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { LoginModule } from '../pages/login/login.module';
+import { ManageModule } from '../pages/manage/manage.module';
 import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
@@ -63,14 +64,14 @@ import { FileService } from '../providers/file-service';
 import { Helper } from '../providers/helper';
 import { Utils } from '../providers/utils';
 import { GlobalData } from '../providers/global-data';
-import {JpushNotification}from '../providers/jpush-notification';
+import { JpushNotification } from '../providers/jpush-notification';
 //import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
 import { Logger } from '../providers/logger';
 import {
-    ModalFromRightEnter,
-    ModalFromRightLeave,
-    ModalScaleEnter,
-    ModalScaleLeave
+	ModalFromRightEnter,
+	ModalFromRightLeave,
+	ModalScaleEnter,
+	ModalScaleLeave
 } from './modal-transitions';
 import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
@@ -91,86 +92,87 @@ import { Validators } from '../providers/validators';
 
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
-    declarations: [MyApp, HomePage],
-    imports: [
-        LoginModule,
-        RemindModule,
-        ClienteleModule,
-        BrowserModule,
-        HttpModule,
-        AlphaScrollModule.forRoot(),
-        IonicModule.forRoot(MyApp, {
-            //			mode: 'ios', // android是'md'
-            backButtonText: '',
-			swipeBackEnabled:true
-        }),
-        IonicStorageModule.forRoot(),
-        SettingsPageModule,
-        ionicGalleryModal.GalleryModalModule
-    ],
-    bootstrap: [IonicApp],
-    entryComponents: [MyApp, HomePage],
-    providers: [
-        {
-            provide: HAMMER_GESTURE_CONFIG,
-            useClass: ionicGalleryModal.GalleryModalHammerConfig
-        },
-        { provide: LOCALE_ID, useValue: 'zh' },
-        AppApi,
-        StatusBar,
-        SplashScreen,
-        AppVersion,
-        Camera,
-        Toast,
-        File,
-        FileTransfer,
-        FileOpener,
-        InAppBrowser,
-        ImagePicker,
-        Network,
-        AppMinimize,
-        Diagnostic,
-        HTTP,
-        JPush,
-        CodePush,
-        CallNumber,
-        BarcodeScanner,
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
-        NativeService,
-        HttpHeader,
-        HttpService,
-        FileService,
-        Helper,
-        Utils,
-        GlobalData,
-        Logger,
-        CommonService,
-        VersionService,
-        Validators,
-        Keyboard,
-        Media,
-        Device,
-        Base64,
-        SMS,
-        LocalNotifications,
+	declarations: [MyApp, HomePage],
+	imports: [
+		LoginModule,
+		ManageModule,
+		RemindModule,
+		ClienteleModule,
+		BrowserModule,
+		HttpModule,
+		AlphaScrollModule.forRoot(),
+		IonicModule.forRoot(MyApp, {
+			//			mode: 'ios', // android是'md'
+			backButtonText: '',
+			swipeBackEnabled: true
+		}),
+		IonicStorageModule.forRoot(),
+		SettingsPageModule,
+		ionicGalleryModal.GalleryModalModule
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [MyApp, HomePage],
+	providers: [
+		{
+			provide: HAMMER_GESTURE_CONFIG,
+			useClass: ionicGalleryModal.GalleryModalHammerConfig
+		},
+		{ provide: LOCALE_ID, useValue: 'zh' },
+		AppApi,
+		StatusBar,
+		SplashScreen,
+		AppVersion,
+		Camera,
+		Toast,
+		File,
+		FileTransfer,
+		FileOpener,
+		InAppBrowser,
+		ImagePicker,
+		Network,
+		AppMinimize,
+		Diagnostic,
+		HTTP,
+		JPush,
+		CodePush,
+		CallNumber,
+		BarcodeScanner,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		NativeService,
+		HttpHeader,
+		HttpService,
+		FileService,
+		Helper,
+		Utils,
+		GlobalData,
+		Logger,
+		CommonService,
+		VersionService,
+		Validators,
+		Keyboard,
+		Media,
+		Device,
+		Base64,
+		SMS,
+		LocalNotifications,
 		JpushNotification
-    ]
+	]
 })
 export class AppModule {
-    constructor(public config: Config) {
-        this.setCustomTransitions();
-    }
+	constructor(public config: Config) {
+		this.setCustomTransitions();
+	}
 
-    private setCustomTransitions() {
-        this.config.setTransition(
-            'modal-from-right-enter',
-            ModalFromRightEnter
-        );
-        this.config.setTransition(
-            'modal-from-right-leave',
-            ModalFromRightLeave
-        );
-        this.config.setTransition('modal-scale-enter', ModalScaleEnter);
-        this.config.setTransition('modal-scale-leave', ModalScaleLeave);
-    }
+	private setCustomTransitions() {
+		this.config.setTransition(
+			'modal-from-right-enter',
+			ModalFromRightEnter
+		);
+		this.config.setTransition(
+			'modal-from-right-leave',
+			ModalFromRightLeave
+		);
+		this.config.setTransition('modal-scale-enter', ModalScaleEnter);
+		this.config.setTransition('modal-scale-leave', ModalScaleLeave);
+	}
 }

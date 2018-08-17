@@ -90,6 +90,7 @@ export class RemindPage {
 
     ionViewDidLoad() {
         this.events.subscribe('remind:create', this.update);
+        this.events.subscribe('user:modalLogin', this.update);
         this.events.subscribe('followRecord:update', this.update);
         this.events.subscribe('delay:update', this.update);
         this.getData();
@@ -97,6 +98,7 @@ export class RemindPage {
     }
     ionViewWillUnload() {
         this.events.unsubscribe('remind:create', this.update);
+        this.events.unsubscribe('user:modalLogin', this.update);
         this.events.unsubscribe('followRecord:update', this.update);
         this.events.unsubscribe('delay:update', this.update);
     }

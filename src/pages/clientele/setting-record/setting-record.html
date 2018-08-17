@@ -34,7 +34,7 @@
                         pickerFormat="YYYY-MM-DD HH:mm" [min]="minTime" cancelText="取消" doneText="确定"></ion-datetime>
                 </button>
                 <info-input [ngClass]="{'invalid':(settingRecordForm.controls.nextContent?.touched || settingRecordForm.submitted) && settingRecordForm.controls.nextContent.invalid}"
-                    [disabled]="followId!==undefined" [(ngModel)]="remindContent" required
+                    [disabled]="followId!==undefined" [(ngModel)]="remindContent"
                     #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="nextContent" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-item-group>
         </ion-list>
