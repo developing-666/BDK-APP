@@ -1,0 +1,10 @@
+page-add-auth {
+    .item{
+        .item-inner{
+            .choose-contacts{
+                border-left: $border;border-radius: 0;margin: 0;padding: 8px;height: calc(100% - 1rem);
+            }
+        }
+        
+    }
+}

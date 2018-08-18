@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>新增权限</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <form class="add-auth-form full-form" #addAuthForm="ngForm" novalidate>
+        <ion-list>
+            <ion-item-group>
+                <ion-item [ngClass]="{'invalid':addAuthForm.controls.phone?.touched && addAuthForm.controls.phone.invalid}">
+                    <ion-label>电话号码</ion-label>
+                    <ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone"></ion-input>
+                    <button hidden class="choose-contacts" ion-button icon-only item-end clear>
+                        <i class="iconfont">&#xe66f;</i>
+                    </button>
+                </ion-item>
+                <ion-item class="has-end-button" [ngClass]="{'invalid':addAuthForm.controls.code?.touched && addAuthForm.controls.code.invalid}">
+					<ion-label>验证码</ion-label>
+                    <ion-input type="number" placeholder="请输入验证码" required maxlength="4" [(ngModel)]="formData.code" name="code"></ion-input>
+                    <button ion-button item-end>
+                        获取验证码
+                    </button>
+				</ion-item>
+            </ion-item-group>
+            <ion-item-group>
+                <ion-item [ngClass]="{'invalid':addAuthForm.controls.name?.touched && addAuthForm.controls.name.invalid}">
+					<ion-label>姓名</ion-label>
+					<ion-input placeholder="请输入姓名" maxlength="4" required [(ngModel)]="formData.name" name="name"></ion-input>
+				</ion-item>
+                <button ion-item (tap)="authTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
+					<ion-label>权限标签</ion-label>
+					<ion-note [ngClass]="{'active':formData.label}" item-end>{{formData.label?formData.label:'请选择权限标签'}}</ion-note>
+                </button>
+                <button ion-item (tap)="customTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
+					<ion-label>自定义标签</ion-label>
+					<ion-note [ngClass]="{'active':formData.labels}" item-end>{{formData.labels?formData.labels:'请选择自定义标签'}}</ion-note>
+				</button>
+            </ion-item-group>
+            <ion-item-group>
+                <button ion-item>
+					<ion-label>呼转号码归属省份</ion-label>
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()">
+						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
+					</ion-select>
+				</button>
+				<button ion-item>
+					<ion-label>呼转号码归属城市</ion-label>
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0">
+						<ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
+					</ion-select>
+                </button>
+                <ion-item *ngIf="1==0" >
+					<ion-label>电话号码</ion-label>
+					<ion-input maxlength="11" required [(ngModel)]="formData.phone" name="phone"></ion-input>
+				</ion-item>
+            </ion-item-group>
+        </ion-list>
+        <button (tap)="add()" [disabled]="addAuthForm.invalid || submitIng" type="submit" class="large" ion-button block round>{{type === 'edit'?'确认':'添加'}}</button>
+    </form>
+</ion-content>

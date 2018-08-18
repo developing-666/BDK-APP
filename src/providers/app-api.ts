@@ -172,6 +172,12 @@ export class AppApi {
         return this._http.get('/customerfollow/queryCustomerFollowById/' + id);
     }
     /**
+     * 创建用户
+     */
+    createByCompany(opts?: any): any {
+        return this._http.post('/user/createByCompany', opts);
+    }
+    /**
      * 更新用户信息
      */
     updateUserInfo(opts?: any): any {

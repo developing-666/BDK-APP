@@ -260,6 +260,11 @@ ion-content.has-refresher>.scroll-content {
             &.disabled {
                 opacity: 0.4;
             }
+            &.has-end-button{
+                .item-inner{
+                    padding-right: 0;
+                }
+            }
         }
         button.item:not([detail-none]) .item-inner{
             background-position: right 1rem center;padding-right:2.4rem;
