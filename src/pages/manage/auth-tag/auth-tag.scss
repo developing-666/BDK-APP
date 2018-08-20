@@ -1,0 +1,42 @@
+page-auth-tag {
+    .content{
+        background-color: #fff;
+    }
+	.tag-wrapper{
+		padding: 0 rem(10) 0 rem(30);min-height: 100%;
+		.hint{
+			line-height: rem(110);text-align: center;font-size: rem(30);color:color($colors,light);
+		}
+		.tag-container{
+			display: flex;
+			flex-wrap: wrap;
+			.tag-item{
+				@include round-tag();margin-bottom: 1rem;background-color: #fff;position: relative;margin-right:1rem;
+				&.active{
+					@include round-tag('default',color($colors,primary),false);
+				}
+				&.del:after{
+					position: absolute;display: flex;width: rem(32);height:rem(32);line-height: 1;font-size:1.2rem;background-color: color($colors,warning);color:#fff;
+					@extend .iconfont;content: '\e640';border-radius: 50%;justify-content: center;align-items: center;right:-0.4rem;top: -0.4rem;
+				}
+			}
+			.no-tag{
+				background-color: #fff;
+				display: flex;
+			    height: 2.6rem;
+                align-items: center;justify-content: center;
+			    width: rem(180);
+			    font-size: rem(30);
+			    border-radius: 1.3rem;
+			    border: 1px dashed color($colors,light);
+			    margin-right:1rem;
+			    margin-bottom: 1rem;
+
+			}
+		}
+		.submit{
+			margin-top: rem(200);
+            width: calc(100% - 1rem);
+		}
+	}
+}

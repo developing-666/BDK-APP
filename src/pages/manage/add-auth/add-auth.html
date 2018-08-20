@@ -9,7 +9,7 @@
             <ion-item-group>
                 <ion-item [ngClass]="{'invalid':addAuthForm.controls.phone?.touched && addAuthForm.controls.phone.invalid}">
                     <ion-label>电话号码</ion-label>
-                    <ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone"></ion-input>
+                    <ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone" type="tel" pattern="^1[3|4|5|7|8|9][0-9]{9}$" maxlength="11"></ion-input>
                     <button hidden class="choose-contacts" ion-button icon-only item-end clear>
                         <i class="iconfont">&#xe66f;</i>
                     </button>
@@ -17,8 +17,11 @@
                 <ion-item class="has-end-button" [ngClass]="{'invalid':addAuthForm.controls.code?.touched && addAuthForm.controls.code.invalid}">
 					<ion-label>验证码</ion-label>
                     <ion-input type="number" placeholder="请输入验证码" required maxlength="4" [(ngModel)]="formData.code" name="code"></ion-input>
-                    <button ion-button item-end>
+                    <button ion-button item-end [disabled]="addAuthForm.controls.phone?.invalid" *ngIf="time==60" (tap)="getCode()">
                         获取验证码
+                    </button>
+					<button ion-button item-end [disabled]="true" *ngIf="time!=60">
+                        {{time}}
                     </button>
 				</ion-item>
             </ion-item-group>
@@ -27,9 +30,9 @@
 					<ion-label>姓名</ion-label>
 					<ion-input placeholder="请输入姓名" maxlength="4" required [(ngModel)]="formData.name" name="name"></ion-input>
 				</ion-item>
-                <button ion-item (tap)="authTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
+                <button ion-item (tap)="authTag()" [ngClass]="{'invalid': submitted && !formData.roleId}">
 					<ion-label>权限标签</ion-label>
-					<ion-note [ngClass]="{'active':formData.label}" item-end>{{formData.label?formData.label:'请选择权限标签'}}</ion-note>
+					<ion-note [ngClass]="{'active':formData.roleId}" item-end>{{formData.roleId?role:'请选择权限标签'}}</ion-note>
                 </button>
                 <button ion-item (tap)="customTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
 					<ion-label>自定义标签</ion-label>

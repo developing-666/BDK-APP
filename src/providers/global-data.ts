@@ -5,6 +5,7 @@ export class GlobalData {
 	private _nav :any = undefined;
     private _CUSTOMER_LABEL: Array<any>;
     private _CUSTOMER_LABELS: Array<any>;
+	private _ALLROLE:Array<any>;
     private _userId: string; // 用户id
     private _userTag: Array<string>; // 用户标签
     private _username: string; // 用户名
@@ -122,6 +123,12 @@ export class GlobalData {
     }
     set nav(value: any) {
         this._nav = value;
+    }
+	get ALLROLE() {
+        return this._ALLROLE;
+    }
+    set ALLROLE(value: any) {
+        this._ALLROLE = value;
     }
     initData() {
         this.user = undefined;
