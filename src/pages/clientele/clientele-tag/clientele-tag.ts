@@ -74,9 +74,8 @@ export class ClienteleTagPage {
         prompt.present();
     }
     done() {
-        this.callback(this.tag).then(() => {
-            this.navCtrl.pop();
-        });
+        this.events.publish('tags:clienteleTag',this.tag);
+        this.navCtrl.pop();
     }
     selectTag(tag) {
         if (this.deleteIng) {

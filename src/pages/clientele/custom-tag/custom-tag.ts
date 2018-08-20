@@ -68,9 +68,8 @@ export class CustomTagPage {
 		prompt.present();
 	}
 	done() {
-		this.callback(this.tag).then(() => {
-			this.navCtrl.pop();
-		});
+		this.events.publish('tags:customTag',this.tag);
+		this.navCtrl.pop();
 	}
 	selectTag(tag) {
 		if (this.deleteIng) {

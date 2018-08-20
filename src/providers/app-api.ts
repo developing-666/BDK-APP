@@ -292,4 +292,10 @@ export class AppApi {
     logout() {
         return this._http.post('/logout');
     }
+	/**
+	 * 查询所有角色
+	 */
+	queryAllRole(){
+		return this._http.get('/role/queryAllRole/');
+	}
 }
