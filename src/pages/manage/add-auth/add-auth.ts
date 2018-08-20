@@ -16,22 +16,25 @@ import { AppApi } from '../../../providers/app-api';
 export class AddAuthPage {
 	@ViewChild('addAuthForm') addAuthForm: NgForm;
 	type: string = this.navParams.get('type');
-	labelsString: string = '';
 	formData: any = {
 		phone: undefined,
 		name: undefined,
 		roleId: undefined,
 		labels: undefined,
 	};
-	role:string = '';
-	city: Array<any> = [];
+    role:string = '';
+    provinces: Array<any> = [];
+    city: Array<any> = [];
+    safetyPhones:Array<any> = [];
 	submitIng: boolean = false;
 	submitted: boolean = false;
 	interval: any;
-	time: number = 60;
+    time: number = 60;
+    provinceId:string = '';
+    currentPage:number = 1;
 	labelsUpdate: any = (d) => {
 		console.log(d);
-
+        this.formData.labels = d;
 	};
 	roleUpdate: any = (d) => {
 		console.log(d);
@@ -46,12 +49,13 @@ export class AddAuthPage {
 	) { }
 
 	ionViewDidLoad() {
+        this.queryVirtualPhoneProvinces();
 		this.events.subscribe('tag:authTag', this.roleUpdate);
 		this.events.subscribe('tag:customTag', this.labelsUpdate);
 	}
 	ionViewWillUnload() {
-		this.events.subscribe('tag:authTag', this.roleUpdate);
-		this.events.subscribe('tag:customTag', this.labelsUpdate);
+		this.events.unsubscribe('tag:authTag', this.roleUpdate);
+		this.events.unsubscribe('tag:customTag', this.labelsUpdate);
 	}
 	authTag() {
 		this.navCtrl.push(AuthTagPage, {
@@ -81,5 +85,30 @@ export class AddAuthPage {
 	countDownEnd() {
 		clearInterval(this.interval);
 		this.time = 60;
-	}
+    }
+    queryVirtualPhoneProvinces(){
+        this.appApi.queryVirtualPhoneProvinces().subscribe(d => {
+            this.provinces = d;
+        });
+    }
+    queryVirtualPhoneCitiesByProvinceId(){
+        this.appApi
+            .queryVirtualPhoneCitiesByProvinceId(this.provinceId)
+            .subscribe(d => {
+                this.city = d;
+            });
+    }
+    querySafetyPhones(){
+        this.appApi
+            .querySafetyPhones({
+                currentPageIndex:this.currentPage,
+                params:{
+                    queryCityId:this.formData.virtualPhoneCityId
+                }
+            })
+            .subscribe(d => {
+                this.safetyPhones = d.items;
+                this.currentPage ++;
+            });
+    }
 }

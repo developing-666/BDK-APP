@@ -297,5 +297,24 @@ export class AppApi {
 	 */
 	queryAllRole(){
 		return this._http.get('/role/queryAllRole/');
-	}
+    }
+    /**
+     * 查询虚拟号码省份
+     */
+    queryVirtualPhoneProvinces(){
+        return this._http.get('/province/queryVirtualPhoneProvinces');
+    }
+    /**
+     * 查询虚拟号码城市
+     */
+    queryVirtualPhoneCitiesByProvinceId(id){
+        return this._http.get('/city/queryVirtualPhoneCitiesByProvinceId/'+id);
+    }
+    /**
+     * 查询隐私号码
+     * @param opts 
+     */
+    querySafetyPhones(opts){
+        return this._http.post('/user/querySafetyPhones',opts);
+    }
 }

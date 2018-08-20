@@ -36,28 +36,30 @@
                 </button>
                 <button ion-item (tap)="customTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
 					<ion-label>自定义标签</ion-label>
-					<ion-note [ngClass]="{'active':formData.labels}" item-end>{{formData.labels?formData.labels:'请选择自定义标签'}}</ion-note>
+					<ion-note [ngClass]="{'active':formData.labels}" item-end>{{formData.labels?formData.labels.join(','):'请选择自定义标签'}}</ion-note>
 				</button>
             </ion-item-group>
             <ion-item-group>
                 <button ion-item>
 					<ion-label>呼转号码归属省份</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()">
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryVirtualPhoneCitiesByProvinceId()">
 						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
 					</ion-select>
 				</button>
 				<button ion-item>
 					<ion-label>呼转号码归属城市</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0">
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.virtualPhoneCityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0" (ngModelChange)="querySafetyPhones()">
 						<ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
 					</ion-select>
                 </button>
-                <ion-item *ngIf="1==0" >
-					<ion-label>电话号码</ion-label>
-					<ion-input maxlength="11" required [(ngModel)]="formData.phone" name="phone"></ion-input>
+                <ion-item>
+					<ion-label>隐私号码</ion-label>
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.virtualPhoneId" name="safetyPhone" placeholder="请选择隐私号码" [disabled]="safetyPhones.length==0">
+						<ion-option [value]="item.id" *ngFor="let item of safetyPhones">{{item.phone}}</ion-option>
+					</ion-select>
 				</ion-item>
             </ion-item-group>
         </ion-list>
-        <button (tap)="add()" [disabled]="addAuthForm.invalid || submitIng" type="submit" class="large" ion-button block round>{{type === 'edit'?'确认':'添加'}}</button>
+        <button (tap)="add()" [disabled]="addAuthForm.invalid || submitIng" type="submit" class="large" ion-button block round>{{type === 'edit'?'确认':'新建'}}</button>
     </form>
 </ion-content>
