@@ -7,41 +7,15 @@
 	<ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>
-	<div class="no-result" *ngIf="listData.length==0&&currentPage!=1">
+	<div class="no-result" *ngIf="auths.length==0&&currentPage!=1">
         <div class="no-result-tag">
             <img src="./assets/imgs/no-auth.png" />
             <p>暂无权限设置</p>
-            <button class="add-auth" ion-button block round (tap)="new()">新增权限设置</button>
+            <button class="add-auth" ion-button block round (tap)="add()">新增权限设置</button>
         </div>
     </div>
-	<ion-list class="auth-list" hidden>
-		<ion-item-sliding>
-			<ion-item>
-				<ion-avatar item-start>
-					<span>
-						管理者
-					</span>
-				</ion-avatar>
-				<div class="info">
-					<h2>王盛</h2>
-					<div class="tag-container">
-						<i>员工</i>
-					</div>
-				</div>
-			</ion-item>
-			<ion-item-options side="right">
-				<button ion-button color="primary">
-					分配
-				</button>
-				<button ion-button color="warning">
-					修改
-				</button>
-				<button ion-button color="danger">
-					删除
-				</button>
-			</ion-item-options>
-		</ion-item-sliding>
-		<ion-item-sliding>
+	<ion-list class="auth-list">
+		<ion-item-sliding *ngFor="let item of auths">
 			<ion-item>
 				<ion-avatar item-start>
 					<span class="admin">
@@ -68,8 +42,8 @@
 			</ion-item-options>
 		</ion-item-sliding>
 	</ion-list>
-	<button (tap)="new()" class="large" ion-button block round>新建</button>
-	<p class="no-more" *ngIf="isHasNext&&clienteles.length!=0">没有更多了</p>
+	<button (tap)="add()" class="large" ion-button block round *ngIf="auths.length!=0">新建</button>
+	<p class="no-more" *ngIf="isHasNext&&auths.length!=0">没有更多了</p>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
         <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>

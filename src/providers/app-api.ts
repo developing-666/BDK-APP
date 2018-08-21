@@ -299,22 +299,34 @@ export class AppApi {
 		return this._http.get('/role/queryAllRole/');
     }
     /**
-     * 查询虚拟号码省份
+     * 查询隐私号码省份
      */
     queryVirtualPhoneProvinces(){
         return this._http.get('/province/queryVirtualPhoneProvinces');
     }
     /**
-     * 查询虚拟号码城市
+     * 查询隐私号码城市
      */
     queryVirtualPhoneCitiesByProvinceId(id){
         return this._http.get('/city/queryVirtualPhoneCitiesByProvinceId/'+id);
     }
     /**
      * 查询隐私号码
-     * @param opts 
+     * @param opts
      */
     querySafetyPhones(opts){
         return this._http.post('/user/querySafetyPhones',opts);
     }
+	/**
+	 * 查询用户
+	 */
+	queryUserByPage(opts){
+		return this._http.post('/user/queryUserByPage',opts);
+	}
+	/**
+	 * 修改权限
+	 */
+	updateByCompany(opts){
+		return this._http.post('/user/updateByCompany',opts);
+	}
 }

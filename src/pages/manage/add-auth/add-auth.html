@@ -1,65 +1,67 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>新增权限</ion-title>
-    </ion-navbar>
+	<ion-navbar>
+		<ion-title>新增权限</ion-title>
+	</ion-navbar>
 </ion-header>
 <ion-content>
-    <form class="add-auth-form full-form" #addAuthForm="ngForm" novalidate>
-        <ion-list>
-            <ion-item-group>
-                <ion-item [ngClass]="{'invalid':addAuthForm.controls.phone?.touched && addAuthForm.controls.phone.invalid}">
-                    <ion-label>电话号码</ion-label>
-                    <ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone" type="tel" pattern="^1[3|4|5|7|8|9][0-9]{9}$" maxlength="11"></ion-input>
-                    <button hidden class="choose-contacts" ion-button icon-only item-end clear>
-                        <i class="iconfont">&#xe66f;</i>
-                    </button>
-                </ion-item>
-                <ion-item class="has-end-button" [ngClass]="{'invalid':addAuthForm.controls.code?.touched && addAuthForm.controls.code.invalid}">
-					<ion-label>验证码</ion-label>
-                    <ion-input type="number" placeholder="请输入验证码" required maxlength="4" [(ngModel)]="formData.code" name="code"></ion-input>
-                    <button ion-button item-end [disabled]="addAuthForm.controls.phone?.invalid" *ngIf="time==60" (tap)="getCode()">
-                        获取验证码
-                    </button>
-					<button ion-button item-end [disabled]="true" *ngIf="time!=60">
-                        {{time}}
-                    </button>
+	<form class="add-auth-form full-form" #addAuthForm="ngForm" novalidate>
+		<ion-list>
+			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':addAuthForm.controls.phone?.touched && addAuthForm.controls.phone.invalid}">
+					<ion-label>电话号码</ion-label>
+					<ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone" type="tel" pattern="^1[3|4|5|7|8|9][0-9]{9}$" maxlength="11"></ion-input>
+					<button hidden class="choose-contacts" ion-button icon-only item-end clear>
+						<i class="iconfont">&#xe66f;</i>
+					</button>
 				</ion-item>
-            </ion-item-group>
-            <ion-item-group>
-                <ion-item [ngClass]="{'invalid':addAuthForm.controls.name?.touched && addAuthForm.controls.name.invalid}">
+				<ion-item class="has-end-button" [ngClass]="{'invalid':addAuthForm.controls.code?.touched && addAuthForm.controls.code.invalid}">
+					<ion-label>验证码</ion-label>
+					<ion-input type="number" placeholder="请输入验证码" required maxlength="4" [(ngModel)]="formData.code" name="code"></ion-input>
+					<button ion-button item-end [disabled]="addAuthForm.controls.phone?.invalid" *ngIf="time==60" (tap)="getCode()">
+						获取验证码
+					</button>
+					<button ion-button item-end [disabled]="true" *ngIf="time!=60">
+						{{time}}
+					</button>
+				</ion-item>
+			</ion-item-group>
+			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':addAuthForm.controls.name?.touched && addAuthForm.controls.name.invalid}">
 					<ion-label>姓名</ion-label>
 					<ion-input placeholder="请输入姓名" maxlength="4" required [(ngModel)]="formData.name" name="name"></ion-input>
 				</ion-item>
-                <button ion-item (tap)="authTag()" [ngClass]="{'invalid': submitted && !formData.roleId}">
+				<button ion-item (tap)="authTag()" [ngClass]="{'invalid': submitted && !formData.roleId}">
 					<ion-label>权限标签</ion-label>
 					<ion-note [ngClass]="{'active':formData.roleId}" item-end>{{formData.roleId?role:'请选择权限标签'}}</ion-note>
-                </button>
-                <button ion-item (tap)="customTag()" [ngClass]="{'invalid': submitted && !formData.labels}">
+				</button>
+				<button ion-item (tap)="customTag()">
 					<ion-label>自定义标签</ion-label>
 					<ion-note [ngClass]="{'active':formData.labels}" item-end>{{formData.labels?formData.labels.join(','):'请选择自定义标签'}}</ion-note>
 				</button>
-            </ion-item-group>
-            <ion-item-group>
-                <button ion-item>
+				<ion-item *ngIf="followId===undefined">
+					<ion-label>绑定隐私号码</ion-label>
+					<ion-toggle name="bindSafetyPhone" [(ngModel)]="bindSafetyPhone"></ion-toggle>
+				</ion-item>
+			</ion-item-group>
+			<ion-item-group *ngIf="bindSafetyPhone">
+				<button ion-item>
 					<ion-label>呼转号码归属省份</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryVirtualPhoneCitiesByProvinceId()">
+					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryVirtualPhoneCitiesByProvinceId()" [selectOptions]="selectOptions" [ngClass]="{'invalid':addAuthForm.controls.province?.touched && addAuthForm.controls.province.invalid}">
 						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
 					</ion-select>
 				</button>
 				<button ion-item>
 					<ion-label>呼转号码归属城市</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.virtualPhoneCityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0" (ngModelChange)="querySafetyPhones()">
+					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="formData.virtualPhoneCityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0" (ngModelChange)="querySafetyPhones()" [ngClass]="{'invalid':addAuthForm.controls.cityId?.touched && addAuthForm.controls.cityId.invalid}">
 						<ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
 					</ion-select>
-                </button>
-                <ion-item>
+				</button>
+				<button ion-item (tap)="pickPhone()" [disabled]="safetyPhones.length==0">
 					<ion-label>隐私号码</ion-label>
-					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.virtualPhoneId" name="safetyPhone" placeholder="请选择隐私号码" [disabled]="safetyPhones.length==0">
-						<ion-option [value]="item.id" *ngFor="let item of safetyPhones">{{item.phone}}</ion-option>
-					</ion-select>
-				</ion-item>
-            </ion-item-group>
-        </ion-list>
-        <button (tap)="add()" [disabled]="addAuthForm.invalid || submitIng" type="submit" class="large" ion-button block round>{{type === 'edit'?'确认':'新建'}}</button>
-    </form>
+					<ion-note [ngClass]="{'active':formData.virtualPhoneId}" item-end>{{formData.virtualPhoneId?virtualPhone:'请选择隐私号码'}}</ion-note>
+				</button>
+			</ion-item-group>
+		</ion-list>
+		<button (tap)="add()" [disabled]="addAuthForm.invalid || submitIng || !formData.roleId || (bindSafetyPhone&&!formData.virtualPhoneId)" type="submit" class="large" ion-button block round>{{type === 'edit'?'确认':'新建'}}</button>
+	</form>
 </ion-content>
