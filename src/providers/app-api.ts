@@ -340,5 +340,11 @@ export class AppApi {
 	 */
 	queryCallLog(opts){
 		return this._http.post('/fourhundredtalkdtl/queryFourHundredTalkDtlByPage',opts);
-	}
+    }
+    /**
+     * 获取被叫号码
+     */
+    queryAllCalled(){
+        return this._http.get('/fourhundredtalkdtl/queryAllCalled');
+    }
 }

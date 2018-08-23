@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GlobalData {
-	private _nav :any = undefined;
+    private _nav: any = undefined;
     private _CUSTOMER_LABEL: Array<any>;
     private _CUSTOMER_LABELS: Array<any>;
-	private _ALLROLE:Array<any>;
+    private _ALLROLE: Array<any>;
     private _userId: string; // 用户id
     private _userTag: Array<string>; // 用户标签
     private _username: string; // 用户名
@@ -24,7 +24,10 @@ export class GlobalData {
 
     //申请企业版信息
     private _applyCompanyInfo: any = {};
-
+    //当前应用播放的音频文件
+    private _playingMedia: any = null;
+    //当前应用的播放状态
+    private _MediaPlaying:boolean = false;
     //申请状态
     checkStatus: any = {
         WAIT_CHECK: 'WAIT_CHECK',
@@ -118,17 +121,29 @@ export class GlobalData {
     set header(value: any) {
         this._header = value;
     }
-	get nav() {
+    get nav() {
         return this._nav;
     }
     set nav(value: any) {
         this._nav = value;
     }
-	get ALLROLE() {
+    get ALLROLE() {
         return this._ALLROLE;
     }
     set ALLROLE(value: any) {
         this._ALLROLE = value;
+    }
+    get playingMedia() {
+        return this._playingMedia;
+    }
+    set playingMedia(value: any) {
+        this._playingMedia = value;
+    }
+    get MediaPlaying() {
+        return this._MediaPlaying;
+    }
+    set MediaPlaying(value: boolean) {
+        this._MediaPlaying = value;
     }
     initData() {
         this.user = undefined;

@@ -2,6 +2,7 @@ import { Component, Input,ApplicationRef,OnChanges,SimpleChanges } from '@angula
 
 
 import { NativeService } from '../../providers/native-service';
+import { GlobalData } from '../../providers/global-data';
 @Component({
 	selector: 'voice-bar',
 	templateUrl: 'voice-bar.html'
@@ -14,6 +15,7 @@ export class VoiceBarComponent implements OnChanges {
 	constructor(
         private applicationRef: ApplicationRef,
         private nativeService: NativeService,
+        public globalData:GlobalData
 	) {}
 	ngOnChanges(changes: SimpleChanges){
 		let dataChange = changes.data.currentValue;
@@ -21,7 +23,8 @@ export class VoiceBarComponent implements OnChanges {
 			this.nativeService.preloadAudio(dataChange.audioUrl).subscribe(e => {
 				this.Media = e;
 				this.Media.addEventListener('ended', () => {
-					this.playing = false;
+                    this.playing = false;
+                    this.globalData.MediaPlaying = false;
 					this.applicationRef.tick();
 					console.log('播放完成');
 				});
@@ -42,8 +45,14 @@ export class VoiceBarComponent implements OnChanges {
 	barClick(e){
 		e.stopPropagation();
 		e.preventDefault();
-		this.played = true;
+        this.played = true;
+        if(this.globalData.MediaPlaying){
+            this.globalData.playingMedia.pause();
+            this.globalData.playingMedia = null;
+        };
 		if(this.Media){
+            this.globalData.playingMedia = this.Media;
+            this.globalData.MediaPlaying = true;
 			this.playing = true;
 	        this.Media.play();
 		}

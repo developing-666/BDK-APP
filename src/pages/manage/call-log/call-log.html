@@ -1,59 +1,64 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title>400电话记录</ion-title>
-	</ion-navbar>
-	<div class="filter-bar-wrapper" [ngClass]="{'filter-ios':plt.is('ios'),'filter-md':plt.is('android')}">
-	    <div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" (tap)="close()"></div>
-	    <div class="filter-bar">
-			<div class="filter-item" [ngClass]="{'active':queryDate}">
-				<span class="name">
-					{{queryDate?queryDate:'日期'}}
-				</span>
-				<i class="iconfont">&#xe683;</i>
-				<ion-datetime cancelText="取消" doneText="确认" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="queryDate" (ngModelChange)="doRefresh()"></ion-datetime>
-			</div>
-			<div class="filter-item">
-				<span class="name">
-					被叫号码
-				</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-		</div>
-	</div>
+    <ion-navbar>
+        <ion-title>400电话记录</ion-title>
+    </ion-navbar>
+    <div class="filter-bar-wrapper" [ngClass]="{'filter-ios':plt.is('ios'),'filter-md':plt.is('android')}">
+        <div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" (tap)="close()"></div>
+        <div class="filter-bar">
+            <div class="filter-item" [ngClass]="{'active':queryDate}">
+                <span class="name">
+                    {{queryDate?queryDate:'日期'}}
+                </span>
+                <i class="iconfont">&#xe683;</i>
+                <ion-datetime cancelText="取消" doneText="确认" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="queryDate"
+                    (ngModelChange)="doRefresh()"></ion-datetime>
+            </div>
+            <div class="filter-item">
+                <span class="name">
+                    被叫号码
+                </span>
+                <i class="iconfont">&#xe683;</i>
+                <ion-select [selectOptions]="{'title':'被叫号码'}" [(ngModel)]="queryCalled" cancelText="取消" okText="确认" (ngModelChange)="doRefresh()">
+                    <ion-option value="">全部</ion-option>
+                    <ion-option *ngFor="let item of allAllCalled" [value]="item">{{item}}</ion-option>
+                </ion-select>
+            </div>
+        </div>
+    </div>
 </ion-header>
 <ion-content [ngClass]="{'no-result':logs.length===0}">
-	<ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
     </ion-refresher>
-	<ion-list class="log-list">
-		<ion-item-sliding *ngFor="let item of logs;let $index = index">
-		<!-- <ion-item-sliding> -->
-			<ion-item>
-				<div class="info">
-					<h3><span>{{item.caller}}</span><i *ngIf="item.isConnectCalled==2">(接通)</i><i class="lost-call" *ngIf="item.isConnectCalled!=2">(未接通)</i></h3>
-					<p>{{item.called}}</p>
-				</div>
-				<div class="date-time">
-					{{item.beginTime}}
-				</div>
-				<div class="icon-wrapper" item-end>
-					<i class="iconfont" *ngIf="item.isConnectCalled==2">
-						&#xe690;
-					</i>
-				</div>
-			</ion-item>
-			<ion-item-options side="right">
-				<button ion-button color="warning" (tap)="addClientele(item)">
-					<span>添加</span>
-					<span>客户</span>
-				</button>
-				<button ion-button color="primary" (tap)="call(item)">
-					回拨
-				</button>
-			</ion-item-options>
-		</ion-item-sliding>
-	</ion-list>
-	<p class="no-more" *ngIf="isHasNext&&auths.length!=0">没有更多了</p>
+    <ion-list class="log-list">
+        <ion-item-sliding *ngFor="let item of logs;let $index = index">
+            <!-- <ion-item-sliding> -->
+            <ion-item>
+                <div class="info">
+                    <h3><span>{{item.caller}}</span><i *ngIf="item.isConnectCalled==2">(接通)</i><i class="lost-call" *ngIf="item.isConnectCalled!=2">(未接通)</i></h3>
+                    <p>{{item.called}}</p>
+                </div>
+                <div class="date-time">
+                    {{item.beginTime}}
+                </div>
+                <div class="icon-wrapper" item-end>
+                    <i class="iconfont" [ngClass]="{'playing':playingId==item.id}"  *ngIf="item.isConnectCalled==2" (tap)="loadingMedia(item)">
+                        &#xe690;
+                    </i>
+                </div>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="warning" (tap)="addClientele(item)">
+                    <span>添加</span>
+                    <span>客户</span>
+                </button>
+                <button ion-button color="primary" (tap)="call(item.caller)">
+                    回拨
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <p class="no-more" *ngIf="isHasNext&&logs.length!=0">没有更多了</p>
     <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
         <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
