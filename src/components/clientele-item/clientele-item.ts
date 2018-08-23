@@ -161,7 +161,6 @@ export class ClienteleItemComponent {
     phone(e) {
         e.stopPropagation();
         e.preventDefault();
-        // this.nativeService.callNumber(p);
         if (!this.data.phones || this.data.phones.length == 0) {
             this.customerCall(this.data.phone);
         } else {
