@@ -218,7 +218,9 @@ export class Helper {
 			console.log(result);
 		}).catch(error => {
             console.log('jpush-设置别名失败:' + error.code);
-            this.setAlias();
+			setTimeout(()=>{
+            	this.setAlias();
+			},1000);
 		});
 	}
 
@@ -251,6 +253,9 @@ export class Helper {
 			console.log(result);
 		}).catch(error => {
 			console.log('jpush-设置标签失败:' + error.code);
+			setTimeout(()=>{
+            	this.jPush.setTags({ sequence: 3, tags });
+			},1000);
 		});
 	}
 

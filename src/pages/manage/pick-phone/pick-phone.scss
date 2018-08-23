@@ -1,0 +1,11 @@
+page-pick-phone {
+	.phone-list{
+		border-top: $border;
+		.phone-item{
+			.icon{
+				color: color($colors,primary);font-size: 2.6rem;min-height: 2.6rem;
+			}
+		}
+	}
+
+}

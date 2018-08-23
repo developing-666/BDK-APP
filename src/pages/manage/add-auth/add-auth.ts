@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, Events, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Events, ModalController } from 'ionic-angular';
 
 import { AuthTagPage } from '../auth-tag/auth-tag';
 import { CustomTagPage } from '../../clientele/custom-tag/custom-tag';
+import { PickPhonePage } from '../pick-phone/pick-phone';
 
 import { AppApi } from '../../../providers/app-api';
 
@@ -16,6 +17,7 @@ import { AppApi } from '../../../providers/app-api';
 export class AddAuthPage {
 	@ViewChild('addAuthForm') addAuthForm: NgForm;
 	type: string = this.navParams.get('type');
+	item: any = this.navParams.get('item');
 	formData: any = {
 		code: undefined,
 		phone: undefined,
@@ -34,9 +36,10 @@ export class AddAuthPage {
 	interval: any;
 	time: number = 60;
 	provinceId: string = '';
-	virtualPhone: string = '';
+	virtualPhone: string = undefined;
+	isHasNext: boolean = false;
 	currentPage: number = 1;
-	bindSafetyPhone:boolean = false;
+	bindSafetyPhone: boolean = false;
 	labelsUpdate: any = (d) => {
 		console.log(d);
 		this.formData.labels = d;
@@ -46,40 +49,37 @@ export class AddAuthPage {
 		this.formData.roleId = d.id;
 		this.role = d.name;
 	};
-	selectOptions: any = {
-		title: '选号',
-		buttons: [
-			{
-				text: 'Cancel',
-				role: 'cancel',
-				handler: data => {
-					console.log('Cancel clicked');
-				}
-			},
-			{
-				text: 'Login',
-				handler: data => {
-					return false;
-				}
-			}
-		]
+	phoneNum: any = (d) => {
+		this.formData.virtualPhoneId = d.id;
+		this.virtualPhone = d.phone;
 	}
 	constructor(
 		public navCtrl: NavController,
 		public navParams: NavParams,
 		private appApi: AppApi,
 		private events: Events,
-		private alertCtrl: AlertController
+		private modalCtrl: ModalController
 	) { }
 
 	ionViewDidLoad() {
 		this.queryVirtualPhoneProvinces();
 		this.events.subscribe('tag:authTag', this.roleUpdate);
 		this.events.subscribe('tag:customTag', this.labelsUpdate);
+		this.events.subscribe('pickPhone', this.phoneNum);
+		if (this.type == 'edit') {
+			this.virtualPhone = this.item.virtualPhone;
+			for (let name in this.formData) {
+				console.log(name);
+				this.formData[name] = this.item[name];
+			}
+			this.formData.roleId = this.item.role.id;
+			this.role = this.item.role.name;
+		}
 	}
 	ionViewWillUnload() {
 		this.events.unsubscribe('tag:authTag', this.roleUpdate);
 		this.events.unsubscribe('tag:customTag', this.labelsUpdate);
+		this.events.unsubscribe('pickPhone', this.phoneNum);
 	}
 	authTag() {
 		this.navCtrl.push(AuthTagPage, {
@@ -96,10 +96,18 @@ export class AddAuthPage {
 	add() {
 		this.submitted = true;
 		if (this.addAuthForm.valid) {
-			this.appApi.createByCompany(this.formData).subscribe(d=>{
-				this.events.publish('auth:create');
-				this.navCtrl.pop();
-			});
+			if(this.type=='edit'){
+				this.formData.id = this.item.id;
+				this.appApi.updateByCompany(this.formData).subscribe(d => {
+					this.events.publish('auth:update');
+					this.navCtrl.pop();
+				});
+			}else{
+				this.appApi.createByCompany(this.formData).subscribe(d => {
+					this.events.publish('auth:create');
+					this.navCtrl.pop();
+				});
+			}
 		}
 	}
 	getCode() {
@@ -125,24 +133,23 @@ export class AddAuthPage {
 				this.city = d;
 			});
 	}
-	querySafetyPhones() {
-		this.appApi
-			.querySafetyPhones({
-				currentPageIndex: this.currentPage,
-				params: {
-					queryCityId: this.formData.virtualPhoneCityId
-				}
-			})
-			.subscribe(d => {
-				this.safetyPhones = d.items;
-				this.currentPage++;
-			});
-	}
 	pickPhone() {
-		let alert = this.alertCtrl.create({
-			title: '选号',
-			buttons: []
+		if(this.type == 'edit') return;
+		let profileModal = this.modalCtrl.create(PickPhonePage, {
+			cityId: this.formData.virtualPhoneCityId,
+			phone: this.formData.virtualPhoneId ? {
+				id: this.formData.virtualPhoneId,
+				phone: this.virtualPhone
+			} : undefined
 		});
-		alert.present();
+		profileModal.present();
+	}
+	getPhone(id) {
+		console.log(id);
+		for (let item of this.safetyPhones) {
+			if (item.value == id) {
+				this.virtualPhone = item.label;
+			}
+		};
 	}
 }

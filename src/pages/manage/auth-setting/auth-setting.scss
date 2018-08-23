@@ -32,7 +32,7 @@ page-auth-setting {
 	.auth-list{
 		.item-wrapper{background-color: #fff;
 			.item.item-block{
-				padding-left: 0;border-bottom: none;background-color: #fff;
+				padding-left: 0;border-bottom: none;background-color: #fff;min-height: 6rem;
 				ion-avatar{
 					padding: 0;margin: 0;width: rem(140);display: flex;justify-content: center;align-items: center;height: 100%;
 					span{

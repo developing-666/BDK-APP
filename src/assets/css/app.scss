@@ -276,7 +276,7 @@ ion-content.has-refresher>.scroll-content {
 .icon-form {
     .item.item-block {
         &.item-md.item-input{
-            & .item-inner{   
+            & .item-inner{
                 border:0 !important;
                 box-shadow:none !important;
                 -webkit-box-shadow:none !important;
@@ -317,35 +317,49 @@ ion-content.has-refresher>.scroll-content {
 
 
 .ion-filter{
+	&.ion-filter-ios{
+        @include ion-filter('ios');
+    }
+    &.ion-filter-md{
+        @include ion-filter('md');
+    }
+    .line-wrapper{
+        padding: 0 1rem;
+        .panel-line{
+            display: flex;border-bottom: $border;justify-content: space-between;
+            .name {
+                color: color($colors,dark);height:rem(86);display: flex;align-items: center;width: rem(140);
+            }
+            .tag-container{align-content: flex-start;
+                width: calc(100% - 7rem);padding-top: rem(18);display: flex;flex-wrap:wrap;
+                // justify-content: space-around;
+                .tag{
+                    @include round-tag();font-size: 1.2rem;overflow: hidden;text-align: center;margin-right: 1rem;
+                    @extend .transition-02;margin-bottom:0.9rem;
+                    &.active{
+                        @include round-tag('', color($colors, primary), false);
+                        font-size: 1.2rem;
+                    }
+                }
+				.no-tag{
+					@include round-tag('', color($colors, primary), false);
+					font-size: 1.2rem;
+					padding: 0;width: 6rem;text-align: center;
+				}
+            }
+        }
+    }
+    .btn-wrapper{
+        height: rem(80);padding:0.5rem 0;display: flex;
+        .btn{
+            display: flex;flex-basis: 50%;
+            justify-content: center;
+            align-items: center;
+            color: color($colors, light);font-size: 1.5rem;
+            &.on{
+                border-left: $border;
+                color: color($colors, primary);
+            }
+        }
+    }
 }
-
-
-
-//.filter-bar{
-//  display: flex;height: rem(84);padding:1rem 0;background-color: color($colors,bg);
-//  border-bottom: $border;
-//  .filter-item{
-//      width: calc(100% / 3);
-//      @include flex-center();border-right:$border;position: relative;
-//      .select{width: rem(170);max-width: 100%;padding:0;
-//          .select-text{
-//              font-size: rem(30);color:color($colors,dark);flex: inherit;
-//          }
-//          .select-icon{
-//              &:before{
-//                  @extend .iconfont;content:'\e683';font-size:1.2rem;@include flex-center();height: 2.2rem;width: 4rem;transform-origin: center center;
-//
-//              }
-//              .select-icon-inner{display: none;}
-//          }
-//      }
-//  }
-//}
-
-//.full-selector{
-//  ion-backdrop{opacity: 0 !important;
-//      &:before{
-//          position: absolute;
-//      }
-//  }
-//}

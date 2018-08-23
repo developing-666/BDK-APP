@@ -1,0 +1,29 @@
+<ion-header>
+	<ion-navbar [hideBackButton]="true">
+		<button ion-button icon-only (tap)="close()">
+            <ion-icon name="close"></ion-icon>
+        </button>
+		<ion-title>请选择隐私号码</ion-title>
+		<ion-buttons end>
+            <button ion-button="ion-button" icon-only="icon-only" (tap)="done()">
+                完成
+            </button>
+        </ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content>
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
+	<ion-list class="phone-list">
+		<ion-item *ngFor="let item of safetyPhones" class="phone-item" (tap)="pickPhone(item)">
+			<h3>{{item.phone}}</h3>
+			<ion-icon name="md-checkmark" item-end *ngIf="activePhone.id==item.id"></ion-icon>
+		</ion-item>
+	</ion-list>
+	<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
+        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

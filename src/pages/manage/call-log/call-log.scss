@@ -1,0 +1,107 @@
+page-call-log {
+	.filter-bar-wrapper{
+		height: rem(84);
+		position: relative;
+		.filter-bar {
+			background-color: color($colors, bg);
+			height: rem(82);
+			display: flex;
+			padding: 1rem 0;
+			position: relative;
+			z-index: 10;
+			.filter-item {
+				width: calc(100% / 2);
+				@include flex-center();
+				border-right: $border;
+				position: relative;
+				.name {
+					font-size: rem(30);
+					@extend .transition-02;
+				}
+				.iconfont {
+					font-size: 1.2rem;
+					margin-left: 1rem;
+					@include flex-center();
+					height: 100%;
+					@extend .transition-02;
+				}
+				&.open {
+					color: color($colors, primary);
+					.iconfont {
+						transform: rotate(180deg);
+					}
+				}
+				&.active{
+					color: color($colors, primary);
+				}
+				&:last-child {
+					border-right: none;
+				}
+				.datetime{
+					position: absolute;left: 0;width: 100%;height: 100%;opacity: 0;
+				}
+			}
+		}
+		&.filter-ios{
+			.filter-bar{
+				border-bottom: $border;
+			}
+		}
+	}
+	.content{
+		.scroll-content{
+			background-color: #fff;
+		}
+        &.no-result {
+            &:before {
+                height: rem(278);
+                width: rem(310);
+                @include flex-center();
+                padding-top: rem(200);
+                background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
+                background-size: rem(200);
+                content: '暂无通话记录';
+                font-size: rem(30);
+                margin-top: rem(200);
+                position: absolute;
+                z-index: 2;
+                left: 50%;
+                margin-left: rem(-310/2);
+            }
+			.button.large{
+				margin-top:30rem;
+			}
+        }
+	}
+	.log-list{
+		.item-wrapper{background-color: #fff;}
+		.item{background-color: #fff;
+			.label{
+				display: flex;margin: 0;padding: rem(16) 0 rem(10) 0;align-items: center;min-height: 5.5rem;
+				.info{width: calc(100% - #{rem(248)});
+					h3{
+						line-height:rem(44);font-size: 1.5rem;margin: 0;color: #000;
+						i{
+							margin-left: 1rem;color:color($colors,primary);
+							&.lost-call{
+								color:color($colors,danger);
+							}
+						}
+					}
+					p{
+						line-height:rem(40);font-size: 1.2rem;margin: 0;color:color($colors,light);
+					}
+				}
+				.date-time{
+					width: rem(248);text-align: center;font-size: 1.2rem;color:color($colors,light);
+				}
+			}
+		}
+		.icon-wrapper{
+			margin: 0;min-width:2.7rem;
+			.iconfont{
+				color:color($colors,primary);font-size: 2.7rem;
+			}
+		}
+	}
+}

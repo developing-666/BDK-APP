@@ -1,6 +1,6 @@
 <ion-header>
 	<ion-navbar>
-		<ion-title>新增权限</ion-title>
+		<ion-title>{{type=='edit'?'编辑权限':'新增权限'}}</ion-title>
 	</ion-navbar>
 </ion-header>
 <ion-content>
@@ -9,7 +9,7 @@
 			<ion-item-group>
 				<ion-item [ngClass]="{'invalid':addAuthForm.controls.phone?.touched && addAuthForm.controls.phone.invalid}">
 					<ion-label>电话号码</ion-label>
-					<ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone" type="tel" pattern="^1[3|4|5|7|8|9][0-9]{9}$" maxlength="11"></ion-input>
+					<ion-input placeholder="请输入电话号码" required [(ngModel)]="formData.phone" name="phone" type="tel" pattern="^1[3|4|5|7|8|9][0-9]{9}$" maxlength="11" [disabled]="type=='edit'"></ion-input>
 					<button hidden class="choose-contacts" ion-button icon-only item-end clear>
 						<i class="iconfont">&#xe66f;</i>
 					</button>
@@ -38,27 +38,27 @@
 					<ion-label>自定义标签</ion-label>
 					<ion-note [ngClass]="{'active':formData.labels}" item-end>{{formData.labels?formData.labels.join(','):'请选择自定义标签'}}</ion-note>
 				</button>
-				<ion-item *ngIf="followId===undefined">
+				<ion-item *ngIf="type!='edit'">
 					<ion-label>绑定隐私号码</ion-label>
 					<ion-toggle name="bindSafetyPhone" [(ngModel)]="bindSafetyPhone"></ion-toggle>
 				</ion-item>
 			</ion-item-group>
-			<ion-item-group *ngIf="bindSafetyPhone">
-				<button ion-item>
+			<ion-item-group *ngIf="bindSafetyPhone || (type=='edit' && virtualPhone)">
+				<button ion-item *ngIf="type!='edit'">
 					<ion-label>呼转号码归属省份</ion-label>
-					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryVirtualPhoneCitiesByProvinceId()" [selectOptions]="selectOptions" [ngClass]="{'invalid':addAuthForm.controls.province?.touched && addAuthForm.controls.province.invalid}">
+					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="provinceId" name="provinceId" placeholder="请选择省份" (ngModelChange)="queryVirtualPhoneCitiesByProvinceId()" [ngClass]="{'invalid':addAuthForm.controls.province?.touched && addAuthForm.controls.province.invalid}">
 						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
 					</ion-select>
 				</button>
-				<button ion-item>
+				<button ion-item *ngIf="type!='edit'">
 					<ion-label>呼转号码归属城市</ion-label>
-					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="formData.virtualPhoneCityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0" (ngModelChange)="querySafetyPhones()" [ngClass]="{'invalid':addAuthForm.controls.cityId?.touched && addAuthForm.controls.cityId.invalid}">
+					<ion-select cancelText="取消" okText="确认" required [(ngModel)]="formData.virtualPhoneCityId" name="cityId" placeholder="请选择城市" [disabled]="city.length==0" [ngClass]="{'invalid':addAuthForm.controls.cityId?.touched && addAuthForm.controls.cityId.invalid}">
 						<ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
 					</ion-select>
 				</button>
-				<button ion-item (tap)="pickPhone()" [disabled]="safetyPhones.length==0">
+				<button ion-item (tap)="pickPhone()" [disabled]="!formData.virtualPhoneCityId">
 					<ion-label>隐私号码</ion-label>
-					<ion-note [ngClass]="{'active':formData.virtualPhoneId}" item-end>{{formData.virtualPhoneId?virtualPhone:'请选择隐私号码'}}</ion-note>
+					<ion-note [ngClass]="{'active':formData.virtualPhoneId}" item-end>{{virtualPhone?virtualPhone:'请选择隐私号码'}}</ion-note>
 				</button>
 			</ion-item-group>
 		</ion-list>

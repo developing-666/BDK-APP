@@ -329,4 +329,16 @@ export class AppApi {
 	updateByCompany(opts){
 		return this._http.post('/user/updateByCompany',opts);
 	}
+	/**
+	 * 删除用户
+	 */
+	userDelete(id){
+		return this._http.post('/user/delete/'+id);
+	}
+	/**
+	 * 查询通话记录
+	 */
+	queryCallLog(opts){
+		return this._http.post('/fourhundredtalkdtl/queryFourHundredTalkDtlByPage',opts);
+	}
 }

@@ -1,872 +1,810 @@
 @import "ionic.globals";
 $colors: (
-    primary : #3dcbbd,
-    secondary : #11a593,
-    warning : #ffaa33,
-    danger : #fe4739,
-    success : #6ed91f,
-    light : #999,
-    dark : #666,
-    link : #488aff,
-    gray : #c5c5c5,
-    icon : #828282,
-    font : #333,
-    border : #ddd,
-    bg : #fafafa
+	primary: #3dcbbd,
+	secondary: #11a593,
+	warning: #ffaa33,
+	danger: #fe4739,
+	success: #6ed91f,
+	light: #999,
+	dark: #666,
+	link: #488aff,
+	gray: #c5c5c5,
+	icon: #828282,
+	font: #333,
+	border: #ddd,
+	bg: #fafafa
 );
-$border : 0.55px solid color($colors, border);
-$padding-horizontal : rem(30);
+$border: 0.55px solid color($colors, border);
+$padding-horizontal: rem(30);
 $designWidth: 750; //如设计图是750
-@function rem( $px) {
-    @return $px/20+rem;
+@function rem($px) {
+	@return $px/20+rem;
 }
-
 @mixin flex-center() {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-
 @mixin text-overflow($size:2) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: $size;
-    -webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: $size;
+	-webkit-box-orient: vertical;
 }
-
 @mixin tag($color, $out-line:false) {
-    display: inline-block;
-    text-align: center;
-    width: rem(90);
-    height: rem(32);
-    position: relative;
-    border-radius: rem(16);
-    @include flex-center();
-    em {
-        display: inline-block;
-        width: rem(12);
-        height: rem(15);
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-    i {
-        font-size: $font-size-base;
-        line-height: 1;
-    }
-    @if($out-line) {
-        color: $color;
-        border: 1px solid $color;
-        em {
-            left: -1px;
-            top: -1px;
-            border-left: 1px solid $color;
-            border-top: 1px solid $color;
-            background-color: #f6f6f6;
-        }
-    }
-    @else {
-        color: #fff;
-        background-color: $color;
-        em {
-            background-color: $color;
-        }
-    }
+	display: inline-block;
+	text-align: center;
+	width: rem(90);
+	height: rem(32);
+	position: relative;
+	border-radius: rem(16);
+	@include flex-center();
+	em {
+		display: inline-block;
+		width: rem(12);
+		height: rem(15);
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	i {
+		font-size: $font-size-base;
+		line-height: 1;
+	}
+	@if($out-line) {
+		color: $color;
+		border: 1px solid $color;
+		em {
+			left: -1px;
+			top: -1px;
+			border-left: 1px solid $color;
+			border-top: 1px solid $color;
+			background-color: #f6f6f6;
+		}
+	} @else {
+		color: #fff;
+		background-color: $color;
+		em {
+			background-color: $color;
+		}
+	}
 }
-
 @mixin tag-size($size) {
-    @if $size=='small' {
-        height: rem(32);
-        line-height: calc(#{rem(32)} - 2px);
-        padding: 0 rem(20);
-        font-size: rem(24);
-        border-radius: rem(16);
-    }
-    @else if $size=='large' {
-        height: rem(60);
-        line-height: calc(#{rem(60)} - 2px);
-        padding: 0 rem(40);
-        font-size: rem(30);
-        border-radius: rem(30);
-    }
-    @else {
-        height: rem(52);
-        line-height: calc(#{rem(52)} - 2px);
-        padding: 0 rem(32);
-        font-size: rem(30);
-        border-radius: rem(26);
-    }
+	@if $size== 'small' {
+		height: rem(32);
+		line-height: calc(#{rem(32)} - 2px);
+		padding: 0 rem(20);
+		font-size: rem(24);
+		border-radius: rem(16);
+	} @else if $size=='large' {
+		height: rem(60);
+		line-height: calc(#{rem(60)} - 2px);
+		padding: 0 rem(40);
+		font-size: rem(30);
+		border-radius: rem(30);
+	} @else {
+		height: rem(52);
+		line-height: calc(#{rem(52)} - 2px);
+		padding: 0 rem(32);
+		font-size: rem(30);
+		border-radius: rem(26);
+	}
 }
-
 @mixin round-tag($size:'default', $color:false, $out-line:true) {
-    display: inline-block;
+	display: inline-block;
 	cursor: pointer;
-    @include tag-size($size);
-    @if($out-line) {
-        @if($color) {
-            border: 1px solid $color;
-            color: $color;
-        }
-        @else {
-            border: 1px solid color($colors, border);
-            color: color($colors, dark);
-        }
-    }
-    @else {
-        border: 1px solid transparent;
-        color: #fff;
-        @if($color) {
-            background-color: $color;
-        }
-        @else {
-            background-color: color($colors, primary);
-        }
-    }
+	@include tag-size($size);
+	@if($out-line) {
+		@if($color) {
+			border: 1px solid $color;
+			color: $color;
+		} @else {
+			border: 1px solid color($colors, border);
+			color: color($colors, dark);
+		}
+	} @else {
+		border: 1px solid transparent;
+		color: #fff;
+		@if($color) {
+			background-color: $color;
+		} @else {
+			background-color: color($colors, primary);
+		}
+	}
 }
-
 @mixin clientele-item() {
-    padding-left: rem(142);
-    .item-inner {
-        .progress {
-            position: absolute;
-            transform: translateX(-6rem);
-            width: rem(96);
-            height: rem(96);
-            border-radius: 50%;
-            border: 1px solid color($colors, border);
-            @include flex-center();
-            .state {
-                font-size: rem(28);
-                color: color($colors, dark);
-            }
-            div {
-                position: absolute;
-                top: -1px;
-                height: rem(96);
-                width: rem(48);
-                overflow: hidden;
-            }
-            .line {
-                top: 0;
-                width: rem(96);
-                border-radius: 50%;
-                border-width: 1px;
-                border-style: solid;
-                border-color: transparent;
-                transform: rotate(-135deg);
-            }
-            .left-wrapper {
-                left: -1px;
-                .line {
-                    left: 0;
-                    border-left-color: color($colors, primary);
-                    border-bottom-color: color($colors, primary);
-                    transform: rotate(45deg);
-                }
-            }
-            .right-wrapper {
-                right: -1px;
-                .line {
-                    right: 0;
-                    border-right-color: color($colors, primary);
-                    border-top-color: color($colors, primary);
-                    transform: rotate(45deg);
-                }
-            }
-            &.wait {
-                .left-wrapper {
-                    .line {
-                        transform: rotate(135deg);
-                    }
-                }
-            }
-            &.wait {
-                .left-wrapper {
-                    .line {
-                        transform: rotate(225deg);
-                    }
-                }
-            }
-            &.already {
-                .left-wrapper {
-                    .line {
-						transform: rotate(135deg);
-                    }
-                }
-            }
-            &.invalid {
-                .left-wrapper {
-                    .line {
-                        transform: rotate(-135deg);
-                    }
-                }
-                .right-wrapper {
-                    .line {
-                        transform: rotate(-135deg);
-                    }
-                }
-            }
-        }
-        .label {
-            margin: 0;
-            display: flex;
-            align-items: center;
-            .clientele-detail {
-                width: 100%
-            }
-            .name {
-                height: rem(66);
-                display: flex;
-                align-items: center;
-                font-size: rem(30);
-                margin-bottom: 0;
-                .main-tag {
-                    @include round-tag('small', color($colors, primary));
-                    margin-left: 1rem;
-                }
-            }
-            .company {
-                height: rem(28);
-                line-height: rem(28);
-                color: color($colors, light);
-                @extend .fn-text-overflow;
-                margin-bottom: 0;
-                font-size: 1.2rem;
-                width: 100%
-            }
-            .tag-container {
-                min-height: rem(66);
-                display: flex;
-                align-items: flex-start;
-                flex-wrap: wrap;
-                // max-height: rem(140);
-                padding-top: 0.5rem;
-                overflow: hidden;
-                .tag-item {
-                    @include round-tag('small');
-                    margin-right: 1rem;
-                    margin-bottom: 0.5rem;
-                }
-            }
-        }
-    }
-    .bar-buttons[item-end] {
-        margin: 0;
-        z-index: 0;
-        .button[icon-only] {
-            .iconfont {
-                font-size: 2.5rem;
-            }
-            &:last-child {
-                margin-left: 1rem;
-            }
-        }
-    }
-}
-
-@mixin remind-item($hasHandle:false) {
-    .item-block {
-        padding-left: rem(60);
-        position: relative;
-        .item-inner {
-            padding-right: 1rem;
-        }
-    }
-    .label {
-        margin: 0;
-        .remind-content {
-            position: relative;
-            padding-bottom: rem(16);
-            // min-height: 8rem;
-            .mark {
-                display: none;
-            }
-			.write-btn-wrapper{
-				display: none;
+	padding-left: rem(142);
+	.item-inner {
+		.progress {
+			position: absolute;
+			transform: translateX(-6rem);
+			width: rem(96);
+			height: rem(96);
+			border-radius: 50%;
+			border: 1px solid color($colors, border);
+			@include flex-center();
+			.state {
+				font-size: rem(28);
+				color: color($colors, dark);
 			}
-            @if($hasHandle) {
-                padding-right: rem(60);
-                .mark {
-                    display: flex;
-                    position: absolute;
-                    height: rem(44);
-                    width: rem(44);
-                    border-radius: 50%;
-                    border: 2px solid #bcbcbc;
-                    justify-content: center;
-                    align-items: center;
-                    top: rem(110);
-                    right: 2px;
-                    font-size: 1.8rem;
-                    color: #fff;
-                    @extend .transition-02;
-                }
-            }
-        }
-        h3 {
-            height: rem(68);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            @extend .fn-text-overflow;
-            margin-bottom: 0;
-            .start {
-                display: flex;
-                align-items: center;
-                height: 100%;
-            }
-            .time {
-                @include tag(color($colors, primary));
-            }
-            .title {
-                font-size: rem(32);
-                color: #000;
-                font-weight: bold;
-                margin-left: rem(20);
-                line-height: 1;
-            }
-            .date {
-                color: color($colors, light);
-                align-items: flex-end;
-                line-height: 1;
-            }
-        }
-        .clientele-info {
-            padding-left: 0.6rem;
-            margin-bottom: 0;
-            line-height: rem(52);
-            max-height: rem(104);
-            font-size: rem(28);
-            @include text-overflow();
-            margin: 0;
-            color: color($colors, dark);
-            .start {
-                margin-right: 1rem;
-            }
-        }
-        .remark {
-            padding-left: 0.6rem;
-            .remark-text {
-                line-height: rem(44);
-                color: color($colors, light);
-                white-space: normal;
-                word-break: break-all;
-            }
-            .remark-img-container {
-                display: flex;
-                height: rem(72);
-                align-items: center;
-                img {
-                    height: rem(56);
-                    margin-right: 1rem;
-                }
-            }
-            .remark-voice-container {
-                margin-top: 0.4rem;
-            }
-        }
-        .return-wrapper {
-            padding-left: 0.6rem;
-            background-color: #f6f6f6;
-        }
-        .return {
-            min-height: rem(74);
-            padding: rem(10) 0;
-            .return-from {
-                display: flex;
-                .name-wrapper {
-                    height: rem(56);
-                    @include flex-center();
-                }
-                .name {
-                    @include tag(color($colors, primary), true);
-                    margin-right: rem(16);
-                }
-                .return-text {
-                    width: calc(100% - 5.3rem);
-                    @include text-overflow();
-                    white-space: normal;
-                    word-break: break-all;
-                    line-height: rem(56);
-                    max-height: rem(112);
-                    font-size: 1.2rem;
-                    color: color($colors, primary);
-                }
-                .return-voice-container {
-                    width: calc(100% - 5.3rem);
-                    height: rem(56);
-                    display: flex;
-                    align-items: center;
-                }
-            }
-            .return-img-container {
-                height: rem(76);
-                display: flex;
-                align-items: center;
-                img {
-                    width: rem(56);
-                    height: rem(56);
-                    margin-right: 1rem;
-                }
-            }
-        }
-    }
-    .top-line {
-        position: absolute;
-        display: inline-block;
-        height: 2.2rem;
-        width: 1px;
-        background-color: color($colors, border);
-        left: 1.5rem;
-        top: 0;
-    }
-    .item:before {
-        position: absolute;
-        display: inline-block;
-        height: rem(20);
-        width: rem(20);
-        background-color: color($colors, primary);
-        left: 1rem;
-        top: 0.9rem;
-        content: '';
-        border-radius: 50%;
-        z-index: 2;
-    }
-    .item:after {
-        position: absolute;
-        display: inline-block;
-        height: 100%;
-        width: 1px;
-        background-color: color($colors, border);
-        left: 1.5rem;
-        top: 1.9rem;
-        content: '';
-    }
-    &.time-out {
-        .item:before {
-            background-color: color($colors, danger);
-        }
-        .label {
-            h3 {
-                .time {
-                    @include tag(color($colors, danger));
-                }
-                .title {
-                    i {
-                        color: color($colors, danger);
-                    }
-                }
-            }
-            .remark {
-                .remark-text {
-                    // text-decoration:line-through;
-                }
-            }
-        }
-    }
-	&.write-in{
-		.label{
-			.remind-content{
-				.remark{
-					padding-right:7rem;
+			div {
+				position: absolute;
+				top: -1px;
+				height: rem(96);
+				width: rem(48);
+				overflow: hidden;
+			}
+			.line {
+				top: 0;
+				width: rem(96);
+				border-radius: 50%;
+				border-width: 1px;
+				border-style: solid;
+				border-color: transparent;
+				transform: rotate(-135deg);
+			}
+			.left-wrapper {
+				left: -1px;
+				.line {
+					left: 0;
+					border-left-color: color($colors, primary);
+					border-bottom-color: color($colors, primary);
+					transform: rotate(45deg);
 				}
-				.clientele-info{
-					padding-right:7rem;
+			}
+			.right-wrapper {
+				right: -1px;
+				.line {
+					right: 0;
+					border-right-color: color($colors, primary);
+					border-top-color: color($colors, primary);
+					transform: rotate(45deg);
 				}
-				.write-btn-wrapper{
-					position: absolute;right: 0;top:3.4rem;
-					display: flex;height: calc(100% - 3.4rem);align-items: center;
-					.write-btn{
-
+			}
+			&.wait {
+				.left-wrapper {
+					.line {
+						transform: rotate(135deg);
+					}
+				}
+			}
+			&.wait {
+				.left-wrapper {
+					.line {
+						transform: rotate(225deg);
+					}
+				}
+			}
+			&.already {
+				.left-wrapper {
+					.line {
+						transform: rotate(135deg);
+					}
+				}
+			}
+			&.invalid {
+				.left-wrapper {
+					.line {
+						transform: rotate(-135deg);
+					}
+				}
+				.right-wrapper {
+					.line {
+						transform: rotate(-135deg);
 					}
 				}
 			}
 		}
+		.label {
+			margin: 0;
+			display: flex;
+			align-items: center;
+			.clientele-detail {
+				width: 100%;
+			}
+			.name {
+				height: rem(66);
+				display: flex;
+				align-items: center;
+				font-size: rem(30);
+				margin-bottom: 0;
+				.main-tag {
+					@include round-tag('small', color($colors, primary));
+					margin-left: 1rem;
+				}
+			}
+			.company {
+				height: rem(28);
+				line-height: rem(28);
+				color: color($colors, light);
+				@extend .fn-text-overflow;
+				margin-bottom: 0;
+				font-size: 1.2rem;
+				width: 100%;
+			}
+			.tag-container {
+				min-height: rem(66);
+				display: flex;
+				align-items: flex-start;
+				flex-wrap: wrap;
+				// max-height: rem(140);
+				padding-top: 0.5rem;
+				overflow: hidden;
+				.tag-item {
+					@include round-tag('small');
+					margin-right: 1rem;
+					margin-bottom: 0.5rem;
+				}
+			}
+		}
 	}
-    &.done {
-        .item:before {
-            background-color: color($colors, gray);
-        }
-        .label {
-            h3 {
-                .time {
-                    @include tag(color($colors, gray));
-                }
-				.title{
-					color: color($colors, danger);text-decoration:line-through;
-					i{
-						color: color($colors, light);
+	.bar-buttons[item-end] {
+		margin: 0;
+		z-index: 0;
+		.button[icon-only] {
+			.iconfont {
+				font-size: 2.5rem;
+			}
+			&:last-child {
+				margin-left: 1rem;
+			}
+		}
+	}
+}
+@mixin remind-item($hasHandle:false) {
+	.item-block {
+		padding-left: rem(60);
+		position: relative;
+		.item-inner {
+			padding-right: 1rem;
+		}
+	}
+	.label {
+		margin: 0;
+		.remind-content {
+			position: relative;
+			padding-bottom: rem(16);
+			// min-height: 8rem;
+			.mark {
+				display: none;
+			}
+			.write-btn-wrapper {
+				display: none;
+			}
+			@if($hasHandle) {
+				padding-right: rem(60);
+				.mark {
+					display: flex;
+					position: absolute;
+					height: rem(44);
+					width: rem(44);
+					border-radius: 50%;
+					border: 2px solid #bcbcbc;
+					justify-content: center;
+					align-items: center;
+					top: rem(110);
+					right: 2px;
+					font-size: 1.8rem;
+					color: #fff;
+					@extend .transition-02;
+				}
+			}
+		}
+		h3 {
+			height: rem(68);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			@extend .fn-text-overflow;
+			margin-bottom: 0;
+			.start {
+				display: flex;
+				align-items: center;
+				height: 100%;
+			}
+			.time {
+				@include tag(color($colors, primary));
+			}
+			.title {
+				font-size: rem(32);
+				color: #000;
+				font-weight: bold;
+				margin-left: rem(20);
+				line-height: 1;
+			}
+			.date {
+				color: color($colors, light);
+				align-items: flex-end;
+				line-height: 1;
+			}
+		}
+		.clientele-info {
+			padding-left: 0.6rem;
+			margin-bottom: 0;
+			line-height: rem(52);
+			max-height: rem(104);
+			font-size: rem(28);
+			@include text-overflow();
+			margin: 0;
+			color: color($colors, dark);
+			.start {
+				margin-right: 1rem;
+			}
+		}
+		.remark {
+			padding-left: 0.6rem;
+			.remark-text {
+				line-height: rem(44);
+				color: color($colors, light);
+				white-space: normal;
+				word-break: break-all;
+			}
+			.remark-img-container {
+				display: flex;
+				height: rem(72);
+				align-items: center;
+				img {
+					height: rem(56);
+					margin-right: 1rem;
+				}
+			}
+			.remark-voice-container {
+				margin-top: 0.4rem;
+			}
+		}
+		.return-wrapper {
+			padding-left: 0.6rem;
+			background-color: #f6f6f6;
+		}
+		.return {
+			min-height: rem(74);
+			padding: rem(10) 0;
+			.return-from {
+				display: flex;
+				.name-wrapper {
+					height: rem(56);
+					@include flex-center();
+				}
+				.name {
+					@include tag(color($colors, primary), true);
+					margin-right: rem(16);
+				}
+				.return-text {
+					width: calc(100% - 5.3rem);
+					@include text-overflow();
+					white-space: normal;
+					word-break: break-all;
+					line-height: rem(56);
+					max-height: rem(112);
+					font-size: 1.2rem;
+					color: color($colors, primary);
+				}
+				.return-voice-container {
+					width: calc(100% - 5.3rem);
+					height: rem(56);
+					display: flex;
+					align-items: center;
+				}
+			}
+			.return-img-container {
+				height: rem(76);
+				display: flex;
+				align-items: center;
+				img {
+					width: rem(56);
+					height: rem(56);
+					margin-right: 1rem;
+				}
+			}
+		}
+	}
+	.top-line {
+		position: absolute;
+		display: inline-block;
+		height: 2.2rem;
+		width: 1px;
+		background-color: color($colors, border);
+		left: 1.5rem;
+		top: 0;
+	}
+	.item:before {
+		position: absolute;
+		display: inline-block;
+		height: rem(20);
+		width: rem(20);
+		background-color: color($colors, primary);
+		left: 1rem;
+		top: 0.9rem;
+		content: '';
+		border-radius: 50%;
+		z-index: 2;
+	}
+	.item:after {
+		position: absolute;
+		display: inline-block;
+		height: 100%;
+		width: 1px;
+		background-color: color($colors, border);
+		left: 1.5rem;
+		top: 1.9rem;
+		content: '';
+	}
+	&.time-out {
+		.item:before {
+			background-color: color($colors, danger);
+		}
+		.label {
+			h3 {
+				.time {
+					@include tag(color($colors, danger));
+				}
+				.title {
+					i {
+						color: color($colors, danger);
 					}
 				}
-            }
-			.remark{
-				.remark-text{
+			}
+			.remark {
+				.remark-text {
 					// text-decoration:line-through;
 				}
 			}
-        }
-    }
-    &.pitch-on {
-        .label {
-            .remind-content {
-                .mark {
-                    background-color: color($colors, warning);
-                    border-color: color($colors, warning);
-                }
-            }
-        }
-    }
+		}
+	}
+	&.write-in {
+		.label {
+			.remind-content {
+				.remark {
+					padding-right: 7rem;
+				}
+				.clientele-info {
+					padding-right: 7rem;
+				}
+				.write-btn-wrapper {
+					position: absolute;
+					right: 0;
+					top: 3.4rem;
+					display: flex;
+					height: calc(100% - 3.4rem);
+					align-items: center;
+					.write-btn {}
+				}
+			}
+		}
+	}
+	&.done {
+		.item:before {
+			background-color: color($colors, gray);
+		}
+		.label {
+			h3 {
+				.time {
+					@include tag(color($colors, gray));
+				}
+				.title {
+					color: color($colors, danger);
+					text-decoration: line-through;
+					i {
+						color: color($colors, light);
+					}
+				}
+			}
+			.remark {
+				.remark-text {
+					// text-decoration:line-through;
+				}
+			}
+		}
+	}
+	&.pitch-on {
+		.label {
+			.remind-content {
+				.mark {
+					background-color: color($colors, warning);
+					border-color: color($colors, warning);
+				}
+			}
+		}
+	}
 }
-
 @mixin set-state() {
-    background-color: #fff;
-    padding: 0 1rem 2.2rem 1rem;
-    .title {
-        height: rem(86);
-        display: flex;
-        align-items: center;
-        font-size: rem(30);
-    }
-    .state-container {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 0.5rem;
-    }
-    .state-item {
-        @include round-tag('large');
-        @extend .transition-02;
-        &.active {
-            @include round-tag('large', color($colors, primary), false);
-        }
-        &.disabled{
-            opacity: 0.4;
-            cursor: default;
-            pointer-events: none;
-        }
-    }
+	background-color: #fff;
+	padding: 0 1rem 2.2rem;
+	.title {
+		height: rem(86);
+		display: flex;
+		align-items: center;
+		font-size: rem(30);
+	}
+	.state-container {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 0.5rem;
+	}
+	.state-item {
+		@include round-tag('large');
+		@extend .transition-02;
+		&.active {
+			@include round-tag('large', color($colors, primary), false);
+		}
+		&.disabled {
+			opacity: 0.4;
+			cursor: default;
+			pointer-events: none;
+		}
+	}
 }
-
 @mixin ion-filter($platform) {
-    .ion-filter {
-        height: rem(84);
-        position: relative;
-        .filter-bar {
-            background-color: color($colors, bg);
-            height: rem(82);
-            @if $platform=='ios' {
-                border-bottom: $border;
-            }
-            display: flex;
-            padding: 1rem 0;
-            position: relative;
-            z-index: 10;
-            .filter-item {
-                width: calc(100% / 3);
-                @include flex-center();
-                border-right: $border;
-                position: relative;
-                .name {
-                    font-size: rem(30);
-                    @extend .transition-02;
-                }
-                .iconfont {
-                    font-size: 1.2rem;
-                    margin-left: 1rem;
-                    @include flex-center();
-                    height: 100%;
-                    @extend .transition-02;
-                }
-                &.open {
-                    color: color($colors, primary);
-                    .iconfont {
-                        transform: rotate(180deg);
-                    }
-                }
-                &:last-child {
-                    border-right: none;
-                }
-            }
-        }
-        .filter-panel {
-            position: absolute;
-            width: 100%;
-            top: 100%;
-            background-color: #fff;
-            z-index: 9;
-            @extend .transition-35;
-            margin-top: -1px;
-            transform: translateY(-100%);
-            .panel-item {
-                display: none;
-                height: rem(80);
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                font-size: rem(30);
-                padding-left: rem(40);
-                padding-right: 1rem;
-                border-bottom: $border;
-                @extend .transition-02;
-                .iconfont {
-                    display: none;
-                }
-                &:last-child {
-                    border-bottom: none;
-                }
-                &.active {
-                    color: color($colors, primary);
-                    .iconfont {
-                        display: block;
-                        color: color($colors, primary);
-                    }
-                }
-            }
-            &.show {
-                box-shadow: 0 6px 5px rgba(0, 0, 0, 0.05);
-                transform: translateY(0);
-            }
-        }
-        .filter-backdrop {
-            position: fixed;
-            height: 100%;
-            width: 100%;
-            background-color: #000;
-            opacity: 0;
-            @extend .transition-02;
-            z-index: 9;
-            &.in {
-                opacity: 0.3;
-            }
-        }
-    }
+	height: rem(84);
+	position: relative;
+	.filter-bar {
+		background-color: color($colors, bg);
+		height: rem(82);
+		@if $platform== 'ios' {
+			border-bottom: $border;
+		}
+		display: flex;
+		padding: 1rem 0;
+		position: relative;
+		z-index: 10;
+		.filter-item {
+			width: calc(100% / 3);
+			@include flex-center();
+			border-right: $border;
+			position: relative;
+			.name {
+				font-size: rem(30);
+				@extend .transition-02;
+			}
+			.iconfont {
+				font-size: 1.2rem;
+				margin-left: 1rem;
+				@include flex-center();
+				height: 100%;
+				@extend .transition-02;
+			}
+			&.open {
+				color: color($colors, primary);
+				.iconfont {
+					transform: rotate(180deg);
+				}
+			}
+			&:last-child {
+				border-right: none;
+			}
+		}
+	}
+	.filter-panel {
+		position: absolute;
+		width: 100%;
+		top: 100%;
+		background-color: #fff;
+		z-index: 9;
+		@extend .transition-35;
+		margin-top: -1px;
+		transform: translateY(-100%);
+		.panel-item {
+			display: none;
+			height: rem(80);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: rem(30);
+			padding-left: rem(40);
+			padding-right: 1rem;
+			border-bottom: $border;
+			@extend .transition-02;
+			.iconfont {
+				display: none;
+			}
+			&:last-child {
+				border-bottom: none;
+			}
+			&.active {
+				color: color($colors, primary);
+				.iconfont {
+					display: block;
+					color: color($colors, primary);
+				}
+			}
+		}
+		&.show {
+			box-shadow: 0 6px 5px rgba(0, 0, 0, 0.05);
+			transform: translateY(0);
+		}
+	}
+	.filter-backdrop {
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		background-color: #000;
+		opacity: 0;
+		@extend .transition-02;
+		z-index: 9;
+		&.in {
+			opacity: 0.3;
+		}
+	}
 }
-
 .gray {
-    background-color: color($colors, bg);
+	background-color: color($colors, bg);
 }
-
 .iconfont {
-    color: color($colors, icon);
+	color: color($colors, icon);
 }
-
 .transition-02 {
-    transition: all 0.2s ease;
+	transition: all 0.2s ease;
 }
-
 .transition-35 {
-    transition: all 0.35s ease;
+	transition: all 0.35s ease;
 }
-
 .transition-05 {
-    transition: all 0.5s ease;
+	transition: all 0.5s ease;
 }
-
 .color-primary {
-    color: color($colors, primary);
+	color: color($colors, primary);
 }
-
 .color-secondary {
-    color: color($colors, secondary);
+	color: color($colors, secondary);
 }
-
 .color-warning {
-    color: color($colors, warning);
+	color: color($colors, warning);
 }
-
 .color-danger {
-    color: color($colors, danger);
+	color: color($colors, danger);
 }
-
 .color-success {
-    color: color($colors, success);
+	color: color($colors, success);
 }
-
 /* 清理浮动 */
-
 .fn-clear:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: '';
-    clear: both;
-    height: 0;
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: '';
+	clear: both;
+	height: 0;
 }
-
 .fn-clear {
-    zoom: 1;
-    /* for IE6 IE7 */
+	zoom: 1;
+	/* for IE6 IE7 */
 }
-
 .fn-left {
-    float: left;
+	float: left;
 }
-
 .fn-right {
-    float: right;
+	float: right;
 }
-
 .fn-hide {
-    display: none !important;
+	display: none !important;
 }
-
 .fn-text-overflow {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
-
 .icon-loading {
-    display: inline-block;
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    left: 50%;
-    top: 50%;
-    margin-top: -50px;
-    margin-left: -50px;
-    text-align: center;
-    z-index: 9;
-    transform-origin: 50% 50% 0;
-    animation: load 1.5s linear infinite;
+	display: inline-block;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+	text-align: center;
+	z-index: 9;
+	transform-origin: 50% 50% 0;
+	animation: load 1.5s linear infinite;
 }
-
 /* 对齐是排版最重要的因素, 别让什么都居中 */
-
 caption,
 th {
-    text-align: left;
+	text-align: left;
 }
-
 /* 来自yahoo, 让标题都自定义, 适应多个系统应用 */
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-size: 100%;
-    font-weight: 500;
+	font-size: 100%;
+	font-weight: 500;
 }
-
-q:before,
-q:after {
-    content: '';
+q:after,
+q:before {
+	content: '';
 }
-
 /* 统一上标和下标 */
-
 sub,
 sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
 }
-
 sup {
-    top: -0.5em;
+	top: -0.5em;
 }
-
 sub {
-    bottom: -0.25em;
+	bottom: -0.25em;
 }
-
 /* 正常链接 未访问 */
-
 a:link {
-    text-decoration: none;
+	text-decoration: none;
 }
-
 /* 鼠标悬停 */
-
 a:hover {
-    text-decoration: none;
+	text-decoration: none;
 }
-
 /* 默认不显示下划线，保持页面简洁 */
-
-ins,
-a {
-    text-decoration: none;
+a,
+ins {
+	text-decoration: none;
 }
-
 /* 代码字体 */
-
 code,
 kbd,
 pre,
 samp {
-    font-family: monospace, serif;
-    font-size: 1em;
+	font-family: monospace, serif;
+	font-size: 1em;
 }
-
 /* 隐藏, 通常用来与 JS 配合 */
-
 /* a链接去掉点击时候的虚线*/
-
 a,
 button,
 input {
-    &:focus {
-        text-decoration: none;
-        outline: none;
-    }
-    text-decoration: none;
-    outline: none;
+	&:focus {
+		text-decoration: none;
+		outline: none;
+	}
+	text-decoration: none;
+	outline: none;
 }
-
 a:hover {
-    text-decoration: none;
+	text-decoration: none;
 }
-
 /*初始化系统默认样式*/
-
-i,
-em {
-    font-style: normal;
+em,
+i {
+	font-style: normal;
 }
-
 input,
 select,
 textarea {
-    vertical-align: middle;
-    -webkit-appearance: none;
-    border-radius: 0;
-    outline: none;
-    font-family: \5FAE\8F6F\96C5\9ED1, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
-    color: #333;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	border-radius: 0;
+	outline: none;
+	font-family: \5FAE\8F6F\96C5\9ED1, Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
+	color: #333;
 }
-
 *,
-*:after,
-*::before {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+*::before,
+*:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
-
 /* 清除浏览器默认行为 */
-
 * {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    -webkit-touch-callout: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-touch-callout: none;
 }
-
 a,
 button {
-    -webkit-user-select: none;
+	-webkit-user-select: none;
 }
-
-input[type=tel],
+input[type=date],
 input[type=number],
 input[type=password],
-input[type=date] {
-    font-family: tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
+input[type=tel] {
+	font-family: tahoma, arial, "Hiragino Sans GB", \5b8b\4f53, sans-serif;
 }
-
 /*input[type="date"]:before {
     content: attr(placeholder);
     color:#c7c7c7;width: 100%;

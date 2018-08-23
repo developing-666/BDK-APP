@@ -14,7 +14,7 @@
             </button>
         </ion-buttons>
     </ion-navbar>
-    <ion-filter [ngClass]="{'ion-filter-ios':plt.is('ios'),'ion-filter-md':plt.is('android')}" (panelHidden)="filterHide($event)">
+    <ion-filter class="ion-filter" [ngClass]="{'ion-filter-ios':plt.is('ios'),'ion-filter-md':plt.is('android')}" (panelHidden)="filterHide($event)">
     </ion-filter>
 </ion-header>
 <ion-content>

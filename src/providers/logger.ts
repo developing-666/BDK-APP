@@ -9,33 +9,33 @@ import { GlobalData } from './global-data';
  */
 @Injectable()
 export class Logger {
-  constructor(private globalData: GlobalData) {
-  }
+	constructor(private globalData: GlobalData) {
+	}
 
-  log(err: any, action: string, other = null): void {
-    console.log('Logger.log：action-' + action);
-    other && console.log(other);
-    console.log(err);
-//  fundebug.notifyError(err,
-//    {
-//      metaData: {
-//        action, // 操作名称
-//        other, // 其他数据信息
-//        user: { id: this.globalData.userId, name: this.globalData.username }
-//      }
-//    });
-  }
+	log(err: any, action: string, other = null): void {
+		console.log('Logger.log：action-' + action);
+		other && console.log(other);
+		console.log(err);
+		//  fundebug.notifyError(err,
+		//    {
+		//      metaData: {
+		//        action, // 操作名称
+		//        other, // 其他数据信息
+		//        user: { id: this.globalData.userId, name: this.globalData.username }
+		//      }
+		//    });
+	}
 
-  httpLog(err: any, msg: string, other = {}): void {
-    console.log('Logger.httpLog：msg-' + msg);
-//  fundebug.notifyHttpError(err,
-//    {
-//      metaData: {
-//        action: msg, // 操作名称
-//        other, // 其他数据信息
-//        user: { id: this.globalData.userId, name: this.globalData.username }
-//      }
-//    });
-  }
+	httpLog(err: any, msg: string, other = {}): void {
+		console.log('Logger.httpLog：msg-' + msg);
+		//  fundebug.notifyHttpError(err,
+		//    {
+		//      metaData: {
+		//        action: msg, // 操作名称
+		//        other, // 其他数据信息
+		//        user: { id: this.globalData.userId, name: this.globalData.username }
+		//      }
+		//    });
+	}
 
 }

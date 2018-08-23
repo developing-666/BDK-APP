@@ -15,28 +15,28 @@
         </div>
     </div>
 	<ion-list class="auth-list">
-		<ion-item-sliding *ngFor="let item of auths">
+		<ion-item-sliding *ngFor="let item of auths;let $index = index">
 			<ion-item>
 				<ion-avatar item-start>
-					<span class="admin">
-						管理者
+					<span class="admin" [ngClass]="{'admin':item?.role?.name=='管理员'}">
+						{{item?.role?.name}}
 					</span>
 				</ion-avatar>
 				<div class="info">
-					<h2>王盛</h2>
+					<h2>{{item.name}}</h2>
 					<div class="tag-container">
-						<i>员工</i>
+						<i *ngFor="let tag of item.labels">{{tag}}</i>
 					</div>
 				</div>
 			</ion-item>
 			<ion-item-options side="right">
-				<button ion-button color="primary">
+				<button ion-button color="primary" hidden>
 					分配
 				</button>
-				<button ion-button color="warning">
+				<button ion-button color="warning" (tap)="edit(item)">
 					修改
 				</button>
-				<button ion-button color="danger">
+				<button ion-button color="danger" (tap)="delete(item,$index)">
 					删除
 				</button>
 			</ion-item-options>
