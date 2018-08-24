@@ -105,6 +105,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="此App需要您的同意才能读取媒体库" />
     </plugin>
     <plugin name="cordova-plugin-code-push" spec="^1.11.11" />
+    <plugin name="cordova-plugin-contacts" spec="^3.0.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.7.1" />

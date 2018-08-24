@@ -30,6 +30,7 @@
         "@ionic-native/call-number": "^4.7.0",
         "@ionic-native/camera": "^4.7.0",
         "@ionic-native/code-push": "^4.7.0",
+        "@ionic-native/contacts": "^4.12.0",
         "@ionic-native/core": "4.7.0",
         "@ionic-native/device": "^4.7.0",
         "@ionic-native/diagnostic": "^4.7.0",
@@ -64,6 +65,7 @@
         "cordova-plugin-appminimize": "^1.0.0",
         "cordova-plugin-camera": "^4.0.3",
         "cordova-plugin-code-push": "^1.11.11",
+        "cordova-plugin-contacts": "^3.0.1",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-dialogs": "^2.0.1",
         "cordova-plugin-file": "^6.0.1",
@@ -91,6 +93,7 @@
         "js-base64": "^2.4.5",
         "moment": "^2.22.2",
         "mx.ferreyra.callnumber": "~0.0.2",
+        "pinyin": "^2.8.3",
         "rxjs": "5.5.10",
         "sw-toolbox": "3.6.0",
         "zone.js": "0.8.26"
@@ -137,7 +140,8 @@
             "cordova-sms-plugin": {},
             "jpush-phonegap-plugin": {
                 "APP_KEY": "fae3c4774ec570d93166b3a6"
-            }
+            },
+            "cordova-plugin-contacts": {}
         },
         "platforms": [
             "android",
