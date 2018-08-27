@@ -37,4 +37,21 @@ export { TrustResourceUrl } from './bypass-trust-res-url';
         SizeTransformPipe
     ]
 })
-export class PipesModule {}
+export class PipesModule {
+	public static forRoot(): ModuleWithProviders {
+		return {
+			ngModule: PipesModule,
+			providers: [
+				MapToIterable,
+		        OrderBy,
+		        TrustResourceUrl,
+		        FollowStatusPipe,
+		        MomentPipe,
+		        GetImgPipe,
+		        PhoneHideNumberPipe,
+		        SortNamePipe,
+		        SizeTransformPipe
+			]
+		};
+	}
+}

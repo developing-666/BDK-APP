@@ -68,8 +68,8 @@ export class AlphaScroll implements OnInit, OnChanges, OnDestroy {
 		body.appendChild(this.letterIndicatorEle);
 	}
 	ngOnInit() {
-		console.log(this.elementRef.nativeElement.offsetHeight);
-		console.log(this.list.nativeElement.offsetHeight);
+		// console.log(this.elementRef.nativeElement.offsetHeight);
+		// console.log(this.list.nativeElement.offsetHeight);
 		setTimeout(() => {
 			this.indicatorWidth = this.letterIndicatorEle.offsetWidth;
 			this.indicatorHeight = this.letterIndicatorEle.offsetHeight;
@@ -77,6 +77,7 @@ export class AlphaScroll implements OnInit, OnChanges, OnDestroy {
 		});
 	}
 	ngOnChanges() {
+		console.log(this.listData);
 		// 先对传入的listData排序 避免结果顺序乱掉
 		let sortedListData: Array<any> = this.orderBy.transform(_.orderBy(this.listData, x => x.initial), [this.key]);
 		let groupItems: any = _.groupBy(sortedListData, item => {
@@ -183,9 +184,9 @@ export class AlphaScroll implements OnInit, OnChanges, OnDestroy {
 	private iterateAlphabet(alphabet: any): Array<any> {
 		let str: string;
 		if (this.headerTemplate != null || this.headerTemplate != undefined) {
-			str = '↑ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			str = '↑ABCDEFGHIJKLMNOPQRSTUVWXYZ#';
 		} else {
-			str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#';
 		}
 		let result: Array<any> = [];
 		for (let i = 0; i < str.length; i++) {

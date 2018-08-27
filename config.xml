@@ -11,6 +11,9 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSContactsUsageDescription">
+        <string>此App需要您的同意才能读取通讯录</string>
+    </edit-config>
     <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>此App需要您的同意才能读取媒体库</string>
     </edit-config>
@@ -95,8 +98,8 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <engine name="android" spec="^7.1.0" />
-    <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="^4.5.5" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
     <plugin name="cordova-plugin-app-version" spec="^0.1.9" />

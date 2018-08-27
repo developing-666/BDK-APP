@@ -27,7 +27,9 @@ import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
 
-import { AlphaScrollModule } from '../modules/alpha-scroll/index';
+
+import { PipesModule } from '../pipes/pipes.module';
+import { AlphaScrollModule } from '../modules/alpha-scroll/alpha-scroll.module';
 import * as ionicGalleryModal from '../modules/ion-gallery/index';
 
 //Ionic原生相关
@@ -72,7 +74,7 @@ import { GlobalData } from '../providers/global-data';
 import { JpushNotification } from '../providers/jpush-notification';
 //import { FUNDEBUG_API_KEY, IS_DEBUG } from '../providers/constants';
 import { Logger } from '../providers/logger';
-import { Pinyin } from '../providers/pinyinUtil';
+import { Pinyin } from '../providers/pinyin';
 
 import {
 	ModalFromRightEnter,
@@ -115,7 +117,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		}),
 		IonicStorageModule.forRoot(),
 		SettingsPageModule,
-		ionicGalleryModal.GalleryModalModule
+		ionicGalleryModal.GalleryModalModule,
+		PipesModule.forRoot()
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [MyApp, HomePage, ContactsPage],
