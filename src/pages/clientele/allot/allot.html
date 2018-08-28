@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>分配对象</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <div class="tag-wrapper">
+		<p class="hint">请选择给客户分配的工作人员</p>
+        <div class="tag-container">
+            <span class="tag-item" *ngFor="let item of tags" (tap)="selectTag(item)" [ngClass]="{'active':item.id==tag?.id}">{{item.name}}</span>
+			<span class="no-tag" *ngIf="tags.length==0">
+                无
+            </span>
+        </div>
+        <button class="submit" ion-button block round (tap)="customerAssign()" [disabled]="!tag">确定</button>
+    </div>
+</ion-content>

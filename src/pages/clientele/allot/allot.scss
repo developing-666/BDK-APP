@@ -1,0 +1,38 @@
+page-allot {
+	.content{
+        background-color: #fff;
+    }
+	.tag-wrapper{
+		padding: 0 rem(10) 0 rem(30);min-height: 100%;
+		.hint{
+			line-height: rem(110);text-align: center;font-size: rem(30);color:color($colors,light);
+		}
+		.tag-container{
+			display: flex;
+			flex-wrap: wrap;
+			.tag-item{
+				@include round-tag();margin-bottom: 1rem;background-color: #fff;position: relative;margin-right:1rem;
+				&.active{
+					@include round-tag('default',color($colors,primary),false);
+				}
+			}
+			.no-tag{
+				background-color: #fff;
+				display: flex;
+			    height: 2.6rem;
+                align-items: center;justify-content: center;
+			    width: rem(180);
+			    font-size: rem(30);
+			    border-radius: 1.3rem;
+			    border: 1px dashed color($colors,light);
+			    margin-right:1rem;
+			    margin-bottom: 1rem;
+
+			}
+		}
+		.submit{
+			margin-top: rem(200);
+            width: calc(100% - 1rem);
+		}
+	}
+}

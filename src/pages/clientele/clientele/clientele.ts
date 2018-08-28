@@ -150,6 +150,9 @@ export class ClientelePage {
 	itemRemind() {
 		this.list.closeSlidingItems();
 	}
+	itemAllot(){
+		this.list.closeSlidingItems();
+	}
 	itemDetails(item) {
 		this.app.getRootNav().push(
 			ClienteleDetailPage,

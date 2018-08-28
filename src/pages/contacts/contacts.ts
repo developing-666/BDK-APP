@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, AlertController, Content } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Content,Events } from 'ionic-angular';
 
 import { Contacts, ContactFindOptions, ContactFieldType } from '@ionic-native/contacts';
 
@@ -21,6 +21,7 @@ export class ContactsPage {
 	@ViewChild('list') list: ElementRef;
 	@ViewChild('letterIndicatorEle') letterIndicatorEle: ElementRef;
 	@ViewChild('sidebar') sidebar: ElementRef;
+	person: any = this.navParams.get('person');
 	sortedItems: any = [];
 	alphabet: any = [];
 	allContacts: Array<any> = allContacts;//未按首字母顺序分组格式化后的数据
@@ -38,6 +39,7 @@ export class ContactsPage {
 		private nativeService: NativeService,
 		private orderBy: OrderBy,
 		private elementRef: ElementRef,
+		public events: Events
 	) { }
 	ionViewDidLoad() {
 		if (this.nativeService.isMobile()) {
@@ -181,6 +183,7 @@ export class ContactsPage {
 		// this.wrapper.nativeElement.style['overflow-y'] = 'auto';
 	}
 	onItemClick(e) {
-		console.log(e)
+		this.events.publish('contacts:choose',e);
+		this.navCtrl.pop();
 	}
 }

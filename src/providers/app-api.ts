@@ -347,4 +347,16 @@ export class AppApi {
     queryAllCalled(){
         return this._http.get('/fourhundredtalkdtl/queryAllCalled');
     }
+	/**
+	 * 查询分配对象
+	 */
+	queryUserByCompany(opts){
+		return this._http.post('/user/queryUserByCompany',opts);
+	}
+	/**
+	 * 客户分配
+	 */
+	customerAssign(opts){
+		return this._http.post('/customer/assign',opts);
+	}
 }

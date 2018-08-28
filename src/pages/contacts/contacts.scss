@@ -10,8 +10,8 @@ page-contacts {
 				top: 0;
 				bottom: 0;
 				left: 0;
-				right: 3.2rem;
-				overflow-y:scroll;
+				right: 3.5rem;
+				overflow-y:auto;
 				overflow-x:hidden;
 				&::-webkit-scrollbar{
 					display: none;
@@ -50,6 +50,15 @@ page-contacts {
 					line-height: 2.9rem;
 					font-size: 1.5rem;
 					color: color($colors,dark);
+				}
+			}
+			&.active{
+				.item-inner{position: relative;
+					&:after{
+						position: absolute;right: 1rem;
+						@extend .iconfont;
+						content: '\e640';color: color($colors,primary);font-size: 2.4rem;
+					}
 				}
 			}
 		}

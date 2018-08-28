@@ -125,8 +125,9 @@ $designWidth: 750; //如设计图是750
 			border: 1px solid color($colors, border);
 			@include flex-center();
 			.state {
-				font-size: rem(28);
+				font-size: 1.2rem;
 				color: color($colors, dark);
+				@extend .fn-text-overflow;
 			}
 			div {
 				position: absolute;

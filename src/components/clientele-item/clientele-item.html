@@ -1,6 +1,6 @@
 <ion-item-sliding [ngClass]="{'no-push':noPush}">
     <ion-item class="clientele-item" detail-push (click)="itemClick($event,data)">
-        <div class="progress" [ngClass]="data.followStatus | followStatus:'class'">
+        <div class="progress" *ngIf="globalData?.user?.type!='COMPANY'" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
             </div>
@@ -9,6 +9,17 @@
             </div>
             <span class="state">
                 {{data.followStatus | followStatus:'state'}}
+            </span>
+        </div>
+		<div class="progress" *ngIf="globalData?.user?.type=='COMPANY'" [ngClass]="{over:'data.onwer'}">
+            <div class="left-wrapper">
+                <div class="line"></div>
+            </div>
+            <div class="right-wrapper">
+                <div class="line"></div>
+            </div>
+            <span class="state">
+                {{data?.onwer?.name}}
             </span>
         </div>
         <div class="clientele-detail">
@@ -38,6 +49,9 @@
         </ion-buttons>
     </ion-item>
     <ion-item-options side="right" class="item-options">
+		<button ion-button color="primary" (click)="goAllot(data)">
+            分配
+        </button>
         <button class="remind" color="warning" ion-button (click)="itemRemind(data)">
             <span>设置</span>
             <span>提醒</span>

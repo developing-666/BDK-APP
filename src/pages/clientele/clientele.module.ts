@@ -13,39 +13,42 @@ import { OperatingRecordPage } from './clientele-detail/tabs/operating-record/op
 import { CallRecordPage } from './clientele-detail/tabs/call-record/call-record';
 import { FollowRecordPage } from './clientele-detail/tabs/follow-record/follow-record';
 import { NotFollowPage } from './clientele-detail/tabs/not-follow/not-follow';
+import { AllotPage } from './allot/allot';
 
 import { ComponentsModule } from '../../components/components.module';
 
 import { PipesModule } from '../../pipes/pipes.module';
 @NgModule({
-    declarations: [
-        ClientelePage,
-        SearchClientelePage,
-        AddClientelePage,
-        ClienteleTagPage,
-        CustomTagPage,
-        ClienteleDetailPage,
-        SettingRecordPage,
-        OperatingRecordPage,
-        SearchResultPage,
-        CallRecordPage,
-        FollowRecordPage,
-        NotFollowPage
-    ],
-    entryComponents: [
-        ClientelePage,
-        SearchClientelePage,
-        AddClientelePage,
-        ClienteleTagPage,
-        CustomTagPage,
-        ClienteleDetailPage,
-        SettingRecordPage,
-        OperatingRecordPage,
-        SearchResultPage,
-        CallRecordPage,
-        FollowRecordPage,
-        NotFollowPage
-    ],
-    imports: [IonicModule, ComponentsModule, PipesModule]
+	declarations: [
+		ClientelePage,
+		SearchClientelePage,
+		AddClientelePage,
+		ClienteleTagPage,
+		CustomTagPage,
+		ClienteleDetailPage,
+		SettingRecordPage,
+		OperatingRecordPage,
+		SearchResultPage,
+		CallRecordPage,
+		FollowRecordPage,
+		NotFollowPage,
+		AllotPage
+	],
+	entryComponents: [
+		ClientelePage,
+		SearchClientelePage,
+		AddClientelePage,
+		ClienteleTagPage,
+		CustomTagPage,
+		ClienteleDetailPage,
+		SettingRecordPage,
+		OperatingRecordPage,
+		SearchResultPage,
+		CallRecordPage,
+		FollowRecordPage,
+		NotFollowPage,
+		AllotPage
+	],
+	imports: [IonicModule, ComponentsModule, PipesModule]
 })
-export class ClienteleModule {}
+export class ClienteleModule { }

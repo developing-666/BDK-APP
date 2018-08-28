@@ -12,7 +12,7 @@
 				<ion-item-divider id="scroll-letter-{{group.letter}}">
 					{{group.letter}}
 				</ion-item-divider>
-				<ion-item *ngFor="let item of group.children">
+				<ion-item [ngClass]="{'active':person?.displayName==item?.displayName}" *ngFor="let item of group.children" (tap)="onItemClick(item)">
 					{{item.displayName}}
 				</ion-item>
 			</ion-item-group>
@@ -24,10 +24,4 @@
 		</li>
 	</ul>
 	<div class="alpha-letter-indicator" #letterIndicatorEle></div>
-	<!-- <ion-alpha-scroll *ngIf="formatContacts.length>0" [listData]="formatContacts" key="initial" [itemTemplate]="alphaScrollItemTemplate" [currentPageClass]="currentPageClass"></ion-alpha-scroll> -->
 </ion-content>
-<!-- <ng-template #alphaScrollItemTemplate let-item="item" let-currentPageClass="currentPageClass">
-	<ion-item (click)="currentPageClass.onItemClick(item)">
-		<h2>{{item?.displayName}}</h2>
-	</ion-item>
-</ng-template> -->
