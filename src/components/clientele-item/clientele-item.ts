@@ -65,7 +65,6 @@ export class ClienteleItemComponent {
 		public globalData: GlobalData
 	) { }
 	ngOnInit() {
-		console.log(this.globalData);
 		this.events.subscribe('clientele:update', this.update);
 		this.events.subscribe('clientele:assign', this.update);
 	}

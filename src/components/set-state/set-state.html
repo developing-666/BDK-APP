@@ -1,6 +1,6 @@
 <div class="set-state">
     <p class="title">客户跟进状态</p>
     <div class="state-container">
-        <span class="state-item" *ngFor="let item of followStatus" (tap)="statusTap(item.value)" [ngClass]="{'active': innerValue==item.value,'disabled':disabled}">{{item.label}}</span>
+        <span class="state-item" *ngFor="let item of followStatus;let $index = index" [hidden]="$index==0" (tap)="statusTap(item.value)" [ngClass]="{'active': innerValue==item.value,'disabled':disabled}">{{item.label}}</span>
     </div>
 </div>

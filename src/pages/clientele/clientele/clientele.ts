@@ -98,17 +98,31 @@ export class ClientelePage {
 		this.openSelect = !this.openSelect;
 	}
 	filterHide(v) {
+		let sorts = this.getSorts(v[2].value);
 		let tmpQueryParams = Utils.extend(true, {}, this.initQueryParams);
 		tmpQueryParams.params.queryLabel = v[0].value[0].value;
 		tmpQueryParams.params.queryCustomLabel = v[0].value[1].value.join(',');
 		tmpQueryParams.params.queryFollowStatus = v[1].value ? v[1].value : '';
-		tmpQueryParams.sort = v[2].value ? v[2].value : '';
+		tmpQueryParams.sort = sorts ? sorts.sort : '';
+		tmpQueryParams.orderBy = sorts ? sorts.orderBy : 'DESC';
 		if (
 			JSON.stringify(tmpQueryParams) != JSON.stringify(this.queryParams)
 		) {
 			this.queryParams = tmpQueryParams;
 			this.currentPage = 1;
 			this.customerQuery(this.queryParams);
+		}
+	}
+	getSorts(s){
+		if(!s){
+			return undefined;
+		}else{
+			let tmp = s.split('_');
+			let orderBy = tmp.pop();
+			return {
+				sort:tmp.join('_'),
+				orderBy:orderBy
+			}
 		}
 	}
 	customerQuery(queryParams, e?: any) {

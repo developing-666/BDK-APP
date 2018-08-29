@@ -2,7 +2,7 @@ page-add-clientele-remind {
     .content{
         background-color: #fff;
     }
-    .clientele-item{background-color: #fff;
+    .clientele-item{background-color: #fff;border-bottom: $border;
         &.item{
             .item-inner{border-bottom: none;}
         }
@@ -12,6 +12,9 @@ page-add-clientele-remind {
             margin-top: 1rem;
             .item{
                 border-top: none;
+				&:first-child{
+					border-top: $border;
+				}
             }
         }
     }

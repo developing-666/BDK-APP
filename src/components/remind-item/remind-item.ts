@@ -13,6 +13,7 @@ import { AddRemindPage } from '../../pages/remind/add-remind/add-remind';
 import { SettingRecordPage } from '../../pages/clientele/setting-record/setting-record';
 
 import { AppApi } from '../../providers/app-api';
+import { GlobalData } from '../../providers/global-data';
 
 import { GalleryModal } from '../../modules/ion-gallery/index';
 import { Utils } from '../../providers/utils';
@@ -26,6 +27,7 @@ export class RemindItemComponent implements OnChanges {
     @Output() delay: EventEmitter<any> = new EventEmitter();
     @Output() delete: EventEmitter<any> = new EventEmitter();
     @Output() detail: EventEmitter<any> = new EventEmitter();
+    @Output() postil: EventEmitter<any> = new EventEmitter();
     @Input() remind: any = {};
     @Input() index: number = undefined;
     @Input() view: boolean = false;
@@ -36,7 +38,8 @@ export class RemindItemComponent implements OnChanges {
         private appApi: AppApi,
         private alertCtrl: AlertController,
         public app: App,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+		public globalData: GlobalData
     ) {}
     ngOnChanges(changes: SimpleChanges) {
         if (changes.remind) {
@@ -91,6 +94,11 @@ export class RemindItemComponent implements OnChanges {
         e.preventDefault();
         this.detail.emit(this.remind);
     }
+	itemPostil(e){
+		e.stopPropagation();
+        e.preventDefault();
+        this.postil.emit(this.remind);
+	}
     write(e) {
         e.stopPropagation();
         e.preventDefault();
