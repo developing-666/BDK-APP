@@ -15,6 +15,7 @@ import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
 
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
+import { GlobalData } from '../../../providers/global-data';
 
 @Component({
 	selector: 'page-clientele',
@@ -66,7 +67,8 @@ export class ClientelePage {
 		public app: App,
 		public viewCtrl: ViewController,
 		private events: Events,
-		public plt: Platform
+		public plt: Platform,
+		public globalData: GlobalData
 	) { }
 	ionViewDidLoad() {
 		this.customerQuery(this.initQueryParams);

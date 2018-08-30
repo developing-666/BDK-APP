@@ -359,4 +359,16 @@ export class AppApi {
 	customerAssign(opts){
 		return this._http.post('/customer/assign',opts);
 	}
+	/**
+	 * 提醒批注
+	 */
+	taskCommentCreate(opts){
+		return this._http.post('/taskcomment/create',opts);
+	}
+	/**
+	 * 跟进批注
+	 */
+	customerFollowComment(opts){
+		return this._http.post('/customerfollowcomment/create',opts);
+	}
 }

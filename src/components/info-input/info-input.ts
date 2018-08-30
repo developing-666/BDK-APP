@@ -37,6 +37,7 @@ export class InfoInputComponent implements ControlValueAccessor {
     @Input() id: string;
     @Input() name: string;
     @Input() type: string = 'task';
+    @Input() placeholder: string = '点击输入备注,可使用输入法自带的语音进行输入';
     change: any;
     changed: any = [];
     touched: any = [];

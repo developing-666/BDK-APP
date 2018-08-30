@@ -1,9 +1,10 @@
 <ion-header>
 	<ion-navbar>
-		<div class="date-now" (tap)="goToady()">
+		<div *ngIf="!isCompany" class="date-now" (tap)="goToady()">
 			<span>{{today | date:'yyyy-MM-dd'}}</span>
 			<i class="iconfont">&#xe675;</i>
 		</div>
+		<span *ngIf="isCompany" class="nav-title">任务</span>
 		<!-- <div class="hint"> 点击返回今天 </div> -->
 		<ion-buttons end>
 			<button ion-button="ion-button" icon-only="icon-only" (tap)="wantDelete()">
@@ -16,33 +17,21 @@
 	<div class="filter-bar-wrapper" *ngIf="isCompany" [ngClass]="{'filter-ios':plt.is('ios'),'filter-md':plt.is('android')}">
 		<div class="filter-backdrop" [ngClass]="{'in':backIn}" *ngIf="showBack" (tap)="filterPanelClose()"></div>
 		<div class="filter-bar">
-			<div class="filter-item" [ngClass]="{'open':filterLayout == 'isFollow' && openPanel}" (tap)="filterPanelToggle('isFollow')">
+			<div class="filter-item" [ngClass]="{'open':filterLayout == key && openPanel}" *ngFor="let key of filterValues | objKeys;" (tap)="filterPanelToggle(key)">
 				<span class="name">
-					{{isFollow.label}}
-				</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item" [ngClass]="{'open':filterLayout == 'followStatus' && openPanel}" (tap)="filterPanelToggle('followStatus')">
-				<span class="name">
-					{{followStatus.label}}
-				</span>
-				<i class="iconfont">&#xe683;</i>
-			</div>
-			<div class="filter-item" [ngClass]="{'open':filterLayout == 'isComment' && openPanel}" (tap)="filterPanelToggle('isComment')">
-				<span class="name">
-					{{isComment.label}}
+					{{filterValues[key].label}}
 				</span>
 				<i class="iconfont">&#xe683;</i>
 			</div>
 		</div>
 		<div class="filter-panel" [ngClass]="{'show':openPanel}" #filterPanel>
-			<div class="filter-item-container" *ngIf="filterLayout=='isFollow'">
-				<div class="panel-item" *ngFor="let item of filterOpts.isFollow;" (tap)="filterItemTap('isFollow',item)" [ngClass]="{'active':isFollow?.value == item.value}">
+			<div class="filter-item-container" [hidden]="filterLayout!=key" *ngFor="let key of filterOpts | objKeys;">
+				<div class="panel-item" *ngFor="let item of filterOpts[key];" (tap)="filterItemTap(key,item)" [ngClass]="{'active':filterValues[key]?.value == item.value}">
 					<span class="name">{{item.label}}</span>
 					<i class="iconfont">&#xe640;</i>
 				</div>
 			</div>
-			<div class="filter-item-container" *ngIf="filterLayout=='followStatus'">
+			<!-- <div class="filter-item-container" *ngIf="filterLayout=='followStatus'">
 				<div class="panel-item" *ngFor="let item of filterOpts.followStatus;" (tap)="filterItemTap('followStatus',item)" [ngClass]="{'active':followStatus?.value == item.value}">
 					<span class="name">{{item.label}}</span>
 					<i class="iconfont">&#xe640;</i>
@@ -53,7 +42,7 @@
 					<span class="name">{{item.label}}</span>
 					<i class="iconfont">&#xe640;</i>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </ion-header>
@@ -82,7 +71,7 @@
 			<ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
 		</ion-refresher>
 		<ion-list>
-			<remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'has-handle':hideTabs,'done':item.isDone,'pitch-on':deleteIds.indexOf(item.id)>-1,'time-out':item.isExpired}" [remind]="item" [index]="$index" (delete)="delete($event)"
+			<remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'has-handle':hideTabs,'done':item.isDone,'pitch-on':deleteIds.indexOf(item.id)>-1,'time-out':item.isExpired}" [remind]="item" [index]="$index" (delete)="delete($event)" (postil)="itemPostil($event);"
 			    (goDelay)="goDelay()" (detail)="itemClick($event)"></remind-item>
 		</ion-list>
 		<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">

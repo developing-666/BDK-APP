@@ -40,8 +40,10 @@ export class SettingRecordPage {
 	remind: any = this.navParams.get('remind');
 	followId: string = this.navParams.get('followId');
 	taskId: string = this.navParams.get('taskId');
+	postil: boolean = this.navParams.get('postil');
 	infoContent: any;
 	remindContent: any;
+	comment:any;
 	formData: any = {
 		followStatus:
 			this.remind && this.remind.customerId
@@ -118,7 +120,6 @@ export class SettingRecordPage {
 				this.remind = d.taskDetail;
 				this.remind.customer = d.customerDetail;
 				this.formData.followStatus = d.customerDetail.followStatus;
-
 			});
 	}
 	setting() {
@@ -164,6 +165,17 @@ export class SettingRecordPage {
 					console.log(this.formData);
 					this.followCreate();
 				}
+			});
+		}
+	}
+	followPostil(){
+		if (this.settingRecordForm.valid) {
+			this.appApi.customerFollowComment({
+				customerFollowId:this.followId,
+				comment:this.comment.content
+			}).subscribe(d=>{
+				this.events.publish('followPostil:create');
+				this.success();
 			});
 		}
 	}
@@ -288,7 +300,7 @@ export class SettingRecordPage {
 	}
 	success() {
 		const toast = this.toastCtrl.create({
-			message: '创建成功',
+			message: '提交成功',
 			position: 'middle',
 			duration: 1500
 		});

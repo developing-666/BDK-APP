@@ -350,8 +350,7 @@ $designWidth: 750; //如设计图是750
 				align-items: center;
 				img {
 					height: rem(56);
-					margin-right: 1rem;
-					margin-bottom: 1rem;
+					margin: 0.4rem 1rem 0.4rem 0;
 				}
 			}
 			.remark-voice-container {
@@ -378,11 +377,9 @@ $designWidth: 750; //如设计图是750
 				}
 				.return-text {
 					width: calc(100% - 5.3rem);
-					@include text-overflow();
 					white-space: normal;
 					word-break: break-all;
 					line-height: rem(56);
-					max-height: rem(112);
 					font-size: 1.2rem;
 					color: color($colors, primary);
 				}

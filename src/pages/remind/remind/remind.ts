@@ -1,5 +1,5 @@
 import { Utils } from './../../../providers/utils';
-import { Component, ViewChild,ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import {
 	NavController,
 	NavParams,
@@ -29,9 +29,9 @@ import { CalendarComponentOptions, DayConfig } from 'ion2-calendar';
 })
 export class RemindPage {
 	@ViewChild('scrollContainer') scrollContainer: Content;
-    @ViewChild('filterPanel') filterPanel: ElementRef;
+	@ViewChild('filterPanel') filterPanel: ElementRef;
 	@ViewChild(List) list: List;
-	isCompany:boolean = this.globalData.user.type=='COMPANY';
+	isCompany: boolean = this.globalData.user.type == 'COMPANY';
 	fold: boolean = true;
 	hideTabs: boolean = false;
 	isHasNext: boolean = false;
@@ -75,7 +75,9 @@ export class RemindPage {
 		setTimeout(() => {
 			this.getData();
 		}, 0);
-		this.queryTaskCountByDate(this.currentMonth);
+		if(!this.isCompany){
+			this.queryTaskCountByDate(this.currentMonth);
+		}
 	};
 	draging: boolean = false;
 	addBtnStyle: any = {};
@@ -84,26 +86,28 @@ export class RemindPage {
 		isComment: ISCOMMENT,
 		followStatus: FOLLOWSTATUS,
 	}
-	isFollow: any = {
-		value: undefined,
-		label: '全部'
-	};
-	isComment: any = {
-		value: undefined,
-		label: '全部'
-	};
-	followStatus: any = {
-		value: undefined,
-		label: '全部'
-	};
+	filterValues: any = {
+		isFollow: {
+			value: undefined,
+			label: '全部'
+		},
+		followStatus: {
+			value: undefined,
+			label: '全部用户'
+		},
+		isComment: {
+			value: undefined,
+			label: '全部'
+		},
+	}
 	openPanel: boolean = false;
 	showBack: boolean = false;
 	backIn: boolean = false;
 	filterLayout: string = '';
-	queryParams:any = {
+	queryParams: any = {
 		queryFetchCustomer: true,
-		queryPlanRemindTimeStart: this.isCompany?this.activeDay.value:undefined,
-		queryPlanRemindTimeEnd: this.isCompany?this.activeDay.value:undefined,
+		queryPlanRemindTimeStart: this.isCompany ? this.activeDay.value : undefined,
+		queryPlanRemindTimeEnd: this.isCompany ? this.activeDay.value : undefined,
 	}
 	constructor(
 		public navCtrl: NavController,
@@ -125,14 +129,18 @@ export class RemindPage {
 		this.events.subscribe('user:modalLogin', this.update);
 		this.events.subscribe('followRecord:update', this.update);
 		this.events.subscribe('delay:update', this.update);
+		this.events.subscribe('remind:postil', this.update);
 		this.getData();
-		this.queryTaskCountByDate(this.currentMonth);
+		if(!this.isCompany){
+			this.queryTaskCountByDate(this.currentMonth);
+		}
 	}
 	ionViewWillUnload() {
 		this.events.unsubscribe('remind:create', this.update);
 		this.events.unsubscribe('user:modalLogin', this.update);
 		this.events.unsubscribe('followRecord:update', this.update);
 		this.events.unsubscribe('delay:update', this.update);
+		this.events.unsubscribe('remind:postil', this.update);
 	}
 	foldCalendar() {
 		this.fold = !this.fold;
@@ -331,6 +339,9 @@ export class RemindPage {
 			}
 		}
 	}
+	itemPostil() {
+		this.list.closeSlidingItems();
+	}
 	selectAll() {
 		if (this.deleteIds.length < this.reminds.length) {
 			for (let item of this.reminds) {
@@ -397,9 +408,9 @@ export class RemindPage {
 	}
 	filterPanelToggle(t) {
 		if (this.openPanel) {
-			if(this.filterLayout == t){
+			if (this.filterLayout == t) {
 				this.filterPanelClose();
-			}else{
+			} else {
 				this.filterLayout = t;
 			}
 		} else {
@@ -407,6 +418,7 @@ export class RemindPage {
 		}
 	}
 	filterPanelOpen(t) {
+		console.log(t)
 		this.filterLayout = t;
 		this.showBack = true;
 		setTimeout(() => {
@@ -421,28 +433,27 @@ export class RemindPage {
 			this.showBack = false;
 		}, 200);
 	}
-	filterItemTap(t,item){
-		this[t] = item;
-		console.log(this.isFollow);
+	filterItemTap(t, item) {
+		this.filterValues[t] = item;
 		this.filterPanelClose();
 	}
 	panelHide() {
-        this.filterPanel.nativeElement.addEventListener(
-            Utils.transitionEnd(),
-            e => {
-                if (e && e.propertyName == 'transform' && !this.openPanel) {
+		this.filterPanel.nativeElement.addEventListener(
+			Utils.transitionEnd(),
+			e => {
+				if (e && e.propertyName == 'transform' && !this.openPanel) {
 					let tmpParams = Utils.extend(true, {}, this.queryParams);
-                    tmpParams.queryUnFollow = this.isFollow.value;
-                    tmpParams.queryUnComment = this.isComment.value;
-                    tmpParams.queryCustomerFollowStatus = this.followStatus.value;
+					tmpParams.queryUnFollow = this.filterValues.isFollow.value;
+					tmpParams.queryUnComment = this.filterValues.isComment.value;
+					tmpParams.queryCustomerFollowStatus = this.filterValues.followStatus.value;
 					if (JSON.stringify(tmpParams) != JSON.stringify(this.queryParams)) {
 						this.queryParams = tmpParams;
 						this.currentPage = 1;
 						this.getData();
 					}
-                }
-            },
-            false
-        );
-    }
+				}
+			},
+			false
+		);
+	}
 }

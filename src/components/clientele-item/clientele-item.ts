@@ -46,6 +46,8 @@ export class ClienteleItemComponent {
 	data: any = {};
 	@Input()
 	index: number = undefined;
+	@Input()
+	showOnwer: boolean = false;
 	labels: Array<any> = this.data.labels ? this.data.labels : [];
 	update: any = id => {
 		if (this.data.id === id) {

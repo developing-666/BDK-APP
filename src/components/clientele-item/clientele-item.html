@@ -1,6 +1,6 @@
 <ion-item-sliding [ngClass]="{'no-push':noPush}">
     <ion-item class="clientele-item" detail-push (click)="itemClick($event,data)">
-        <div class="progress" *ngIf="globalData?.user?.type!='COMPANY'" [ngClass]="data.followStatus | followStatus:'class'">
+        <div class="progress" *ngIf="!showOnwer" [ngClass]="data.followStatus | followStatus:'class'">
             <div class="left-wrapper">
                 <div class="line"></div>
             </div>
@@ -11,7 +11,7 @@
                 {{data.followStatus | followStatus:'state'}}
             </span>
         </div>
-		<div class="progress" *ngIf="globalData?.user?.type=='COMPANY'" [ngClass]="{over:'data.onwer'}">
+		<div class="progress" *ngIf="showOnwer" [ngClass]="{over:'data.onwer'}">
             <div class="left-wrapper">
                 <div class="line"></div>
             </div>

@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{followId?'查看跟进记录':'写入跟进记录'}}</ion-title>
+        <ion-title>{{postil?'跟进记录批注':followId?'查看跟进记录':'写入跟进记录'}}</ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -39,8 +39,15 @@
             </ion-item-group>
         </ion-list>
         <set-state [(ngModel)]="formData.followStatus" *ngIf="remind?.customerId" [disabled]="followId!==undefined" name="followStatus"></set-state>
-        <div class="btn-wrapper" *ngIf="followId===undefined">
-            <button class="large" [disabled]="settingRecordForm.invalid" type="submit" ion-button block round (tap)="setting()">提交</button>
+		<ion-list class="form-input-wrapper" *ngIf="followId!==undefined&&postil">
+			<ion-item-group class="follow-postil">
+				<info-input [ngClass]="{'invalid':(settingRecordForm.controls.comment?.touched || settingRecordForm.submitted) && settingRecordForm.controls.comment.invalid}" placeholder="点击输入批注,可使用输入法自带的语音进行输入" required
+                     [(ngModel)]="comment" name="comment"></info-input>
+			</ion-item-group>
+		</ion-list>
+        <div class="btn-wrapper">
+            <button *ngIf="followId===undefined" class="large" [disabled]="settingRecordForm.invalid" type="submit" ion-button block round (tap)="setting()">提交</button>
+			<button *ngIf="followId!==undefined&&postil" class="large" [disabled]="settingRecordForm.invalid" type="submit" ion-button block round (tap)="followPostil()">提交</button>
         </div>
     </form>
     <ion-input-panel #inputPanel (textInput)="textInput()" (recordInput)="recordInput()" (recordEnd)="recordEnd($event)"></ion-input-panel>

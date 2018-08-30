@@ -1,33 +1,40 @@
 <ion-content [ngClass]="{'no-result':record.length===0}">
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
-    </ion-refresher>
-    <ion-list>
-        <ion-item class="record-item" *ngFor="let item of record" (click)="itemClick($event,item)">
-            <em class="top-line"></em>
-            <div class="record-content">
-                <h3>
-                    <div class="start">
-                        <span class="time">
-                            <em></em>
-                            <i>{{item?.createTime | moment:'HH:mm'}}</i>
-                        </span>
-                        <span class="title">{{item?.title | slice :0:10}}</span>
-                    </div>
-                    <span class="date">{{item?.createTime | moment:'YYYY/MM/DD ddd'}}</span>
-                </h3>
-                <div class="record-info">
-                    <p class="operater">{{item?.onwer?.name | slice :0:4}}</p>
-                    <p class="operat-content">{{item?.content | slice :0:50}}</p>
-                </div>
-                <div class="record-img-container" *ngIf="item?.pics.length>0">
-                    <img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'200'" (click)="getPics($event,item,i)">
-                </div>
-            </div>
-        </ion-item>
-    </ion-list>
-    <button class="large" ion-button block round (tap)="add()">写入跟进记录</button>
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
-        <ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-round-down" pullingText="下拉刷新" refreshingText="刷新中..."></ion-refresher-content>
+	</ion-refresher>
+	<ion-list>
+		<ion-item-sliding *ngFor="let item of record" (click)="itemClick($event,item)">
+			<ion-item class="record-item">
+				<em class="top-line"></em>
+				<div class="record-content">
+					<h3>
+						<div class="start">
+							<span class="time">
+								<em></em>
+								<i>{{item?.createTime | moment:'HH:mm'}}</i>
+							</span>
+							<span class="title">{{item?.title | slice :0:10}}</span>
+						</div>
+						<span class="date">{{item?.createTime | moment:'YYYY/MM/DD ddd'}}</span>
+					</h3>
+					<div class="record-info">
+						<p class="operater">{{item?.onwer?.name | slice :0:4}}</p>
+						<p class="operat-content">{{item?.content | slice :0:50}}</p>
+					</div>
+					<div class="record-img-container" *ngIf="item?.pics.length>0">
+						<img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'200'" (click)="getPics($event,item,i)">
+					</div>
+				</div>
+			</ion-item>
+			<ion-item-options side="right" class="item-options" *ngIf="globalData?.user?.type=='COMPANY'" >
+				<button ion-button color="warning" (click)="itemPostil($event,item)">
+		            批注
+		        </button>
+		    </ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+	<button class="large" ion-button block round (tap)="add()">写入跟进记录</button>
+	<ion-infinite-scroll (ionInfinite)="loadMore($event)" *ngIf="isHasNext">
+		<ion-infinite-scroll-content loadingText="加载更多..."></ion-infinite-scroll-content>
+	</ion-infinite-scroll>
 </ion-content>

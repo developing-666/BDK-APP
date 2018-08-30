@@ -8,34 +8,37 @@ import { MomentPipe } from './moment/moment';
 import { GetImgPipe } from './get-img/get-img';
 import { SortNamePipe } from './sort-name/sort-name';
 import { SizeTransformPipe } from './size-transform/size-transform';
+import { ObjKeysPipe } from './obj-keys/obj-keys';
 
 export { MapToIterable } from './map-to-iterable';
 export { OrderBy } from './order-by';
 export { TrustResourceUrl } from './bypass-trust-res-url';
 
 @NgModule({
-    exports: [
-        MapToIterable,
-        OrderBy,
-        TrustResourceUrl,
-        FollowStatusPipe,
-        MomentPipe,
-        GetImgPipe,
-        PhoneHideNumberPipe,
-        SortNamePipe,
-        SizeTransformPipe
-    ],
-    declarations: [
-        MapToIterable,
-        OrderBy,
-        TrustResourceUrl,
-        FollowStatusPipe,
-        MomentPipe,
-        GetImgPipe,
-        PhoneHideNumberPipe,
-        SortNamePipe,
-        SizeTransformPipe
-    ]
+	exports: [
+		MapToIterable,
+		OrderBy,
+		TrustResourceUrl,
+		FollowStatusPipe,
+		MomentPipe,
+		GetImgPipe,
+		PhoneHideNumberPipe,
+		SortNamePipe,
+		SizeTransformPipe,
+		ObjKeysPipe
+	],
+	declarations: [
+		MapToIterable,
+		OrderBy,
+		TrustResourceUrl,
+		FollowStatusPipe,
+		MomentPipe,
+		GetImgPipe,
+		PhoneHideNumberPipe,
+		SortNamePipe,
+		SizeTransformPipe,
+		ObjKeysPipe
+	]
 })
 export class PipesModule {
 	public static forRoot(): ModuleWithProviders {
@@ -43,14 +46,15 @@ export class PipesModule {
 			ngModule: PipesModule,
 			providers: [
 				MapToIterable,
-		        OrderBy,
-		        TrustResourceUrl,
-		        FollowStatusPipe,
-		        MomentPipe,
-		        GetImgPipe,
-		        PhoneHideNumberPipe,
-		        SortNamePipe,
-		        SizeTransformPipe
+				OrderBy,
+				TrustResourceUrl,
+				FollowStatusPipe,
+				MomentPipe,
+				GetImgPipe,
+				PhoneHideNumberPipe,
+				SortNamePipe,
+				SizeTransformPipe,
+				ObjKeysPipe
 			]
 		};
 	}

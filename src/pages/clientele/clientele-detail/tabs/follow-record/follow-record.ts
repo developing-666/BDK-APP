@@ -5,6 +5,7 @@ import {
     App,
     Events,
     Content,
+	List,
     ModalController
 } from 'ionic-angular';
 
@@ -13,6 +14,7 @@ import { SettingRecordPage } from '../../../setting-record/setting-record';
 
 import { GalleryModal } from '../../../../../modules/ion-gallery/index';
 import { Utils } from '../../../../../providers/utils';
+import { GlobalData } from '../../../../../providers/global-data';
 
 @Component({
     selector: 'page-follow-record',
@@ -20,6 +22,7 @@ import { Utils } from '../../../../../providers/utils';
 })
 export class FollowRecordPage {
     @ViewChild(Content) content: Content;
+	@ViewChild(List) list: List;
 	isHasNext: boolean = false;
     currentPage: number = 1;
     id: string = this.navParams.get('id');
@@ -38,14 +41,17 @@ export class FollowRecordPage {
         public appApi: AppApi,
         public app: App,
         public events: Events,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+		public globalData: GlobalData
     ) {}
 
     ionViewDidLoad() {
         this.queryCustomerFollowDetailByPage();
+        this.events.subscribe('followPostil:create', this.update);
         this.events.subscribe('followRecord:update', this.update);
     }
     ionViewWillUnload() {
+        this.events.unsubscribe('followPostil:create', this.update);
         this.events.unsubscribe('followRecord:update', this.update);
     }
     queryCustomerFollowDetailByPage(e?: any) {
@@ -102,6 +108,15 @@ export class FollowRecordPage {
             followId: item.id
         });
     }
+	itemPostil(e,item){
+		e.stopPropagation();
+        e.preventDefault();
+		this.list.closeSlidingItems();
+		this.app.getRootNav().push(SettingRecordPage, {
+            followId: item.id,
+			postil:true
+        });
+	}
     add() {
         this.app.getRootNav().push(SettingRecordPage, {
             customerId: this.id

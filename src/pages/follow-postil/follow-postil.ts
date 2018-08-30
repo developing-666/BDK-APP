@@ -2,16 +2,16 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams,ToastController,Events, } from 'ionic-angular';
 
-import { AppApi } from './../../../providers/app-api';
-import { NativeService } from '../../../providers/native-service';
+import { AppApi } from '../../providers/app-api';
+import { NativeService } from '../../providers/native-service';
 
 import { Observable } from 'rxjs/Rx';
 @IonicPage()
 @Component({
-	selector: 'page-postil',
-	templateUrl: 'postil.html',
+  selector: 'page-follow-postil',
+  templateUrl: 'follow-postil.html',
 })
-export class PostilPage {
+export class FollowPostilPage {
 	@ViewChild('postilForm') postilForm: NgForm;
 	remind: any = this.navParams.get('remind');
 	paths: Array<any> = [];

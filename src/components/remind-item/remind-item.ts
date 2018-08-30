@@ -98,6 +98,12 @@ export class RemindItemComponent implements OnChanges {
 		e.stopPropagation();
         e.preventDefault();
         this.postil.emit(this.remind);
+		// this.app.getRootNav().push('PostilPage', {
+        //     remind: this.remind,
+        // });
+		this.app.getRootNav().push('FollowPostilPage', {
+            remind: this.remind,
+        });
 	}
     write(e) {
         e.stopPropagation();
