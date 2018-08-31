@@ -9,7 +9,6 @@ import {
 
 import { AlertController, ModalController, App } from 'ionic-angular';
 
-import { AddRemindPage } from '../../pages/remind/add-remind/add-remind';
 import { SettingRecordPage } from '../../pages/clientele/setting-record/setting-record';
 
 import { AppApi } from '../../providers/app-api';
@@ -82,7 +81,7 @@ export class RemindItemComponent implements OnChanges {
             return Promise.resolve();
         };
         this.goDelay.emit(this.remind);
-        this.app.getRootNav().push(AddRemindPage, {
+        this.app.getRootNav().push('AddRemindPage', {
             item: this.remind,
             callback,
             mode: 'delay',
@@ -98,10 +97,7 @@ export class RemindItemComponent implements OnChanges {
 		e.stopPropagation();
         e.preventDefault();
         this.postil.emit(this.remind);
-		// this.app.getRootNav().push('PostilPage', {
-        //     remind: this.remind,
-        // });
-		this.app.getRootNav().push('FollowPostilPage', {
+		this.app.getRootNav().push('RemindPostilPage', {
             remind: this.remind,
         });
 	}

@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 
 import { Validators } from '../../../providers/validators';
 import { AppApi } from './../../../providers/app-api';
-import { ForgetPasswordPage } from '../../login/forget-password/forget-password';
 import { HttpHeader } from '../../../providers/http-header';
 import { LoginPage } from './../../login/login/login';
 import { GlobalData } from '../../../providers/global-data';
@@ -81,7 +80,7 @@ export class ChangePasswordPage {
     }
 
     toForgetPasswordPage() {
-        this.navCtrl.push(ForgetPasswordPage);
+        this.navCtrl.push('ForgetPasswordPage');
     }
 
     presentToast() {

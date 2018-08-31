@@ -7,7 +7,6 @@ import {
 
 import {GlobalData} from './global-data';
 
-import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
 import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
 import {ClienteleDetailPage} from '../pages/clientele/clientele-detail/clientele-detail';
 
@@ -45,7 +44,7 @@ export class JpushNotification {
 		}
 	}
 	remind(d){
-		this.app.getRootNav().push(AddRemindPage,{
+		this.app.getRootNav().push('AddRemindPage',{
 			type:JSON.parse(d.data).type
 		});
 	}

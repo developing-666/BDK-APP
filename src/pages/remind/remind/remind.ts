@@ -229,7 +229,7 @@ export class RemindPage {
 		this.getData(e);
 	}
 	add() {
-		let profileModal = this.modalCtrl.create(NewRemindPage);
+		let profileModal = this.modalCtrl.create('NewRemindPage');
 		profileModal.present();
 	}
 	change() {

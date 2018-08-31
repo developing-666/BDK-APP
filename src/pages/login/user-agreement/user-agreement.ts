@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
-import { NativeService } from '../../../providers/native-service';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the UserAgreementPage page.
@@ -10,22 +8,18 @@ import { NativeService } from '../../../providers/native-service';
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-user-agreement',
   templateUrl: 'user-agreement.html',
 })
 export class UserAgreementPage {
 
-  constructor(
-      public navCtrl: NavController, 
-      public navParams: NavParams,
-      private nativeService: NativeService,
-    ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserAgreementPage');
-    this.nativeService.statusBarStyle(); // 设置状态栏颜色
   }
 
 }

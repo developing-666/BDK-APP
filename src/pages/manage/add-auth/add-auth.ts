@@ -1,15 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, Events, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ModalController } from 'ionic-angular';
 
-import { AuthTagPage } from '../auth-tag/auth-tag';
 import { CustomTagPage } from '../../clientele/custom-tag/custom-tag';
-import { PickPhonePage } from '../pick-phone/pick-phone';
 
 import { AppApi } from '../../../providers/app-api';
 
 
-
+@IonicPage()
 @Component({
 	selector: 'page-add-auth',
 	templateUrl: 'add-auth.html'
@@ -82,7 +80,7 @@ export class AddAuthPage {
 		this.events.unsubscribe('pickPhone', this.phoneNum);
 	}
 	authTag() {
-		this.navCtrl.push(AuthTagPage, {
+		this.navCtrl.push('AuthTagPage', {
 			tag: {
 				id: this.formData.roleId
 			}
@@ -96,13 +94,13 @@ export class AddAuthPage {
 	add() {
 		this.submitted = true;
 		if (this.addAuthForm.valid) {
-			if(this.type=='edit'){
+			if (this.type == 'edit') {
 				this.formData.id = this.item.id;
 				this.appApi.updateByCompany(this.formData).subscribe(d => {
 					this.events.publish('auth:update');
 					this.navCtrl.pop();
 				});
-			}else{
+			} else {
 				this.appApi.createByCompany(this.formData).subscribe(d => {
 					this.events.publish('auth:create');
 					this.navCtrl.pop();
@@ -134,8 +132,8 @@ export class AddAuthPage {
 			});
 	}
 	pickPhone() {
-		if(this.type == 'edit') return;
-		let profileModal = this.modalCtrl.create(PickPhonePage, {
+		if (this.type == 'edit') return;
+		let profileModal = this.modalCtrl.create('PickPhonePage', {
 			cityId: this.formData.virtualPhoneCityId,
 			phone: this.formData.virtualPhoneId ? {
 				id: this.formData.virtualPhoneId,

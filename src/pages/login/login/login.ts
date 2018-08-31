@@ -13,10 +13,7 @@ import { HttpHeader } from '../../../providers/http-header';
 
 import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
-import { SignInPage } from '../sign-in/sign-in';
 import { GlobalData } from '../../../providers/global-data';
-import { UserAgreementPage } from '../user-agreement/user-agreement';
-import { ForgetPasswordPage } from '../forget-password/forget-password';
 
 @Component({
     selector: 'page-login',
@@ -112,7 +109,7 @@ export class LoginPage {
                 }
             });
         };
-        this.navCtrl.push(SignInPage, {
+        this.navCtrl.push('SignInPage', {
             callback: callback
         });
     }
@@ -121,13 +118,13 @@ export class LoginPage {
      * 跳转用户协议页面
      */
     toUserAgreementPage() {
-        this.navCtrl.push(UserAgreementPage);
+        this.navCtrl.push('UserAgreementPage');
     }
     /**
      * 跳转忘记密码页面
      */
     toForgetPasswordPage() {
-        this.navCtrl.push(ForgetPasswordPage);
+        this.navCtrl.push('ForgetPasswordPage');
     }
 
 

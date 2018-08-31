@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Events, Content, AlertController, List } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Content, AlertController, List } from 'ionic-angular';
 
 
 import { AddAuthPage } from '../add-auth/add-auth';
 
 
 import { AppApi } from '../../../providers/app-api';
+
+@IonicPage()
 @Component({
 	selector: 'page-auth-setting',
 	templateUrl: 'auth-setting.html',
@@ -71,7 +73,7 @@ export class AuthSettingPage {
 		)
 	}
 	add() {
-		this.navCtrl.push(AddAuthPage);
+		this.navCtrl.push('AddAuthPage');
 	}
 	delete(item, index) {
 		let alert = this.alertCtrl.create({
@@ -96,7 +98,7 @@ export class AuthSettingPage {
 	}
 	edit(item) {
 		this.list.closeSlidingItems();
-		this.navCtrl.push(AddAuthPage, {
+		this.navCtrl.push('AddAuthPage', {
 			item,
 			type: 'edit'
 		});

@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { PostilPage } from './postil';
-
+import { RemindPostilPage } from './remind-postil';
 
 import { ComponentsModule } from '../../../components/components.module';
-
 @NgModule({
 	declarations: [
-		PostilPage,
+		RemindPostilPage,
 	],
 	imports: [
 		ComponentsModule,
-		IonicPageModule.forChild(PostilPage),
+		IonicPageModule.forChild(RemindPostilPage),
 	],
 })
-export class PostilPageModule { }
+export class RemindPostilPageModule { }

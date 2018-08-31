@@ -1,6 +1,6 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { NavController, NavParams, ToastController, Navbar,Events } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, ToastController, Navbar,Events } from 'ionic-angular';
 import moment from 'moment';
 
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
@@ -20,6 +20,8 @@ import { Utils } from '../../../providers/utils';
 import { NativeService } from '../../../providers/native-service';
 
 import { Observable } from 'rxjs/Rx';
+
+@IonicPage()
 @Component({
 	selector: 'page-add-clientele-remind',
 	templateUrl: 'add-clientele-remind.html'

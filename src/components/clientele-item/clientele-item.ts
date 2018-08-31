@@ -17,7 +17,6 @@ import {
 } from 'ionic-angular';
 
 import { ClienteleDetailPage } from '../../pages/clientele/clientele-detail/clientele-detail';
-import { AddClienteleRemindPage } from '../../pages/remind/add-clientele-remind/add-clientele-remind';
 import { AllotPage } from '../../pages/clientele/allot/allot';
 
 import { NativeService } from '../../providers/native-service';
@@ -99,7 +98,7 @@ export class ClienteleItemComponent {
 	}
 	itemRemind(item) {
 		this.remind.emit(item);
-		this.app.getRootNav().push(AddClienteleRemindPage, {
+		this.app.getRootNav().push('AddClienteleRemindPage', {
 			item
 		});
 	}

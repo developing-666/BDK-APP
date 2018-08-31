@@ -1,9 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, List, App, Events, Content } from 'ionic-angular';
 
-import { AddClienteleRemindPage } from '../../../../remind/add-clientele-remind/add-clientele-remind';
-
-import { AddRemindPage } from '../../../../remind/add-remind/add-remind';
 
 import { AppApi } from '../../../../../providers/app-api';
 @Component({
@@ -104,7 +101,7 @@ export class NotFollowPage {
         console.log(e);
     }
     itemClick(item) {
-        this.app.getRootNav().push(AddRemindPage, {
+        this.app.getRootNav().push('AddRemindPage', {
             item,
             mode: 'delay',
             type: item.customerId ? 'clientele' : 'other'
@@ -119,7 +116,7 @@ export class NotFollowPage {
             // }
             return Promise.resolve();
         };
-        this.app.getRootNav().push(AddClienteleRemindPage, {
+        this.app.getRootNav().push('AddClienteleRemindPage', {
             item: this.item
         });
     }

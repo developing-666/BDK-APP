@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { NativeService } from '../../../providers/native-service';
 import { Helper } from '../../../providers/helper';
 import { LoginPage } from '../login/login';
 
+@IonicPage()
 @Component({
 	selector: 'page-guide',
 	templateUrl: 'guide.html'

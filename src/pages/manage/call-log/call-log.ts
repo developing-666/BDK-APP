@@ -1,5 +1,6 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import {
+	IonicPage,
     NavController,
     NavParams,
     Platform,
@@ -10,6 +11,8 @@ import {
 import { AppApi } from '../../../providers/app-api';
 import { NativeService } from '../../../providers/native-service';
 import { GlobalData } from '../../../providers/global-data';
+
+@IonicPage()
 @Component({
     selector: 'page-call-log',
     templateUrl: 'call-log.html'

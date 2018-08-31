@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Events,ViewController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, Events,ViewController } from 'ionic-angular';
 
 
 import { AppApi } from '../../../providers/app-api';
+
+@IonicPage()
 @Component({
 	selector: 'page-pick-phone',
 	templateUrl: 'pick-phone.html',

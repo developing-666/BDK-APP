@@ -18,17 +18,17 @@ import { IonicStorageModule } from '@ionic/storage';
 
 //业务相关组件、页面、模块
 import { MyApp } from './app.component';
+import { LoginPage } from '../pages/login/login/login';
 import { HomePage } from '../pages/home/home';
+import { ManagePage } from '../pages/manage/manage/manage';
+import { RemindPage } from '../pages/remind/remind/remind';
 
-import { ContactsPage } from '../pages/contacts/contacts';
-import { LoginModule } from '../pages/login/login.module';
-import { ManageModule } from '../pages/manage/manage.module';
-import { RemindModule } from '../pages/remind/remind.module';
 import { ClienteleModule } from '../pages/clientele/clientele.module';
 import { SettingsPageModule } from './../pages/settings/settings.module';
 
-
+import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
+import { CalendarModule } from 'ion2-calendar';
 import { AlphaScrollModule } from '../modules/alpha-scroll/alpha-scroll.module';
 import * as ionicGalleryModal from '../modules/ion-gallery/index';
 
@@ -101,14 +101,13 @@ import { Validators } from '../providers/validators';
 
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
-	declarations: [MyApp, HomePage, ContactsPage],
+	declarations: [MyApp, HomePage, ManagePage, RemindPage, LoginPage],
 	imports: [
-		LoginModule,
-		ManageModule,
-		RemindModule,
+		ComponentsModule,
 		ClienteleModule,
 		BrowserModule,
 		HttpModule,
+		CalendarModule,
 		AlphaScrollModule.forRoot(),
 		IonicModule.forRoot(MyApp, {
 			//			mode: 'ios', // android是'md'
@@ -121,7 +120,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		PipesModule.forRoot()
 	],
 	bootstrap: [IonicApp],
-	entryComponents: [MyApp, HomePage, ContactsPage],
+	entryComponents: [MyApp, HomePage, ManagePage, RemindPage, LoginPage],
 	providers: [
 		{
 			provide: HAMMER_GESTURE_CONFIG,

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController,Events, ToastController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, AlertController,Events, ToastController } from 'ionic-angular';
 
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
+@IonicPage()
 @Component({
     selector: 'page-auth-tag',
     templateUrl: 'auth-tag.html'

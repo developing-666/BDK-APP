@@ -1,7 +1,4 @@
 page-setting-record {
-    .content {
-        background-color: #fff;
-    }
     .clientele-item {
         background-color: #fff;
         &.item {
@@ -18,6 +15,13 @@ page-setting-record {
         &.no-remind {
             margin-top: 0;
         }
+		.follow-postil{
+			margin-bottom: 0;
+			.info-input-warpper{
+				border-bottom: $border;
+			}
+			.accessory{display: none;}
+		}
     }
     .no-return{
         .item-wrapper {
@@ -33,12 +37,16 @@ page-setting-record {
         background-color: #fff;
         padding-bottom: 1.6rem;
     }
+	.no-border{
+		.set-state{
+			border-bottom: none;
+		}
+	}
     .set-state {
         margin-top: 1rem;
         border-bottom: $border;
     }
     .btn-wrapper {
-        background-color: #fff;
         padding: 2rem 0;
         .button {
             margin: 0 auto;
@@ -61,7 +69,5 @@ page-setting-record {
             }
         }
     }
-	.follow-postil{
-		.accessory{display: none;}
-	}
+
 }

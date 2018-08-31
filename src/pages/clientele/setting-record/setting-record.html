@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <form #settingRecordForm="ngForm" class="setting-record-form full-form gray" novalidate>
+    <form #settingRecordForm="ngForm" class="setting-record-form full-form" novalidate>
         <clientele-item *ngIf="remind?.customer" [data]="remind.customer"></clientele-item>
         <remind-item *ngIf="remind" [view]="true" [remind]="remind" [ngClass]="{'no-return':remind.comments.length==0}"></remind-item>
         <ion-list class="form-input-wrapper" [ngClass]="{'no-remind': !remind}">
@@ -38,7 +38,7 @@
                     #infoInput (inputFoucs)="openInputPanel()" (inputBlur)="hideInputPanel()" name="nextContent" (voiceBarClick)="voiceBarClick()"></info-input>
             </ion-item-group>
         </ion-list>
-        <set-state [(ngModel)]="formData.followStatus" *ngIf="remind?.customerId" [disabled]="followId!==undefined" name="followStatus"></set-state>
+        <set-state [ngClass]="{'no-border':followId!==undefined&&postil}" [(ngModel)]="formData.followStatus" *ngIf="remind?.customerId" [disabled]="followId!==undefined" name="followStatus"></set-state>
 		<ion-list class="form-input-wrapper" *ngIf="followId!==undefined&&postil">
 			<ion-item-group class="follow-postil">
 				<info-input [ngClass]="{'invalid':(settingRecordForm.controls.comment?.touched || settingRecordForm.submitted) && settingRecordForm.controls.comment.invalid}" placeholder="点击输入批注,可使用输入法自带的语音进行输入" required

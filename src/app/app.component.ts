@@ -26,24 +26,9 @@ import { HttpHeader } from '../providers/http-header';
 import { CodePush } from '@ionic-native/code-push';
 import { CODE_PUSH_DEPLOYMENT_KEY, IS_DEBUG } from '../providers/constants';
 
-import { RemindPage } from '../pages/remind/remind/remind';
-import { NewRemindPage } from '../pages/remind/new-remind/new-remind';
-import { AddRemindPage } from '../pages/remind/add-remind/add-remind';
-import { AddClienteleRemindPage } from '../pages/remind/add-clientele-remind/add-clientele-remind';
-import { SignInPage } from '../pages/login/sign-in/sign-in';
-import { ForgetPasswordPage } from '../pages/login/forget-password/forget-password';
-import { ClientelePage } from '../pages/clientele/clientele/clientele';
-import { SettingsPage } from '../pages/settings/settings/settings';
-
-import { SearchClientelePage } from '../pages/clientele/search-clientele/search-clientele';
-import { AddClientelePage } from '../pages/clientele/add-clientele/add-clientele';
-import { ClienteleTagPage } from '../pages/clientele/clientele-tag/clientele-tag';
-import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
-import { ClienteleDetailPage } from '../pages/clientele/clientele-detail/clientele-detail';
 
 import { Device } from '@ionic-native/device';
 import * as VConsole from '../assets/lib/vconsole.min';
-import { GuidePage } from '../pages/login/guide/guide';
 function _window(): any {
 	// return the global native browser window object
 	return window;
@@ -100,7 +85,7 @@ export class MyApp {
 			this.assertNetwork(); // 检测网络
 			// this.helper.funDebugInit(); // 初始化fundebug
 			// this.helper.alloyLeverInit(); // 本地"开发者工具"
-            
+
 			this.storage.get('notFirstOpen').then(notFirstOpen => {
 				console.log('notFirstOpen', notFirstOpen);
 				if (notFirstOpen) {
@@ -130,7 +115,7 @@ export class MyApp {
 						}
 					});
 				} else {
-					this.nav.setRoot(GuidePage); // 设置首页
+					this.nav.setRoot('GuidePage'); // 设置首页
 					this.helper.initJpush(); // 初始化极光推送
 				}
 			});

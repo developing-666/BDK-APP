@@ -1,6 +1,7 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {
+	IonicPage,
 	NavController,
 	NavParams,
 	ModalController,
@@ -29,6 +30,7 @@ import { NativeService } from '../../../providers/native-service';
 
 import { Observable } from 'rxjs/Rx';
 
+@IonicPage()
 @Component({
 	selector: 'page-add-remind',
 	templateUrl: 'add-remind.html'

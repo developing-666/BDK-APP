@@ -2,11 +2,6 @@ import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { NavController, Tabs, Events, ViewController } from 'ionic-angular';
 
 import { ManagePage } from '../manage/manage/manage';
-import { AuthSettingPage } from '../manage/auth-setting/auth-setting';
-import { AddAuthPage } from '../manage/add-auth/add-auth';
-import { PickPhonePage } from '../manage/pick-phone/pick-phone';
-import { CallLogPage } from '../manage/call-log/call-log';
-import { ContactsPage } from '../contacts/contacts';
 
 import { RemindPage } from '../remind/remind/remind';
 import { ClientelePage } from '../clientele/clientele/clientele';
@@ -24,7 +19,7 @@ export class HomePage {
 	// tab1Root = RemindPage;
 	// tab2Root = ClientelePage;
 	// tab3Root = SettingsPage;
-	tab0Root = ContactsPage;
+	tab0Root = ManagePage;
 	tab1Root = RemindPage;
 	tab2Root = ClientelePage;
 	tab3Root = SettingsPage;
