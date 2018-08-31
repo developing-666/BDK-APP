@@ -1,42 +1,38 @@
 <ion-header>
-
-    <ion-navbar>
-        <ion-title>推送消息设置</ion-title>
-    </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>推送消息设置</ion-title>
+	</ion-navbar>
 </ion-header>
-
-
 <ion-content>
-    <div class="main-wrapper full-form">
-        <ion-list>
-            <ion-item-group>
-                <ion-item-divider>不丢客未打开时</ion-item-divider>
-                <ion-item>
-                    <ion-label>新推送消息通知</ion-label>
-                    <ion-toggle item-end [(ngModel)]="isNewMsgNotify" (ngModelChange)="statusChange('isNewMsgNotify')"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label>语音通话提醒</ion-label>
-                    <ion-toggle item-end [(ngModel)]="isVoiceNotify" (ngModelChange)="statusChange('isVoiceNotify')"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label>通知显示消息详情</ion-label>
-                    <ion-toggle item-end [(ngModel)]="isDetailNotify" (ngModelChange)="statusChange('isDetailNotify')"></ion-toggle>
-                </ion-item>
-            </ion-item-group>
-            <ion-item-group>
-                <ion-item-divider light>不丢客打开时</ion-item-divider>
-                <ion-item>
-                    <ion-label>声音</ion-label>
-                    <ion-toggle item-end [(ngModel)]="isVoice" (ngModelChange)="statusChange('isVoice')"></ion-toggle>
-                </ion-item>
-                <ion-item>
-                    <ion-label>震动</ion-label>
-                    <ion-toggle item-end [(ngModel)]="isShake" (ngModelChange)="statusChange('isShake')" ></ion-toggle>
-                </ion-item>
-            </ion-item-group>
-        </ion-list>
-    </div>
+	<div class="main-wrapper full-form">
+		<ion-list>
+			<ion-item-group>
+				<ion-item-divider>不丢客未打开时</ion-item-divider>
+				<ion-item>
+					<ion-label>新推送消息通知</ion-label>
+					<ion-toggle item-end [(ngModel)]="isNewMsgNotify" (ngModelChange)="statusChange('isNewMsgNotify')"></ion-toggle>
+				</ion-item>
+				<ion-item>
+					<ion-label>语音通话提醒</ion-label>
+					<ion-toggle item-end [(ngModel)]="isVoiceNotify" (ngModelChange)="statusChange('isVoiceNotify')"></ion-toggle>
+				</ion-item>
+				<ion-item>
+					<ion-label>通知显示消息详情</ion-label>
+					<ion-toggle item-end [(ngModel)]="isDetailNotify" (ngModelChange)="statusChange('isDetailNotify')"></ion-toggle>
+				</ion-item>
+			</ion-item-group>
+			<ion-item-group>
+				<ion-item-divider light>不丢客打开时</ion-item-divider>
+				<ion-item>
+					<ion-label>声音</ion-label>
+					<ion-toggle item-end [(ngModel)]="isVoice" (ngModelChange)="statusChange('isVoice')"></ion-toggle>
+				</ion-item>
+				<ion-item>
+					<ion-label>震动</ion-label>
+					<ion-toggle item-end [(ngModel)]="isShake" (ngModelChange)="statusChange('isShake')"></ion-toggle>
+				</ion-item>
+			</ion-item-group>
+		</ion-list>
+	</div>
 
 </ion-content>

@@ -4,7 +4,7 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<form class="main-wrapper full-form" #addClienteleForm="ngForm" novalidate (ngSubmit)="add()">
+	<form class="main-wrapper full-form">
 		<ion-list>
 			<ion-item-group>
 				<button ion-item (tap)="toChangePasswordPage()">
@@ -25,7 +25,5 @@
 			</ion-item-group>
 		</ion-list>
 	</form>
-	<div class="submit">
-		<button ion-button round block (tap)="logout()">退出登录</button>
-	</div>
+	<button class="large" ion-button round block (tap)="logout()">退出登录</button>
 </ion-content>

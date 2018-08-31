@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { Validators } from '../../../providers/validators';
@@ -8,13 +8,7 @@ import { GlobalData } from '../../../providers/global-data';
 import { INDUSTRY } from '../../../providers/constants';
 import { Utils } from './../../../providers/utils';
 
-/**
- * Generated class for the ApplyEnterprisePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+@IonicPage()
 @Component({
     selector: 'page-apply-enterprise',
     templateUrl: 'apply-enterprise.html'

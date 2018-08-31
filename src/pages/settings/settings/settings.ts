@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Events, NavController, NavParams, App } from 'ionic-angular';
 
-import { UserInfoPage } from './../user-info/user-info';
 import { AppApi } from './../../../providers/app-api';
-import { ApplyEnterprisePage } from '../apply-enterprise/apply-enterprise';
-import { AboutUsPage } from './../about-us/about-us';
-import { HelpPage } from './../help/help';
 import { GlobalData } from '../../../providers/global-data';
 './../apply-enterprise/apply-enterprise';
 import { DEFAULT_AVATAR } from '../../../providers/constants';
-import { SettingPage } from '../setting/setting';
 
 @Component({
 	selector: 'page-settings',
@@ -27,7 +22,7 @@ export class SettingsPage {
 
 	_userInfo: any = this.globalData.user;
 	avatar: String = DEFAULT_AVATAR;
-	update:any = ()=>{
+	update: any = () => {
 		this.userInfo = this.globalData.user;
 		this.getApplyCompany();
 	}
@@ -76,7 +71,7 @@ export class SettingsPage {
 	ionViewDidLoad() {
 		this.events.subscribe('user:modalLogin', this.update);
 	}
-	ionViewWillUnload(){
+	ionViewWillUnload() {
 		this.events.unsubscribe('user:modalLogin', this.update);
 	}
 	ionViewWillEnter() {
@@ -107,7 +102,7 @@ export class SettingsPage {
 			}
 			return Promise.resolve();
 		};
-		this.app.getRootNav().push(UserInfoPage, {
+		this.app.getRootNav().push('UserInfoPage', {
 			callback: callback
 		});
 	}
@@ -120,7 +115,7 @@ export class SettingsPage {
 			this.applyCompanyInfo = d;
 			return Promise.resolve();
 		};
-		this.app.getRootNav().push(ApplyEnterprisePage, {
+		this.app.getRootNav().push('ApplyEnterprisePage', {
 			callback: callback
 		});
 	}
@@ -129,7 +124,7 @@ export class SettingsPage {
      */
 
 	toAboutUsPage() {
-		this.app.getRootNav().push(AboutUsPage);
+		this.app.getRootNav().push('AboutUsPage');
 	}
 
     /**
@@ -137,7 +132,7 @@ export class SettingsPage {
      */
 
 	toHelpPage() {
-		this.app.getRootNav().push(HelpPage);
+		this.app.getRootNav().push('HelpPage');
 	}
 
     /**
@@ -146,7 +141,7 @@ export class SettingsPage {
 
 	toSettingPage() {
 		// this.events.publish('user:reLogin'); //  跳转到登录页面
-		this.app.getRootNav().push(SettingPage);
+		this.app.getRootNav().push('SettingPage');
 	}
 
     /**

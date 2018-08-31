@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 
@@ -9,13 +9,7 @@ import { HttpHeader } from '../../../providers/http-header';
 import { LoginPage } from './../../login/login/login';
 import { GlobalData } from '../../../providers/global-data';
 
-/**
- * Generated class for the ChangePasswordPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
+@IonicPage()
 @Component({
     selector: 'page-change-password',
     templateUrl: 'change-password.html'

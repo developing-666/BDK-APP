@@ -22,9 +22,9 @@ import { LoginPage } from '../pages/login/login/login';
 import { HomePage } from '../pages/home/home';
 import { ManagePage } from '../pages/manage/manage/manage';
 import { RemindPage } from '../pages/remind/remind/remind';
+import { SettingsPage } from '../pages/settings/settings/settings';
 
 import { ClienteleModule } from '../pages/clientele/clientele.module';
-import { SettingsPageModule } from './../pages/settings/settings.module';
 
 import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
@@ -101,7 +101,14 @@ import { Validators } from '../providers/validators';
 
 registerLocaleData(localeZh, 'zh', localeZhExtra);
 @NgModule({
-	declarations: [MyApp, HomePage, ManagePage, RemindPage, LoginPage],
+	declarations: [
+		MyApp,
+		HomePage,
+		ManagePage,
+		RemindPage,
+		LoginPage,
+		SettingsPage
+	],
 	imports: [
 		ComponentsModule,
 		ClienteleModule,
@@ -115,12 +122,18 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 			swipeBackEnabled: true
 		}),
 		IonicStorageModule.forRoot(),
-		SettingsPageModule,
 		ionicGalleryModal.GalleryModalModule,
 		PipesModule.forRoot()
 	],
 	bootstrap: [IonicApp],
-	entryComponents: [MyApp, HomePage, ManagePage, RemindPage, LoginPage],
+	entryComponents: [
+		MyApp,
+		HomePage,
+		ManagePage,
+		RemindPage,
+		LoginPage,
+		SettingsPage
+	],
 	providers: [
 		{
 			provide: HAMMER_GESTURE_CONFIG,

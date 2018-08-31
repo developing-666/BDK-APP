@@ -1,98 +1,86 @@
-<!--
-  Generated template for the UserInfoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-    <ion-navbar>
-        <ion-title>个人资料</ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only clear (tap)="clickEditButton()">{{canEdit?'保存':'编辑'}}
-            </button>
-        </ion-buttons>
-
-    </ion-navbar>
-
+	<ion-navbar>
+		<ion-title>个人资料</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only clear (tap)="clickEditButton()">{{canEdit?'保存':'编辑'}}
+			</button>
+		</ion-buttons>
+	</ion-navbar>
 </ion-header>
 
 
 <ion-content>
-    <form class="main-wrapper full-form " [formGroup]="ngForm" novalidate>
-        <ion-list>
-            <ion-item-group class="header">
-                <button [ngClass]="{'unactive':!canEdit}" type="button" ion-item (tap)="presentActionSheet()">
-                    <ion-label>头像</ion-label>
-                    <ion-avatar item-right>
-                        <img [src]="formData?.avatar | getImg:'200'">
-                    </ion-avatar>
-                </button>
-            </ion-item-group>
+	<form class="main-wrapper full-form " [formGroup]="ngForm" novalidate>
+		<ion-list>
+			<ion-item-group class="header">
+				<button [ngClass]="{'unactive':!canEdit}" type="button" ion-item (tap)="presentActionSheet()">
+					<ion-label>头像</ion-label>
+					<ion-avatar item-right>
+						<img [src]="formData?.avatar | getImg:'200'">
+					</ion-avatar>
+				</button>
+			</ion-item-group>
 
-            <ion-item-group>
-                <ion-item [ngClass]="{'invalid':(name.touched && name.invalid)}">
-                    <ion-label>昵称</ion-label>
-                    <ion-input type="text" maxLength="15" placeholder="请输入昵称" formControlName="name" [(ngModel)]="formData.name" [disabled]="!canEdit"></ion-input>
-                </ion-item>
-                <ion-item [ngClass]="{'invalid':(phone.touched && phone.invalid)}">
-                    <ion-label>手机</ion-label>
-                    <ion-input type="tel" placeholder="请输入手机号" [(ngModel)]="formData.phone" formControlName="phone" disabled></ion-input>
-                </ion-item>
-            </ion-item-group>
-            <ion-item-group>
-                <ion-item [ngClass]="{'invalid':(post.touched && post.invalid)}">
-                    <ion-label>职务</ion-label>
-                    <ion-input type="text" maxLength="15" placeholder="请输入您的职务" formControlName="post" [(ngModel)]="formData.post" [disabled]="!canEdit"></ion-input>
-                </ion-item>
-                <button ion-item [ngClass]="{'invalid':(provinceId.touched && provinceId.invalid),'unactive':!canEdit}">
-                    <ion-label>省份</ion-label>
-                    <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()"
-                        formControlName="provinceId" [disabled]="!canEdit">
-                        <ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
-                    </ion-select>
-                </button>
-                <button ion-item [ngClass]="{'invalid':(cityId.touched && cityId.invalid),'unactive':!canEdit}">
-                    <ion-label>城市</ion-label>
-                    <ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" placeholder="请选择城市" [disabled]="city.length==0 ||!canEdit"
-                        formControlName="cityId" [disabled]="!canEdit">
-                        <ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
-                    </ion-select>
-                </button>
-            </ion-item-group>
-            <ion-item-group>
-                <button ion-item [ngClass]="{'invalid':(gender.touched && gender.invalid),'unactive':!canEdit}">
-                    <ion-label>性别</ion-label>
-                    <ion-select cancelText="取消" okText="确认" placeholder="请选择性别" [(ngModel)]="formData.gender" formControlName="gender" [disabled]="!canEdit">
-                        <ion-option value="M">男</ion-option>
-                        <ion-option value="F">女</ion-option>
-                    </ion-select>
-                </button>
-                <button ion-item [ngClass]="{'invalid':(birthday.touched && birthday.invalid),'unactive':!canEdit}">
-                    <ion-label>生日</ion-label>
-                    <ion-datetime cancelText="取消" doneText="确认" placeholder="请选择生日" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="formData.birthday"
-                        formControlName="birthday" [disabled]="!canEdit"></ion-datetime>
-                </button>
-            </ion-item-group>
-            <ion-item-group>
-                <ion-item [ngClass]="{'invalid':(company.touched && company.invalid)}">
-                    <ion-label>公司</ion-label>
-                    <ion-input type="text" maxLength="30" placeholder="请输入公司名称" formControlName="company" [(ngModel)]="formData.company" [disabled]="!canEdit"></ion-input>
-                </ion-item>
-                <button ion-item [ngClass]="{'invalid':(industry.touched && industry.invalid),'unactive':!canEdit}">
-                    <ion-label>行业</ion-label>
-                    <ion-select cancelText="取消" okText="确认" placeholder="请选择行业" [(ngModel)]="formData.industry" formControlName="industry" [disabled]="!canEdit">
-                        <ion-option [value]="item" *ngFor="let item of industrys">{{item}}</ion-option>
-                    </ion-select>
-                </button>
-            </ion-item-group>
-            <ion-item-group>
-                <button ion-item [ngClass]="{'disabled':!canEdit,'unactive':!canEdit}" (tap)="toChangePasswordPage()">
-                    <ion-label>修改密码</ion-label>
-                    <ion-note item-end></ion-note>
-                </button>
-            </ion-item-group>
-        </ion-list>
-        <div class="shade" *ngIf="!canEdit"></div>
-    </form>
+			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':(name.touched && name.invalid)}">
+					<ion-label>昵称</ion-label>
+					<ion-input type="text" maxLength="15" placeholder="请输入昵称" formControlName="name" [(ngModel)]="formData.name" [disabled]="!canEdit"></ion-input>
+				</ion-item>
+				<ion-item [ngClass]="{'invalid':(phone.touched && phone.invalid)}">
+					<ion-label>手机</ion-label>
+					<ion-input type="tel" placeholder="请输入手机号" [(ngModel)]="formData.phone" formControlName="phone" disabled></ion-input>
+				</ion-item>
+			</ion-item-group>
+			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':(post.touched && post.invalid)}">
+					<ion-label>职务</ion-label>
+					<ion-input type="text" maxLength="15" placeholder="请输入您的职务" formControlName="post" [(ngModel)]="formData.post" [disabled]="!canEdit"></ion-input>
+				</ion-item>
+				<button ion-item [ngClass]="{'invalid':(provinceId.touched && provinceId.invalid),'unactive':!canEdit}">
+					<ion-label>省份</ion-label>
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.provinceId" placeholder="请选择省份" (ngModelChange)="queryCitiesByProvinceId()" formControlName="provinceId" [disabled]="!canEdit">
+						<ion-option [value]="item.id" *ngFor="let item of provinces">{{item.name}}</ion-option>
+					</ion-select>
+				</button>
+				<button ion-item [ngClass]="{'invalid':(cityId.touched && cityId.invalid),'unactive':!canEdit}">
+					<ion-label>城市</ion-label>
+					<ion-select cancelText="取消" okText="确认" [(ngModel)]="formData.cityId" placeholder="请选择城市" [disabled]="city.length==0 ||!canEdit" formControlName="cityId" [disabled]="!canEdit">
+						<ion-option [value]="item.id" *ngFor="let item of city">{{item.name}}</ion-option>
+					</ion-select>
+				</button>
+			</ion-item-group>
+			<ion-item-group>
+				<button ion-item [ngClass]="{'invalid':(gender.touched && gender.invalid),'unactive':!canEdit}">
+					<ion-label>性别</ion-label>
+					<ion-select cancelText="取消" okText="确认" placeholder="请选择性别" [(ngModel)]="formData.gender" formControlName="gender" [disabled]="!canEdit">
+						<ion-option value="M">男</ion-option>
+						<ion-option value="F">女</ion-option>
+					</ion-select>
+				</button>
+				<button ion-item [ngClass]="{'invalid':(birthday.touched && birthday.invalid),'unactive':!canEdit}">
+					<ion-label>生日</ion-label>
+					<ion-datetime cancelText="取消" doneText="确认" placeholder="请选择生日" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="formData.birthday" formControlName="birthday" [disabled]="!canEdit"></ion-datetime>
+				</button>
+			</ion-item-group>
+			<ion-item-group>
+				<ion-item [ngClass]="{'invalid':(company.touched && company.invalid)}">
+					<ion-label>公司</ion-label>
+					<ion-input type="text" maxLength="30" placeholder="请输入公司名称" formControlName="company" [(ngModel)]="formData.company" [disabled]="!canEdit"></ion-input>
+				</ion-item>
+				<button ion-item [ngClass]="{'invalid':(industry.touched && industry.invalid),'unactive':!canEdit}">
+					<ion-label>行业</ion-label>
+					<ion-select cancelText="取消" okText="确认" placeholder="请选择行业" [(ngModel)]="formData.industry" formControlName="industry" [disabled]="!canEdit">
+						<ion-option [value]="item" *ngFor="let item of industrys">{{item}}</ion-option>
+					</ion-select>
+				</button>
+			</ion-item-group>
+			<ion-item-group>
+				<button ion-item [ngClass]="{'disabled':!canEdit,'unactive':!canEdit}" (tap)="toChangePasswordPage()">
+					<ion-label>修改密码</ion-label>
+					<ion-note item-end></ion-note>
+				</button>
+			</ion-item-group>
+		</ion-list>
+		<div class="shade" *ngIf="!canEdit"></div>
+	</form>
 </ion-content>
