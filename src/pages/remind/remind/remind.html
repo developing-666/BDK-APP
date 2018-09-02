@@ -5,13 +5,11 @@
 			<i class="iconfont">&#xe675;</i>
 		</div>
 		<span *ngIf="isCompany" class="nav-title">任务</span>
-		<!-- <div class="hint"> 点击返回今天 </div> -->
 		<ion-buttons end>
 			<button ion-button="ion-button" icon-only="icon-only" (tap)="wantDelete()">
 				<span *ngIf="hideTabs">完成</span>
 				<i *ngIf="!hideTabs" class="iconfont">&#xe66e;</i>
 			</button>
-			<!-- <i class="iconfont">&#xe66e;</i> -->
 		</ion-buttons>
 	</ion-navbar>
 	<div class="filter-bar-wrapper" *ngIf="isCompany" [ngClass]="{'filter-ios':plt.is('ios'),'filter-md':plt.is('android')}">
@@ -31,18 +29,6 @@
 					<i class="iconfont">&#xe640;</i>
 				</div>
 			</div>
-			<!-- <div class="filter-item-container" *ngIf="filterLayout=='followStatus'">
-				<div class="panel-item" *ngFor="let item of filterOpts.followStatus;" (tap)="filterItemTap('followStatus',item)" [ngClass]="{'active':followStatus?.value == item.value}">
-					<span class="name">{{item.label}}</span>
-					<i class="iconfont">&#xe640;</i>
-				</div>
-			</div>
-			<div class="filter-item-container" *ngIf="filterLayout=='isComment'">
-				<div class="panel-item" *ngFor="let item of filterOpts.isComment;" (tap)="filterItemTap('isComment',item)" [ngClass]="{'active':isComment?.value == item.value}">
-					<span class="name">{{item.label}}</span>
-					<i class="iconfont">&#xe640;</i>
-				</div>
-			</div> -->
 		</div>
 	</div>
 </ion-header>

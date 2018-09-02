@@ -141,7 +141,7 @@ export class HttpService {
 				// IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
 				console.log(err);
-                if (!noLoading) this.hideLoading();
+                this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
 				// IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
 			});

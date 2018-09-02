@@ -122,16 +122,17 @@ export class RemindPage {
 	) { }
 
 	ionViewDidLoad() {
-		this.panelHide();
 		this.events.subscribe('remind:create', this.update);
 		this.events.subscribe('user:modalLogin', this.update);
 		this.events.subscribe('followRecord:update', this.update);
 		this.events.subscribe('delay:update', this.update);
 		this.events.subscribe('remind:postil', this.update);
-		this.getData();
+        this.getData();
 		if(!this.isCompany){
 			this.queryTaskCountByDate(this.currentMonth);
-		}
+		}else{
+            this.panelHide();
+        }
 	}
 	ionViewWillUnload() {
 		this.events.unsubscribe('remind:create', this.update);
@@ -179,36 +180,6 @@ export class RemindPage {
 				}
 			);
 	}
-	// getNotificationData() {
-	// 	if (this.reminds.length == 0) return;
-	// 	let arr: Array<any> = [];
-	// 	for (let item of this.reminds) {
-	// 		if (!item.isExpired) {
-	// 			arr.push(item);
-	// 		}
-	// 	}
-	// 	if (arr.length == 0) return;
-	// 	for (let item of arr) {
-	// 		let time = moment(item.planRemindTime).valueOf();
-	// 		this.notificationData.push({
-	// 			id: item.id,
-	// 			title: item.title,
-	// 			text: item.content,
-	// 			sound: this.nativeService.isAndroid() ? 'file://sound.mp3' : 'file://beep.caf',
-	// 			data: { secret: '5666' },
-	// 			trigger: { at: new Date(time)},
-	// 		})
-	// 	};
-	// 	this.setNotification();
-	//
-	// }
-	// setNotification() {
-	// 	this.localNotifications.clearAll().then(() => {
-	// 		this.localNotifications.schedule(this.notificationData);
-	// 	}).catch(() => {
-	// 		this.nativeService.alert('本地通知清除错误');
-	// 	})
-	// }
 	wantDelete() {
 		if (this.hideTabs) {
 			this.events.publish('showTabs');
@@ -218,12 +189,10 @@ export class RemindPage {
 		this.hideTabs = !this.hideTabs;
 	}
 	doRefresh(e) {
-		console.log(e);
 		this.currentPage = 1;
 		this.getData(e);
 	}
 	loadMore(e) {
-		console.log(e);
 		this.getData(e);
 	}
 	add() {
@@ -231,7 +200,6 @@ export class RemindPage {
 		profileModal.present();
 	}
 	change() {
-		console.log(this.activeDay);
 		this.currentPage = 1;
 		this.getData();
 	}
