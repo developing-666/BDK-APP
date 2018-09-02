@@ -40,6 +40,20 @@
 						<ion-note item-end class="P-CHECK_FAIL" *ngIf="isCheckFail">申请失败</ion-note>
 					</button>
 				</ion-item-group>
+				<ion-item-group>
+					<button ion-item (tap)="clienteleTag()">
+						<button clear ion-button icon-only item-start>
+							<i class="iconfont">&#xe663;</i>
+						</button>
+						<ion-label>客户标签</ion-label>
+					</button>
+					<button ion-item (tap)="customTag()">
+						<button clear ion-button icon-only item-start>
+							<i class="iconfont">&#xe63d;</i>
+						</button>
+						<ion-label>自定义标签</ion-label>
+					</button>
+				</ion-item-group>
 				<button ion-item (tap)="toAboutUsPage()">
 					<button clear ion-button icon-only item-start>
 						<i class="iconfont">&#xe670;</i>
