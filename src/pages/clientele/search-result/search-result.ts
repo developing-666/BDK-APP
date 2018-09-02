@@ -1,10 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ViewController, List, App } from 'ionic-angular';
-
-import { AddClientelePage } from '../add-clientele/add-clientele';
-import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
+import {IonicPage, NavController, NavParams, ViewController, List} from 'ionic-angular';
 
 import { AppApi } from './../../../providers/app-api';
+@IonicPage()
 @Component({
 	selector: 'page-search-result',
 	templateUrl: 'search-result.html'
@@ -36,7 +34,6 @@ export class SearchResultPage {
 		public navParams: NavParams,
 		private appApi: AppApi,
 		public viewCtrl: ViewController,
-		private app: App,
 	) { }
 	ionViewDidLoad() {
 		console.log('noPush' + this.noPush);
@@ -73,7 +70,7 @@ export class SearchResultPage {
 	itemDetails(item) {
 		if (this.type == 'search') {
 			this.navCtrl.push(
-				ClienteleDetailPage,
+				'ClienteleDetailPage',
 				{
 					id: item.id
 				},
@@ -102,7 +99,7 @@ export class SearchResultPage {
 			}
 			return Promise.resolve();
 		};
-		this.navCtrl.push(AddClientelePage, {
+		this.navCtrl.push('AddClientelePage', {
 			callback,
 			type: 'add'
 		});

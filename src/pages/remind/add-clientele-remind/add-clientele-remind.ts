@@ -11,7 +11,6 @@ import {
 	FileTransfer,
 	FileUploadOptions,
 	FileTransferObject,
-	FileUploadResult
 } from '@ionic-native/file-transfer';
 import { APP_SERVE_URL } from '../../../providers/constants';
 import { GlobalData } from '../../../providers/global-data';

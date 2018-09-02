@@ -6,8 +6,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { NativeService } from '../../../providers/native-service';
 import { Validators } from '../../../providers/validators';
-import { GlobalData } from '../../../providers/global-data';
-import { Utils } from '../../../providers/utils';
 
 @IonicPage()
 @Component({
@@ -32,7 +30,6 @@ export class SignInPage {
 		public navParams: NavParams,
 		private appApi: AppApi,
 		private fb: FormBuilder,
-		private globalData: GlobalData,
 		public toastController: ToastController,
 		private nativeService: NativeService,
 	) {

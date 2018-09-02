@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, List, App, Events, Content } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, List, App, Events, Content } from 'ionic-angular';
 
 
 import { AppApi } from '../../../../../providers/app-api';
+@IonicPage()
 @Component({
     selector: 'page-not-follow',
     templateUrl: 'not-follow.html'
@@ -107,15 +108,10 @@ export class NotFollowPage {
             type: item.customerId ? 'clientele' : 'other'
         });
     }
+    itemPostil(){
+		this.list.closeSlidingItems();
+	}
     add() {
-        let callback = (done): any => {
-            console.log(done);
-            // if (done) {
-            // 	this.currentPage = 1;
-            //     this.queryTaskDetailByPage();
-            // }
-            return Promise.resolve();
-        };
         this.app.getRootNav().push('AddClienteleRemindPage', {
             item: this.item
         });

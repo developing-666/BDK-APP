@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import { Events, NavController, NavParams, App } from 'ionic-angular';
 
 import { AppApi } from './../../../providers/app-api';
 import { GlobalData } from '../../../providers/global-data';
-'./../apply-enterprise/apply-enterprise';
 import { DEFAULT_AVATAR } from '../../../providers/constants';
 
 @Component({
@@ -33,6 +33,7 @@ export class SettingsPage {
 		private appApi: AppApi,
 		public globalData: GlobalData,
 		private events: Events,
+        private storage: Storage,
 	) {
 		// this.applyCompanyInfo = this.globalData.applyCompanyInfo;
 	}
@@ -183,7 +184,18 @@ export class SettingsPage {
 		this.appApi.updateUserInfo(param).subscribe(d => {
 			console.log('updateUserInfo', d);
 			this.userInfo.type = param.type;
-			this.globalData.user.type = param.type;
+            this.globalData.user.type = param.type;
+            this.storage.set('user', this.globalData.user);
 		});
-	}
+    }
+    clienteleTag(){
+        this.app.getRootNav().push('ClienteleTagPage',{
+            type:'edit'
+        });
+    }
+    customTag(){
+        this.app.getRootNav().push('CustomTagPage',{
+            type:'edit'
+        });
+    }
 }

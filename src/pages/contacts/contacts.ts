@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, AlertController, Content,Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Content,Events } from 'ionic-angular';
 
 import { Contacts, ContactFindOptions, ContactFieldType } from '@ionic-native/contacts';
 
@@ -10,7 +10,7 @@ import allContacts from '../../assets/lib/contacts';
 import * as AlloyTouch from 'alloytouch';
 import * as _ from 'lodash';
 
-
+@IonicPage()
 @Component({
 	selector: 'page-contacts',
 	templateUrl: 'contacts.html'

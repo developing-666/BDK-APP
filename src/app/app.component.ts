@@ -12,14 +12,11 @@ import {
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login/login';
 
-import { UserInfo } from '../model/user-info';
-
 import { JpushNotification } from '../providers/jpush-notification';
 import { NativeService } from '../providers/native-service';
 import { Helper } from '../providers/helper';
 import { Storage } from '@ionic/storage';
 import { GlobalData } from '../providers/global-data';
-import { Utils } from '../providers/utils';
 import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
 import { HttpHeader } from '../providers/http-header';

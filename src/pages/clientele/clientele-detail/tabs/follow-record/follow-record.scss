@@ -6,7 +6,8 @@ page-follow-record {
                 width: rem(310);
                 @include flex-center();
                 padding-top: rem(200);
-                background: url('../assets/imgs/no-remind.png') no-repeat center 3rem;
+                background: url('../assets/imgs/no-remind.png') no-repeat center
+                    3rem;
                 background-size: rem(200);
                 content: '暂无跟进记录';
                 font-size: rem(30);
@@ -16,12 +17,12 @@ page-follow-record {
                 left: 50%;
                 margin-left: rem(-310/2);
             }
-			.button.large{
-				margin-top:30rem;
-			}
+            .button.large {
+                margin-top: 30rem;
+            }
         }
     }
-	.record-item{
+    .record-item {
         &.item-block {
             &:last-child {
                 border: none;
@@ -100,12 +101,12 @@ page-follow-record {
             }
             .record-info {
                 margin: 0;
-                .operater{
+                .operater {
                     line-height: rem(50);
                     font-size: 1.4rem;
                     color: color($colors, dark);
                 }
-                .operat-content{
+                .operat-content {
                     white-space: normal;
                     word-break: break-all;
                     line-height: rem(50);
@@ -120,6 +121,50 @@ page-follow-record {
                 img {
                     height: rem(56);
                     margin-right: 1rem;
+                }
+            }
+            .return-wrapper {
+                width: 100%;
+                padding-left: 0.6rem;
+                background-color: #f6f6f6;
+            }
+            .return {
+                min-height: rem(74);
+                padding: rem(10) 0;
+                .return-from {
+                    display: flex;
+                    .name-wrapper {
+                        height: rem(56);
+                        @include flex-center();
+                    }
+                    .name {
+                        @include tag(color($colors, primary), true);
+                        margin-right: rem(16);
+                    }
+                    .return-text {
+                        width: calc(100% - 5.3rem);
+                        white-space: normal;
+                        word-break: break-all;
+                        line-height: rem(56);
+                        font-size: 1.2rem;
+                        color: color($colors, primary);
+                    }
+                    .return-voice-container {
+                        width: calc(100% - 5.3rem);
+                        height: rem(56);
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+                .return-img-container {
+                    height: rem(76);
+                    display: flex;
+                    align-items: center;
+                    img {
+                        width: rem(56);
+                        height: rem(56);
+                        margin-right: 1rem;
+                    }
                 }
             }
         }

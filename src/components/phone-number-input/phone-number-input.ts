@@ -9,8 +9,6 @@ import { NgForm } from '@angular/forms';
 
 import { AlertController,NavController} from 'ionic-angular';
 
-import { ClienteleDetailPage } from '../../pages/clientele/clientele-detail/clientele-detail';
-
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
 import { Utils } from '../../providers/utils';
@@ -136,7 +134,7 @@ export class PhoneNumberInputComponent implements OnChanges {
 		this.appApi.enableCustomer(id).subscribe(d=>{
 			console.log(d);
 			this.navCtrl.pop();
-			this.navCtrl.push(ClienteleDetailPage,{
+			this.navCtrl.push('ClienteleDetailPage',{
 				id
 			},{
 				animation: 'md-transition'

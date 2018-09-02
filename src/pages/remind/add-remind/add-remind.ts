@@ -14,13 +14,10 @@ import moment from 'moment';
 import { IonInputPanelComponent } from '../../../components/ion-input-panel/ion-input-panel';
 import { InfoInputComponent } from '../../../components/info-input/info-input';
 
-import { SearchResultPage } from '../../clientele/search-result/search-result';
-
 import {
 	FileTransfer,
 	FileUploadOptions,
 	FileTransferObject,
-	FileUploadResult
 } from '@ionic-native/file-transfer';
 import { APP_SERVE_URL } from '../../../providers/constants';
 import { GlobalData } from '../../../providers/global-data';
@@ -316,7 +313,7 @@ export class AddRemindPage {
 			console.log(d);
 			return Promise.resolve();
 		};
-		let profileModal = this.modalCtrl.create(SearchResultPage, {
+		let profileModal = this.modalCtrl.create('SearchResultPage', {
 			item: this.clientele
 		});
 		profileModal.onDidDismiss(data => {

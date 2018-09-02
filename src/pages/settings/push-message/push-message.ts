@@ -1,4 +1,3 @@
-import { UserInfo } from './../../../model/user-info.d';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 

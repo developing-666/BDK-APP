@@ -9,9 +9,6 @@ import {
 	Platform,
 	Events
 } from 'ionic-angular';
-import { AddClientelePage } from '../add-clientele/add-clientele';
-import { SearchClientelePage } from '../search-clientele/search-clientele';
-import { ClienteleDetailPage } from '../clientele-detail/clientele-detail';
 
 import { AppApi } from './../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
@@ -88,13 +85,13 @@ export class ClientelePage {
 			}
 			return Promise.resolve();
 		};
-		this.app.getRootNav().push(AddClientelePage, {
+		this.app.getRootNav().push('AddClientelePage', {
 			callback,
 			type: 'add'
 		});
 	}
 	search() {
-		this.app.getRootNav().push(SearchClientelePage);
+		this.app.getRootNav().push('SearchClientelePage');
 	}
 	open(): void {
 		this.openSelect = !this.openSelect;
@@ -171,7 +168,7 @@ export class ClientelePage {
 	}
 	itemDetails(item) {
 		this.app.getRootNav().push(
-			ClienteleDetailPage,
+			'ClienteleDetailPage',
 			{
 				id: item.id
 			},

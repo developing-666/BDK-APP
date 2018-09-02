@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
 	<clientele-item *ngIf="remind?.customer" [data]="remind.customer"></clientele-item>
-	<remind-item *ngIf="remind" [view]="true" [remind]="remind" [ngClass]="{'no-return':remind.comments.length==0}"></remind-item>
+	<remind-item *ngIf="remind" [view]="true" [remind]="remind"></remind-item>
 	<form #postilForm="ngForm" class="postil-form full-form gray" novalidate>
 		<info-input [ngClass]="{'invalid':(postilForm.controls.comment?.touched || postilForm.submitted) && postilForm.controls.comment.invalid}" placeholder="点击输入批注,可使用输入法自带的语音进行输入" [(ngModel)]="comment" #infoInput required name="comment"></info-input>
 		<button class="large" [disabled]="postilForm.invalid" type="submit" ion-button block round (tap)="done()">提交</button>

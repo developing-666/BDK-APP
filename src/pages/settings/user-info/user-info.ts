@@ -12,7 +12,6 @@ import { Validators } from '../../../providers/validators';
 import { AppApi } from './../../../providers/app-api';
 import { GlobalData } from '../../../providers/global-data';
 import { INDUSTRY } from '../../../providers/constants';
-import { DEFAULT_AVATAR } from '../../../providers/constants';
 import { NativeService } from '../../../providers/native-service';
 
 @IonicPage()

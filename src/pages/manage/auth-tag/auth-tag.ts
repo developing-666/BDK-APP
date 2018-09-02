@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage,NavController, NavParams, AlertController,Events, ToastController } from 'ionic-angular';
+import { IonicPage,NavController, NavParams, AlertController,Events, } from 'ionic-angular';
 
 
 import { GlobalData } from '../../../providers/global-data';
@@ -19,7 +19,6 @@ export class AuthTagPage {
         public appApi: AppApi,
         public globalData: GlobalData,
         private events: Events,
-        private toastCtrl: ToastController
     ) {}
 
     ionViewDidLoad() {

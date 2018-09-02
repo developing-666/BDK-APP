@@ -1,11 +1,9 @@
 import { Component,ViewChild } from '@angular/core';
-import { NavController, NavParams, AlertController,Searchbar } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController,Searchbar } from 'ionic-angular';
 
-
-import { AddClientelePage } from '../add-clientele/add-clientele';
-import { SearchResultPage}from '../search-result/search-result';
 
 import { AppApi } from './../../../providers/app-api';
+@IonicPage()
 @Component({
     selector: 'page-search-clientele',
     templateUrl: 'search-clientele.html'
@@ -42,6 +40,8 @@ export class SearchClientelePage {
             let keywords = this.keywords.replace(/(^\s*)|(\s*$)/g, '');
             console.log(keywords);
             this.search(keywords);
+        }else{
+            this.loaded = false;
         }
     }
     onCancel(e) {
@@ -56,7 +56,7 @@ export class SearchClientelePage {
         });
     }
     itemTap(name) {
-        this.navCtrl.push(SearchResultPage, {
+        this.navCtrl.push('SearchResultPage', {
             name,
             type:'search'
         });
@@ -92,7 +92,7 @@ export class SearchClientelePage {
         alert.present();
     }
 	add() {
-		this.navCtrl.push(AddClientelePage, {
+		this.navCtrl.push('AddClientelePage', {
 			type: 'add'
 		});
 	}

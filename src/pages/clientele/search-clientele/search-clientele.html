@@ -1,34 +1,35 @@
 <ion-header>
-<ion-searchbar debounce="500" placeholder="请输入客户姓名或公司名进行搜索" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消"
-    [showCancelButton]="true" #searchbar
-        (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
-    </ion-searchbar>
-</ion-header>
-<ion-content>
-    <div class="lately-words" *ngIf="results.length==0&&!loaded">
-        <p class="title">
-            <span>最近搜索</span>
-            <i class="iconfont" (tap)="confirm()">&#xe66e;</i>
-        </p>
-        <div class="words-container">
-            <span *ngIf="history.length==0">无</span>
-            <span class="words-item" *ngFor="let item of history" (tap)="itemTap(item)">{{item}}</span>
+    <ion-searchbar debounce="500" placeholder="请输入客户姓名或公司名进行搜索" [(ngModel)]="keywords" [animated]="true" cancelButtonText="取消"
+        [showCancelButton]="true" #searchbar
+            (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+        </ion-searchbar>
+    </ion-header>
+    <ion-content>
+        <div class="lately-words" *ngIf="results.length==0&&!loaded">
+            <p class="title">
+                <span>最近搜索</span>
+                <i class="iconfont" (tap)="confirm()">&#xe66e;</i>
+            </p>
+            <div class="words-container">
+                <span *ngIf="history.length==0">无</span>
+                <span class="words-item" *ngFor="let item of history" (tap)="itemTap(item)">{{item}}</span>
+            </div>
         </div>
-    </div>
-    <div class="result-container" *ngIf="results.length>0">
-        <ul>
-            <li *ngFor="let item of results" (tap)="itemTap(item)">
-                {{item}}
-            </li>
-        </ul>
-    </div>
-    <div class="no-result" *ngIf="results.length==0&&loaded">
-        <div class="no-result-tag">
-            <img src="../../../assets/imgs/no-clientele.png" />
-            <p>没有搜索到客户</p>
-            <button class="add-clientele" ion-button block round (tap)="add()">
-                添加客户
-            </button>
+        <div class="result-container" *ngIf="results.length>0">
+            <ul>
+                <li *ngFor="let item of results" (tap)="itemTap(item)">
+                    {{item}}
+                </li>
+            </ul>
         </div>
-    </div>
-</ion-content>
+        <div class="no-result" *ngIf="results.length==0&&loaded">
+            <div class="no-result-tag">
+                <img src="../../../assets/imgs/no-clientele.png" />
+                <p>没有搜索到客户</p>
+                <button class="add-clientele" ion-button block round (tap)="add()">
+                    添加客户
+                </button>
+            </div>
+        </div>
+    </ion-content>
+    

@@ -11,7 +11,6 @@ import { Storage } from '@ionic/storage';
 
 import { HttpHeader } from '../../../providers/http-header';
 import { LoginPage } from './../../login/login/login';
-import { AppApi } from './../../../providers/app-api';
 import { GlobalData } from '../../../providers/global-data';
 
 
@@ -27,7 +26,6 @@ export class SettingPage {
 		public navCtrl: NavController,
 		public navParams: NavParams,
 		public actionSheetController: ActionSheetController,
-		private appApi: AppApi,
 		private file: File,
 		private storage: Storage,
 		private globalData: GlobalData,

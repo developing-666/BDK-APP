@@ -13,8 +13,6 @@ import {
 	Platform
 } from 'ionic-angular';
 
-import { NewRemindPage } from '../new-remind/new-remind';
-import { SettingRecordPage } from '../../clientele/setting-record/setting-record';
 
 import { AppApi } from '../../../providers/app-api';
 import { NativeService } from '../../../providers/native-service';
@@ -329,11 +327,11 @@ export class RemindPage {
 			}
 		} else {
 			if (item.isDone) {
-				this.app.getRootNav().push(SettingRecordPage, {
+				this.app.getRootNav().push('SettingRecordPage', {
 					followId: item.currFollowId
 				});
 			} else {
-				this.app.getRootNav().push(SettingRecordPage, {
+				this.app.getRootNav().push('SettingRecordPage', {
 					remind: item
 				});
 			}

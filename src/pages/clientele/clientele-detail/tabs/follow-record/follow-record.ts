@@ -1,29 +1,32 @@
 import { Component, ViewChild } from '@angular/core';
 import {
+    IonicPage,
     NavController,
     NavParams,
     App,
     Events,
     Content,
-	List,
+    List,
     ModalController
 } from 'ionic-angular';
 
 import { AppApi } from '../../../../../providers/app-api';
-import { SettingRecordPage } from '../../../setting-record/setting-record';
 
 import { GalleryModal } from '../../../../../modules/ion-gallery/index';
 import { Utils } from '../../../../../providers/utils';
 import { GlobalData } from '../../../../../providers/global-data';
 
+@IonicPage()
 @Component({
     selector: 'page-follow-record',
     templateUrl: 'follow-record.html'
 })
 export class FollowRecordPage {
-    @ViewChild(Content) content: Content;
-	@ViewChild(List) list: List;
-	isHasNext: boolean = false;
+    @ViewChild(Content)
+    content: Content;
+    @ViewChild(List)
+    list: List;
+    isHasNext: boolean = false;
     currentPage: number = 1;
     id: string = this.navParams.get('id');
     record: Array<any> = [];
@@ -42,7 +45,7 @@ export class FollowRecordPage {
         public app: App,
         public events: Events,
         public modalCtrl: ModalController,
-		public globalData: GlobalData
+        public globalData: GlobalData
     ) {}
 
     ionViewDidLoad() {
@@ -65,15 +68,15 @@ export class FollowRecordPage {
             })
             .subscribe(
                 d => {
-					this.isHasNext = d.isHasNext;
+                    this.isHasNext = d.isHasNext;
                     if (this.currentPage == 1) {
                         this.record = d.items;
                     } else {
                         this.record = this.record.concat(d.items);
                     }
-					setTimeout(() => {
-						this.currentPage++;
-					}, 0);
+                    setTimeout(() => {
+                        this.currentPage++;
+                    }, 0);
                     if (e) {
                         setTimeout(() => {
                             e.complete();
@@ -104,25 +107,25 @@ export class FollowRecordPage {
         e.preventDefault();
         console.log(item);
 
-        this.app.getRootNav().push(SettingRecordPage, {
+        this.app.getRootNav().push('SettingRecordPage', {
             followId: item.id
         });
     }
-	itemPostil(e,item){
-		e.stopPropagation();
+    itemPostil(e, item) {
+        e.stopPropagation();
         e.preventDefault();
-		this.list.closeSlidingItems();
-		this.app.getRootNav().push(SettingRecordPage, {
+        this.list.closeSlidingItems();
+        this.app.getRootNav().push('SettingRecordPage', {
             followId: item.id,
-			postil:true
+            postil: true
         });
-	}
+    }
     add() {
-        this.app.getRootNav().push(SettingRecordPage, {
+        this.app.getRootNav().push('SettingRecordPage', {
             customerId: this.id
         });
     }
-    getPics(e,item, i) {
+    getPics(e, item, i) {
         e.stopPropagation();
         e.preventDefault();
         this.pics = [];

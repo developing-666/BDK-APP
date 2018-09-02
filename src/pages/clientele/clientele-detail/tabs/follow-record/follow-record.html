@@ -24,7 +24,20 @@
 					<div class="record-img-container" *ngIf="item?.pics.length>0">
 						<img *ngFor="let pic of item.pics;let i = index" [src]="pic | getImg:'200'" (click)="getPics($event,item,i)">
 					</div>
-				</div>
+                </div>
+                <div class="return-wrapper" *ngIf="item?.comments&&item?.comments.length>0">
+                    <div class="return" *ngFor="let comment of item?.comments">
+                        <div class="return-from">
+                            <div class="name-wrapper">
+                                <span class="name">
+                                    <em></em>
+                                    <i>{{comment?.createUser?.name}}</i>
+                                </span>
+                            </div>
+                            <span class="return-text">{{comment.comment | slice :0:50}}</span>
+                        </div>
+                    </div>
+                </div>
 			</ion-item>
 			<ion-item-options side="right" class="item-options" *ngIf="globalData?.user?.type=='COMPANY'" >
 				<button ion-button color="warning" (click)="itemPostil($event,item)">

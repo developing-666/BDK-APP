@@ -7,7 +7,7 @@
 <ion-content>
     <form #settingRecordForm="ngForm" class="setting-record-form full-form" novalidate>
         <clientele-item *ngIf="remind?.customer" [data]="remind.customer"></clientele-item>
-        <remind-item *ngIf="remind" [view]="true" [remind]="remind" [ngClass]="{'no-return':remind.comments.length==0}"></remind-item>
+        <remind-item *ngIf="remind" [view]="true" [remind]="remind"></remind-item>
         <ion-list class="form-input-wrapper" [ngClass]="{'no-remind': !remind}">
             <ion-item-group>
                 <ion-item *ngIf="!remind" [ngClass]="{'invalid':(settingRecordForm.controls?.title?.touched || settingRecordForm.submitted) && settingRecordForm.controls?.title.invalid}">

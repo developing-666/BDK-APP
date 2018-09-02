@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, Content, AlertController, List } from 'ionic-angular';
 
 
-import { AddAuthPage } from '../add-auth/add-auth';
-
 
 import { AppApi } from '../../../providers/app-api';
 

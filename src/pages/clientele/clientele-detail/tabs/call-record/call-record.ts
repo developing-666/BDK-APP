@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AppApi } from '../../../../../providers/app-api';
+@IonicPage()
 @Component({
 	selector: 'page-call-record',
 	templateUrl: 'call-record.html',

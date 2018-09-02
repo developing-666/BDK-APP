@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { IonicPage, NavController, NavParams, Events, ModalController } from 'ionic-angular';
 
-import { CustomTagPage } from '../../clientele/custom-tag/custom-tag';
-
 import { AppApi } from '../../../providers/app-api';
 
 
@@ -87,7 +85,7 @@ export class AddAuthPage {
 		});
 	}
 	customTag() {
-		this.navCtrl.push(CustomTagPage, {
+		this.navCtrl.push('CustomTagPage', {
 			tag: this.formData.labels
 		});
 	}

@@ -1,7 +1,7 @@
 <ion-header>
 
 	<ion-navbar>
-		<ion-title>设置</ion-title>
+		<span class="nav-title">设置</span>
 		<ion-buttons end>
 			<button ion-button icon-only clear (tap)="toSettingPage()">
 				<i class="iconfont">
@@ -26,7 +26,6 @@
 				</div>
 			</div>
 		</button>
-
 		<div class="user-list full-form">
 			<ion-list>
 				<ion-item-group>
@@ -41,7 +40,7 @@
 					</button>
 				</ion-item-group>
 				<ion-item-group>
-					<button ion-item (tap)="clienteleTag()">
+					<button ion-item (tap)="clienteleTag()" *ngIf="globalData.user.type == 'COMPANY'">
 						<button clear ion-button icon-only item-start>
 							<i class="iconfont">&#xe663;</i>
 						</button>
@@ -76,7 +75,7 @@
 
 		</div>
 
-		<div class="submit">
+		<div class="submit" hidden>
 			<button ion-button round block *ngIf="isCheckSuccess && (userInfo?.type == 'NORAML')" (tap)="changeUserInfoType('COMPANY')">切换为企业版</button>
 			<button ion-button round block *ngIf="userInfo?.type == 'COMPANY'" (tap)="changeUserInfoType('NORAML')">切换为个人版</button>
 		</div>

@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import {
+    IonicPage,
     NavController,
     NavParams,
     AlertController,
@@ -10,15 +11,16 @@ import {
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
 import { Utils } from '../../../providers/utils';
+@IonicPage()
 @Component({
     selector: 'page-custom-tag',
     templateUrl: 'custom-tag.html'
 })
 export class CustomTagPage {
-    callback: any = this.navParams.get('callback');
     tag: Array<any> = this.navParams.get('tag')
         ? Utils.extend(true, [], this.navParams.get('tag'))
         : [];
+    type: any = this.navParams.get('type');
     tags: Array<any> = [];
     deleteIng: boolean = false;
     deleteId: string = '';

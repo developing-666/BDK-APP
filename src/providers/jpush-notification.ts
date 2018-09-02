@@ -7,8 +7,6 @@ import {
 
 import {GlobalData} from './global-data';
 
-import { SettingRecordPage } from '../pages/clientele/setting-record/setting-record';
-import {ClienteleDetailPage} from '../pages/clientele/clientele-detail/clientele-detail';
 
 @Injectable()
 /**
@@ -52,11 +50,11 @@ export class JpushNotification {
 		// this.navCtrl.popToRoot();
 		console.log('follow----SettingRecordPage');
 		if(d.event=='create'){
-			this.app.getRootNav().push(SettingRecordPage,{
+			this.app.getRootNav().push('SettingRecordPage',{
 				taskId:JSON.parse(d.data).taskId
 			});
 		}else{
-			this.app.getRootNav().push(SettingRecordPage,{
+			this.app.getRootNav().push('SettingRecordPage',{
 				followId:JSON.parse(d.data).id
 			});
 		}
@@ -64,7 +62,7 @@ export class JpushNotification {
 	}
 	clientele(d){
 		this.app.getRootNav().push(
-			ClienteleDetailPage,
+			'ClienteleDetailPage',
 			{
 				id: JSON.parse(d.data).id
 			},

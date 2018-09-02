@@ -4,7 +4,6 @@ import {
 	EventEmitter,
 	Input,
 	ElementRef,
-	OnInit
 } from '@angular/core';
 
 import {
@@ -16,8 +15,6 @@ import {
 	ActionSheetController
 } from 'ionic-angular';
 
-import { ClienteleDetailPage } from '../../pages/clientele/clientele-detail/clientele-detail';
-import { AllotPage } from '../../pages/clientele/allot/allot';
 
 import { NativeService } from '../../providers/native-service';
 import { AppApi } from '../../providers/app-api';
@@ -110,7 +107,7 @@ export class ClienteleItemComponent {
 		e.preventDefault();
 		if (this.detail) {
 			this.navCtrl.push(
-				ClienteleDetailPage,
+				'ClienteleDetailPage',
 				{
 					id: item.id
 				},
@@ -197,7 +194,7 @@ export class ClienteleItemComponent {
 	}
 	goAllot(item) {
 		this.allot.emit(item);
-		this.app.getRootNav().push(AllotPage, {
+		this.app.getRootNav().push('AllotPage', {
 			item
 		});
 	}

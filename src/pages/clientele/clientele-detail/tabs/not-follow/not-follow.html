@@ -4,7 +4,7 @@
     </ion-refresher>
     <ion-list>
         <remind-item *ngFor="let item of reminds;let $index = index" class="" [ngClass]="{'disabled':item.isExpired,'write-in':true}"
-            [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (detail)="itemClick($event)"
+            [remind]="item" [index]="$index" (delete)="delete($event)" (delay)="delay($event)" (goDelay)="goDelay()" (detail)="itemClick($event)" (postil)="itemPostil($event);"
             (refresh)="doRefresh()"></remind-item>
     </ion-list>
     <button class="large" ion-button block round (tap)="add()">创建提醒</button>

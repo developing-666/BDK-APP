@@ -9,8 +9,6 @@ import {
 
 import { AlertController, ModalController, App } from 'ionic-angular';
 
-import { SettingRecordPage } from '../../pages/clientele/setting-record/setting-record';
-
 import { AppApi } from '../../providers/app-api';
 import { GlobalData } from '../../providers/global-data';
 
@@ -108,7 +106,7 @@ export class RemindItemComponent implements OnChanges {
             this.refresh.emit(true);
             return Promise.resolve();
         };
-        this.app.getRootNav().push(SettingRecordPage, {
+        this.app.getRootNav().push('SettingRecordPage', {
             refresh,
             remind: this.remind
         });

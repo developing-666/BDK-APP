@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController,Events, ToastController } from 'ionic-angular';
-
+import {
+    IonicPage,
+    NavController,
+    NavParams,
+    AlertController,
+    Events,
+    ToastController
+} from 'ionic-angular';
 
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from '../../../providers/app-api';
+@IonicPage()
 @Component({
     selector: 'page-clientele-tag',
     templateUrl: 'clientele-tag.html'
 })
 export class ClienteleTagPage {
-    callback: any = this.navParams.get('callback');
     tag: any = this.navParams.get('tag');
+    type: any = this.navParams.get('type');
     tags: Array<any> = [];
     deleteIng: boolean = false;
     deleteId: string = '';
-	tmp:any = this.navParams.get('tag');
+    tmp: any = this.navParams.get('tag');
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -54,15 +61,12 @@ export class ClienteleTagPage {
                     handler: data => {
                         console.log(data);
                         if (data.tag.length > 7) {
-                            let toast = this.toastCtrl.create(
-                                {
-                                    message:
-                                        '标签不能多于7字',
-                                    duration: 1500,
-                                    position: 'top',
-                                    cssClass: 'danger'
-                                }
-                            );
+                            let toast = this.toastCtrl.create({
+                                message: '标签不能多于7字',
+                                duration: 1500,
+                                position: 'top',
+                                cssClass: 'danger'
+                            });
                             toast.present();
                         } else {
                             this.labelCreate(data.tag);
@@ -74,13 +78,13 @@ export class ClienteleTagPage {
         prompt.present();
     }
     done() {
-        this.events.publish('tags:clienteleTag',this.tag);
+        this.events.publish('tags:clienteleTag', this.tag);
         this.navCtrl.pop();
     }
     selectTag(tag) {
-        if (this.deleteIng) {
+        if (this.deleteIng && this.type == 'edit') {
             this.deleteId = tag.id;
-        } else {
+        } else if(!this.deleteIng && this.type != 'edit'){
             this.tag = tag.label;
         }
     }
@@ -114,11 +118,11 @@ export class ClienteleTagPage {
     wantDelete() {
         this.deleteId = '';
         this.deleteIng = !this.deleteIng;
-		if(this.deleteIng){
-	        this.tag = '';
-		}else{
-			this.tag = this.tmp;
-		}
+        if (this.deleteIng) {
+            this.tag = '';
+        } else {
+            this.tag = this.tmp;
+        }
     }
     confirm() {
         let alert = this.alertCtrl.create({
@@ -141,7 +145,7 @@ export class ClienteleTagPage {
     labelDelete() {
         this.appApi.labelDelete(this.deleteId).subscribe(d => {
             console.log(d);
-			this.deleteId = '';
+            this.deleteId = '';
             this.queryLabelByType();
         });
     }

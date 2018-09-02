@@ -1,6 +1,7 @@
 import { Component, ViewChild, ApplicationRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {
+    IonicPage,
 	NavController,
 	NavParams,
 	ToastController,
@@ -16,16 +17,15 @@ import {
 	FileTransfer,
 	FileUploadOptions,
 	FileTransferObject,
-	FileUploadResult
 } from '@ionic-native/file-transfer';
 import { APP_SERVE_URL } from '../../../providers/constants';
 import { GlobalData } from '../../../providers/global-data';
 import { AppApi } from './../../../providers/app-api';
-import { Utils } from '../../../providers/utils';
 import { NativeService } from '../../../providers/native-service';
 
 import { Observable } from 'rxjs/Rx';
 
+@IonicPage()
 @Component({
 	selector: 'page-setting-record',
 	templateUrl: 'setting-record.html'
@@ -76,7 +76,6 @@ export class SettingRecordPage {
 		public viewCtrl: ViewController
 	) { }
 	ionViewDidLoad() {
-		console.log(this.formData.followStatus);
 		if (this.followId) {
 			this.getData();
 		}
@@ -119,6 +118,7 @@ export class SettingRecordPage {
 				this.infoContent.pics = d.pics;
 				this.remind = d.taskDetail;
 				this.remind.customer = d.customerDetail;
+				this.remind.comments = d.comments;
 				this.formData.followStatus = d.customerDetail.followStatus;
 			});
 	}

@@ -23,19 +23,15 @@ page-setting-record {
 			.accessory{display: none;}
 		}
     }
-    .no-return{
-        .item-wrapper {
-            .remind-item.item {
-                .item-inner {
-                    border-bottom: none;
-                }
+    .item-wrapper {
+        .remind-item.item {
+            margin-top: 1rem;
+            background-color: #fff;
+            padding-bottom: 1.6rem;
+            .item-inner {
+                border-bottom: none;
             }
         }
-    }
-    .remind-item {
-        margin-top: 1rem;
-        background-color: #fff;
-        padding-bottom: 1.6rem;
     }
 	.no-border{
 		.set-state{

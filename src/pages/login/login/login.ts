@@ -1,6 +1,6 @@
-import { ViewChild, Component } from '@angular/core';
+import {  Component } from '@angular/core';
 
-import { App, NavController, NavParams, ViewController,Events } from 'ionic-angular';
+import { NavController, NavParams, ViewController,Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { NativeService } from '../../../providers/native-service';
 import { Helper } from '../../../providers/helper';
@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Validators } from '../../../providers/validators';
 import { HttpHeader } from '../../../providers/http-header';
 
-import { AddClientelePage } from '../../clientele/add-clientele/add-clientele';
 import { HomePage } from '../../home/home';
 import { GlobalData } from '../../../providers/global-data';
 
@@ -31,7 +30,6 @@ export class LoginPage {
         public viewCtrl: ViewController,
         private appApi: AppApi,
         private fb: FormBuilder,
-        private app: App,
         private httpHeader: HttpHeader,
         private storage: Storage,
         private globalData: GlobalData,

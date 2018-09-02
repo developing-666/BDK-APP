@@ -2,14 +2,10 @@ import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 import { NavController, Tabs, Events, ViewController } from 'ionic-angular';
 
 import { ManagePage } from '../manage/manage/manage';
-
 import { RemindPage } from '../remind/remind/remind';
 import { ClientelePage } from '../clientele/clientele/clientele';
 import { SettingsPage } from '../settings/settings/settings';
 
-import { JpushNotification } from '../../providers/jpush-notification';
-
-import { SearchResultPage } from '../clientele/search-result/search-result';
 @Component({
 	selector: 'page-home',
 	templateUrl: 'home.html'
@@ -30,7 +26,6 @@ export class HomePage {
 		private renderer: Renderer,
 		private events: Events,
 		public viewCtrl: ViewController,
-		private jpushNotification: JpushNotification,
 	) { }
 	ionViewDidLoad() {
 		let tabs = this.queryElement(this.elementRef.nativeElement, '.tabbar');
