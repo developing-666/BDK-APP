@@ -57,6 +57,7 @@ import { JPush } from '@jiguang-ionic/jpush';
 import { SMS } from '@ionic-native/sms';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts } from '@ionic-native/contacts';
+import { ThreeDeeTouch} from '@ionic-native/three-dee-touch';
 
 //ionic第三方插件
 
@@ -179,7 +180,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
         LocalNotifications,
         JpushNotification,
         Contacts,
-        Pinyin
+        Pinyin,
+		ThreeDeeTouch
     ]
 })
 export class AppModule {

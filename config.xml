@@ -133,4 +133,5 @@
         <variable name="APP_KEY" value="fae3c4774ec570d93166b3a6" />
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <plugin name="cordova-plugin-3dtouch" spec="~1.3.5" />
 </widget>

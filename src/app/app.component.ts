@@ -21,6 +21,7 @@ import { CommonService } from '../service/common-service';
 import { VersionService } from '../providers/version-service';
 import { HttpHeader } from '../providers/http-header';
 import { CodePush } from '@ionic-native/code-push';
+import { ThreeDeeTouch, ThreeDeeTouchQuickAction, ThreeDeeTouchForceTouch } from '@ionic-native/three-dee-touch';
 import { CODE_PUSH_DEPLOYMENT_KEY, IS_DEBUG } from '../providers/constants';
 
 
@@ -57,10 +58,11 @@ export class MyApp {
 		private codePush: CodePush,
 		private zone: NgZone,
 		private jpushNotification: JpushNotification,
+		private threeDeeTouch: ThreeDeeTouch
 	) {
 		platform.resume.subscribe(d => {
 			console.log('我又回来了');
-            this.helper.setIosIconBadgeNumber(0);
+			this.helper.setIosIconBadgeNumber(0);
 			// this.assetsSync();
 		});
 		platform.ready().then(() => {
@@ -74,7 +76,12 @@ export class MyApp {
 			);
 			if (this.nativeService.isMobile()) {
 				var vConsole = new VConsole();
-			}
+				this.threeDeeTouch.isAvailable().then(isAvailable => {
+					if(isAvailable){
+						this.threeDTouch();
+					}
+				})
+			};
 			// this.nav.setRoot(LoginPage); // 设置首页
 			// this.nav.setRoot(HomePage); // 设置首页
 			this.nativeService.statusBarStyle(); // 设置状态栏颜色
@@ -103,9 +110,9 @@ export class MyApp {
 							this.nav.setRoot(HomePage); // 设置首页
 							this.jPushOpenNotification(); // 处理打开推送消息事件
 							this.helper.initJpush(); // 初始化极光推送
-                            this.helper.setIosIconBadgeNumber(0);
+							this.helper.setIosIconBadgeNumber(0);
 						} else {
-						//打开推送时，未登录状态未解决
+							//打开推送时，未登录状态未解决
 							this.nav.setRoot(LoginPage); // 设置首页
 							this.jPushOpenNotification(); // 处理打开推送消息事件
 							this.helper.initJpush(); // 初始化极光推送
@@ -278,5 +285,39 @@ export class MyApp {
 			//     });
 			// }
 		});
+	}
+	threeDTouch() {
+		let actions: Array<ThreeDeeTouchQuickAction> = [
+			{
+				type: 'checkin',
+				title: 'Check in',
+				subtitle: 'Quickly check in',
+				iconType: 'Compose'
+			},
+			{
+				type: 'share',
+				title: 'Share',
+				subtitle: 'Share like you care',
+				iconType: 'Share'
+			},
+			{
+				type: 'search',
+				title: 'Search',
+				iconType: 'Search'
+			},
+			{
+				title: 'Show favorites',
+				iconTemplate: 'HeartTemplate'
+			}
+		];
+		this.threeDeeTouch.configureQuickActions(actions);
+		this.threeDeeTouch.onHomeIconPressed().subscribe(
+			payload => {
+				// returns an object that is the button you presed
+				console.log('Pressed the ${payload.title} button')
+				console.log(payload.type)
+
+			}
+		)
 	}
 }
