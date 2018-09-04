@@ -4,7 +4,8 @@ import {
 	NavController,
 	NavParams,
 	ToastController,
-	ActionSheetController
+	ActionSheetController,
+	AlertController
 } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -34,6 +35,18 @@ export class UserInfoPage {
 		company: undefined,
 		industry: undefined,
 	};
+	initFormData: any = {
+		avatar: this.globalData.user.avatar,
+		name: undefined,
+		phone: undefined,
+		post: undefined,
+		provinceId: undefined,
+		cityId: undefined,
+		gender: undefined,
+		birthday: undefined,
+		company: undefined,
+		industry: undefined,
+	};
 	provinces: Array<any> = this.globalData.provinces;
 	city: Array<any> = [];
 	industrys: Array<any> = INDUSTRY;
@@ -51,6 +64,7 @@ export class UserInfoPage {
 			for (const name in this.formData) {
 				if (value[name] != null) {
 					this.formData[name] = value[name];
+					this.initFormData[name] = value[name];
 				}
 			}
 			if (this.formData.avatar.indexOf('base64') > -1) {
@@ -59,6 +73,7 @@ export class UserInfoPage {
 					type: 'USER_AVATAR'
 				}).subscribe(d => {
 					this.formData.avatar = d.url;
+					this.initFormData.avatar = d.url;
 					console.log('avatar======', this.formData.avatar);
 				});
 			}
@@ -72,17 +87,22 @@ export class UserInfoPage {
 		private appApi: AppApi,
 		private toastCtrl: ToastController,
 		private actionSheetCtrl: ActionSheetController,
-		private nativeService: NativeService
+		private nativeService: NativeService,
+		public alertCtrl: AlertController
 	) {
 		this.createForm();
 		this.initData();
 	}
 
-	ngOnInit() {
+	ionViewDidLoad() {
 		this.queryProvinces();
 	}
-	ionViewDidLoad() {
-		console.log('ionViewDidLoad UserInfoPage');
+	ionViewCanLeave() {
+		if (JSON.stringify(this.initFormData) == JSON.stringify(this.formData)) {
+			return true;
+		} else {
+			return this.confirm();
+		}
 	}
 	initData() {
 		this.userInfo = this.globalData.user;
@@ -179,13 +199,12 @@ export class UserInfoPage {
     /**
      * 更新用户信息
      */
-	updateUserInfo() {
+	updateUserInfo(r: any = undefined) {
 		let param = this.formData;
 		if (param.avatar.indexOf('base64') > -1) {
 			param.avatar = null;
 		}
 		console.log('updateUserInfo-param', param);
-
 		this.appApi.updateUserInfo(param).subscribe(d => {
 			console.log('updateUserInfo', d);
 			this.canEdit = false;
@@ -193,6 +212,13 @@ export class UserInfoPage {
 				this.globalData.user[name] = this.formData[name];
 			}
 			this.callback(this.formData).then();
+			if (r) {
+				r(true);
+			}
+		}, e => {
+			if (r) {
+				r(true);
+			}
 		});
 	}
 
@@ -201,14 +227,13 @@ export class UserInfoPage {
      */
 	clickEditButton() {
 		console.log('this.ngForm.valid', this.ngForm.valid);
-
 		if (this.canEdit) {
 			if (this.ngForm.valid) {
 				this.updateUserInfo();
 			} else {
 				console.log(this.ngForm);
 
-				this.presentToast();
+				this.presentToast('请正确填写信息');
 			}
 		} else {
 			this.canEdit = true;
@@ -219,14 +244,12 @@ export class UserInfoPage {
 		this.navCtrl.push('ChangePasswordPage');
 	}
 
-	presentToast() {
+	presentToast(msg) {
 		const toast = this.toastCtrl.create({
-			message: '请正确填写信息',
+			message: msg,
 			position: 'middle',
 			duration: 1500
 		});
-		// toast.onDidDismiss(() => {
-		// });
 		toast.present();
 	}
 
@@ -251,6 +274,7 @@ export class UserInfoPage {
 									type: 'USER_AVATAR'
 								}).subscribe(d => {
 									this.formData.avatar = d.url;
+									this.initFormData.avatar = d.url;
 									console.log('avatar======', this.formData.avatar);
 								});
 							});
@@ -274,6 +298,7 @@ export class UserInfoPage {
 									type: 'USER_AVATAR'
 								}).subscribe(d => {
 									this.formData.avatar = d.url;
+									this.initFormData.avatar = d.url;
 									console.log('avatar======', this.formData.avatar);
 								});
 
@@ -290,5 +315,28 @@ export class UserInfoPage {
 			]
 		});
 		actionSheet.present();
+	}
+	confirm(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			let alert = this.alertCtrl.create({
+				title: '是否保存本次编辑结果',
+				buttons: [
+					{
+						text: '不保存',
+						role: 'cancel',
+						handler: () => {
+							resolve(true);
+						}
+					},
+					{
+						text: '保存',
+						handler: () => {
+							this.updateUserInfo(resolve);
+						}
+					}
+				]
+			});
+			alert.present();
+		});
 	}
 }

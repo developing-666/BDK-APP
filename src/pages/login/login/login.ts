@@ -87,8 +87,9 @@ export class LoginPage {
             this.nativeService.statusBarStyle(); // 设置状态栏颜色
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
-                this.events.publish('user:modalLogin'); //  motal登录后刷新数据
-                this.viewCtrl.dismiss();
+                // this.events.publish('user:modalLogin'); //  motal登录后刷新数据
+                this.navCtrl.setRoot(HomePage);
+                // this.viewCtrl.dismiss();
             } else {
                 this.navCtrl.setRoot(HomePage); // 重新设置首页
             }

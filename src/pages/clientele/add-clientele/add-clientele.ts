@@ -113,7 +113,7 @@ export class AddClientelePage implements OnInit {
         }
         this.queryProvinces();
     }
-    done() {
+    done(r:any = undefined) {
         let phones = this.phonePicker.getPhone();
         if (phones.length != 0) {
             this.valid = true;
@@ -132,7 +132,7 @@ export class AddClientelePage implements OnInit {
         if (this.addClienteleForm.valid && this.valid) {
             console.log(this.formData);
             if (this.type === 'edit') {
-                this.customerUpdate();
+                this.customerUpdate(r);
             } else {
                 this.customerCreate();
             }
@@ -161,12 +161,12 @@ export class AddClientelePage implements OnInit {
             }
         );
     }
-    customerUpdate() {
+    customerUpdate(r:any) {
         this.submitIng = true;
         this.appApi.customerUpdate(this.formData).subscribe(
             d => {
                 console.log(d);
-                this.presentToast('更新成功');
+                this.presentToast('更新成功',r);
                 this.events.publish('clientele:update', this.formData.id);
             },
             e => {
@@ -174,14 +174,18 @@ export class AddClientelePage implements OnInit {
             }
         );
     }
-    presentToast(msg) {
+    presentToast(msg,r:any = undefined) {
         const toast = this.toastCtrl.create({
             message: msg,
             position: 'middle',
             duration: 1500
         });
         toast.onDidDismiss(() => {
-            this.navCtrl.pop();
+			if (r) {
+			    r(true);
+			}else{
+				this.navCtrl.pop();
+			}
         });
         toast.present();
     }
@@ -240,7 +244,7 @@ export class AddClientelePage implements OnInit {
                     {
                         text: '保存',
                         handler: () => {
-                            this.done();
+                            this.done(resolve);
                         }
                     }
                 ]

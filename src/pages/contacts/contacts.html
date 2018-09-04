@@ -12,7 +12,7 @@
 				<ion-item-divider id="scroll-letter-{{group.letter}}">
 					{{group.letter}}
 				</ion-item-divider>
-				<ion-item [ngClass]="{'active':person?.displayName==item?.displayName}" *ngFor="let item of group.children" (tap)="onItemClick(item)">
+				<ion-item [ngClass]="{'active':person?.displayName==item?.displayName}" *ngFor="let item of group.children" (click)="onItemClick(item)">
 					{{item.displayName}}
 				</ion-item>
 			</ion-item-group>
