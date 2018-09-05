@@ -42,6 +42,9 @@ export class HomePage {
 			let content = this.queryElement(SelectTab, '.scroll-content');
 			this.renderer.setElementStyle(content, 'margin-bottom', this.mb);
 		});
+		this.events.subscribe('selectTab', (d) => {
+			this.tabRef.select(d);
+		});
 	}
 	queryElement(elem: HTMLElement, q: string): HTMLElement {
 		return <HTMLElement>elem.querySelector(q);

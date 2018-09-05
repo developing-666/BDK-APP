@@ -5,6 +5,11 @@ page-clientele-detail {
             .item-inner{border-bottom: none;}
         }
 	}
+	.header{
+		.toolbar{
+			.bar-button{min-width: 3rem;}
+		}
+	}
 	.record-tab-container{
 	    position: relative;margin-top: 1rem;height:calc(100% - 9rem);
 	    .tabs{
