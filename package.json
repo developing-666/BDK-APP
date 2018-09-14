@@ -29,6 +29,8 @@
         "@ionic-native/base64": "^4.9.1",
         "@ionic-native/call-number": "^4.7.0",
         "@ionic-native/camera": "^4.7.0",
+        "@ionic-native/camera-preview": "^4.12.2",
+        "@ionic-native/card-io": "^4.12.2",
         "@ionic-native/code-push": "^4.7.0",
         "@ionic-native/contacts": "^4.12.0",
         "@ionic-native/core": "4.7.0",
@@ -57,6 +59,7 @@
         "alloytouch-transformjs": "^0.1.0",
         "blueimp-md5": "^2.10.0",
         "call-number": "^1.0.1",
+        "card.io.cordova.mobilesdk": "^2.1.0",
         "code-push": "^2.0.4",
         "com-badrit-base64": "^0.2.0",
         "cordova-android": "^7.1.1",
@@ -66,6 +69,7 @@
         "cordova-plugin-app-version": "^0.1.9",
         "cordova-plugin-appminimize": "^1.0.0",
         "cordova-plugin-camera": "^4.0.3",
+        "cordova-plugin-camera-preview": "^0.10.0",
         "cordova-plugin-code-push": "^1.11.11",
         "cordova-plugin-contacts": "^3.0.1",
         "cordova-plugin-device": "^2.0.2",
@@ -90,7 +94,7 @@
         "ion2-calendar": "^2.2.0",
         "ionic-angular": "3.9.2",
         "ionic-plugin-keyboard": "^2.2.1",
-        "ionicons": "^4.2.4",
+        "ionicons": "^4.4.3",
         "jpush-phonegap-plugin": "^3.4.2",
         "js-base64": "^2.4.5",
         "moment": "^2.22.2",
@@ -120,7 +124,6 @@
             },
             "cordova-plugin-file": {},
             "cordova.plugins.diagnostic": {},
-            "cordova-plugin-add-swift-support": {},
             "cordova-plugin-app-version": {},
             "cordova-plugin-network-information": {},
             "cordova-plugin-x-toast": {},
@@ -143,7 +146,10 @@
                 "APP_KEY": "fae3c4774ec570d93166b3a6"
             },
             "cordova-plugin-contacts": {},
-            "cordova-plugin-3dtouch": {}
+            "cordova-plugin-3dtouch": {},
+            "card.io.cordova.mobilesdk": {},
+            "cordova-plugin-add-swift-support": {},
+            "cordova-plugin-camera-preview": {}
         },
         "platforms": [
             "android",

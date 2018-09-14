@@ -24,6 +24,7 @@ import { ManagePage } from '../pages/manage/manage/manage';
 import { RemindPage } from '../pages/remind/remind/remind';
 import { ClientelePage } from '../pages/clientele/clientele/clientele';
 import { SettingsPage } from '../pages/settings/settings/settings';
+import { IonicDemoPage } from '../pages/demo/ionic-demo/ionic-demo';
 
 import { ComponentsModule } from '../components/components.module';
 import { PipesModule } from '../pipes/pipes.module';
@@ -59,6 +60,8 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { Contacts } from '@ionic-native/contacts';
 import { ThreeDeeTouch } from '@ionic-native/three-dee-touch';
 import { ThreeDeeTouchProvider } from '../providers/three-dee-touch';
+import { CardIO } from '@ionic-native/card-io';
+import { CameraPreview } from '@ionic-native/camera-preview';
 //ionic第三方插件
 
 //自己封装的服务、模块、方法等
@@ -108,7 +111,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		RemindPage,
 		LoginPage,
 		SettingsPage,
-		ClientelePage
+		ClientelePage,
+		IonicDemoPage
 	],
 	imports: [
 		ComponentsModule,
@@ -133,7 +137,8 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		RemindPage,
 		LoginPage,
 		SettingsPage,
-		ClientelePage
+		ClientelePage,
+		IonicDemoPage
 	],
 	providers: [
 		{
@@ -182,7 +187,9 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 		Contacts,
 		Pinyin,
 		ThreeDeeTouch,
-		ThreeDeeTouchProvider
+		ThreeDeeTouchProvider,
+		CardIO,
+		CameraPreview
 	]
 })
 export class AppModule {

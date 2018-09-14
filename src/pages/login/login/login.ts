@@ -88,7 +88,9 @@ export class LoginPage {
             if (this.viewCtrl.isOverlay) {
                 this.globalData.modalLoginPage = false;
                 // this.events.publish('user:modalLogin'); //  motal登录后刷新数据
-                this.navCtrl.setRoot(HomePage);
+                // this.navCtrl.setRoot(HomePage);
+				window.location.reload(false);
+				// window.location.href = window.location.href.indexOf('#')>-1?window.location.href.split('#')[0]:window.location.href;
                 // this.viewCtrl.dismiss();
             } else {
                 this.navCtrl.setRoot(HomePage); // 重新设置首页

@@ -1,19 +1,17 @@
-@font-face {
-	font-family: 'iconfont';  /* project id 665262 */
-    src: url('../assets/fonts/iconfont.eot');
-    src: url('../assets/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
-    url('../assets/fonts/iconfont.woff') format('woff'),
-    url('../assets/fonts/iconfont.ttf') format('truetype'),
-    url('../assets/fonts/iconfont.svg#iconfont') format('svg');
-}
 // @font-face {
 // 	font-family: 'iconfont';  /* project id 665262 */
-//     src: url('//at.alicdn.com/t/font_665262_m9estia3a4.eot');
-//     src: url('//at.alicdn.com/t/font_665262_m9estia3a4.eot?#iefix') format('embedded-opentype'),
-//     url('//at.alicdn.com/t/font_665262_m9estia3a4.woff') format('woff'),
-//     url('//at.alicdn.com/t/font_665262_m9estia3a4.ttf') format('truetype'),
-//     url('//at.alicdn.com/t/font_665262_m9estia3a4.svg#iconfont') format('svg');
+//     src: url('../assets/fonts/iconfont.eot');
+//     src: url('../assets/fonts/iconfont.eot?#iefix') format('embedded-opentype'),
+//     url('../assets/fonts/iconfont.woff') format('woff'),
+//     url('../assets/fonts/iconfont.ttf') format('truetype'),
+//     url('../assets/fonts/iconfont.svg#iconfont') format('svg');
 // }
+@font-face {
+	font-family: 'iconfont';
+	/* project id 665262 */
+	src: url("//at.alicdn.com/t/font_665262_htvvybhem6m.eot");
+	src: url("//at.alicdn.com/t/font_665262_htvvybhem6m.eot?#iefix") format('embedded-opentype'), url("//at.alicdn.com/t/font_665262_htvvybhem6m.woff") format('woff'), url("//at.alicdn.com/t/font_665262_htvvybhem6m.ttf") format('truetype'), url("//at.alicdn.com/t/font_665262_htvvybhem6m.svg#iconfont") format('svg');
+}
 .iconfont {
 	font-family: 'iconfont' !important;
 	font-size: 2rem;
@@ -72,6 +70,14 @@
 .ion-ios-icon-setting:before,
 .ion-md-icon-setting:before {
 	content: '\e67a';
+}
+.ion-ios-icon-bug-outline:before,
+.ion-md-icon-bug-outline:before {
+	content: '\eb75';
+}
+.ion-ios-icon-bug:before,
+.ion-md-icon-bug:before {
+	content: '\e9f7';
 }
 .tabs .tab-button[aria-selected=true] {
 	.icon:before {

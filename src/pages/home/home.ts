@@ -5,6 +5,7 @@ import { ManagePage } from '../manage/manage/manage';
 import { RemindPage } from '../remind/remind/remind';
 import { ClientelePage } from '../clientele/clientele/clientele';
 import { SettingsPage } from '../settings/settings/settings';
+import { IonicDemoPage } from '../demo/ionic-demo/ionic-demo';
 
 @Component({
 	selector: 'page-home',
@@ -19,6 +20,7 @@ export class HomePage {
 	tab1Root = RemindPage;
 	tab2Root = ClientelePage;
 	tab3Root = SettingsPage;
+	tab4Root = IonicDemoPage;
 	mb: any;
 	constructor(
 		public navCtrl: NavController,
