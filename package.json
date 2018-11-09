@@ -97,10 +97,14 @@
         "ionicons": "^4.4.3",
         "jpush-phonegap-plugin": "^3.4.2",
         "js-base64": "^2.4.5",
+        "koa": "^2.6.1",
+        "koa-morgan": "^1.0.1",
+        "koa-static": "^5.0.0",
         "moment": "^2.22.2",
         "mx.ferreyra.callnumber": "~0.0.2",
         "rxjs": "5.5.10",
         "sw-toolbox": "3.6.0",
+        "urlencode": "^1.1.0",
         "zone.js": "0.8.26"
     },
     "devDependencies": {

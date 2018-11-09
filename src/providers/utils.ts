@@ -165,7 +165,7 @@ export class Utils {
     static md5(str: string) {
         return md5(str).toUpperCase();
     }
-    static base64(str: string) {
+    static base64(str: any) {
         return Base64.encode(str);
     }
     static base64Decode(str: string) {

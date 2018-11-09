@@ -12,7 +12,7 @@ export class GlobalData {
     private _user; // 用户详细信息
 
     private _token: string; // token
-
+	private _baiduToken:string;
     // 设置http请求是否显示loading,注意:设置为true,接下来的请求会不显示loading,请求执行完成会自动设置为false
     private _showLoading = true;
 
@@ -76,6 +76,12 @@ export class GlobalData {
         this._token = value;
     }
 
+	get baiduToken(): string {
+        return this._token;
+    }
+    set baiduToken(value: string) {
+        this._token = value;
+    }
     get showLoading(): boolean {
         return this._showLoading;
     }

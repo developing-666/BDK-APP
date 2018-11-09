@@ -66,7 +66,7 @@ export class MyApp {
 		platform.resume.subscribe(d => {
 			console.log('我又回来了');
 			this.helper.setIosIconBadgeNumber(0);
-			// this.assetsSync();
+			this.assetsSync();
 		});
 		platform.ready().then(() => {
 			this.nativeService.getVersionNumber().subscribe(
@@ -144,7 +144,7 @@ export class MyApp {
 			// });
 			this.registerBackButtonAction(); // 注册android返回按键事件
 			// this.versionService.checkVersion(); // 检查版本更新
-			// this.assetsSync(); // 启动app检查热更新
+			this.assetsSync(); // 启动app检查热更新
 			// Utils.sessionStorageClear(); // 清除数据缓存
 		});
 	}
@@ -200,6 +200,7 @@ export class MyApp {
 							'[CodePush]:下载完成准备安装;syncStatus:' +
 							syncStatus
 						);
+						this.nativeService.splashScreenShow(); // 显示启动页
 					} else {
 						console.log('[CodePush]:syncStatus:' + syncStatus);
 					}

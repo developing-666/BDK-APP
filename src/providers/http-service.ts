@@ -30,18 +30,18 @@ export class HttpService {
 		private httpHeader: HttpHeader
 	) { }
 
-    public get(url: string, paramMap: any = null, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
+	public get(url: string, paramMap: any = null, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Get,
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8'
-            }),
+			headers: new Headers({
+				'Content-Type': 'application/json; charset=UTF-8'
+			}),
 			search: HttpService.buildURLSearchParams(paramMap)
 		});
-        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
+		return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
 	}
 
-    public post(url: string, body: any = {}, noLoading: boolean = false,useDefaultApi = true): Observable<any> {
+	public post(url: string, body: any = {}, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Post,
 			body,
@@ -49,13 +49,15 @@ export class HttpService {
 				'Content-Type': 'application/json; charset=UTF-8'
 			})
 		});
-        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
+		return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
 	}
 
-	public postFormData(url: string, paramMap: any = null, useDefaultApi = true): Observable<any> {
+	public postFormData(url: string, paramMap: any = null, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
+		console.log(paramMap);
 		const options = new RequestOptions({
 			method: RequestMethod.Post,
 			body: HttpService.buildURLSearchParams(paramMap).toString(),
+			// body: paramMap,
 			headers: new Headers({
 				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
 			})
@@ -65,15 +67,15 @@ export class HttpService {
 
 	public delete(url: string, body: any = {}, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
-            method: RequestMethod.Delete,
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8'
-            }),
+			method: RequestMethod.Delete,
+			headers: new Headers({
+				'Content-Type': 'application/json; charset=UTF-8'
+			}),
 			body
 		});
 		return useDefaultApi ? this.defaultRequest(url, options) : this.request(url, options);
 	}
-    public put(url: string, body: any = {}, noLoading: boolean = false,useDefaultApi = true): Observable<any> {
+	public put(url: string, body: any = {}, noLoading: boolean = false, useDefaultApi = true): Observable<any> {
 		const options = new RequestOptions({
 			method: RequestMethod.Put,
 			body,
@@ -81,13 +83,13 @@ export class HttpService {
 				'Content-Type': 'application/json; charset=UTF-8'
 			})
 		});
-        return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
+		return useDefaultApi ? this.defaultRequest(url, options, noLoading) : this.request(url, options, noLoading);
 	}
 
 	/**
 	 * 一个app可能有多个后台接口服务(api),针对主api添加业务处理,非主api请调用request方法
 	 */
-	public defaultRequest(url: string, options: RequestOptionsArgs,noLoading:boolean = false): Observable<any> {
+	public defaultRequest(url: string, options: RequestOptionsArgs, noLoading: boolean = false): Observable<any> {
 		//  使用默认API:APP_SERVE_URL
 		url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url); // tslint:disable-line
 		//  添加请求头
@@ -98,17 +100,17 @@ export class HttpService {
 		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
 		options.headers.append('DAFU-APP-INFO', header.appInfo);
 		options.headers.append('DAFU-REQUEST-TIME', header.requestTime);
-        options.headers.append('DAFU-APP-SIGN', header.appSign);
-        options.headers.append('DAFU-TOKEN', header.token);
+		options.headers.append('DAFU-APP-SIGN', header.appSign);
+		options.headers.append('DAFU-TOKEN', header.token);
 		return Observable.create(observer => {
-            this.request(url, options, noLoading).subscribe(res => {
+			this.request(url, options, noLoading).subscribe(res => {
 				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
 				if (res.status === 1) {
-                    if (url.indexOf('valid')>-1 || url.indexOf('login')>-1) {
-                        observer.next(res);
-                    } else {
-                        observer.next(res.data);
-                    }
+					if (url.indexOf('valid') > -1 || url.indexOf('login') > -1) {
+						observer.next(res);
+					} else {
+						observer.next(res.data);
+					}
 				} else {
 					// IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
 					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
@@ -126,13 +128,54 @@ export class HttpService {
 			});
 		});
 	}
-
-    public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
+	public xfyunPost(url: string, apiKey: string, header: any, paramMap: any = null): Observable<any> {
+		const options = new RequestOptions({
+			method: RequestMethod.Post,
+			body: HttpService.buildURLSearchParams(paramMap).toString(),
+			headers: new Headers({
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			})
+		});
+		return this.xfyunRequest(url, apiKey, header, options);
+	}
+	/**
+	 * 科大讯飞AI服务
+	 */
+	public xfyunRequest(url: string, apiKey: string, header: any, options: RequestOptionsArgs, noLoading: boolean = false): Observable<any> {
+		let requestTime = String(new Date().getTime());
+		//  使用默认API:APP_SERVE_URL
+		url = Utils.formatUrl(url.startsWith('http') ? url : APP_SERVE_URL + url); // tslint:disable-line
+		//  添加请求头
+		// options.withCredentials = true;
+		options.headers = options.headers || new Headers();
+		// options.headers.append('Authorization', 'Bearer ' + this.globalData.token);
+		options.headers.append('X-Appid', apiKey);
+		options.headers.append('X-CurTime', requestTime);
+		options.headers.append('X-Param', Utils.base64(header));
+		options.headers.append('X-CheckSum', Utils.md5(apiKey + requestTime + header));
+		console.log(options);
+		return Observable.create(observer => {
+			this.request(url, options, noLoading).subscribe(res => {
+				//  后台api返回统一数据,res.status===1表示业务处理成功,否则表示发生异常或业务处理失败
+				if (res.code === 0) {
+					observer.next(res.data);
+				} else {
+					// IS_DEBUG && console.log('%c 请求处理失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', res);
+					this.nativeService.alert(res.message || '请求失败,请稍后再试!');
+					observer.error(res);
+				}
+			}, error => {
+				this.nativeService.alert(JSON.parse(error._body).message || '请求失败,请稍后再试!');
+				observer.error(error);
+			});
+		});
+	}
+	public request(url: string, options: RequestOptionsArgs, noLoading?: boolean): Observable<any> {
 		//IS_DEBUG && console.log('%c 请求发送前 %c', 'color:blue', '', 'url', url, 'options', options);
-        if (!noLoading) this.showLoading();
+		if (!noLoading) this.showLoading();
 		return Observable.create(observer => {
 			this.http.request(url, options).timeout(REQUEST_TIMEOUT).subscribe(res => {
-                if (!noLoading) this.hideLoading();
+				if (!noLoading) this.hideLoading();
 				try {
 					observer.next(res.json());
 				} catch (e) {
@@ -141,7 +184,7 @@ export class HttpService {
 				// IS_DEBUG && console.log('%c 请求发送成功 %c', 'color:green', '', 'url', url, 'options', options, 'res', res);
 			}, err => {
 				console.log(err);
-                this.hideLoading();
+				this.hideLoading();
 				observer.error(this.requestFailedHandle(url, options, err));
 				// IS_DEBUG && console.log('%c 请求发送失败 %c', 'color:red', '', 'url', url, 'options', options, 'err', err);
 			});
@@ -158,10 +201,10 @@ export class HttpService {
 			this.nativeService.alert('请求超时,请稍后再试!');
 		} else {
 			const status = err.status;
-            if (status == 401) return err;
+			if (status == 401) return err;
 			let msg = '请求发生异常';
-			for(let state in HTTPSTATUS){
-				if(parseInt(state)==status){
+			for (let state in HTTPSTATUS) {
+				if (parseInt(state) == status) {
 					msg = HTTPSTATUS[state];
 				}
 			};

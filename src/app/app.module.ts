@@ -67,6 +67,7 @@ import { CameraPreview } from '@ionic-native/camera-preview';
 //自己封装的服务、模块、方法等
 
 import { AppApi } from '../providers/app-api';
+import { XfyunApi } from '../providers/xfyun-api';
 import { NativeService } from '../providers/native-service';
 import { HttpHeader } from '../providers/http-header';
 import { HttpService } from '../providers/http-service';
@@ -146,6 +147,7 @@ registerLocaleData(localeZh, 'zh', localeZhExtra);
 			useClass: ionicGalleryModal.GalleryModalHammerConfig
 		},
 		{ provide: LOCALE_ID, useValue: 'zh' },
+		XfyunApi,
 		AppApi,
 		StatusBar,
 		SplashScreen,

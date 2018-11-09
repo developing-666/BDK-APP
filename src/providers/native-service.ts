@@ -142,7 +142,12 @@ export class NativeService {
 			this.statusBar.backgroundColorByHexString(color); // 3261b3
 		}
 	}
-
+	/**
+	 * 显示启动页面
+	 */
+	splashScreenShow(): void {
+		this.isMobile() && this.splashScreen.show();
+	}
     /**
      * 隐藏启动页面
      */
