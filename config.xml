@@ -129,11 +129,11 @@
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="jpush-phonegap-plugin" spec="^3.4.2">
-        <variable name="APP_KEY" value="fae3c4774ec570d93166b3a6" />
-    </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-camera-preview" spec="^0.10.0" />
-    <engine name="android" spec="^7.1.1" />
     <engine name="ios" spec="^4.5.5" />
+    <plugin name="jpush-phonegap-plugin" spec="^3.5.1">
+        <variable name="APP_KEY" value="fae3c4774ec570d93166b3a6" />
+    </plugin>
+    <engine name="android" spec="~7.1.1" />
 </widget>

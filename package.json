@@ -78,7 +78,7 @@
         "cordova-plugin-file-transfer": "^1.7.1",
         "cordova-plugin-inappbrowser": "^3.0.0",
         "cordova-plugin-ionic-webview": "^1.2.1",
-        "cordova-plugin-jcore": "^1.2.1",
+        "cordova-plugin-jcore": "^1.2.6",
         "cordova-plugin-media": "^5.0.2",
         "cordova-plugin-network-information": "^2.0.1",
         "cordova-plugin-splashscreen": "^5.0.2",
@@ -95,7 +95,7 @@
         "ionic-angular": "3.9.2",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "^4.4.3",
-        "jpush-phonegap-plugin": "^3.4.2",
+        "jpush-phonegap-plugin": "^3.5.1",
         "js-base64": "^2.4.5",
         "koa": "^2.6.1",
         "koa-morgan": "^1.0.1",
@@ -146,14 +146,14 @@
                 "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
             },
             "cordova-sms-plugin": {},
-            "jpush-phonegap-plugin": {
-                "APP_KEY": "fae3c4774ec570d93166b3a6"
-            },
             "cordova-plugin-contacts": {},
             "cordova-plugin-3dtouch": {},
             "card.io.cordova.mobilesdk": {},
             "cordova-plugin-add-swift-support": {},
-            "cordova-plugin-camera-preview": {}
+            "cordova-plugin-camera-preview": {},
+            "jpush-phonegap-plugin": {
+                "APP_KEY": "fae3c4774ec570d93166b3a6"
+            }
         },
         "platforms": [
             "android",
